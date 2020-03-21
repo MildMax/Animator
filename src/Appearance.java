@@ -12,8 +12,8 @@ public class Appearance extends AbstractTransformation {
    *
    * @param startTime takes an int indicating the time the shape appears
    * @param endTime   takes an int indicating the time the shape disappears
-   * @throws IllegalArgumentException if the start time is less than 0. If the end time is before the
-   *                                  start time.
+   * @throws IllegalArgumentException if the start time is less than 0.
+   *                                  If the end time is before the start time.
    */
   public Appearance(int startTime, int endTime) throws IllegalArgumentException {
     super(startTime, endTime);
