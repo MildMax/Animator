@@ -19,4 +19,9 @@ public class Appearance extends AbstractTransformation {
     super(startTime, endTime);
   }
 
+  @Override
+  public String getDescription(Shape shape) {
+    return shape.getName() + " appears at time t=" + getStart()
+            + " and disappears at time t=" + getEnd() + ".";
+  }
 }

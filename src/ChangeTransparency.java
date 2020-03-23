@@ -36,4 +36,10 @@ public class ChangeTransparency extends AbstractTransformation {
   public double getTransparency() {
     return this.newTransparency;
   }
+
+  @Override
+  public String getDescription(Shape shape) {
+    return shape.getName() + " changes to " + this.getTransparency()
+            + super.getDescription(shape);
+  }
 }

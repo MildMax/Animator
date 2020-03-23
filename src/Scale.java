@@ -39,5 +39,9 @@ public class Scale extends AbstractTransformation {
     return this.scaleFactor;
   }
 
-
+  @Override
+  public String getDescription(Shape shape) {
+    return shape.getName() + " scales to " + scaleFactor + " times its current size"
+            + super.getDescription(shape);
+  }
 }

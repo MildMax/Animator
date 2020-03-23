@@ -57,4 +57,10 @@ public class Resize extends AbstractTransformation {
   public int getHeight() {
     return this.newHeight;
   }
+
+  @Override
+  public String getDescription(Shape shape) {
+    return shape.getName() + " changes to width:" + this.getWidth() + " height:"
+            + this.getHeight() + super.getDescription(shape);
+  }
 }
