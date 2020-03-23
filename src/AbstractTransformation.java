@@ -9,7 +9,7 @@
  *
  * <p>getEnd() method</p>
  */
-public class AbstractTransformation implements Transformation {
+public abstract class AbstractTransformation implements Transformation {
 
   private int startTime;
   private int endTime;
@@ -54,5 +54,10 @@ public class AbstractTransformation implements Transformation {
   @Override
   public int getEnd() {
     return this.endTime;
+  }
+
+  @Override
+  public String getDescription(Shape shape) {
+    return " from time t=" + startTime + " to time t=" + endTime + ".";
   }
 }

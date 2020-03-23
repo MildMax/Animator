@@ -22,4 +22,12 @@ public interface Transformation {
    * @return an int indicating the end time of the transformation.
    */
   int getEnd();
+
+  /**
+   * Returns a description of the transformation.
+   *
+   * @param name the name of the shape.
+   * @return a description of the transformation.
+   */
+  String getDescription(Shape shape);
 }

@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AnimationModelImpl implements AnimationModel {
 
@@ -8,8 +10,8 @@ public class AnimationModelImpl implements AnimationModel {
   private final int windowXMax;
   private final int windowYMin;
   private final int windowYMax;
-  Color windowColor;
-  List<ShapeWrapper> listOfShapeWrapper;
+  private final Color windowColor;
+  private Map<String, ShapeWrapper> listOfShapeWrapper;
 
   public AnimationModelImpl() {
     this(Color.WHITE, -500, 500, -500, 500);
@@ -34,7 +36,7 @@ public class AnimationModelImpl implements AnimationModel {
     }
 
     this.windowColor = windowColor;
-    listOfShapeWrapper = new ArrayList<>();
+    listOfShapeWrapper = new HashMap<>();
     this.windowXMin = windowXMin;
     this.windowXMax = windowXMax;
     this.windowYMin = windowYMin;
@@ -42,7 +44,7 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   @Override
-  public List listOfShapeWrappers(String descriptionFromController) {
+  public Map<String, ShapeWrapper> listOfShapeWrappers(String descriptionFromController) {
     List<ShapeWrapper> listOfShapeWrapperCopy = new ArrayList<>();
     for (ShapeWrapper s : listOfShapeWrapper) {
 
@@ -63,6 +65,12 @@ public class AnimationModelImpl implements AnimationModel {
 
   @Override
   public void addShape(Shape shape, String shapeName) {
+    if (listOfShapeWrapper.containsKey(shapeName)) {
+      throw new IllegalArgumentException("That shape already exists");
+    }
+    else {
+      listOfShapeWrapper.put(shapeName, new ShapeWrapper(shape, shapeName));
+    }
   }
 
   @Override
@@ -70,63 +78,98 @@ public class AnimationModelImpl implements AnimationModel {
     ShapeWrapper wrapper = findWrapper(shapeName);
     for (Transformation t : wrapper.listOfTransformations) {
       //if move already exists
-      if (t instanceof Move) {
-        //if start is during another move throw illegal argument
-        if (startTime >= t.getStart() && startTime <= t.getEnd()) {
-          throw new IllegalArgumentException();
-        }
-        //if end is during another move throw illegal argument
-        else if (endTime >= t.getStart() && endTime <= t.getEnd()) {
-          throw new IllegalArgumentException();
-        }
+      if (t instanceof Move && checkTimes(t.getStart(), t.getEnd(), startTime, endTime)) {
+        throw new IllegalArgumentException("Move already exists within that period");
       }
     }
   }
 
   @Override
   public void addScale(String shapeName, int startTime, int endTime, double scaleFactor) {
-
+    ShapeWrapper wrapper = findWrapper(shapeName);
+    for (Transformation t : wrapper.listOfTransformations) {
+      //if move already exists
+      if (t instanceof Scale && checkTimes(t.getStart(), t.getEnd(), startTime, endTime)) {
+        throw new IllegalArgumentException("Scale already exists within that period");
+      }
+    }
   }
 
   @Override
   public void addResize(String shapeName, int startTime, int endTime, int newHeight, int newWidth) {
-
+    ShapeWrapper wrapper = findWrapper(shapeName);
+    for (Transformation t : wrapper.listOfTransformations) {
+      //if move already exists
+      if (t instanceof Resize && checkTimes(t.getStart(), t.getEnd(), startTime, endTime)) {
+        throw new IllegalArgumentException("Resize already exists within that period");
+      }
+    }
   }
 
   @Override
   public void addChangeColor(String shapeName, Color newColor, int startTime, int endTime) {
-
+    ShapeWrapper wrapper = findWrapper(shapeName);
+    for (Transformation t : wrapper.listOfTransformations) {
+      //if move already exists
+      if (t instanceof ChangeColor && checkTimes(t.getStart(), t.getEnd(), startTime, endTime)) {
+        throw new IllegalArgumentException("Color change already exists within that period");
+      }
+    }
   }
 
   @Override
   public void addAppearance(String shapeName, int startTime, int endTime) {
-
+    ShapeWrapper wrapper = findWrapper(shapeName);
+    for (Transformation t : wrapper.listOfTransformations) {
+      //if move already exists
+      if (t instanceof Appearance && checkTimes(t.getStart(), t.getEnd(), startTime, endTime)) {
+        throw new IllegalArgumentException("Appearances already exists within that period");
+      }
+    }
   }
 
   @Override
   public void addChangeTransparency(String shapeName, int startTime, int endTime, double transparency) {
-
+    ShapeWrapper wrapper = findWrapper(shapeName);
+    for (Transformation t : wrapper.listOfTransformations) {
+      //if move already exists
+      if (t instanceof ChangeTransparency && checkTimes(t.getStart(), t.getEnd(), startTime, endTime)) {
+        throw new IllegalArgumentException("Transparency change already exists within that period");
+      }
+    }
   }
 
   private ShapeWrapper findWrapper(String shapeName) {
-    for (ShapeWrapper w : listOfShapeWrapper) {
-      if (w.shapeName.compareTo(shapeName) == 0) {
-        return w;
-      }
+    ShapeWrapper w = listOfShapeWrapper.get(shapeName);
+
+    if (w == null) {
+      throw new IllegalArgumentException("Shape with name " + shapeName + " does not exist");
     }
 
-    throw new IllegalArgumentException("Shape " + shapeName + " does not exist");
+    return w;
+  }
+
+  private boolean checkTimes(int currStart, int currEnd, int newStart, int newEnd) {
+    return (newStart >= currStart && newStart <= currEnd)
+            || (newEnd >= currStart && newEnd <= currEnd);
   }
 
   private static class ShapeWrapper {
-    private Shape shape;
-    private String shapeName;
+    private final Shape shape;
     List<Transformation> listOfTransformations;
 
-    ShapeWrapper(Shape shape, String shapeName) {
+    ShapeWrapper(Shape shape, String name) {
       this.shape = shape;
-      this.shapeName = shapeName;
       listOfTransformations = new ArrayList();
+    }
+
+    String getData() {
+      String ret = "";
+      ret += shape.getCreateStatement();
+      for (Transformation t : listOfTransformations) {
+        ret += t.getDescription(shape);
+      }
+      return ret;
     }
   }
 }
