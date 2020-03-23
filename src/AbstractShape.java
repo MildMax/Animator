@@ -43,6 +43,7 @@ public abstract class AbstractShape implements Shape {
    *
    * @return the shape's name.
    */
+  @Override
   public String getName() {
     return this.name;
   }
@@ -52,6 +53,7 @@ public abstract class AbstractShape implements Shape {
    *
    * @return the shape's Type.
    */
+  @Override
   public String getType() {
     return null;
   }
@@ -61,6 +63,7 @@ public abstract class AbstractShape implements Shape {
    *
    * @return the shape's height.
    */
+  @Override
   public int getInitialHeight() {
     return this.initialHeight;
   }
@@ -70,6 +73,7 @@ public abstract class AbstractShape implements Shape {
    *
    * @return the shape's width.
    */
+  @Override
   public int getInitialWidth() {
     return this.initialWidth;
   }
@@ -79,6 +83,7 @@ public abstract class AbstractShape implements Shape {
    *
    * @return the X coordinate of the shape's center.
    */
+  @Override
   public int getInitialCenterX() {
     return this.initialCenterX;
   }
@@ -88,6 +93,7 @@ public abstract class AbstractShape implements Shape {
    *
    * @return the Y coordinate of the shape's center.
    */
+  @Override
   public int getInitialCenterY() {
     return this.initialCenterY;
   }
@@ -97,6 +103,7 @@ public abstract class AbstractShape implements Shape {
    *
    * @return the shape's transparency
    */
+  @Override
   public double getInitialTransparency() {
     return this.initialTransparency;
   }
@@ -106,6 +113,7 @@ public abstract class AbstractShape implements Shape {
    *
    * @return the shape's color.
    */
+  @Override
   public Color getInitialColor() {
     return this.initialColor;
   }
@@ -115,6 +123,7 @@ public abstract class AbstractShape implements Shape {
    *
    * @return the shape's "Create" statement.
    */
+  @Override
   public String getCreateStatement() {
     return null;
   }
