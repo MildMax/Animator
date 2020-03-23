@@ -14,7 +14,6 @@
  * <p>getDescription() method</p>
  */
 public class AbstractTransformation implements Transformation {
-  private final String shapeName;
   private final int startTime;
   private final int endTime;
 
@@ -23,13 +22,12 @@ public class AbstractTransformation implements Transformation {
    * transformation animation and the end of the transformation animation. Throws
    * IllegalArgumentException if start is less than 0 or if end is before start.
    *
-   * @param shapeName is the name of the shape that the transformation occurs on.
    * @param startTime takes an int indicating the start time of the transformation.
    * @param endTime takes an int indicating the end time of the transformation
    * @throws IllegalArgumentException if the start time is less than 0.
    *                                  If the end time is before the start time.
    */
-  public AbstractTransformation(String shapeName, int startTime, int endTime)
+  public AbstractTransformation(int startTime, int endTime)
           throws IllegalArgumentException {
     if (startTime < 0) {
       throw new IllegalArgumentException("Start time cannot be less than 0");
@@ -37,19 +35,8 @@ public class AbstractTransformation implements Transformation {
     else if (endTime < startTime) {
       throw new IllegalArgumentException("End time cannot be before start time");
     }
-    this.shapeName = shapeName;
     this.startTime = startTime;
     this.endTime = endTime;
-  }
-
-  /**
-   * Returns the start time of the transformation.
-   *
-   * @return an int indicating the start time of the transformation.
-   */
-  @Override
-  public String getShapeName() {
-    return this.shapeName;
   }
 
   /**
@@ -78,7 +65,7 @@ public class AbstractTransformation implements Transformation {
    * @return the transformation's description.
    */
   @Override
-  public String getDescription() {
-    return null;
+  public String getDescription(Shape shape) {
+    return " from time t=" + startTime + " to time t=" + endTime + ".";
   }
 }

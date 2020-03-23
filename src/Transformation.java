@@ -14,13 +14,6 @@
 public interface Transformation {
 
   /**
-   * Returns the name of the shape on which the transformation occurs.
-   *
-   * @return the name of the shape on which the transformation occurs.
-   */
-  String getShapeName();
-
-  /**
    * Returns the start time of the transformation.
    *
    * @return an int indicating the start time of the transformation.
@@ -35,9 +28,9 @@ public interface Transformation {
   int getEnd();
 
   /**
-   * return the transformation's description.
+   * Return the transformation's description.
    *
    * @return the transformation's description.
    */
-  String getDescription();
+  String getDescription(Shape shape);
 }
