@@ -48,6 +48,15 @@ public abstract class AbstractShape implements Shape {
   }
 
   /**
+   * return the shape's Type.
+   *
+   * @return the shape's Type.
+   */
+  public String getType() {
+    return null;
+  }
+
+  /**
    * return the shape's height.
    *
    * @return the shape's height.

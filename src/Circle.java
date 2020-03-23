@@ -31,10 +31,21 @@ public class Circle extends Oval {
   }
 
   /**
+   * return the shape's Type.
+   *
+   * @return the shape's Type.
+   */
+  @Override
+  public String getType() {
+    return "Circle";
+  }
+
+  /**
    * return the shape's "Create" statement.
    *
    * @return the shape's "Create" statement.
    */
+  @Override
   public String getCreateStatement() {
     return    "Create "
             + this.initialColor

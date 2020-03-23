@@ -11,6 +11,13 @@ public interface Shape {
   String getName();
 
   /**
+   * return the shape's Type.
+   *
+   * @return the shape's Type.
+   */
+  String getType();
+
+  /**
    * return the shape's height.
    *
    * @return the shape's height.

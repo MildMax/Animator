@@ -19,10 +19,21 @@ public class Oval extends AbstractShape {
   }
 
   /**
+   * return the shape's Type.
+   *
+   * @return the shape's Type.
+   */
+  @Override
+  public String getType() {
+    return "Oval";
+  }
+
+  /**
    * return the shape's "Create" statement.
    *
    * @return the shape's "Create" statement.
    */
+  @Override
   public String getCreateStatement() {
     return    "Create "
             + this.initialColor

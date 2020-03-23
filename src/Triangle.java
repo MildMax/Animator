@@ -6,13 +6,47 @@ public class Triangle extends AbstractShape {
   /**
    * Create a new instance of Rectangle.
    *
-   * @param height  is the height of the shape.
-   * @param width   is the width of the shape.
-   * @param centerX is the X coordinate of the center of the shape.
-   * @param centerY is the Y coordinate of the center of the shape.
-   * @param color   is the color of the shape.
+   * @param initialHeight  is the height of the shape.
+   * @param initialWidth   is the width of the shape.
+   * @param initialCenterX is the X coordinate of the center of the shape.
+   * @param initialCenterY is the Y coordinate of the center of the shape.
+   * @param initialColor   is the color of the shape.
    */
-  Triangle(String name, int height, int width, int centerX, int centerY, Color color) {
-    super(name, height, width, centerX, centerY, color);
+  Triangle(String name, int initialHeight, int initialWidth, int initialCenterX,
+           int initialCenterY, Color initialColor) {
+    super(name, initialHeight, initialWidth, initialCenterX, initialCenterY, initialColor);
+  }
+
+  /**
+   * return the shape's Type.
+   *
+   * @return the shape's Type.
+   */
+  @Override
+  public String getType() {
+    return "Triangle";
+  }
+
+  /**
+   * return the shape's "Create" statement.
+   *
+   * @return the shape's "Create" statement.
+   */
+  @Override
+  public String getCreateStatement() {
+    return    "Create "
+            + this.initialColor
+            + " triangle "
+            + this.name
+            + " with center at ("
+            + this.initialCenterX
+            + ", "
+            + this.initialCenterY
+            + "), height "
+            + this.initialHeight
+            + ", and width "
+            + this.initialWidth
+            + ".\n"
+            ;
   }
 }
