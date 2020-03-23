@@ -2,23 +2,41 @@
  * Create an Oval class that extends the AbstractShape abstract class.
  */
 public class Oval extends AbstractShape {
-  private int height;
-  private int width;
-  private int centerX;
-  private int centerY;
-  private Color color;
-  private double transparency;
 
   /**
    * Create a new instance of Oval.
    *
-   * @param verticalRadius  is the height of the shape.
-   * @param horizontalRadius   is the width of the shape.
-   * @param centerX is the X coordinate of the center of the shape.
-   * @param centerY is the Y coordinate of the center of the shape.
-   * @param color   is the color of the shape.
+   * @param initialVerticalRadius  is the height of the shape.
+   * @param initialHorizontalRadius   is the width of the shape.
+   * @param initialCenterX is the X coordinate of the center of the shape.
+   * @param initialCenterY is the Y coordinate of the center of the shape.
+   * @param initialColor   is the color of the shape.
    */
-  Oval(int verticalRadius, int horizontalRadius, int centerX, int centerY, Color color) {
-    super(verticalRadius * 2, horizontalRadius * 2, centerX, centerY, color);
+  Oval(String name, int initialVerticalRadius, int initialHorizontalRadius, int initialCenterX,
+       int initialCenterY, Color initialColor) {
+    super(name,initialVerticalRadius * 2, initialHorizontalRadius * 2,
+            initialCenterX, initialCenterY, initialColor);
+  }
+
+  /**
+   * return the shape's "Create" statement.
+   *
+   * @return the shape's "Create" statement.
+   */
+  public String getCreateStatement() {
+    return    "Create "
+            + this.initialColor
+            + " oval "
+            + this.name
+            + " with center at ("
+            + this.initialCenterX
+            + ", "
+            + this.initialCenterY
+            + "), vertical radius "
+            + this.initialHeight
+            + ", and horizontal radius "
+            + this.initialWidth
+            + ".\n"
+            ;
   }
 }
