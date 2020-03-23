@@ -1,4 +1,3 @@
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -82,6 +81,7 @@ public class AnimationModelImpl implements AnimationModel {
         throw new IllegalArgumentException("Move already exists within that period");
       }
     }
+    wrapper.addTransformation(new Move(startTime, endTime, newX, newY));
   }
 
   @Override
@@ -93,17 +93,31 @@ public class AnimationModelImpl implements AnimationModel {
         throw new IllegalArgumentException("Scale already exists within that period");
       }
     }
+    wrapper.addTransformation(new Scale(startTime, endTime, scaleFactor));
   }
 
   @Override
-  public void addResize(String shapeName, int startTime, int endTime, int newHeight, int newWidth) {
+  public void addChangeWidth(String shapeName, int startTime, int endTime, int newWidth) {
     ShapeWrapper wrapper = findWrapper(shapeName);
     for (Transformation t : wrapper.listOfTransformations) {
       //if move already exists
-      if (t instanceof Resize && checkTimes(t.getStart(), t.getEnd(), startTime, endTime)) {
+      if (t instanceof ChangeWidth && checkTimes(t.getStart(), t.getEnd(), startTime, endTime)) {
+        throw new IllegalArgumentException("Change width already exists within that period");
+      }
+    }
+    wrapper.addTransformation(new ChangeWidth(startTime, endTime, newWidth));
+  }
+
+  @Override
+  public void addChangeHeight(String shapeName, int startTime, int endTime, int newHeight) {
+    ShapeWrapper wrapper = findWrapper(shapeName);
+    for (Transformation t : wrapper.listOfTransformations) {
+      //if move already exists
+      if (t instanceof ChangeHeight && checkTimes(t.getStart(), t.getEnd(), startTime, endTime)) {
         throw new IllegalArgumentException("Resize already exists within that period");
       }
     }
+    wrapper.addTransformation(new ChangeHeight(startTime, endTime, newHeight));
   }
 
   @Override
@@ -115,6 +129,7 @@ public class AnimationModelImpl implements AnimationModel {
         throw new IllegalArgumentException("Color change already exists within that period");
       }
     }
+    wrapper.addTransformation(new ChangeColor(startTime, endTime, newColor));
   }
 
   @Override
@@ -137,6 +152,7 @@ public class AnimationModelImpl implements AnimationModel {
         throw new IllegalArgumentException("Transparency change already exists within that period");
       }
     }
+    wrapper.addTransformation(new ChangeTransparency(startTime, endTime, transparency));
   }
 
   private ShapeWrapper findWrapper(String shapeName) {
@@ -161,6 +177,10 @@ public class AnimationModelImpl implements AnimationModel {
     ShapeWrapper(Shape shape, String name) {
       this.shape = shape;
       listOfTransformations = new ArrayList();
+    }
+
+    void addTransformation(Transformation t) {
+      listOfTransformations.add(t);
     }
 
     String getData() {

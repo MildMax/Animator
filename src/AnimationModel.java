@@ -14,7 +14,9 @@ public interface AnimationModel {
 
   void addScale(String shapeName, int startTime, int endTime, double scaleFactor);
 
-  void addResize(String shapeName, int startTime, int endTime, int newHeight, int newWidth);
+  void addChangeWidth(String shapeName, int startTime, int endTime, int newWidth);
+
+  void addChangeHeight(String shapeName, int startTime, int endTime, int newHeight);
 
   void addChangeColor(String shapeName, Color newColor, int startTime, int endTime);
 
