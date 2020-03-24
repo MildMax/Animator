@@ -15,8 +15,7 @@ public class Circle extends Oval {
    * @param initialCenterY is the Y coordinate of the center of the shape.
    * @param initialColor   is the color of the shape.
    *
-   * @throws IllegalArgumentException if initialHeight <= 0.
-   * @throws IllegalArgumentException if initialWidth <= 0.
+   * @throws IllegalArgumentException if radius <= 0.
    */
   Circle(String name, int layer, int radius, int initialCenterX, int initialCenterY,
          Color initialColor) {

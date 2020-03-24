@@ -17,8 +17,8 @@ public class Oval extends AbstractShape {
    * @param initialCenterY is the Y coordinate of the center of the shape.
    * @param initialColor   is the color of the shape.
    *
-   * @throws IllegalArgumentException if initialHeight <= 0.
-   * @throws IllegalArgumentException if initialWidth <= 0.
+   * @throws IllegalArgumentException if initialVerticalRadius <= 0.
+   * @throws IllegalArgumentException if initialHorizontalRadius <= 0.
    */
   Oval(String name, int layer, int initialVerticalRadius, int initialHorizontalRadius,
        int initialCenterX, int initialCenterY, Color initialColor) {

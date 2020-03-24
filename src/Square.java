@@ -10,19 +10,18 @@ public class Square extends Rectangle {
    *
    * @param name is the unique name of the shape.
    * @param layer is the order (back to front) that the shape appears relative to the other shapes.
-   * @param initialWidth   is the width of the shape.
+   * @param side   is the width of the shape.
    * @param initialCenterX is the X coordinate of the center of the shape.
    * @param initialCenterY is the Y coordinate of the center of the shape.
    * @param initialColor   is the color of the shape.
    *
-   * @throws IllegalArgumentException if initialHeight <= 0.
-   * @throws IllegalArgumentException if initialWidth <= 0.
+   * @throws IllegalArgumentException if side <= 0.
    */
-  Square(String name, int layer, int initialWidth, int initialCenterX, int initialCenterY,
+  Square(String name, int layer, int side, int initialCenterX, int initialCenterY,
          Color initialColor) {
-    super(name, layer, initialWidth, initialWidth, initialCenterX, initialCenterY, initialColor);
+    super(name, layer, side, side, initialCenterX, initialCenterY, initialColor);
 
-    this.side = initialWidth;
+    this.side = side;
   }
 
   @Override
