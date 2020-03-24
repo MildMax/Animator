@@ -1,3 +1,5 @@
+import java.util.List;
+
 /**
  * Create an interface that creates a generic shape.
  */
@@ -72,4 +74,8 @@ public interface Shape {
    * @return the shape's "Create" statement.
    */
   String getCreateStatement();
+
+  void addTransformation(Transformation t);
+
+  List<Transformation> getTransformationList();
 }

@@ -42,8 +42,13 @@ public class ChangeColor extends AbstractTransformation {
   }
 
   @Override
-  public String getDescription(Shape shape) {
-    return shape.getName() + " changes to " + newColor.toString()
-            + super.getDescription(shape);
+  public String getDescription(String shapeName) {
+    return shapeName + " changes to " + newColor.toString()
+            + super.getDescription(shapeName);
+  }
+
+  @Override
+  public String toString() {
+    return "changes to " + newColor.toString() + super.toString();
   }
 }

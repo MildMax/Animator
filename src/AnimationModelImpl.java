@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class AnimationModelImpl implements AnimationModel {
@@ -11,7 +8,7 @@ public class AnimationModelImpl implements AnimationModel {
   private final int windowYMin;
   private final int windowYMax;
   private final Color windowColor;
-  private Map<String, ShapeWrapper> listOfShapeWrapper;
+  private Map<String, Shape> shapeMap;
 
   public AnimationModelImpl() {
     this(Color.WHITE, -500, 500, -500, 500);
@@ -36,7 +33,7 @@ public class AnimationModelImpl implements AnimationModel {
     }
 
     this.windowColor = windowColor;
-    listOfShapeWrapper = new HashMap<>();
+    shapeMap = new HashMap<>();
     this.windowXMin = windowXMin;
     this.windowXMax = windowXMax;
     this.windowYMin = windowYMin;
@@ -46,71 +43,56 @@ public class AnimationModelImpl implements AnimationModel {
   @Override
   public String getDescription() {
     String out = "";
-    for (ShapeWrapper w : listOfShapeWrapper.values()) {
-      out += w.getData() + "\n\n";
+    for (Shape shape : shapeMap.values()) {
+      out += shape.toString() + "\n\n";
     }
     return out;
   }
 
   @Override
-  public void addShape(Shape shape) {
-    if (listOfShapeWrapper.containsKey(shape.getName())) {
+  public void addShape(Shape shape, String shapeName) {
+    if (shapeMap.containsKey(shapeName)) {
       throw new IllegalArgumentException("That shape already exists");
     }
     else {
-      listOfShapeWrapper.put(shape.getName(), new ShapeWrapper(shape));
+      shapeMap.put(shapeName, shape);
     }
   }
 
   @Override
   public void addTransformation(String shapeName, Transformation t) {
-    ShapeWrapper wrapper = findWrapper(shapeName);
-    for (Transformation transformation : wrapper.listOfTransformations) {
+    Shape shape = findShape(shapeName);
+    for (Transformation transformation : shape.getTransformationList()) {
       if (t.getClass() == transformation.getClass()
               && checkTimes(transformation.getStart(), transformation.getEnd(),
               t.getStart(), t.getEnd())) {
         throw new IllegalArgumentException("Move already exists within that period");
       }
     }
-    wrapper.addTransformationToList(t);
+    shape.addTransformation(t);
   }
 
-  private ShapeWrapper findWrapper(String shapeName) {
-    ShapeWrapper w = listOfShapeWrapper.get(shapeName);
+  @Override
+  public String toString() {
+    String out = "";
+    for (Shape shape : shapeMap.values()) {
+      out += shape.toString() + "\n\n";
+    }
+    return out;
+  }
 
-    if (w == null) {
+  private Shape findShape(String shapeName) {
+    Shape shape = shapeMap.get(shapeName);
+
+    if (shape == null) {
       throw new IllegalArgumentException("Shape with name " + shapeName + " does not exist");
     }
 
-    return w;
+    return shape;
   }
 
   private boolean checkTimes(int currStart, int currEnd, int newStart, int newEnd) {
     return (newStart >= currStart && newStart <= currEnd)
             || (newEnd >= currStart && newEnd <= currEnd);
-  }
-
-  private static class ShapeWrapper {
-    private final Shape shape;
-    List<Transformation> listOfTransformations;
-
-    ShapeWrapper(Shape shape) {
-      this.shape = shape;
-      listOfTransformations = new ArrayList();
-    }
-
-    void addTransformationToList(Transformation t) {
-      listOfTransformations.add(t);
-    }
-
-    String getData() {
-      listOfTransformations.sort(Comparator.comparing(Transformation::getStart));
-      String ret = "";
-      ret += shape.getCreateStatement() + "\n";
-      for (Transformation t : listOfTransformations) {
-        ret += t.getDescription(shape) + "\n";
-      }
-      return ret;
-    }
   }
 }

@@ -52,8 +52,13 @@ public class Move extends AbstractTransformation {
   }
 
   @Override
-  public String getDescription(Shape shape) {
-    return shape.getName() + " moves to (" + getX() + "," + getY() + ")"
-            + super.getDescription(shape);
+  public String getDescription(String shapeName) {
+    return shapeName + " moves to (" + getX() + "," + getY() + ")"
+            + super.getDescription(shapeName);
+  }
+
+  @Override
+  public String toString() {
+    return "moves to (" + getX() + "," + getY() + ")" + super.toString();
   }
 }

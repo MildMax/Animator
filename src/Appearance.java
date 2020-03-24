@@ -20,8 +20,14 @@ public class Appearance extends AbstractTransformation {
   }
 
   @Override
-  public String getDescription(Shape shape) {
-    return shape.getName() + " appears at time t=" + getStart()
+  public String getDescription(String shapeName) {
+    return shapeName + " appears at time t=" + getStart()
+            + " and disappears at time t=" + getEnd() + ".";
+  }
+
+  @Override
+  public String toString() {
+    return "appears at time t=" + getStart()
             + " and disappears at time t=" + getEnd() + ".";
   }
 }

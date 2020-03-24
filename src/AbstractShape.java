@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Create an abstract class called AbstractShape that is a generic shape.
  * This class implements the Shape interface.
@@ -11,6 +14,8 @@ public abstract class AbstractShape implements Shape {
   protected final int initialCenterY;
   protected final Color initialColor;
   protected final double initialTransparency;
+
+  private List<Transformation> transformationList;
 
   /**
    * Create a new instance of AbstractShape.
@@ -43,6 +48,7 @@ public abstract class AbstractShape implements Shape {
     this.initialCenterY = initialCenterY;
     this.initialColor = initialColor;
     this.initialTransparency = 0.0;
+    transformationList = new ArrayList<>();
   }
 
   /**
@@ -143,5 +149,32 @@ public abstract class AbstractShape implements Shape {
   @Override
   public String getCreateStatement() {
     return null;
+  }
+
+  @Override
+  public void addTransformation(Transformation t) {
+    transformationList.add(t);
+  }
+
+  @Override
+  public List<Transformation> getTransformationList() {
+    return this.transformationList;
+  }
+
+  @Override
+  public String toString() {
+    String out = "";
+
+    out += "Create " + this.getClass().toString() + " " + this.name
+            + " with center at (" + this.initialCenterX + ","
+            + this.initialCenterY +") width " + this.initialWidth
+            + " height " + this.initialHeight + " on layer "
+            + this.layer + ".\n\n";
+
+    for (Transformation t : transformationList) {
+      out += name + " " + t.toString() + "\n";
+    }
+
+    return out;
   }
 }

@@ -46,7 +46,12 @@ public class ChangeWidth extends AbstractTransformation {
 
 
   @Override
-  public String getDescription(Shape shape) {
-    return shape.getName() + " changes to width:" + this.getWidth() + super.getDescription(shape);
+  public String getDescription(String shapeName) {
+    return shapeName + " changes to width:" + this.getWidth() + super.getDescription(shapeName);
+  }
+
+  @Override
+  public String toString() {
+    return "changes to width:" + this.getWidth() + super.toString();
   }
 }

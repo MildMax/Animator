@@ -38,8 +38,13 @@ public class ChangeTransparency extends AbstractTransformation {
   }
 
   @Override
-  public String getDescription(Shape shape) {
-    return shape.getName() + " changes to " + this.getTransparency()
-            + super.getDescription(shape);
+  public String getDescription(String shapeName) {
+    return shapeName + " changes to " + this.getTransparency()
+            + super.getDescription(shapeName);
+  }
+
+  @Override
+  public String toString() {
+    return "changes to " + this.getTransparency() + super.toString();
   }
 }

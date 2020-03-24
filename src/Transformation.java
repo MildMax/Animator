@@ -32,5 +32,5 @@ public interface Transformation {
    *
    * @return the transformation's description.
    */
-  String getDescription(Shape shape);
+  String getDescription(String shapeName);
 }

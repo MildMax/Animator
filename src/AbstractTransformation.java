@@ -65,7 +65,12 @@ public class AbstractTransformation implements Transformation {
    * @return the transformation's description.
    */
   @Override
-  public String getDescription(Shape shape) {
+  public String getDescription(String shapeName) {
+    return " from time t=" + startTime + " to time t=" + endTime + ".";
+  }
+
+  @Override
+  public String toString() {
     return " from time t=" + startTime + " to time t=" + endTime + ".";
   }
 }

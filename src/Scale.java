@@ -40,8 +40,13 @@ public class Scale extends AbstractTransformation {
   }
 
   @Override
-  public String getDescription(Shape shape) {
-    return shape.getName() + " scales to " + scaleFactor + " times its current size"
-            + super.getDescription(shape);
+  public String getDescription(String shapeName) {
+    return shapeName + " scales to " + scaleFactor + " times its current size"
+            + super.getDescription(shapeName);
+  }
+
+  @Override
+  public String toString() {
+    return "scales to " + scaleFactor + " times its current size"  + super.toString();
   }
 }

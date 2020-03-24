@@ -48,7 +48,12 @@ public class ChangeHeight extends AbstractTransformation {
 
 
   @Override
-  public String getDescription(Shape shape) {
-    return shape.getName() + " changes to height:" + this.getHeight() + super.getDescription(shape);
+  public String getDescription(String shapeName) {
+    return shapeName + " changes to height:" + this.getHeight() + super.getDescription(shapeName);
+  }
+
+  @Override
+  public String toString() {
+    return "changes to height:" + this.getHeight() + super.toString();
   }
 }
