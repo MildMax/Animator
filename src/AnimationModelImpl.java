@@ -43,18 +43,20 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   @Override
-  public Map<String, ShapeWrapper> listOfShapeWrappers(String descriptionFromController) {
-    List<ShapeWrapper> listOfShapeWrapperCopy = new ArrayList<>();
-    for (ShapeWrapper s : listOfShapeWrapper) {
+  public List listOfShapeWrappers(String descriptionFromController) {
 
-    }
-
-    return listOfShapeWrapperCopy;
+    return null;
   }
 
   @Override
   public String getDescription() {
-    return null;
+    String out = "";
+    for (ShapeWrapper w : listOfShapeWrapper.values()) {
+      out += w.getData() + "\n\n";
+    }
+
+    return out;
+
   }
 
   @Override
@@ -141,6 +143,7 @@ public class AnimationModelImpl implements AnimationModel {
         throw new IllegalArgumentException("Appearances already exists within that period");
       }
     }
+    wrapper.addTransformation(new Appearance(startTime, endTime));
   }
 
   @Override
@@ -185,9 +188,9 @@ public class AnimationModelImpl implements AnimationModel {
 
     String getData() {
       String ret = "";
-      ret += shape.getCreateStatement();
+      ret += shape.getCreateStatement() + "\n";
       for (Transformation t : listOfTransformations) {
-        ret += t.getDescription(shape);
+        ret += t.getDescription(shape) + "\n";
       }
       return ret;
     }

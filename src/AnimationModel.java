@@ -23,4 +23,5 @@ public interface AnimationModel {
   void addAppearance(String shapeName, int startTime, int endTime);
 
   void addChangeTransparency(String shapeName, int startTime, int endTime, double transparency);
+
 }
