@@ -2,13 +2,11 @@ import java.util.List;
 
 public interface AnimationModel {
 
-  List listOfShapeWrappers(String descriptionFromController);
-
   String getDescription();
 
-  List getAllTransformations();
-
   void addShape(Shape shape);
+
+  void addTransformation(String shapeName, Transformation t);
 
   void addMove(String shapeName, int startTime, int endTime, int newX, int newY);
 

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,25 +44,12 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   @Override
-  public List listOfShapeWrappers(String descriptionFromController) {
-
-    return null;
-  }
-
-  @Override
   public String getDescription() {
     String out = "";
     for (ShapeWrapper w : listOfShapeWrapper.values()) {
       out += w.getData() + "\n\n";
     }
-
     return out;
-
-  }
-
-  @Override
-  public List getAllTransformations() {
-    return null;
   }
 
   @Override
@@ -75,6 +63,18 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   @Override
+  public void addTransformation(String shapeName, Transformation t) {
+    ShapeWrapper wrapper = findWrapper(shapeName);
+    for (Transformation transformation : wrapper.listOfTransformations) {
+      if (t.getClass() == transformation.getClass()
+              && checkTimes(transformation.getStart(), transformation.getEnd(), t.getStart(), t.getEnd())) {
+        throw new IllegalArgumentException("Move already exists within that period");
+      }
+    }
+    wrapper.addTransformationToList(t);
+  }
+
+  @Override
   public void addMove(String shapeName, int startTime, int endTime, int newX, int newY) {
     ShapeWrapper wrapper = findWrapper(shapeName);
     for (Transformation t : wrapper.listOfTransformations) {
@@ -83,7 +83,7 @@ public class AnimationModelImpl implements AnimationModel {
         throw new IllegalArgumentException("Move already exists within that period");
       }
     }
-    wrapper.addTransformation(new Move(startTime, endTime, newX, newY));
+    wrapper.addTransformationToList(new Move(startTime, endTime, newX, newY));
   }
 
   @Override
@@ -95,7 +95,7 @@ public class AnimationModelImpl implements AnimationModel {
         throw new IllegalArgumentException("Scale already exists within that period");
       }
     }
-    wrapper.addTransformation(new Scale(startTime, endTime, scaleFactor));
+    wrapper.addTransformationToList(new Scale(startTime, endTime, scaleFactor));
   }
 
   @Override
@@ -107,7 +107,7 @@ public class AnimationModelImpl implements AnimationModel {
         throw new IllegalArgumentException("Change width already exists within that period");
       }
     }
-    wrapper.addTransformation(new ChangeWidth(startTime, endTime, newWidth));
+    wrapper.addTransformationToList(new ChangeWidth(startTime, endTime, newWidth));
   }
 
   @Override
@@ -119,7 +119,7 @@ public class AnimationModelImpl implements AnimationModel {
         throw new IllegalArgumentException("Resize already exists within that period");
       }
     }
-    wrapper.addTransformation(new ChangeHeight(startTime, endTime, newHeight));
+    wrapper.addTransformationToList(new ChangeHeight(startTime, endTime, newHeight));
   }
 
   @Override
@@ -131,7 +131,7 @@ public class AnimationModelImpl implements AnimationModel {
         throw new IllegalArgumentException("Color change already exists within that period");
       }
     }
-    wrapper.addTransformation(new ChangeColor(startTime, endTime, newColor));
+    wrapper.addTransformationToList(new ChangeColor(startTime, endTime, newColor));
   }
 
   @Override
@@ -143,7 +143,7 @@ public class AnimationModelImpl implements AnimationModel {
         throw new IllegalArgumentException("Appearances already exists within that period");
       }
     }
-    wrapper.addTransformation(new Appearance(startTime, endTime));
+    wrapper.addTransformationToList(new Appearance(startTime, endTime));
   }
 
   @Override
@@ -155,7 +155,7 @@ public class AnimationModelImpl implements AnimationModel {
         throw new IllegalArgumentException("Transparency change already exists within that period");
       }
     }
-    wrapper.addTransformation(new ChangeTransparency(startTime, endTime, transparency));
+    wrapper.addTransformationToList(new ChangeTransparency(startTime, endTime, transparency));
   }
 
   private ShapeWrapper findWrapper(String shapeName) {
@@ -182,11 +182,12 @@ public class AnimationModelImpl implements AnimationModel {
       listOfTransformations = new ArrayList();
     }
 
-    void addTransformation(Transformation t) {
+    void addTransformationToList(Transformation t) {
       listOfTransformations.add(t);
     }
 
     String getData() {
+      listOfTransformations.sort(Comparator.comparing(Transformation::getStart));
       String ret = "";
       ret += shape.getCreateStatement() + "\n";
       for (Transformation t : listOfTransformations) {
