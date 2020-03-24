@@ -14,7 +14,6 @@ public class Square extends Rectangle {
    * @param initialCenterY is the Y coordinate of the center of the shape.
    * @param initialColor   is the color of the shape.
    *
-   * @throws IllegalArgumentException if layer < 0.
    * @throws IllegalArgumentException if initialHeight <= 0.
    * @throws IllegalArgumentException if initialWidth <= 0.
    */
@@ -33,7 +32,6 @@ public class Square extends Rectangle {
    * @param initialCenterY is the Y coordinate of the center of the shape.
    * @param initialColor   is the color of the shape.
    *
-   * @throws IllegalArgumentException if layer < 0.
    * @throws IllegalArgumentException if initialHeight <= 0.
    * @throws IllegalArgumentException if initialWidth <= 0.
    */

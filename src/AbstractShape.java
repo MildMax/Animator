@@ -23,16 +23,12 @@ public abstract class AbstractShape implements Shape {
    * @param initialCenterY is the Y coordinate of the center of the shape.
    * @param initialColor is the color of the shape.
    *
-   * @throws IllegalArgumentException if layer < 0.
    * @throws IllegalArgumentException if initialHeight <= 0.
    * @throws IllegalArgumentException if initialWidth <= 0.
    *
    */
   AbstractShape(String name, int layer, int initialHeight, int initialWidth, int initialCenterX,
                 int initialCenterY, Color initialColor) {
-    if (layer < 0) {
-      throw new IllegalArgumentException("Layer may not be negative.");
-    }
     if (initialHeight <= 0) {
       throw new IllegalArgumentException("Initial height must be greater than zero.");
     }
