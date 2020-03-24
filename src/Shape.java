@@ -18,6 +18,13 @@ public interface Shape {
   String getType();
 
   /**
+   * return the shape's Layer.
+   *
+   * @return the shape's Layer.
+   */
+  int getLayer();
+
+  /**
    * return the shape's height.
    *
    * @return the shape's height.
