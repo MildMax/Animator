@@ -4,6 +4,7 @@
  */
 public abstract class AbstractShape implements Shape {
   protected final String name;
+  protected final int layer;
   protected final int initialHeight;
   protected final int initialWidth;
   protected final int initialCenterX;
@@ -14,15 +15,24 @@ public abstract class AbstractShape implements Shape {
   /**
    * Create a new instance of AbstractShape.
    *
+   * @param name is the unique name of the shape.
+   * @param layer is the order (back to front) that the shape appears relative to the other shapes.
    * @param initialHeight is the height of the shape.
    * @param initialWidth is the width of the shape.
    * @param initialCenterX is the X coordinate of the center of the shape.
    * @param initialCenterY is the Y coordinate of the center of the shape.
    * @param initialColor is the color of the shape.
    *
+   * @throws IllegalArgumentException if layer < 0.
+   * @throws IllegalArgumentException if initialHeight <= 0.
+   * @throws IllegalArgumentException if initialWidth <= 0.
+   *
    */
-  AbstractShape(String name, int initialHeight, int initialWidth, int initialCenterX,
+  AbstractShape(String name, int layer, int initialHeight, int initialWidth, int initialCenterX,
                 int initialCenterY, Color initialColor) {
+    if (layer < 0) {
+      throw new IllegalArgumentException("Layer may not be negative.");
+    }
     if (initialHeight <= 0) {
       throw new IllegalArgumentException("Initial height must be greater than zero.");
     }
@@ -30,6 +40,7 @@ public abstract class AbstractShape implements Shape {
       throw new IllegalArgumentException("Initial width must be greater than zero.");
     }
     this.name = name;
+    this.layer = layer;
     this.initialHeight = initialHeight;
     this.initialWidth = initialWidth;
     this.initialCenterX = initialCenterX;
@@ -56,6 +67,16 @@ public abstract class AbstractShape implements Shape {
   @Override
   public String getType() {
     return null;
+  }
+
+  /**
+   * return the shape's Layer.
+   *
+   * @return the shape's Layer.
+   */
+  @Override
+  public int getLayer() {
+    return this.layer;
   }
 
   /**
