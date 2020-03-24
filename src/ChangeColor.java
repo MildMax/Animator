@@ -30,6 +30,7 @@ public class ChangeColor extends AbstractTransformation {
     }
 
     this.newColor = newColor;
+    this.type = TransformationType.CHANGECOLOR;
   }
 
   @Override

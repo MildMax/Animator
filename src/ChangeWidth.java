@@ -33,6 +33,7 @@ public class ChangeWidth extends AbstractTransformation {
     }
 
     this.newWidth = newWidth;
+    this.type = TransformationType.CHANGEWIDTH;
   }
 
   @Override

@@ -35,6 +35,7 @@ public class ChangeHeight extends AbstractTransformation {
     }
 
     this.newHeight = newHeight;
+    this.type = TransformationType.CHANGEHEIGHT;
   }
 
   @Override

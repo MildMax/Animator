@@ -28,6 +28,7 @@ public class ChangeTransparency extends AbstractTransformation {
     }
 
     this.newTransparency = newTransparency;
+    this.type = TransformationType.CHANGETRANSPARENCY;
   }
 
   @Override

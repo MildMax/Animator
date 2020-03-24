@@ -31,6 +31,7 @@ public class Move extends AbstractTransformation {
 
     this.newX = newX;
     this.newY = newY;
+    this.type = TransformationType.MOVE;
   }
 
   @Override

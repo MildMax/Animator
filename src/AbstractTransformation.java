@@ -16,6 +16,7 @@
 public abstract class AbstractTransformation implements Transformation {
   private final int startTime;
   private final int endTime;
+  protected TransformationType type;
 
   /**
    * The AbstractTransformation constructor takes two ints indicating the start of the
@@ -57,6 +58,11 @@ public abstract class AbstractTransformation implements Transformation {
   @Override
   public int getEnd() {
     return this.endTime;
+  }
+
+  @Override
+  public TransformationType getType() {
+    return this.type;
   }
 
   @Override

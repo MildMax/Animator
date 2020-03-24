@@ -17,6 +17,7 @@ public class Appearance extends AbstractTransformation {
    */
   public Appearance(int startTime, int endTime) throws IllegalArgumentException {
     super(startTime, endTime);
+    this.type = TransformationType.APPEARANCE;
   }
 
   @Override
