@@ -8,7 +8,7 @@ public interface AnimationModel {
 
   List getAllTransformations();
 
-  void addShape(Shape shape, String shapeName);
+  void addShape(Shape shape);
 
   void addMove(String shapeName, int startTime, int endTime, int newX, int newY);
 

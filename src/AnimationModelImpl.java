@@ -65,12 +65,12 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   @Override
-  public void addShape(Shape shape, String shapeName) {
-    if (listOfShapeWrapper.containsKey(shapeName)) {
+  public void addShape(Shape shape) {
+    if (listOfShapeWrapper.containsKey(shape.getName())) {
       throw new IllegalArgumentException("That shape already exists");
     }
     else {
-      listOfShapeWrapper.put(shapeName, new ShapeWrapper(shape, shapeName));
+      listOfShapeWrapper.put(shape.getName(), new ShapeWrapper(shape));
     }
   }
 
@@ -177,7 +177,7 @@ public class AnimationModelImpl implements AnimationModel {
     private final Shape shape;
     List<Transformation> listOfTransformations;
 
-    ShapeWrapper(Shape shape, String name) {
+    ShapeWrapper(Shape shape) {
       this.shape = shape;
       listOfTransformations = new ArrayList();
     }
