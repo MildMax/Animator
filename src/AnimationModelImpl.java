@@ -67,95 +67,12 @@ public class AnimationModelImpl implements AnimationModel {
     ShapeWrapper wrapper = findWrapper(shapeName);
     for (Transformation transformation : wrapper.listOfTransformations) {
       if (t.getClass() == transformation.getClass()
-              && checkTimes(transformation.getStart(), transformation.getEnd(), t.getStart(), t.getEnd())) {
+              && checkTimes(transformation.getStart(), transformation.getEnd(),
+              t.getStart(), t.getEnd())) {
         throw new IllegalArgumentException("Move already exists within that period");
       }
     }
     wrapper.addTransformationToList(t);
-  }
-
-  @Override
-  public void addMove(String shapeName, int startTime, int endTime, int newX, int newY) {
-    ShapeWrapper wrapper = findWrapper(shapeName);
-    for (Transformation t : wrapper.listOfTransformations) {
-      //if move already exists
-      if (t instanceof Move && checkTimes(t.getStart(), t.getEnd(), startTime, endTime)) {
-        throw new IllegalArgumentException("Move already exists within that period");
-      }
-    }
-    wrapper.addTransformationToList(new Move(startTime, endTime, newX, newY));
-  }
-
-  @Override
-  public void addScale(String shapeName, int startTime, int endTime, double scaleFactor) {
-    ShapeWrapper wrapper = findWrapper(shapeName);
-    for (Transformation t : wrapper.listOfTransformations) {
-      //if move already exists
-      if (t instanceof Scale && checkTimes(t.getStart(), t.getEnd(), startTime, endTime)) {
-        throw new IllegalArgumentException("Scale already exists within that period");
-      }
-    }
-    wrapper.addTransformationToList(new Scale(startTime, endTime, scaleFactor));
-  }
-
-  @Override
-  public void addChangeWidth(String shapeName, int startTime, int endTime, int newWidth) {
-    ShapeWrapper wrapper = findWrapper(shapeName);
-    for (Transformation t : wrapper.listOfTransformations) {
-      //if move already exists
-      if (t instanceof ChangeWidth && checkTimes(t.getStart(), t.getEnd(), startTime, endTime)) {
-        throw new IllegalArgumentException("Change width already exists within that period");
-      }
-    }
-    wrapper.addTransformationToList(new ChangeWidth(startTime, endTime, newWidth));
-  }
-
-  @Override
-  public void addChangeHeight(String shapeName, int startTime, int endTime, int newHeight) {
-    ShapeWrapper wrapper = findWrapper(shapeName);
-    for (Transformation t : wrapper.listOfTransformations) {
-      //if move already exists
-      if (t instanceof ChangeHeight && checkTimes(t.getStart(), t.getEnd(), startTime, endTime)) {
-        throw new IllegalArgumentException("Resize already exists within that period");
-      }
-    }
-    wrapper.addTransformationToList(new ChangeHeight(startTime, endTime, newHeight));
-  }
-
-  @Override
-  public void addChangeColor(String shapeName, Color newColor, int startTime, int endTime) {
-    ShapeWrapper wrapper = findWrapper(shapeName);
-    for (Transformation t : wrapper.listOfTransformations) {
-      //if move already exists
-      if (t instanceof ChangeColor && checkTimes(t.getStart(), t.getEnd(), startTime, endTime)) {
-        throw new IllegalArgumentException("Color change already exists within that period");
-      }
-    }
-    wrapper.addTransformationToList(new ChangeColor(startTime, endTime, newColor));
-  }
-
-  @Override
-  public void addAppearance(String shapeName, int startTime, int endTime) {
-    ShapeWrapper wrapper = findWrapper(shapeName);
-    for (Transformation t : wrapper.listOfTransformations) {
-      //if move already exists
-      if (t instanceof Appearance && checkTimes(t.getStart(), t.getEnd(), startTime, endTime)) {
-        throw new IllegalArgumentException("Appearances already exists within that period");
-      }
-    }
-    wrapper.addTransformationToList(new Appearance(startTime, endTime));
-  }
-
-  @Override
-  public void addChangeTransparency(String shapeName, int startTime, int endTime, double transparency) {
-    ShapeWrapper wrapper = findWrapper(shapeName);
-    for (Transformation t : wrapper.listOfTransformations) {
-      //if move already exists
-      if (t instanceof ChangeTransparency && checkTimes(t.getStart(), t.getEnd(), startTime, endTime)) {
-        throw new IllegalArgumentException("Transparency change already exists within that period");
-      }
-    }
-    wrapper.addTransformationToList(new ChangeTransparency(startTime, endTime, transparency));
   }
 
   private ShapeWrapper findWrapper(String shapeName) {

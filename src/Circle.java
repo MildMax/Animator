@@ -3,6 +3,7 @@
  */
 public class Circle extends Oval {
 
+  /*
   /**
    * Create a new instance of circle.
    *
@@ -16,11 +17,12 @@ public class Circle extends Oval {
    *
    * @throws IllegalArgumentException if initialHeight <= 0.
    * @throws IllegalArgumentException if initialWidth <= 0.
-   */
+   *
   Circle(String name, int layer, int initialHeight, int initialWidth, int initialCenterX,
          int initialCenterY, Color initialColor) {
     super(name, layer, initialHeight, initialWidth, initialCenterX, initialCenterY, initialColor);
   }
+  */
 
   /**
    * Create a new instance of circle.
@@ -50,6 +52,8 @@ public class Circle extends Oval {
   public String getType() {
     return "Circle";
   }
+
+  //add get radius
 
   /**
    * return the shape's "Create" statement.

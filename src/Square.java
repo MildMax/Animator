@@ -3,6 +3,7 @@
  */
 public class Square extends Rectangle {
 
+  /*
   /**
    * Create a new instance of Square.
    *
@@ -16,11 +17,12 @@ public class Square extends Rectangle {
    *
    * @throws IllegalArgumentException if initialHeight <= 0.
    * @throws IllegalArgumentException if initialWidth <= 0.
-   */
+   *
   Square(String name, int layer, int initialHeight, int initialWidth, int initialCenterX,
          int initialCenterY, Color initialColor) {
     super(name, layer, initialHeight, initialWidth, initialCenterX, initialCenterY, initialColor);
   }
+  */
 
   /**
    * Create a new instance of Square.
