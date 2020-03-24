@@ -3,6 +3,9 @@
  */
 public class Oval extends AbstractShape {
 
+  private final int initialVerticalRadius;
+  private final int initialHorizontalRadius;
+
   /**
    * Create a new instance of Oval.
    *
@@ -21,40 +24,25 @@ public class Oval extends AbstractShape {
        int initialCenterX, int initialCenterY, Color initialColor) {
     super(name, layer,initialVerticalRadius * 2,
             initialHorizontalRadius * 2, initialCenterX, initialCenterY, initialColor);
+
+    this.initialVerticalRadius = initialVerticalRadius;
+    this.initialHorizontalRadius = initialHorizontalRadius;
   }
 
-  /**
-   * return the shape's Type.
-   *
-   * @return the shape's Type.
-   */
   @Override
-  public String getType() {
-    return "Oval";
-  }
+  public String toString() {
+    String out = "";
 
-  /**
-   * return the shape's "Create" statement.
-   *
-   * @return the shape's "Create" statement.
-   */
-  @Override
-  public String getCreateStatement() {
-    return    "Create "
-            + this.initialColor
-            + " oval "
-            + this.name
-            + " with center at ("
-            + this.initialCenterX
-            + ", "
-            + this.initialCenterY
-            + "), vertical radius "
-            + this.initialHeight
-            + ", and horizontal radius "
-            + this.initialWidth
-            + " on layer "
-            + this.layer
-            + ".\n"
-            ;
+    out += "Create Oval " + this.name
+            + " with center at (" + this.initialCenterX + ","
+            + this.initialCenterY +") horizontal radius " + this.initialHorizontalRadius
+            + " vertical radius " + this.initialVerticalRadius + " on layer "
+            + this.layer + ".\n\n";
+
+    for (Transformation t : this.getTransformationList()) {
+      out += name + " " + t.toString() + "\n";
+    }
+
+    return out;
   }
 }

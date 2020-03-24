@@ -8,7 +8,7 @@
  */
 public class ChangeTransparency extends AbstractTransformation {
 
-  private double newTransparency;
+  private final double newTransparency;
 
   /**
    * The AbstractTransformation constructor takes two ints indicating the start of the transformation
@@ -26,25 +26,17 @@ public class ChangeTransparency extends AbstractTransformation {
     if (newTransparency <= 0 || newTransparency > 100) {
       throw new IllegalArgumentException("Invalid transparency value.");
     }
-  }
 
-  /**
-   * Return the new transparency the shape should take on as a double.
-   *
-   * @return the new transparency the shape should take on as a double.
-   */
-  public double getTransparency() {
-    return this.newTransparency;
+    this.newTransparency = newTransparency;
   }
 
   @Override
-  public String getDescription(String shapeName) {
-    return shapeName + " changes to " + this.getTransparency()
-            + super.getDescription(shapeName);
+  public Transformation copy() {
+    return new ChangeTransparency(this.getStart(), this.getEnd(), this.newTransparency);
   }
 
   @Override
   public String toString() {
-    return "changes to " + this.getTransparency() + super.toString();
+    return "changes to transparency " + this.newTransparency + super.toString();
   }
 }

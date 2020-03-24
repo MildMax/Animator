@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -14,7 +15,6 @@ public abstract class AbstractShape implements Shape {
   protected final int initialCenterY;
   protected final Color initialColor;
   protected final double initialTransparency;
-
   private List<Transformation> transformationList;
 
   /**
@@ -51,106 +51,6 @@ public abstract class AbstractShape implements Shape {
     transformationList = new ArrayList<>();
   }
 
-  /**
-   * return the shape's name.
-   *
-   * @return the shape's name.
-   */
-  @Override
-  public String getName() {
-    return this.name;
-  }
-
-  /**
-   * return the shape's Type.
-   *
-   * @return the shape's Type.
-   */
-  @Override
-  public String getType() {
-    return null;
-  }
-
-  /**
-   * return the shape's Layer.
-   *
-   * @return the shape's Layer.
-   */
-  @Override
-  public int getLayer() {
-    return this.layer;
-  }
-
-  /**
-   * return the shape's height.
-   *
-   * @return the shape's height.
-   */
-  @Override
-  public int getInitialHeight() {
-    return this.initialHeight;
-  }
-
-  /**
-   * return the shape's width.
-   *
-   * @return the shape's width.
-   */
-  @Override
-  public int getInitialWidth() {
-    return this.initialWidth;
-  }
-
-  /**
-   * return the X coordinate of the shape's center.
-   *
-   * @return the X coordinate of the shape's center.
-   */
-  @Override
-  public int getInitialCenterX() {
-    return this.initialCenterX;
-  }
-
-  /**
-   * return the Y coordinate of the shape's center.
-   *
-   * @return the Y coordinate of the shape's center.
-   */
-  @Override
-  public int getInitialCenterY() {
-    return this.initialCenterY;
-  }
-
-  /**
-   * return the shape's transparency.
-   *
-   * @return the shape's transparency
-   */
-  @Override
-  public double getInitialTransparency() {
-    return this.initialTransparency;
-  }
-
-  /**
-   * return the shape's color.
-   *
-   * @return the shape's color.
-   */
-  @Override
-  public Color getInitialColor() {
-    return this.initialColor;
-  }
-
-  /**
-   * return the shape's "Create" statement.
-   *
-   * @return the shape's "Create" statement.
-   */
-  @Override
-  public String getCreateStatement() {
-    return null;
-  }
-
   @Override
   public void addTransformation(Transformation t) {
     transformationList.add(t);
@@ -158,14 +58,19 @@ public abstract class AbstractShape implements Shape {
 
   @Override
   public List<Transformation> getTransformationList() {
-    return this.transformationList;
+    List<Transformation> tList = new ArrayList<>();
+    for (Transformation t : transformationList) {
+      tList.add(t.copy());
+    }
+    tList.sort(Comparator.comparing(Transformation::getStart));
+    return tList;
   }
 
   @Override
   public String toString() {
     String out = "";
 
-    out += "Create " + this.getClass().toString() + " " + this.name
+    out += "Create " + this.getClass().getName() + " " + this.name
             + " with center at (" + this.initialCenterX + ","
             + this.initialCenterY +") width " + this.initialWidth
             + " height " + this.initialHeight + " on layer "

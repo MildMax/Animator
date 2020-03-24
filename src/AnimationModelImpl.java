@@ -41,15 +41,6 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   @Override
-  public String getDescription() {
-    String out = "";
-    for (Shape shape : shapeMap.values()) {
-      out += shape.toString() + "\n\n";
-    }
-    return out;
-  }
-
-  @Override
   public void addShape(Shape shape, String shapeName) {
     if (shapeMap.containsKey(shapeName)) {
       throw new IllegalArgumentException("That shape already exists");

@@ -13,7 +13,7 @@
  *
  * <p>getDescription() method</p>
  */
-public class AbstractTransformation implements Transformation {
+public abstract class AbstractTransformation implements Transformation {
   private final int startTime;
   private final int endTime;
 
@@ -57,16 +57,6 @@ public class AbstractTransformation implements Transformation {
   @Override
   public int getEnd() {
     return this.endTime;
-  }
-
-  /**
-   * return the transformation's description.
-   *
-   * @return the transformation's description.
-   */
-  @Override
-  public String getDescription(String shapeName) {
-    return " from time t=" + startTime + " to time t=" + endTime + ".";
   }
 
   @Override

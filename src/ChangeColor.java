@@ -8,7 +8,7 @@
  */
 public class ChangeColor extends AbstractTransformation {
 
-  private Color newColor;
+  private final Color newColor;
 
   /**
    * The AbstractTransformation constructor takes two ints indicating the start of the transformation
@@ -32,19 +32,9 @@ public class ChangeColor extends AbstractTransformation {
     this.newColor = newColor;
   }
 
-  /**
-   * Returns a color enum indicating the color that the shape should take on.
-   *
-   * @return a color enum indicating the color that the shape should take on.
-   */
-  public Color getColor() {
-    return this.newColor;
-  }
-
   @Override
-  public String getDescription(String shapeName) {
-    return shapeName + " changes to " + newColor.toString()
-            + super.getDescription(shapeName);
+  public Transformation copy() {
+    return new ChangeColor(this.getStart(), this.getEnd(), this.newColor);
   }
 
   @Override

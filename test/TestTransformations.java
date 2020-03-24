@@ -18,11 +18,10 @@ public class TestTransformations {
   @Test
   public void testAppearanceConstructor() {
     Transformation t = new Appearance(10, 15);
-    Shape s = new Square("square", 10, 10, 10, 10, Color.WHITE);
 
     assertEquals(10, t.getStart());
     assertEquals(15, t.getEnd());
-    assertEquals("", t.getDescription("@"));
+    assertEquals("", t.toString());
   }
   //MOVE
   //CHANGEWIDTH

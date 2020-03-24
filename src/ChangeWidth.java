@@ -8,7 +8,7 @@
  */
 public class ChangeWidth extends AbstractTransformation {
 
-  private int newWidth;
+  private final int newWidth;
 
   /**
    * The Resize constructor takes two ints indicating the start of the transformation
@@ -35,23 +35,13 @@ public class ChangeWidth extends AbstractTransformation {
     this.newWidth = newWidth;
   }
 
-  /**
-   * Returns an int indicating the new width of the shape.
-   *
-   * @return an int indicating the new width of the shape.
-   */
-  public int getWidth() {
-    return this.newWidth;
-  }
-
-
   @Override
-  public String getDescription(String shapeName) {
-    return shapeName + " changes to width:" + this.getWidth() + super.getDescription(shapeName);
+  public Transformation copy() {
+    return new ChangeWidth(this.getStart(), this.getEnd(), this.newWidth);
   }
 
   @Override
   public String toString() {
-    return "changes to width:" + this.getWidth() + super.toString();
+    return "changes to width:" + this.newWidth + super.toString();
   }
 }

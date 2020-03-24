@@ -19,14 +19,8 @@ public class TestShape {
     Shape s = new Circle("circle", 1, 25, 30, 35,
             Color.RED);
 
-    assertEquals("circle", s.getName());
-    assertEquals(1, s.getLayer());
-    //assertEquals(50, s.getInitialHeight());
-    assertEquals(30, s.getInitialCenterX());
-    assertEquals(35, s.getInitialCenterY());
-    assertEquals(Color.RED, s.getInitialColor());
     assertEquals("Create red circle circle with center at (30, 35), "
-            + "and radius 25 on layer 1.", s.getCreateStatement());
+            + "and radius 25 on layer 1.", s.toString());
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -54,14 +48,7 @@ public class TestShape {
   public void testOvalConstructor() {
     Shape o = new Oval("oval", -23, 25, 50, -10, -10, Color.WHITE);
 
-    assertEquals("oval", o.getName());
-    assertEquals(-23, o.getLayer());
-    assertEquals(100, o.getInitialWidth());
-    assertEquals(50, o.getInitialHeight());
-    assertEquals(-10, o.getInitialCenterX());
-    assertEquals(-10, o.getInitialCenterY());
-    assertEquals(Color.WHITE, o.getInitialColor());
-    assertEquals("", o.getCreateStatement());
+    assertEquals("", o.toString());
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -98,14 +85,7 @@ public class TestShape {
   public void testRectangleConstructor() {
     Shape o = new Rectangle("rect", 100, 105, 220, -250, 325, Color.PURPLE);
 
-    assertEquals("rect", o.getName());
-    assertEquals(100, o.getLayer());
-    assertEquals(105, o.getInitialHeight());
-    assertEquals(220, o.getInitialWidth());
-    assertEquals(-250, o.getInitialCenterX());
-    assertEquals(325, o.getInitialCenterY());
-    assertEquals(Color.PURPLE, o.getInitialColor());
-    assertEquals("", o.getCreateStatement());
+    assertEquals("", o.toString());
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -142,14 +122,7 @@ public class TestShape {
   public void testSquareConstructor() {
     Shape s = new Square("square", -1001, 15, 12, 10, Color.BLUE);
 
-    assertEquals("square", s.getName());
-    assertEquals(-1001, s.getLayer());
-    assertEquals(15, s.getInitialWidth());
-    assertEquals(15, s.getInitialHeight());
-    assertEquals(12, s.getInitialCenterX());
-    assertEquals(10, s.getInitialCenterY());
-    assertEquals(Color.BLUE, s.getInitialColor());
-    assertEquals("", s.getCreateStatement());
+    assertEquals("", s.toString());
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -176,14 +149,7 @@ public class TestShape {
   public void testTriangleConstructor() {
     Shape t = new Triangle("triangle", -1234, 10, 15, 20, -25, Color.WHITE);
 
-    assertEquals("triangle", t.getName());
-    assertEquals(-1234, t.getLayer());
-    assertEquals(10, t.getInitialHeight());
-    assertEquals(15, t.getInitialWidth());
-    assertEquals(20, t.getInitialCenterX());
-    assertEquals(-25, t.getInitialCenterY());
-    assertEquals(Color.WHITE, t.getInitialColor());
-    assertEquals("", t.getCreateStatement());
+    assertEquals("", t.toString());
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -214,5 +180,18 @@ public class TestShape {
   @Test(expected = IllegalArgumentException.class)
   public void testNullColorTriangleConsctructor() {
     new Triangle("Triangle", 101, 20, 23, 50, 60, null);
+  }
+
+  @Test
+  public void testGetClass() {
+    Shape triangle = new Triangle("1", 2, 3, 4, 5, 6, Color.GREEN);
+    Shape circle = new Circle("2", 2, 2, 2, 2, Color.WHITE);
+    Shape oval = new Oval("3", 2, 2, 2, 2, 2, Color.WHITE);
+    Shape square = new Square("4", 2, 2, 2, 2, Color.WHITE);
+    Shape rect = new Rectangle("5", 2, 2, 2, 2, 2, Color.BLUE);
+
+    assertEquals(false, circle.getClass() == oval.getClass());
+    assertEquals(false, rect.getClass() == square.getClass());
+    assertEquals(false, triangle.getClass() == rect.getClass());
   }
 }

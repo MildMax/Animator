@@ -28,21 +28,9 @@ public class Scale extends AbstractTransformation {
     this.scaleFactor = scaleFactor;
   }
 
-  /**
-   * Returns a double indicating the percentage of scaling that will be applied to the
-   * shape's size.
-   *
-   * @return a double indicating the percentage of scaling that will be applied to the
-   *         shape's size.
-   */
-  public double getScaleFactor() {
-    return this.scaleFactor;
-  }
-
   @Override
-  public String getDescription(String shapeName) {
-    return shapeName + " scales to " + scaleFactor + " times its current size"
-            + super.getDescription(shapeName);
+  public Transformation copy() {
+    return new Scale(this.getStart(), this.getEnd(), this.scaleFactor);
   }
 
   @Override

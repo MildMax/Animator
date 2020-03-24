@@ -10,7 +10,7 @@
  */
 public class ChangeHeight extends AbstractTransformation {
 
-  private int newHeight;
+  private final int newHeight;
 
   /**
    * The Resize constructor takes two ints indicating the start of the transformation
@@ -37,23 +37,13 @@ public class ChangeHeight extends AbstractTransformation {
     this.newHeight = newHeight;
   }
 
-  /**
-   * Returns an int indicating the new height of the shape.
-   *
-   * @return an int indicating the new height of the shape.
-   */
-  public int getHeight() {
-    return this.newHeight;
-  }
-
-
   @Override
-  public String getDescription(String shapeName) {
-    return shapeName + " changes to height:" + this.getHeight() + super.getDescription(shapeName);
+  public Transformation copy() {
+    return new ChangeHeight(this.getStart(), this.getEnd(), this.newHeight);
   }
 
   @Override
   public String toString() {
-    return "changes to height:" + this.getHeight() + super.toString();
+    return "changes to height:" + this.newHeight + super.toString();
   }
 }

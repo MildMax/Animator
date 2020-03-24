@@ -33,32 +33,13 @@ public class Move extends AbstractTransformation {
     this.newY = newY;
   }
 
-  /**
-   * Returns an int indicating the x position the shape is moving to.
-   *
-   * @return an int indicating the x position the shape is moving to.
-   */
-  public int getX() {
-    return this.newX;
-  }
-
-  /**
-   * Returns an int indicating the y position the shape is moving to.
-   *
-   * @return an int indicating the y position the shape is moving to.
-   */
-  public int getY() {
-    return this.newY;
-  }
-
   @Override
-  public String getDescription(String shapeName) {
-    return shapeName + " moves to (" + getX() + "," + getY() + ")"
-            + super.getDescription(shapeName);
+  public Transformation copy() {
+    return new Move(this.getStart(), this.getEnd(), this.newX, this.newY);
   }
 
   @Override
   public String toString() {
-    return "moves to (" + getX() + "," + getY() + ")" + super.toString();
+    return "moves to (" + newX + "," + newY + ")" + super.toString();
   }
 }

@@ -27,10 +27,5 @@ public interface Transformation {
    */
   int getEnd();
 
-  /**
-   * Return the transformation's description.
-   *
-   * @return the transformation's description.
-   */
-  String getDescription(String shapeName);
+  Transformation copy();
 }

@@ -22,38 +22,21 @@ public class Rectangle extends AbstractShape {
     super(name, layer, initialHeight, initialWidth, initialCenterX, initialCenterY, initialColor);
   }
 
-  /**
-   * return the shape's Type.
-   *
-   * @return the shape's Type.
-   */
   @Override
-  public String getType() {
-    return "Rectangle";
+  public String toString() {
+    String out = "";
+
+    out += "Create Rectangle " + this.name
+            + " with center at (" + this.initialCenterX + ","
+            + this.initialCenterY +") width " + this.initialWidth
+            + " height " + this.initialHeight + " on layer "
+            + this.layer + ".\n\n";
+
+    for (Transformation t : this.getTransformationList()) {
+      out += name + " " + t.toString() + "\n";
+    }
+
+    return out;
   }
 
-  /**
-   * return the shape's "Create" statement.
-   *
-   * @return the shape's "Create" statement.
-   */
-  @Override
-  public String getCreateStatement() {
-    return    "Create "
-            + this.initialColor
-            + " rectangle "
-            + this.name
-            + " with center at ("
-            + this.initialCenterX
-            + ", "
-            + this.initialCenterY
-            + "), height "
-            + this.initialHeight
-            + ", and width "
-            + this.initialWidth
-            + " on layer "
-            + this.layer
-            + ".\n"
-            ;
-  }
 }

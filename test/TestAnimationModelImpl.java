@@ -26,7 +26,6 @@ public class TestAnimationModelImpl {
     m.addTransformation("2", new Appearance(16, 30));
 
     m.addTransformation("1", new Move(16, 20, 10, 10));
-
     //this throws IllegalArgumentException for occupying same space
     //m.addTransformation("1", new Move(15, 17, 25, 25));
 
