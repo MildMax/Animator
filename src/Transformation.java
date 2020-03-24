@@ -26,6 +26,4 @@ public interface Transformation {
    * @return an int indicating the end time of the transformation.
    */
   int getEnd();
-
-  Transformation copy();
 }

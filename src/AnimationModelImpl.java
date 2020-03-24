@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AnimationModelImpl implements AnimationModel {
@@ -51,6 +52,16 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   @Override
+  public void removeShape(String shapeName) {
+    if (shapeMap.containsKey(shapeName)) {
+      shapeMap.remove(shapeName);
+    }
+    else {
+      throw new IllegalArgumentException("That shape does not exist");
+    }
+  }
+
+  @Override
   public void addTransformation(String shapeName, Transformation t) {
     Shape shape = findShape(shapeName);
     for (Transformation transformation : shape.getTransformationList()) {
@@ -61,6 +72,18 @@ public class AnimationModelImpl implements AnimationModel {
       }
     }
     shape.addTransformation(t);
+  }
+
+  @Override
+  public void removeTransformation(String shapeName, Class c, int start, int end) {
+    Shape shape = findShape(shapeName);
+    for (Transformation t : shape.getTransformationList()) {
+      if (t.getClass() == c && t.getStart() == start && t.getEnd() == end) {
+        shape.removeTransformation(t);
+        return;
+      }
+    }
+    throw new IllegalArgumentException("That transformation does not exist");
   }
 
   @Override

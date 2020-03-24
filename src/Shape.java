@@ -7,6 +7,8 @@ public interface Shape {
 
   void addTransformation(Transformation t);
 
+  void removeTransformation(Transformation t);
+
   List<Transformation> getTransformationList();
 
 }

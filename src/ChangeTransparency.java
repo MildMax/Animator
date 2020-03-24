@@ -31,11 +31,6 @@ public class ChangeTransparency extends AbstractTransformation {
   }
 
   @Override
-  public Transformation copy() {
-    return new ChangeTransparency(this.getStart(), this.getEnd(), this.newTransparency);
-  }
-
-  @Override
   public String toString() {
     return "changes to transparency " + this.newTransparency + super.toString();
   }

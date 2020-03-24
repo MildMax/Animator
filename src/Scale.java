@@ -1,6 +1,6 @@
 public class Scale extends AbstractTransformation {
 
-  private double scaleFactor;
+  private final double scaleFactor;
 
   /**
    * The Scale constructor takes two ints that indicate the start
@@ -26,11 +26,6 @@ public class Scale extends AbstractTransformation {
     }
 
     this.scaleFactor = scaleFactor;
-  }
-
-  @Override
-  public Transformation copy() {
-    return new Scale(this.getStart(), this.getEnd(), this.scaleFactor);
   }
 
   @Override

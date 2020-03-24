@@ -30,6 +30,8 @@ public class TestAnimationModelImpl {
     //m.addTransformation("1", new Move(15, 17, 25, 25));
 
 
+    m.removeTransformation("1", Move.class, 10, 15);
+    m.removeShape("2");
     //m.addMove("3", 24, 43, 20, 30);
 
     assertEquals("", m.toString());

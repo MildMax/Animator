@@ -38,11 +38,6 @@ public class ChangeHeight extends AbstractTransformation {
   }
 
   @Override
-  public Transformation copy() {
-    return new ChangeHeight(this.getStart(), this.getEnd(), this.newHeight);
-  }
-
-  @Override
   public String toString() {
     return "changes to height:" + this.newHeight + super.toString();
   }

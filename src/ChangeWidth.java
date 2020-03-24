@@ -36,11 +36,6 @@ public class ChangeWidth extends AbstractTransformation {
   }
 
   @Override
-  public Transformation copy() {
-    return new ChangeWidth(this.getStart(), this.getEnd(), this.newWidth);
-  }
-
-  @Override
   public String toString() {
     return "changes to width:" + this.newWidth + super.toString();
   }

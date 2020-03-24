@@ -20,11 +20,6 @@ public class Appearance extends AbstractTransformation {
   }
 
   @Override
-  public Transformation copy() {
-    return new Appearance(this.getStart(), this.getEnd());
-  }
-
-  @Override
   public String toString() {
     return "appears at time t=" + getStart()
             + " and disappears at time t=" + getEnd() + ".";

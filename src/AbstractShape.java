@@ -56,14 +56,14 @@ public abstract class AbstractShape implements Shape {
     transformationList.add(t);
   }
 
+  public void removeTransformation(Transformation t) {
+    transformationList.remove(t);
+  }
+
   @Override
   public List<Transformation> getTransformationList() {
-    List<Transformation> tList = new ArrayList<>();
-    for (Transformation t : transformationList) {
-      tList.add(t.copy());
-    }
-    tList.sort(Comparator.comparing(Transformation::getStart));
-    return tList;
+    transformationList.sort(Comparator.comparing(Transformation::getStart));
+    return transformationList;
   }
 
   @Override
