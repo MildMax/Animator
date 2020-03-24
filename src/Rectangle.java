@@ -51,6 +51,8 @@ public class Rectangle extends AbstractShape {
             + this.initialHeight
             + ", and width "
             + this.initialWidth
+            + " on layer "
+            + this.layer
             + ".\n"
             ;
   }

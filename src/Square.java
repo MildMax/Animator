@@ -67,6 +67,8 @@ public class Square extends Rectangle {
             + this.initialCenterY
             + "), and width "
             + this.initialWidth
+            + " on layer "
+            + this.layer
             + ".\n"
             ;
   }

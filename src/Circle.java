@@ -68,6 +68,8 @@ public class Circle extends Oval {
             + this.initialCenterY
             + "), and radius "
             + this.initialHeight
+            + " on layer "
+            + this.layer
             + ".\n"
             ;
   }

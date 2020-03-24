@@ -52,6 +52,8 @@ public class Oval extends AbstractShape {
             + this.initialHeight
             + ", and horizontal radius "
             + this.initialWidth
+            + " on layer "
+            + this.layer
             + ".\n"
             ;
   }
