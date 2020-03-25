@@ -39,6 +39,6 @@ public class ChangeHeight extends AbstractTransformation {
 
   @Override
   public String toString() {
-    return "changes to height:" + this.newHeight + super.toString();
+    return "changes to height:" + this.newHeight + " " + super.toString();
   }
 }

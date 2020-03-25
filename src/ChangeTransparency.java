@@ -32,6 +32,6 @@ public class ChangeTransparency extends AbstractTransformation {
 
   @Override
   public String toString() {
-    return "changes to transparency " + this.newTransparency + super.toString();
+    return "changes to transparency " + this.newTransparency + " " + super.toString();
   }
 }

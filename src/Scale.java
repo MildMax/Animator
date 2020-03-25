@@ -26,11 +26,10 @@ public class Scale extends AbstractTransformation {
     }
 
     this.scaleFactor = scaleFactor;
-    this.type = TransformationType.SCALE;
   }
 
   @Override
   public String toString() {
-    return "scales to " + scaleFactor + " times its current size"  + super.toString();
+    return "scales to " + scaleFactor + " times its current size "  + super.toString();
   }
 }

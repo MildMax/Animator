@@ -34,6 +34,6 @@ public class ChangeColor extends AbstractTransformation {
 
   @Override
   public String toString() {
-    return "changes to " + newColor.toString() + super.toString();
+    return "changes to " + newColor.toString() +  " " +super.toString();
   }
 }

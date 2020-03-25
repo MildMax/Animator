@@ -71,6 +71,6 @@ public abstract class AbstractTransformation implements Transformation {
 
   @Override
   public String toString() {
-    return " from time t=" + startTime + " to time t=" + endTime + ".";
+    return "from time t=" + startTime + " to time t=" + endTime + ".";
   }
 }

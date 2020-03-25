@@ -35,6 +35,6 @@ public class Move extends AbstractTransformation {
 
   @Override
   public String toString() {
-    return "moves to (" + newX + "," + newY + ")" + super.toString();
+    return "moves to (" + newX + "," + newY + ") " + super.toString();
   }
 }

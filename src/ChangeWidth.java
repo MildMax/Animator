@@ -39,6 +39,6 @@ public class ChangeWidth extends AbstractTransformation {
 
   @Override
   public String toString() {
-    return "changes to width:" + this.newWidth + super.toString();
+    return "changes to width:" + this.newWidth + " " + super.toString();
   }
 }
