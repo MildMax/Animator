@@ -4,6 +4,7 @@ import cs5004Animator.Shapes.Circle;
 import cs5004Animator.Shapes.Oval;
 import cs5004Animator.Shapes.Rectangle;
 import cs5004Animator.Shapes.Shape;
+import cs5004Animator.Shapes.ShapeType;
 import cs5004Animator.Shapes.Square;
 import cs5004Animator.Shapes.Triangle;
 import cs5004Animator.Transformations.Appearance;
@@ -465,8 +466,9 @@ public class TestShape {
     Move t6 = new Move(45, 50, 151, 201);
     Scale t7 = new Scale(55, 60, 2.0);
 
-    // Test getName().
+    // Test getName() and getType().
     assertEquals( "Oval1", oval1.getName());
+    assertEquals( ShapeType.OVAL, oval1.getType());
 
     // Test addTransformation() and getTransformationDescription() and getName().
     oval1.addTransformation(t1);
@@ -526,8 +528,9 @@ public class TestShape {
     Move t6 = new Move(45, 50, 151, 201);
     Scale t7 = new Scale(55, 60, 2.0);
 
-    // Test getName().
+    // Test getName() and getType().
     assertEquals( "Circle1", myShape.getName());
+    assertEquals( ShapeType.CIRCLE, myShape.getType());
 
     // Test addTransformation() and getTransformationDescription() and getName().
     myShape.addTransformation(t1);
@@ -587,8 +590,9 @@ public class TestShape {
     Move t6 = new Move(45, 50, 151, 201);
     Scale t7 = new Scale(55, 60, 2.0);
 
-    // Test getName().
+    // Test getName() and getType().
     assertEquals( "Rectangle1", myShape.getName());
+    assertEquals( ShapeType.RECTANGLE, myShape.getType());
 
     // Test addTransformation() and getTransformationDescription() and getName().
     myShape.addTransformation(t1);
@@ -648,8 +652,9 @@ public class TestShape {
     Move t6 = new Move(45, 50, 151, 201);
     Scale t7 = new Scale(55, 60, 2.0);
 
-    // Test getName().
+    // Test getName() and getType().
     assertEquals( "Square1", myShape.getName());
+    assertEquals( ShapeType.SQUARE, myShape.getType());
 
     // Test addTransformation() and getTransformationDescription() and getName().
     myShape.addTransformation(t1);
@@ -709,8 +714,9 @@ public class TestShape {
     Move t6 = new Move(45, 50, 151, 201);
     Scale t7 = new Scale(55, 60, 2.0);
 
-    // Test getName().
+    // Test getName() and getType().
     assertEquals( "Triangle1", myShape.getName());
+    assertEquals( ShapeType.TRIANGLE, myShape.getType());
 
     // Test addTransformation() and getTransformationDescription() and getName().
     myShape.addTransformation(t1);
