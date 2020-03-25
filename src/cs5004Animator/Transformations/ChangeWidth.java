@@ -1,4 +1,4 @@
-import jdk.jfr.TransitionFrom;
+package cs5004Animator.Transformations;
 
 /**
  * The Resize class handles resizing a shape according to the new width

@@ -1,6 +1,11 @@
+package cs5004Animator.Shapes;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+
+import cs5004Animator.Color;
+import cs5004Animator.Transformations.Transformation;
 
 /**
  * Create an abstract class called AbstractShape that is a generic shape.

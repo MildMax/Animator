@@ -1,3 +1,5 @@
+package cs5004Animator.Transformations;
+
 /**
  * The Transformation interface declares methods that must be implemented by every
  * transformation for each animation. Contains the following features:

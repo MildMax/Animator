@@ -1,3 +1,5 @@
+package cs5004Animator.Transformations;
+
 /**
  * The Resize class handles resizing a shape according to the new height and height
  * of the shapes x and y values. Contains the following features:

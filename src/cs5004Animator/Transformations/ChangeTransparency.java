@@ -1,3 +1,5 @@
+package cs5004Animator.Transformations;
+
 /**
  * The ChangeTransparency class holds information needed to change the transparency of
  * a shape. Contains the following features:

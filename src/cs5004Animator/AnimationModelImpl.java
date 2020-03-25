@@ -1,6 +1,11 @@
+package cs5004Animator;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+
+import cs5004Animator.Shapes.Shape;
+import cs5004Animator.Transformations.Transformation;
+import cs5004Animator.Transformations.TransformationType;
 
 public class AnimationModelImpl implements AnimationModel {
 

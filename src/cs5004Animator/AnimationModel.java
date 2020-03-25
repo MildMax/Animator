@@ -1,4 +1,8 @@
-import java.util.List;
+package cs5004Animator;
+
+import cs5004Animator.Shapes.Shape;
+import cs5004Animator.Transformations.Transformation;
+import cs5004Animator.Transformations.TransformationType;
 
 public interface AnimationModel {
 

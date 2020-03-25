@@ -1,3 +1,8 @@
+package cs5004Animator.Shapes;
+
+import cs5004Animator.Color;
+import cs5004Animator.Transformations.Transformation;
+
 /**
  * Create a square class that extends the rectangle class.
  */
@@ -17,8 +22,8 @@ public class Square extends Rectangle {
    *
    * @throws IllegalArgumentException if side <= 0.
    */
-  Square(String name, int layer, int side, int initialCenterX, int initialCenterY,
-         Color initialColor) {
+  public Square(String name, int layer, int side, int initialCenterX, int initialCenterY,
+                Color initialColor) {
     super(name, layer, side, side, initialCenterX, initialCenterY, initialColor);
 
     this.side = side;

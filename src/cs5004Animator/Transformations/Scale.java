@@ -1,3 +1,5 @@
+package cs5004Animator.Transformations;
+
 public class Scale extends AbstractTransformation {
 
   private final double scaleFactor;

@@ -1,3 +1,5 @@
+package cs5004Animator.Transformations;
+
 public enum TransformationType {
   APPEARANCE("appearance"),
   CHANGECOLOR("change color"),

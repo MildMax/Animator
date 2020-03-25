@@ -1,3 +1,5 @@
+package cs5004Animator.Transformations;
+
 /**
  * The Move class describes a transformation that moves a shape from its current location
  * to another location on screen. Contains the following methods:

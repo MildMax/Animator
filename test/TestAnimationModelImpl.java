@@ -1,7 +1,14 @@
 import org.junit.Test;
 
-import java.sql.SQLClientInfoException;
-import java.util.Collections;
+import cs5004Animator.AnimationModel;
+import cs5004Animator.AnimationModelImpl;
+import cs5004Animator.Transformations.Appearance;
+import cs5004Animator.Color;
+import cs5004Animator.Transformations.Move;
+import cs5004Animator.Transformations.Scale;
+import cs5004Animator.Shapes.Square;
+import cs5004Animator.Shapes.Triangle;
+import cs5004Animator.Transformations.TransformationType;
 
 import static org.junit.Assert.assertEquals;
 

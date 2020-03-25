@@ -1,7 +1,12 @@
+package cs5004Animator.Shapes;
+
+import cs5004Animator.Color;
+import cs5004Animator.Transformations.Transformation;
+
 /**
  * Create a rectangle class that extends the AbstractShape abstract class.
  */
-public class Triangle extends AbstractShape {
+public class Rectangle extends AbstractShape {
 
   /**
    * Create a new instance of Rectangle.
@@ -17,8 +22,8 @@ public class Triangle extends AbstractShape {
    * @throws IllegalArgumentException if initialHeight <= 0.
    * @throws IllegalArgumentException if initialWidth <= 0.
    */
-  Triangle(String name, int layer, int initialHeight, int initialWidth, int initialCenterX,
-           int initialCenterY, Color initialColor) {
+  public Rectangle(String name, int layer, int initialHeight, int initialWidth, int initialCenterX,
+            int initialCenterY, Color initialColor) {
     super(name, layer, initialHeight, initialWidth, initialCenterX, initialCenterY, initialColor);
   }
 
@@ -26,7 +31,7 @@ public class Triangle extends AbstractShape {
   public String toString() {
     String out = "";
 
-    out += "Create Triangle " + this.name
+    out += "Create Rectangle " + this.name
             + " with center at (" + this.initialCenterX + ","
             + this.initialCenterY +") width " + this.initialWidth
             + " height " + this.initialHeight + " on layer "

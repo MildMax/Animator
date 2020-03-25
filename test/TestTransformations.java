@@ -1,7 +1,7 @@
 import org.junit.Test;
 
-import java.sql.SQLClientInfoException;
-import java.util.Collections;
+import cs5004Animator.Transformations.Appearance;
+import cs5004Animator.Transformations.Transformation;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

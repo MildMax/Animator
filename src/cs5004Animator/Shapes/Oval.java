@@ -1,3 +1,8 @@
+package cs5004Animator.Shapes;
+
+import cs5004Animator.Color;
+import cs5004Animator.Transformations.Transformation;
+
 /**
  * Create an Oval class that extends the AbstractShape abstract class.
  */
@@ -20,7 +25,7 @@ public class Oval extends AbstractShape {
    * @throws IllegalArgumentException if initialVerticalRadius <= 0.
    * @throws IllegalArgumentException if initialHorizontalRadius <= 0.
    */
-  Oval(String name, int layer, int initialVerticalRadius, int initialHorizontalRadius,
+  public Oval(String name, int layer, int initialVerticalRadius, int initialHorizontalRadius,
        int initialCenterX, int initialCenterY, Color initialColor) {
     super(name, layer,initialVerticalRadius * 2,
             initialHorizontalRadius * 2, initialCenterX, initialCenterY, initialColor);

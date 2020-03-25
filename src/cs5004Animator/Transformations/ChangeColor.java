@@ -1,3 +1,7 @@
+package cs5004Animator.Transformations;
+
+import cs5004Animator.Color;
+
 /**
  * The ChangeColor class holds information needed to change a shape to a new color. Contains
  * the following features:
@@ -34,6 +38,6 @@ public class ChangeColor extends AbstractTransformation {
 
   @Override
   public String toString() {
-    return "changes to " + newColor.toString() +  " " +super.toString();
+    return "changes to " + newColor.toString() +  " " + super.toString();
   }
 }

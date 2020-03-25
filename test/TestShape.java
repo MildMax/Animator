@@ -1,7 +1,12 @@
 import org.junit.Test;
 
-import java.sql.SQLClientInfoException;
-import java.util.Collections;
+import cs5004Animator.Color;
+import cs5004Animator.Shapes.Circle;
+import cs5004Animator.Shapes.Oval;
+import cs5004Animator.Shapes.Rectangle;
+import cs5004Animator.Shapes.Shape;
+import cs5004Animator.Shapes.Square;
+import cs5004Animator.Shapes.Triangle;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

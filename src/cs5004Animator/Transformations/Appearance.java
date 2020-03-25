@@ -1,3 +1,5 @@
+package cs5004Animator.Transformations;
+
 /**
  * The Appearance class holds the values at which an object appears on screen and when
  * the object disappears.

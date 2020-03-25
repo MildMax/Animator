@@ -1,3 +1,5 @@
+package cs5004Animator;
+
 public enum Color {
   RED("red"),
   ORANGE("orange"),

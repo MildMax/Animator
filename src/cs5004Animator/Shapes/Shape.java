@@ -1,4 +1,8 @@
+package cs5004Animator.Shapes;
+
 import java.util.List;
+
+import cs5004Animator.Transformations.Transformation;
 
 /**
  * Create an interface that creates a generic shape.
