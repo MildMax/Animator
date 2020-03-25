@@ -26,6 +26,7 @@ public class Scale extends AbstractTransformation {
     }
 
     this.scaleFactor = scaleFactor;
+    this.type = TransformationType.SCALE;
   }
 
   @Override
