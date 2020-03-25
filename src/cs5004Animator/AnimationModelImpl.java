@@ -27,24 +27,24 @@ public class AnimationModelImpl implements AnimationModel {
             (windowHeight / 2) * -1, (windowHeight / 2));
 
     if (windowWidth <= 0 || windowHeight <= 0) {
-      throw new IllegalArgumentException("Window dimensions cannot be zero");
+      throw new IllegalArgumentException("Window dimensions cannot be less than or equal to zero");
     }
   }
 
   public AnimationModelImpl(int windowXMin, int windowXMax,
                             int windowYMin, int windowYMax) throws IllegalArgumentException {
-
     if (windowXMax <= windowXMin || windowYMax <= windowYMin) {
       throw new IllegalArgumentException("Invalid window size parameters.");
     }
 
-    this.windowColor = Color.WHITE;
-    this.shapeMap = new HashMap<>();
     this.windowXMin = windowXMin;
     this.windowXMax = windowXMax;
     this.windowYMin = windowYMin;
     this.windowYMax = windowYMax;
+
     this.speed = 1.0;
+    this.windowColor = Color.WHITE;
+    this.shapeMap = new HashMap<>();
   }
 
   @Override
@@ -52,7 +52,7 @@ public class AnimationModelImpl implements AnimationModel {
     if (shape == null) {
       throw new IllegalArgumentException("Shape cannot be null");
     }
-    if (shapeMap.containsKey(shape.getName())) {
+    else if (shapeMap.containsKey(shape.getName())) {
       throw new IllegalArgumentException("That shape already exists");
     }
     else {
@@ -62,7 +62,10 @@ public class AnimationModelImpl implements AnimationModel {
 
   @Override
   public void removeShape(String shapeName) {
-    if (shapeMap.containsKey(shapeName)) {
+    if (shapeName == null) {
+      throw new IllegalArgumentException("String shapeName cannot be null");
+    }
+    else if (shapeMap.containsKey(shapeName)) {
       shapeMap.remove(shapeName);
     }
     else {

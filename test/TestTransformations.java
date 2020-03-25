@@ -1,5 +1,6 @@
 import org.junit.Test;
 
+/*
 import cs5004Animator.Color;
 import cs5004Animator.Transformations.Appearance;
 import cs5004Animator.Transformations.ChangeColor;
@@ -10,7 +11,12 @@ import cs5004Animator.Transformations.Move;
 import cs5004Animator.Transformations.Scale;
 import cs5004Animator.Transformations.Transformation;
 
+ */
+
 import static org.junit.Assert.assertEquals;
+
+import cs5004Animator.*;
+import cs5004Animator.Transformations.*;
 
 public class TestTransformations {
 

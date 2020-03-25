@@ -2,6 +2,11 @@ import org.junit.Test;
 
 import java.util.EmptyStackException;
 
+import cs5004Animator.*;
+import cs5004Animator.Shapes.*;
+import cs5004Animator.Transformations.*;
+
+/*
 import cs5004Animator.AnimationModel;
 import cs5004Animator.AnimationModelImpl;
 import cs5004Animator.Shapes.Circle;
@@ -12,6 +17,8 @@ import cs5004Animator.Transformations.Scale;
 import cs5004Animator.Shapes.Square;
 import cs5004Animator.Shapes.Triangle;
 import cs5004Animator.Transformations.TransformationType;
+
+ */
 
 import static org.junit.Assert.assertEquals;
 
@@ -59,8 +66,18 @@ public class TestAnimationModelImpl {
   }
 
   @Test(expected = IllegalArgumentException.class)
+  public void testAnimationModelImplSameXValues() {
+    new AnimationModelImpl(0, 0, 20, 50);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
   public void testAnimationModelImplBadYValues() {
     new AnimationModelImpl(-10, 10, 0, -10);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testAnimationModelImplSameYValues() {
+    new AnimationModelImpl(-10, 10, 0, 0);
   }
 
   @Test(expected = IllegalArgumentException.class)

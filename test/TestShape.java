@@ -1,5 +1,9 @@
 import org.junit.Test;
 
+import cs5004Animator.*;
+import cs5004Animator.Shapes.*;
+
+/*
 import cs5004Animator.Color;
 import cs5004Animator.Shapes.Circle;
 import cs5004Animator.Shapes.Oval;
@@ -7,7 +11,7 @@ import cs5004Animator.Shapes.Rectangle;
 import cs5004Animator.Shapes.Shape;
 import cs5004Animator.Shapes.Square;
 import cs5004Animator.Shapes.Triangle;
-
+ */
 import static org.junit.Assert.assertEquals;
 
 public class TestShape {
