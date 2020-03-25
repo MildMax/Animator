@@ -27,11 +27,10 @@ public class Move extends AbstractTransformation {
    *                                  if end time is less than the start time.
    */
   public Move(int startTime, int endTime, int newX, int newY) throws IllegalArgumentException {
-    super(startTime, endTime);
+    super(startTime, endTime, TransformationType.MOVE);
 
     this.newX = newX;
     this.newY = newY;
-    this.type = TransformationType.MOVE;
   }
 
   @Override

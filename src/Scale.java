@@ -19,7 +19,7 @@ public class Scale extends AbstractTransformation {
    *                                  If the scale value is less than or equal to 0.
    */
   public Scale(int startTime, int endTime, double scaleFactor) throws IllegalArgumentException {
-    super(startTime, endTime);
+    super(startTime, endTime, TransformationType.SCALE);
 
     if (scaleFactor <= 0) {
       throw new IllegalArgumentException("Scale value cannot be less than or equal to 0");

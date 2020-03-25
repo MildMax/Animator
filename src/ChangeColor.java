@@ -23,14 +23,13 @@ public class ChangeColor extends AbstractTransformation {
    *                                  If the color enum is null.
    */
   public ChangeColor(int startTime, int endTime, Color newColor) throws IllegalArgumentException {
-    super(startTime, endTime);
+    super(startTime, endTime, TransformationType.CHANGECOLOR);
 
     if (newColor == null) {
       throw new IllegalArgumentException("Color cannot be null");
     }
 
     this.newColor = newColor;
-    this.type = TransformationType.CHANGECOLOR;
   }
 
   @Override

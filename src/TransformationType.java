@@ -4,7 +4,8 @@ public enum TransformationType {
   CHANGEHEIGHT("change height"),
   CHANGETRANSPARENCY("change transparency"),
   CHANGEWIDTH("change width"),
-  MOVE("move");
+  MOVE("move"),
+  SCALE("scale");
 
   private String name;
 

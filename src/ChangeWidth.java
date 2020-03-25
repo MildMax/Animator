@@ -1,3 +1,5 @@
+import jdk.jfr.TransitionFrom;
+
 /**
  * The Resize class handles resizing a shape according to the new width
  * of the shapes x value. Contains the following features:
@@ -26,14 +28,13 @@ public class ChangeWidth extends AbstractTransformation {
    */
   public ChangeWidth(int startTime, int endTime, int newWidth)
           throws IllegalArgumentException {
-    super(startTime, endTime);
+    super(startTime, endTime, TransformationType.CHANGEWIDTH);
 
     if (newWidth <= 0) {
       throw new IllegalArgumentException("New width or height cannot be non-positive.");
     }
 
     this.newWidth = newWidth;
-    this.type = TransformationType.CHANGEWIDTH;
   }
 
   @Override

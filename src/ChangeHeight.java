@@ -28,14 +28,13 @@ public class ChangeHeight extends AbstractTransformation {
    */
   public ChangeHeight(int startTime, int endTime, int newHeight)
           throws IllegalArgumentException {
-    super(startTime, endTime);
+    super(startTime, endTime, TransformationType.CHANGEHEIGHT);
 
     if (newHeight <= 0) {
       throw new IllegalArgumentException("New height or height cannot be non-positive.");
     }
 
     this.newHeight = newHeight;
-    this.type = TransformationType.CHANGEHEIGHT;
   }
 
   @Override

@@ -8,6 +8,8 @@ public interface AnimationModel {
 
   void addTransformation(String shapeName, Transformation t);
 
-  void removeTransformation(String shapeName, Class c, int start, int end);
+  void removeTransformation(String shapeName, TransformationType type, int start, int end);
+
+  void setSpeed(double speed);
 
 }

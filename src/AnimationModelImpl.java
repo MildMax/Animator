@@ -9,6 +9,8 @@ public class AnimationModelImpl implements AnimationModel {
   private final int windowYMin;
   private final int windowYMax;
   private final Color windowColor;
+
+  private double speed;
   private Map<String, Shape> shapeMap;
 
   public AnimationModelImpl() {
@@ -34,11 +36,12 @@ public class AnimationModelImpl implements AnimationModel {
     }
 
     this.windowColor = windowColor;
-    shapeMap = new HashMap<>();
+    this.shapeMap = new HashMap<>();
     this.windowXMin = windowXMin;
     this.windowXMax = windowXMax;
     this.windowYMin = windowYMin;
     this.windowYMax = windowYMax;
+    this.speed = 1.0;
   }
 
   @Override
@@ -65,7 +68,7 @@ public class AnimationModelImpl implements AnimationModel {
   public void addTransformation(String shapeName, Transformation t) {
     Shape shape = findShape(shapeName);
     for (Transformation transformation : shape.getTransformationList()) {
-      if (t.getClass() == transformation.getClass()
+      if (t.getType() == transformation.getType()
               && checkTimes(transformation.getStart(), transformation.getEnd(),
               t.getStart(), t.getEnd())) {
         throw new IllegalArgumentException("Move already exists within that period");
@@ -75,10 +78,18 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   @Override
-  public void removeTransformation(String shapeName, Class c, int start, int end) {
+  public void setSpeed(double speed) {
+    if (speed <= 0 || speed > 16) {
+      throw new IllegalArgumentException("Does not support specified speed");
+    }
+    this.speed = speed;
+  }
+
+  @Override
+  public void removeTransformation(String shapeName, TransformationType type, int start, int end) {
     Shape shape = findShape(shapeName);
     for (Transformation t : shape.getTransformationList()) {
-      if (t.getClass() == c && t.getStart() == start && t.getEnd() == end) {
+      if (t.getType() == type && t.getStart() == start && t.getEnd() == end) {
         shape.removeTransformation(t);
         return;
       }
@@ -92,7 +103,7 @@ public class AnimationModelImpl implements AnimationModel {
     for (Shape shape : shapeMap.values()) {
       out += shape.toString() + "\n\n";
     }
-    return out;
+    return out.trim();
   }
 
   private Shape findShape(String shapeName) {

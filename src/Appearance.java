@@ -16,8 +16,7 @@ public class Appearance extends AbstractTransformation {
    *                                  If the end time is before the start time.
    */
   public Appearance(int startTime, int endTime) throws IllegalArgumentException {
-    super(startTime, endTime);
-    this.type = TransformationType.APPEARANCE;
+    super(startTime, endTime, TransformationType.APPEARANCE);
   }
 
   @Override

@@ -16,7 +16,7 @@
 public abstract class AbstractTransformation implements Transformation {
   private final int startTime;
   private final int endTime;
-  protected TransformationType type;
+  private final TransformationType type;
 
   /**
    * The AbstractTransformation constructor takes two ints indicating the start of the
@@ -28,7 +28,7 @@ public abstract class AbstractTransformation implements Transformation {
    * @throws IllegalArgumentException if the start time is less than 0.
    *                                  If the end time is before the start time.
    */
-  public AbstractTransformation(int startTime, int endTime)
+  public AbstractTransformation(int startTime, int endTime, TransformationType type)
           throws IllegalArgumentException {
     if (startTime < 0) {
       throw new IllegalArgumentException("Start time cannot be less than 0");
@@ -36,8 +36,12 @@ public abstract class AbstractTransformation implements Transformation {
     else if (endTime < startTime) {
       throw new IllegalArgumentException("End time cannot be before start time");
     }
+    else if (type == null) {
+      throw new IllegalArgumentException("TransformationType cannot be null");
+    }
     this.startTime = startTime;
     this.endTime = endTime;
+    this.type = type;
   }
 
   /**

@@ -21,14 +21,13 @@ public class ChangeTransparency extends AbstractTransformation {
    *                                  start time.
    */
   public ChangeTransparency(int startTime, int endTime, double newTransparency) throws IllegalArgumentException {
-    super(startTime, endTime);
+    super(startTime, endTime, TransformationType.CHANGETRANSPARENCY);
 
     if (newTransparency <= 0 || newTransparency > 100) {
       throw new IllegalArgumentException("Invalid transparency value.");
     }
 
     this.newTransparency = newTransparency;
-    this.type = TransformationType.CHANGETRANSPARENCY;
   }
 
   @Override

@@ -4,10 +4,6 @@ import java.sql.SQLClientInfoException;
 import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 public class TestAnimationModelImpl {
 
@@ -30,8 +26,8 @@ public class TestAnimationModelImpl {
     //m.addTransformation("1", new Move(15, 17, 25, 25));
 
 
-    m.removeTransformation("1", Move.class, 10, 15);
-    m.removeShape("2");
+    m.removeTransformation("1", TransformationType.MOVE, 10, 15);
+    //m.removeShape("2");
     //m.addMove("3", 24, 43, 20, 30);
 
     assertEquals("", m.toString());

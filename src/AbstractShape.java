@@ -65,21 +65,4 @@ public abstract class AbstractShape implements Shape {
     transformationList.sort(Comparator.comparing(Transformation::getStart));
     return transformationList;
   }
-
-  @Override
-  public String toString() {
-    String out = "";
-
-    out += "Create " + this.getClass().getName() + " " + this.name
-            + " with center at (" + this.initialCenterX + ","
-            + this.initialCenterY +") width " + this.initialWidth
-            + " height " + this.initialHeight + " on layer "
-            + this.layer + ".\n\n";
-
-    for (Transformation t : transformationList) {
-      out += name + " " + t.toString() + "\n";
-    }
-
-    return out;
-  }
 }
