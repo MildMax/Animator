@@ -9,10 +9,6 @@ import cs5004Animator.Shapes.Square;
 import cs5004Animator.Shapes.Triangle;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 public class TestShape {
 
@@ -83,7 +79,7 @@ public class TestShape {
 
   @Test(expected = IllegalArgumentException.class)
   public void testNullColorEnumOvalConstructor() {
-    new Oval("oval", 0, 10, 10, 10, 10, Color.YELLOW);
+    new Oval("oval", 0, 10, 10, 10, 10, null);
   }
   //RECTANGLE
   @Test
@@ -183,20 +179,8 @@ public class TestShape {
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void testNullColorTriangleConsctructor() {
+  public void testNullColorTriangleConstructor() {
     new Triangle("Triangle", 101, 20, 23, 50, 60, null);
   }
 
-  @Test
-  public void testGetClass() {
-    Shape triangle = new Triangle("1", 2, 3, 4, 5, 6, Color.GREEN);
-    Shape circle = new Circle("2", 2, 2, 2, 2, Color.WHITE);
-    Shape oval = new Oval("3", 2, 2, 2, 2, 2, Color.WHITE);
-    Shape square = new Square("4", 2, 2, 2, 2, Color.WHITE);
-    Shape rect = new Rectangle("5", 2, 2, 2, 2, 2, Color.BLUE);
-
-    assertEquals(false, circle.getClass() == oval.getClass());
-    assertEquals(false, rect.getClass() == square.getClass());
-    assertEquals(false, triangle.getClass() == rect.getClass());
-  }
 }
