@@ -31,10 +31,10 @@ public class Triangle extends AbstractShape {
   public String toString() {
     String out = "";
 
-    out += "Create Triangle " + this.name
-            + " with center at (" + this.initialCenterX + ","
-            + this.initialCenterY +") width " + this.initialWidth
-            + " height " + this.initialHeight + " on layer "
+    out += "Create "  + this.initialColor + " triangle " + this.name
+            + " with center at (" + this.initialCenterX + ", "
+            + this.initialCenterY +"), width " + this.initialWidth
+            + ", and height " + this.initialHeight + " on layer "
             + this.layer + ".\n\n";
 
     out += getTransformationDescription();

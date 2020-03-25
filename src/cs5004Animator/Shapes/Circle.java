@@ -37,9 +37,9 @@ public class Circle extends Oval {
   public String toString() {
     String out = "";
 
-    out += "Create Circle " + this.name
-            + " with center at (" + this.initialCenterX + ","
-            + this.initialCenterY +") radius " + this.radius
+    out += "Create "  + this.initialColor + " circle " + this.name
+            + " with center at (" + this.initialCenterX + ", "
+            + this.initialCenterY +") and radius " + this.radius
             + " on layer " + this.layer + ".\n\n";
 
     out += getTransformationDescription();

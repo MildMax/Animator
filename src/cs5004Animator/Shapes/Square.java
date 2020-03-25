@@ -33,9 +33,9 @@ public class Square extends Rectangle {
   public String toString() {
     String out = "";
 
-    out += "Create Square " + this.name
-            + " with center at (" + this.initialCenterX + ","
-            + this.initialCenterY +") side " + this.side + " on layer "
+    out += "Create "  + this.initialColor + " square " + this.name
+            + " with center at (" + this.initialCenterX + ", "
+            + this.initialCenterY +") and side " + this.side + " on layer "
             + this.layer + ".\n\n";
 
     out += getTransformationDescription();

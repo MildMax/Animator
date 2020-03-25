@@ -32,8 +32,8 @@ public class TestShape {
     Shape s = new Circle("circle", 1, 25, 30, 35,
             Color.RED);
 
-    assertEquals("Create red circle circle with center at (30, 35), "
-            + "and radius 25 on layer 1.", s.toString());
+    assertEquals("Create red circle circle with center at (30, 35) and radius 25 on layer 1.\n" +
+            "\n", s.toString());
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -75,7 +75,8 @@ public class TestShape {
   public void testOvalConstructor() {
     Shape o = new Oval("oval", -23, 25, 50, -10, -10, Color.WHITE);
 
-    assertEquals("", o.toString());
+    assertEquals("Create white oval oval with center at (-10, -10), horizontal radius 50, and vertical radius 25 on layer -23.\n" +
+            "\n", o.toString());
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -127,7 +128,8 @@ public class TestShape {
   public void testRectangleConstructor() {
     Shape o = new Rectangle("rect", 100, 105, 220, -250, 325, Color.PURPLE);
 
-    assertEquals("", o.toString());
+    assertEquals("Create purple rectangle rect with center at (-250, 325), width 220, and height 105 on layer 100.\n" +
+            "\n", o.toString());
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -178,7 +180,8 @@ public class TestShape {
   @Test
   public void testSquareConstructor() {
     Shape s = new Square("square", -1001, 15, 12, 10, Color.BLUE);
-    assertEquals("", s.toString());
+    assertEquals("Create blue square square with center at (12, 10) and side 15 on layer -1001.\n" +
+            "\n", s.toString());
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -220,7 +223,8 @@ public class TestShape {
   public void testTriangleConstructor() {
     Shape t = new Triangle("triangle", -1234, 10, 15, 20, -25, Color.WHITE);
 
-    assertEquals("", t.toString());
+    assertEquals("Create white triangle triangle with center at (20, -25), width 15, and height 10 on layer -1234.\n" +
+            "\n", t.toString());
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -267,50 +271,124 @@ public class TestShape {
     c.removeTransformation(null, 10, 10);
   }
 
-    /**
-     * Test all methods on the Oval class with valid inputs.
-     */
-    @Test
-    public void Test_Oval() {
-      // Test the shape's Constructor.
-      Oval oval1 = new Oval("Oval1", 1, 50, 100,
-              150, 200, Color.BLUE);
+  /**
+   * Test all methods on the Oval class with valid inputs.
+   */
+  @Test
+  public void Test_Oval_Valid_All() {
+    // Test the shape's Constructor.
+    Oval oval1 = new Oval("Oval1", 1, 50, 100,
+            150, 200, Color.BLUE);
 
-      // Create some transformations to test adding/removing.
-      Appearance t1 = new Appearance(1, 1000);
-      ChangeColor t2 = new ChangeColor(5, 10, Color.BLUE);
-      ChangeHeight t3 = new ChangeHeight(15, 20, 150);
-      ChangeTransparency t4 = new ChangeTransparency(25, 30, 50);
-      ChangeWidth t5 = new ChangeWidth(35, 40, 75);
-      Move t6 = new Move(45, 50, 151, 201);
-      Scale t7 = new Scale(55, 60, 2.0);
+    // Create some transformations to test adding/removing.
+    Appearance t1 = new Appearance(1, 1000);
+    ChangeColor t2 = new ChangeColor(5, 10, Color.BLUE);
+    ChangeHeight t3 = new ChangeHeight(15, 20, 150);
+    ChangeTransparency t4 = new ChangeTransparency(25, 30, 50);
+    ChangeWidth t5 = new ChangeWidth(35, 40, 75);
+    Move t6 = new Move(45, 50, 151, 201);
+    Scale t7 = new Scale(55, 60, 2.0);
 
+    // Test getName().
+    assertEquals( "Oval1", oval1.getName());
 
-      // Test getName().
-      assertEquals( "Oval1", oval1.getName());
+    // Test addTransformation() and getTransformationDescription() and getName().
+    oval1.addTransformation(t1);
+    oval1.addTransformation(t2);
+    oval1.addTransformation(t3);
+    oval1.addTransformation(t4);
+    oval1.addTransformation(t5);
+    oval1.addTransformation(t6);
+    oval1.addTransformation(t7);
+    assertEquals("Oval1 appears at time t=1 and disappears at time t=1000.\n" +
+                    "Oval1 changes to blue from time t=5 to time t=10.\n" +
+                    "Oval1 changes to height:150 from time t=15 to time t=20.\n" +
+                    "Oval1 changes to transparency 50.0 from time t=25 to time t=30.\n" +
+                    "Oval1 changes to width:75 from time t=35 to time t=40.\n" +
+                    "Oval1 moves to (151,201) from time t=45 to time t=50.\n" +
+                    "Oval1 scales to 2.0 times its current size from time t=55 to time t=60.\n",
+            oval1.getTransformationDescription());
+    assertEquals("Create blue oval Oval1 with center at (150, 200), horizontal radius 100, and vertical radius 50 on layer 1.\n" +
+                    "\n" +
+                    "Oval1 appears at time t=1 and disappears at time t=1000.\n" +
+                    "Oval1 changes to blue from time t=5 to time t=10.\n" +
+                    "Oval1 changes to height:150 from time t=15 to time t=20.\n" +
+                    "Oval1 changes to transparency 50.0 from time t=25 to time t=30.\n" +
+                    "Oval1 changes to width:75 from time t=35 to time t=40.\n" +
+                    "Oval1 moves to (151,201) from time t=45 to time t=50.\n" +
+                    "Oval1 scales to 2.0 times its current size from time t=55 to time t=60.\n"
+            , oval1.toString());
 
-      // Test addTransformation() and getTransformationDescription() and getName().
-      oval1.addTransformation(t1);
-      oval1.addTransformation(t2);
-      oval1.addTransformation(t3);
-      oval1.addTransformation(t4);
-      oval1.addTransformation(t5);
-      oval1.addTransformation(t6);
-      oval1.addTransformation(t7);
-      assertEquals("", oval1.getTransformationDescription());
-      assertEquals("", oval1.toString());
+    // Test removeTransformation() and getTransformationDescription() and getName().
+    oval1.removeTransformation(t1.getType(), t1.getStart(), t1.getEnd());
+    oval1.removeTransformation(t2.getType(), t2.getStart(), t2.getEnd());
+    oval1.removeTransformation(t3.getType(), t3.getStart(), t3.getEnd());
+    oval1.removeTransformation(t4.getType(), t4.getStart(), t4.getEnd());
+    oval1.removeTransformation(t5.getType(), t5.getStart(), t5.getEnd());
+    oval1.removeTransformation(t6.getType(), t6.getStart(), t6.getEnd());
+    oval1.removeTransformation(t7.getType(), t7.getStart(), t7.getEnd());
+    assertEquals("", oval1.getTransformationDescription());
+    assertEquals("Create blue oval Oval1 with center at (150, 200), horizontal radius 100, and vertical radius 50 on layer 1.\n" +
+            "\n", oval1.toString());
+  }
 
+  /**
+   * Test all methods on the Circle class with valid inputs.
+   */
+  @Test
+  public void Test_Circle_Valid_All() {
+    // Test the shape's Constructor.
+    Circle circle1 = new Circle("circle1", 1, 1, 100,150, Color.BLUE);
 
-      // Test removeTransformation() and getTransformationDescription() and getName().
-      oval1.removeTransformation(t1.getType(), t1.getStart(), t1.getEnd());
-      oval1.removeTransformation(t2.getType(), t2.getStart(), t2.getEnd());
-      oval1.removeTransformation(t3.getType(), t3.getStart(), t3.getEnd());
-      oval1.removeTransformation(t4.getType(), t4.getStart(), t4.getEnd());
-      oval1.removeTransformation(t5.getType(), t5.getStart(), t5.getEnd());
-      oval1.removeTransformation(t6.getType(), t6.getStart(), t6.getEnd());
-      oval1.removeTransformation(t7.getType(), t7.getStart(), t7.getEnd());
-      assertEquals("", oval1.getTransformationDescription());
-      assertEquals("", oval1.toString());
-    }
+    // Create some transformations to test adding/removing.
+    Appearance t1 = new Appearance(1, 1000);
+    ChangeColor t2 = new ChangeColor(5, 10, Color.BLUE);
+    ChangeHeight t3 = new ChangeHeight(15, 20, 150);
+    ChangeTransparency t4 = new ChangeTransparency(25, 30, 50);
+    ChangeWidth t5 = new ChangeWidth(35, 40, 75);
+    Move t6 = new Move(45, 50, 151, 201);
+    Scale t7 = new Scale(55, 60, 2.0);
 
+    // Test getName().
+    assertEquals( "Oval1", oval1.getName());
+
+    // Test addTransformation() and getTransformationDescription() and getName().
+    oval1.addTransformation(t1);
+    oval1.addTransformation(t2);
+    oval1.addTransformation(t3);
+    oval1.addTransformation(t4);
+    oval1.addTransformation(t5);
+    oval1.addTransformation(t6);
+    oval1.addTransformation(t7);
+    assertEquals("Oval1 appears at time t=1 and disappears at time t=1000.\n" +
+                    "Oval1 changes to blue from time t=5 to time t=10.\n" +
+                    "Oval1 changes to height:150 from time t=15 to time t=20.\n" +
+                    "Oval1 changes to transparency 50.0 from time t=25 to time t=30.\n" +
+                    "Oval1 changes to width:75 from time t=35 to time t=40.\n" +
+                    "Oval1 moves to (151,201) from time t=45 to time t=50.\n" +
+                    "Oval1 scales to 2.0 times its current size from time t=55 to time t=60.\n",
+            oval1.getTransformationDescription());
+    assertEquals("Create blue oval Oval1 with center at (150, 200), horizontal radius 100, and vertical radius 50 on layer 1.\n" +
+                    "\n" +
+                    "Oval1 appears at time t=1 and disappears at time t=1000.\n" +
+                    "Oval1 changes to blue from time t=5 to time t=10.\n" +
+                    "Oval1 changes to height:150 from time t=15 to time t=20.\n" +
+                    "Oval1 changes to transparency 50.0 from time t=25 to time t=30.\n" +
+                    "Oval1 changes to width:75 from time t=35 to time t=40.\n" +
+                    "Oval1 moves to (151,201) from time t=45 to time t=50.\n" +
+                    "Oval1 scales to 2.0 times its current size from time t=55 to time t=60.\n"
+            , oval1.toString());
+
+    // Test removeTransformation() and getTransformationDescription() and getName().
+    oval1.removeTransformation(t1.getType(), t1.getStart(), t1.getEnd());
+    oval1.removeTransformation(t2.getType(), t2.getStart(), t2.getEnd());
+    oval1.removeTransformation(t3.getType(), t3.getStart(), t3.getEnd());
+    oval1.removeTransformation(t4.getType(), t4.getStart(), t4.getEnd());
+    oval1.removeTransformation(t5.getType(), t5.getStart(), t5.getEnd());
+    oval1.removeTransformation(t6.getType(), t6.getStart(), t6.getEnd());
+    oval1.removeTransformation(t7.getType(), t7.getStart(), t7.getEnd());
+    assertEquals("", oval1.getTransformationDescription());
+    assertEquals("Create blue oval Oval1 with center at (150, 200), horizontal radius 100, and vertical radius 50 on layer 1.\n" +
+            "\n", oval1.toString());
+  }
 }
