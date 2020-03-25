@@ -1,8 +1,24 @@
 import org.junit.Test;
 
 import cs5004Animator.*;
-import cs5004Animator.Transformations.*;
 import cs5004Animator.Shapes.*;
+import cs5004Animator.Transformations.*;
+
+/*
+import cs5004Animator.Color;
+import cs5004Animator.Shapes.Circle;
+import cs5004Animator.Shapes.Oval;
+import cs5004Animator.Shapes.Rectangle;
+import cs5004Animator.Shapes.Square;
+import cs5004Animator.Shapes.Triangle;
+import cs5004Animator.Transformations.Appearance;
+import cs5004Animator.Transformations.ChangeColor;
+import cs5004Animator.Transformations.ChangeHeight;
+import cs5004Animator.Transformations.ChangeTransparency;
+import cs5004Animator.Transformations.ChangeWidth;
+import cs5004Animator.Transformations.Move;
+import cs5004Animator.Transformations.Scale;
+*/
 
 import static org.junit.Assert.assertEquals;
 
