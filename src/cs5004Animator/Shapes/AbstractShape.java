@@ -65,11 +65,17 @@ public abstract class AbstractShape implements Shape {
 
   @Override
   public void addTransformation(Transformation t) {
+    if (t == null) {
+      throw new IllegalArgumentException("Transformation cannot be null");
+    }
     transformationList.add(t);
   }
 
   @Override
   public void removeTransformation(Transformation t) {
+    if (t == null) {
+      throw new IllegalArgumentException("Transformation cannot be null");
+    }
     transformationList.remove(t);
   }
 
@@ -80,7 +86,18 @@ public abstract class AbstractShape implements Shape {
 
   @Override
   public List<Transformation> getTransformationList() {
-    transformationList.sort(Comparator.comparing(Transformation::getStart));
     return transformationList;
+  }
+
+  @Override
+  public String getTransformationDescription() {
+    String out = "";
+
+    transformationList.sort(Comparator.comparing(Transformation::getStart));
+    for (Transformation t : transformationList) {
+      out += name + " " + t.toString() + "\n";
+    }
+
+    return out;
   }
 }

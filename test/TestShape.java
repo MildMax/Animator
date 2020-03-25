@@ -48,6 +48,20 @@ public class TestShape {
   public void testZeroInitialRadius() {
     new Circle("circle", 10, 0, 10, 10, Color.RED);
   }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testCircleAddNullTransformation() {
+    Shape c = new Circle("Circle", 0, 5, 5, 5, Color.WHITE);
+
+    c.addTransformation(null);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testCircleRemoveNullTransformation() {
+    Shape c = new Circle("Circle", 0, 5, 5, 5, Color.WHITE);
+
+    c.removeTransformation(null);
+  }
   //OVAL
   @Test
   public void testOvalConstructor() {
@@ -85,6 +99,21 @@ public class TestShape {
   public void testNullColorEnumOvalConstructor() {
     new Oval("oval", 0, 10, 10, 10, 10, null);
   }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testOvalAddNullTransformation() {
+    Shape c = new Oval("Oval", 0, 5, 5,5, 5, Color.WHITE);
+
+    c.addTransformation(null);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testOvalRemoveNullTransformation() {
+    Shape c = new Oval("Oval", 0, 5, 5,5, 5, Color.WHITE);
+
+    c.removeTransformation(null);
+  }
+
   //RECTANGLE
   @Test
   public void testRectangleConstructor() {
@@ -122,6 +151,21 @@ public class TestShape {
   public void testNullColorEnumRectangleConstructor() {
     new Rectangle("rect", 10, 10, 10, 10, 10, null);
   }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testRectangleAddNullTransformation() {
+    Shape c = new Rectangle("Rectangle", 0, 5, 5,5, 5, Color.WHITE);
+
+    c.addTransformation(null);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testRectangleRemoveNullTransformation() {
+    Shape c = new Rectangle("Rectangle", 0, 5, 5,5, 5, Color.WHITE);
+
+    c.removeTransformation(null);
+  }
+
   //SQUARE
   @Test
   public void testSquareConstructor() {
@@ -148,6 +192,21 @@ public class TestShape {
   public void testNullColorSquareConstructor() {
     new Square("square", 100, 10, 10, 10, null);
   }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testSquareAddNullTransformation() {
+    Shape c = new Square("Square", 0, 5, 5, 5, Color.WHITE);
+
+    c.addTransformation(null);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testSquareRemoveNullTransformation() {
+    Shape c = new Square("Square", 0, 5, 5, 5, Color.WHITE);
+
+    c.removeTransformation(null);
+  }
+
   //TRIANGLE
   @Test
   public void testTriangleConstructor() {
@@ -184,6 +243,20 @@ public class TestShape {
   @Test(expected = IllegalArgumentException.class)
   public void testNullColorTriangleConstructor() {
     new Triangle("Triangle", 101, 20, 23, 50, 60, null);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testTriangleAddNullTransformation() {
+    Shape c = new Triangle("Triangle", 0, 5, 5,5, 5, Color.WHITE);
+
+    c.addTransformation(null);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testTriangleRemoveNullTransformation() {
+    Shape c = new Triangle("Triangle", 0, 5, 5,5, 5, Color.WHITE);
+
+    c.removeTransformation(null);
   }
 
 }

@@ -44,9 +44,7 @@ public class Oval extends AbstractShape {
             + " vertical radius " + this.initialVerticalRadius + " on layer "
             + this.layer + ".\n\n";
 
-    for (Transformation t : this.getTransformationList()) {
-      out += name + " " + t.toString() + "\n";
-    }
+    out += getTransformationDescription();
 
     return out;
   }

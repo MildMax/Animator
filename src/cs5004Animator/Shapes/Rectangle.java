@@ -37,9 +37,7 @@ public class Rectangle extends AbstractShape {
             + " height " + this.initialHeight + " on layer "
             + this.layer + ".\n\n";
 
-    for (Transformation t : this.getTransformationList()) {
-      out += name + " " + t.toString() + "\n";
-    }
+    out += getTransformationDescription();
 
     return out;
   }

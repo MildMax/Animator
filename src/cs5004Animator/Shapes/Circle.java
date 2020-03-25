@@ -1,5 +1,8 @@
 package cs5004Animator.Shapes;
 
+import java.util.Comparator;
+import java.util.List;
+
 import cs5004Animator.Color;
 import cs5004Animator.Transformations.Transformation;
 
@@ -39,9 +42,7 @@ public class Circle extends Oval {
             + this.initialCenterY +") radius " + this.radius
             + " on layer " + this.layer + ".\n\n";
 
-    for (Transformation t : this.getTransformationList()) {
-      out += name + " " + t.toString() + "\n";
-    }
+    out += getTransformationDescription();
 
     return out;
   }

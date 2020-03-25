@@ -86,7 +86,7 @@ public class AnimationModelImpl implements AnimationModel {
         throw new IllegalArgumentException("Move already exists within that period");
       }
     }
-    shape.addTransformation(t);
+    shape.getTransformationList().add(t);
   }
 
   @Override
@@ -97,7 +97,7 @@ public class AnimationModelImpl implements AnimationModel {
     Shape shape = findShape(shapeName);
     for (Transformation t : shape.getTransformationList()) {
       if (t.getType() == type && t.getStart() == start && t.getEnd() == end) {
-        shape.removeTransformation(t);
+        shape.getTransformationList().remove(t);
         return;
       }
     }

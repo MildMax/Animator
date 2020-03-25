@@ -17,4 +17,5 @@ public interface Shape {
 
   List<Transformation> getTransformationList();
 
+  String getTransformationDescription();
 }
