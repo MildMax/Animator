@@ -1,17 +1,9 @@
 import org.junit.Test;
 
 import cs5004Animator.*;
+import cs5004Animator.Transformations.*;
 import cs5004Animator.Shapes.*;
 
-/*
-import cs5004Animator.Color;
-import cs5004Animator.Shapes.Circle;
-import cs5004Animator.Shapes.Oval;
-import cs5004Animator.Shapes.Rectangle;
-import cs5004Animator.Shapes.Shape;
-import cs5004Animator.Shapes.Square;
-import cs5004Animator.Shapes.Triangle;
- */
 import static org.junit.Assert.assertEquals;
 
 public class TestShape {
@@ -254,9 +246,55 @@ public class TestShape {
 
   @Test(expected = IllegalArgumentException.class)
   public void testTriangleRemoveNullTransformation() {
-    Shape c = new Triangle("Triangle", 0, 5, 5,5, 5, Color.WHITE);
+    Shape c = new Triangle("Triangle", 0, 5, 5, 5, 5, Color.WHITE);
 
     c.removeTransformation(null, 10, 10);
   }
+
+    /**
+     * Test all methods on the Oval class with valid inputs.
+     */
+    @Test
+    public void Test_Oval() {
+      // Test the shape's Constructor.
+      Oval oval1 = new Oval("Oval1", 1, 50, 100,
+              150, 200, Color.BLUE);
+
+      // Create some transformations to test adding/removing.
+      Appearance t1 = new Appearance(1, 1000);
+      ChangeColor t2 = new ChangeColor(5, 10, Color.BLUE);
+      ChangeHeight t3 = new ChangeHeight(15, 20, 150);
+      ChangeTransparency t4 = new ChangeTransparency(25, 30, 50);
+      ChangeWidth t5 = new ChangeWidth(35, 40, 75);
+      Move t6 = new Move(45, 50, 151, 201);
+      Scale t7 = new Scale(55, 60, 2.0);
+
+
+      // Test getName().
+      assertEquals( "Oval1", oval1.getName());
+
+      // Test addTransformation() and getTransformationDescription() and getName().
+      oval1.addTransformation(t1);
+      oval1.addTransformation(t2);
+      oval1.addTransformation(t3);
+      oval1.addTransformation(t4);
+      oval1.addTransformation(t5);
+      oval1.addTransformation(t6);
+      oval1.addTransformation(t7);
+      assertEquals("", oval1.getTransformationDescription());
+      assertEquals("", oval1.toString());
+
+
+      // Test removeTransformation() and getTransformationDescription() and getName().
+      oval1.removeTransformation(t1.getType(), t1.getStart(), t1.getEnd());
+      oval1.removeTransformation(t2.getType(), t2.getStart(), t2.getEnd());
+      oval1.removeTransformation(t3.getType(), t3.getStart(), t3.getEnd());
+      oval1.removeTransformation(t4.getType(), t4.getStart(), t4.getEnd());
+      oval1.removeTransformation(t5.getType(), t5.getStart(), t5.getEnd());
+      oval1.removeTransformation(t6.getType(), t6.getStart(), t6.getEnd());
+      oval1.removeTransformation(t7.getType(), t7.getStart(), t7.getEnd());
+      assertEquals("", oval1.getTransformationDescription());
+      assertEquals("", oval1.toString());
+    }
 
 }
