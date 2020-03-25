@@ -60,7 +60,7 @@ public class TestShape {
   public void testCircleRemoveNullTransformation() {
     Shape c = new Circle("Circle", 0, 5, 5, 5, Color.WHITE);
 
-    c.removeTransformation(null);
+    c.removeTransformation(null, 10, 10);
   }
   //OVAL
   @Test
@@ -111,7 +111,7 @@ public class TestShape {
   public void testOvalRemoveNullTransformation() {
     Shape c = new Oval("Oval", 0, 5, 5,5, 5, Color.WHITE);
 
-    c.removeTransformation(null);
+    c.removeTransformation(null, 10, 10);
   }
 
   //RECTANGLE
@@ -163,7 +163,7 @@ public class TestShape {
   public void testRectangleRemoveNullTransformation() {
     Shape c = new Rectangle("Rectangle", 0, 5, 5,5, 5, Color.WHITE);
 
-    c.removeTransformation(null);
+    c.removeTransformation(null, 10, 10);
   }
 
   //SQUARE
@@ -204,7 +204,7 @@ public class TestShape {
   public void testSquareRemoveNullTransformation() {
     Shape c = new Square("Square", 0, 5, 5, 5, Color.WHITE);
 
-    c.removeTransformation(null);
+    c.removeTransformation(null, 10, 10);
   }
 
   //TRIANGLE
@@ -256,7 +256,7 @@ public class TestShape {
   public void testTriangleRemoveNullTransformation() {
     Shape c = new Triangle("Triangle", 0, 5, 5,5, 5, Color.WHITE);
 
-    c.removeTransformation(null);
+    c.removeTransformation(null, 10, 10);
   }
 
 }

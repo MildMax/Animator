@@ -6,6 +6,7 @@ import java.util.List;
 
 import cs5004Animator.Color;
 import cs5004Animator.Transformations.Transformation;
+import cs5004Animator.Transformations.TransformationType;
 
 /**
  * Create an abstract class called AbstractShape that is a generic shape.
@@ -68,25 +69,33 @@ public abstract class AbstractShape implements Shape {
     if (t == null) {
       throw new IllegalArgumentException("Transformation cannot be null");
     }
+    for (Transformation transformation : transformationList) {
+      if (t.getType() == transformation.getType()
+              && checkTimes(transformation.getStart(), transformation.getEnd(),
+              t.getStart(), t.getEnd())) {
+        throw new IllegalArgumentException("Move already exists within that period");
+      }
+    }
     transformationList.add(t);
   }
 
   @Override
-  public void removeTransformation(Transformation t) {
-    if (t == null) {
+  public void removeTransformation(TransformationType type, int start, int end) {
+    if (type == null) {
       throw new IllegalArgumentException("Transformation cannot be null");
     }
-    transformationList.remove(t);
+    for (Transformation t : transformationList) {
+      if (t.getType() == type && t.getStart() == start && t.getEnd() == end) {
+        transformationList.remove(t);
+        return;
+      }
+    }
+    throw new IllegalArgumentException("That transformation does not exist");
   }
 
   @Override
   public String getName() {
     return this.name;
-  }
-
-  @Override
-  public List<Transformation> getTransformationList() {
-    return transformationList;
   }
 
   @Override
@@ -99,5 +108,11 @@ public abstract class AbstractShape implements Shape {
     }
 
     return out;
+  }
+
+  private boolean checkTimes(int currStart, int currEnd, int newStart, int newEnd) {
+    return (newStart >= currStart && newStart <= currEnd)
+            || (newEnd >= currStart && newEnd <= currEnd)
+            || (currStart > newStart && currEnd < newEnd);
   }
 }

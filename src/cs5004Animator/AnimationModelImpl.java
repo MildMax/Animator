@@ -79,14 +79,7 @@ public class AnimationModelImpl implements AnimationModel {
       throw new IllegalArgumentException("Values cannot be null");
     }
     Shape shape = findShape(shapeName);
-    for (Transformation transformation : shape.getTransformationList()) {
-      if (t.getType() == transformation.getType()
-              && checkTimes(transformation.getStart(), transformation.getEnd(),
-              t.getStart(), t.getEnd())) {
-        throw new IllegalArgumentException("Move already exists within that period");
-      }
-    }
-    shape.getTransformationList().add(t);
+    shape.addTransformation(t);
   }
 
   @Override
@@ -95,13 +88,7 @@ public class AnimationModelImpl implements AnimationModel {
       throw new IllegalArgumentException("Values cannot be null");
     }
     Shape shape = findShape(shapeName);
-    for (Transformation t : shape.getTransformationList()) {
-      if (t.getType() == type && t.getStart() == start && t.getEnd() == end) {
-        shape.getTransformationList().remove(t);
-        return;
-      }
-    }
-    throw new IllegalArgumentException("That transformation does not exist");
+    shape.removeTransformation(type, start, end);
   }
 
   @Override
@@ -123,7 +110,7 @@ public class AnimationModelImpl implements AnimationModel {
   @Override
   public String toString() {
     String out = "Create window with bottom left corner(" + this.windowXMin + "," + this.windowXMax
-            + ") top right corner (" + this.windowXMax + "," + this.windowYMax
+            + ") top right corner (" + this.windowYMin + "," + this.windowYMax
             + ") with background color " + this.windowColor.toString() + " and speed "
             + this.speed + ".\n\n";
 
@@ -141,11 +128,5 @@ public class AnimationModelImpl implements AnimationModel {
     }
 
     return shape;
-  }
-
-  private boolean checkTimes(int currStart, int currEnd, int newStart, int newEnd) {
-    return (newStart >= currStart && newStart <= currEnd)
-            || (newEnd >= currStart && newEnd <= currEnd)
-            || (currStart > newStart && currEnd < newEnd);
   }
 }
