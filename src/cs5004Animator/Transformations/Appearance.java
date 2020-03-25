@@ -21,6 +21,13 @@ public class Appearance extends AbstractTransformation {
     super(startTime, endTime, TransformationType.APPEARANCE);
   }
 
+  /**
+   * Returns a formatted String representing the time at which a shape appears
+   * and disappears on screen.
+   *
+   * @return a formatted String representing the time at which a shape appears
+   *         and disappears on screen.
+   */
   @Override
   public String toString() {
     return "appears at time t=" + getStart()

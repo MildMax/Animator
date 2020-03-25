@@ -28,7 +28,8 @@ public class Oval extends AbstractShape {
   public Oval(String name, int layer, int initialVerticalRadius, int initialHorizontalRadius,
        int initialCenterX, int initialCenterY, Color initialColor) {
     super(name, layer,initialVerticalRadius * 2,
-            initialHorizontalRadius * 2, initialCenterX, initialCenterY, initialColor);
+            initialHorizontalRadius * 2, initialCenterX, initialCenterY, initialColor,
+            ShapeType.OVAL);
 
     this.initialVerticalRadius = initialVerticalRadius;
     this.initialHorizontalRadius = initialHorizontalRadius;

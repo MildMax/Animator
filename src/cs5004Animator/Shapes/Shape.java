@@ -16,5 +16,7 @@ public interface Shape {
 
   String getName();
 
+  ShapeType getType();
+
   String getTransformationDescription();
 }

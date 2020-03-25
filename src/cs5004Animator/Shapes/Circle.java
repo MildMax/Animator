@@ -9,7 +9,7 @@ import cs5004Animator.Transformations.Transformation;
 /**
  * Create a circle class that extends the Oval class.
  */
-public class Circle extends Oval {
+public class Circle extends AbstractShape {
 
   private final int radius;
 
@@ -28,7 +28,7 @@ public class Circle extends Oval {
   public Circle(String name, int layer, int radius, int initialCenterX, int initialCenterY,
          Color initialColor) {
     super(name, layer, radius * 2, radius * 2, initialCenterX,
-            initialCenterY, initialColor);
+            initialCenterY, initialColor, ShapeType.CIRCLE);
 
     this.radius = radius;
   }

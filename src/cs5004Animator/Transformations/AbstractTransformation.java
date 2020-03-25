@@ -7,13 +7,13 @@ package cs5004Animator.Transformations;
  *
  * <p>AbstractTransformation() constructor</p>
  *
- * <p>getShapeName() method</p>
- *
  * <p>getStart() method</p>
  *
  * <p>getEnd() method</p>
  *
- * <p>getDescription() method</p>
+ * <p>getType() method</p>
+ *
+ * <p>toString() method</p>
  */
 public abstract class AbstractTransformation implements Transformation {
   private final int startTime;
@@ -66,11 +66,23 @@ public abstract class AbstractTransformation implements Transformation {
     return this.endTime;
   }
 
+  /**
+   * Returns the type enum of the transformation.
+   *
+   * @return the type enum of the transformation.
+   */
   @Override
   public TransformationType getType() {
     return this.type;
   }
 
+  /**
+   * The toString() method returns a formatted String indicating the
+   * start and end time of the transformation.
+   *
+   * @return a formatted String indicating the start and end time of
+   *         the transformation.
+   */
   @Override
   public String toString() {
     return "from time t=" + startTime + " to time t=" + endTime + ".";

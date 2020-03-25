@@ -21,6 +21,8 @@ public abstract class AbstractShape implements Shape {
   protected final int initialCenterY;
   protected final Color initialColor;
   protected final double initialTransparency;
+
+  private final ShapeType type;
   private List<Transformation> transformationList;
 
   /**
@@ -39,7 +41,7 @@ public abstract class AbstractShape implements Shape {
    *
    */
   AbstractShape(String name, int layer, int initialHeight, int initialWidth, int initialCenterX,
-                int initialCenterY, Color initialColor) {
+                int initialCenterY, Color initialColor, ShapeType type) {
     if (initialHeight <= 0) {
       throw new IllegalArgumentException("Initial height must be greater than zero.");
     }
@@ -61,6 +63,7 @@ public abstract class AbstractShape implements Shape {
     this.initialCenterY = initialCenterY;
     this.initialColor = initialColor;
     this.initialTransparency = 0.0;
+    this.type = type;
     transformationList = new ArrayList<>();
   }
 
@@ -73,7 +76,7 @@ public abstract class AbstractShape implements Shape {
       if (t.getType() == transformation.getType()
               && checkTimes(transformation.getStart(), transformation.getEnd(),
               t.getStart(), t.getEnd())) {
-        throw new IllegalArgumentException("Move already exists within that period");
+        throw new IllegalArgumentException("Transformation already exists within that period");
       }
     }
     transformationList.add(t);
@@ -96,6 +99,11 @@ public abstract class AbstractShape implements Shape {
   @Override
   public String getName() {
     return this.name;
+  }
+
+  @Override
+  public ShapeType getType() {
+    return this.type;
   }
 
   @Override

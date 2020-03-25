@@ -24,7 +24,8 @@ public class Triangle extends AbstractShape {
    */
   public Triangle(String name, int layer, int initialHeight, int initialWidth, int initialCenterX,
            int initialCenterY, Color initialColor) {
-    super(name, layer, initialHeight, initialWidth, initialCenterX, initialCenterY, initialColor);
+    super(name, layer, initialHeight, initialWidth, initialCenterX, initialCenterY, initialColor,
+            ShapeType.TRIANGLE);
   }
 
   @Override
