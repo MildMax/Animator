@@ -6,7 +6,7 @@ import cs5004Animator.Transformations.TransformationType;
 
 public interface AnimationModel {
 
-  void addShape(Shape shape, String shapeName);
+  void addShape(Shape shape);
 
   void removeShape(String shapeName);
 
@@ -15,5 +15,7 @@ public interface AnimationModel {
   void removeTransformation(String shapeName, TransformationType type, int start, int end);
 
   void setSpeed(double speed);
+
+  public void setBackgroundColor(Color windowColor);
 
 }

@@ -122,7 +122,6 @@ public class TestShape {
   @Test
   public void testSquareConstructor() {
     Shape s = new Square("square", -1001, 15, 12, 10, Color.BLUE);
-
     assertEquals("", s.toString());
   }
 

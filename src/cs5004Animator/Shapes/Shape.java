@@ -13,6 +13,8 @@ public interface Shape {
 
   void removeTransformation(Transformation t);
 
+  String getName();
+
   List<Transformation> getTransformationList();
 
 }

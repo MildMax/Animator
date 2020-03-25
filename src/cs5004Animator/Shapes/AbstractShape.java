@@ -68,8 +68,14 @@ public abstract class AbstractShape implements Shape {
     transformationList.add(t);
   }
 
+  @Override
   public void removeTransformation(Transformation t) {
     transformationList.remove(t);
+  }
+
+  @Override
+  public String getName() {
+    return this.name;
   }
 
   @Override
