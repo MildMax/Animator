@@ -42,9 +42,16 @@ public abstract class AbstractShape implements Shape {
     if (initialHeight <= 0) {
       throw new IllegalArgumentException("Initial height must be greater than zero.");
     }
-    if (initialWidth <= 0) {
+    else if (initialWidth <= 0) {
       throw new IllegalArgumentException("Initial width must be greater than zero.");
     }
+    else if (name == null) {
+      throw new IllegalArgumentException("String name cannot be null");
+    }
+    else if (initialColor == null) {
+      throw new IllegalArgumentException("Color initialColor cannot be null");
+    }
+
     this.name = name;
     this.layer = layer;
     this.initialHeight = initialHeight;

@@ -109,7 +109,7 @@ public class TestTransformations {
 
   @Test(expected = IllegalArgumentException.class)
   public void testChangeColorEndBeforeStart() {
-    new ChangeColor(4, 5, Color.RED);
+    new ChangeColor(6, 5, Color.RED);
   }
 
   @Test(expected = IllegalArgumentException.class)
