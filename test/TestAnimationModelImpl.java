@@ -22,7 +22,7 @@ import cs5004Animator.Transformations.ChangeTransparency;
 import cs5004Animator.Transformations.ChangeWidth;
 import cs5004Animator.Transformations.Move;
 import cs5004Animator.Transformations.Scale;
- */
+*/
 
 import static org.junit.Assert.assertEquals;
 

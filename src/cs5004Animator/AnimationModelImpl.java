@@ -48,7 +48,7 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   @Override
-  public void addShape(Shape shape) {
+  public void addShape(Shape shape) throws IllegalArgumentException {
     if (shape == null) {
       throw new IllegalArgumentException("Shape cannot be null");
     }
@@ -61,7 +61,7 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   @Override
-  public void removeShape(String shapeName) {
+  public void removeShape(String shapeName) throws IllegalArgumentException {
     if (shapeName == null) {
       throw new IllegalArgumentException("String shapeName cannot be null");
     }
@@ -74,7 +74,7 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   @Override
-  public void addTransformation(String shapeName, Transformation t) {
+  public void addTransformation(String shapeName, Transformation t) throws IllegalArgumentException {
     if (shapeName == null || t == null) {
       throw new IllegalArgumentException("Values cannot be null");
     }
