@@ -1,4 +1,4 @@
-package cs5004Animator.Transformations;
+package cs5004animator.model.transformations;
 
 /**
  * The ChangeTransparency class holds information needed to change the transparency of

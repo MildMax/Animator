@@ -1,4 +1,4 @@
-package cs5004Animator.Transformations;
+package cs5004animator.model.transformations;
 
 /**
  * The TransformationType enum contains enum values indicating the type of each transformation

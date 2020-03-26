@@ -1,8 +1,10 @@
-package cs5004Animator;
+package cs5004animator.model;
 
-import cs5004Animator.Shapes.Shape;
-import cs5004Animator.Transformations.Transformation;
-import cs5004Animator.Transformations.TransformationType;
+import java.util.List;
+
+import cs5004animator.model.shapes.Shape;
+import cs5004animator.model.transformations.Transformation;
+import cs5004animator.model.transformations.TransformationType;
 
 /**
  * The AnimationModel interface declares methods that must be implemented to add shapes,
@@ -60,14 +62,51 @@ public interface AnimationModel {
           throws IllegalArgumentException;
 
   /**
-   * Sets the speed the Animation will be played at. Throws IllegalArgumentException if the
-   * specified speed is less than or equal to 0 or greater than 16.
+   * Returns a list of shapes currently stored in the AnimationModel.
    *
-   * @param speed indicates the speed the Animation will be played at.
-   * @throws IllegalArgumentException if the specified speed is less than or equal to 0 or
-   *                                  greater than 16.
+   * @return a list of shapes currently stored in the AnimationModel.
    */
-  void setSpeed(double speed) throws IllegalArgumentException;
+  List<Shape> getShapes();
+
+  /**
+   * Returns a list of transformations currently stored in the AnimationModel sorted
+   * chronologically by start time.
+   *
+   * @return a list of transformations currently stored in the AnimationModel sorted
+   *         chronologically by start time.
+   */
+  List<Transformation> getTransformations();
+
+  /**
+   * Returns the total number of ticks in the animation.
+   *
+   * @return the total number of ticks in the animation.
+   */
+  int getTotalTicks();
+
+  /**
+   * Returns a new list of shapes and their respective values at the frame specified by parameter
+   * tick.
+   *
+   * @param tick takes an int indicating the current frame of the animation.
+   * @return a list of Shapes and their respective values at the frame specified by parameter tick.
+   * @throws IllegalArgumentException if parameter tick is less than 0.
+   */
+  List<Shape> getShapesAtTick(int tick) throws IllegalArgumentException;
+
+  /**
+   * Returns the height of the window.
+   *
+   * @return the height of the the window.
+   */
+  int getWindowHeight();
+
+  /**
+   * Returns the width of the window.
+   *
+   * @return the width of the window.
+   */
+  int getWindowWidth();
 
   /**
    * Sets the background color of the window.

@@ -1,12 +1,12 @@
-package cs5004Animator.Shapes;
+package cs5004animator.model.shapes;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import cs5004Animator.Color;
-import cs5004Animator.Transformations.Transformation;
-import cs5004Animator.Transformations.TransformationType;
+import cs5004animator.model.Color;
+import cs5004animator.model.transformations.Transformation;
+import cs5004animator.model.transformations.TransformationType;
 
 /**
  * Create an abstract class called AbstractShape that is a generic shape.
@@ -116,6 +116,10 @@ public abstract class AbstractShape implements Shape {
     }
 
     return out;
+  }
+
+  public List<Transformation> getTransformationList() {
+    return this.transformationList;
   }
 
   private boolean checkTimes(int currStart, int currEnd, int newStart, int newEnd) {

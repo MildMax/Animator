@@ -1,4 +1,4 @@
-package cs5004Animator.Transformations;
+package cs5004animator.model.transformations;
 
 /**
  * The Move class describes a transformation that moves a shape from its current location

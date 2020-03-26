@@ -1,4 +1,4 @@
-package cs5004Animator.Shapes;
+package cs5004animator.model.shapes;
 
 public enum ShapeType {
   CIRCLE,

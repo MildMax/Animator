@@ -1,57 +1,32 @@
 import org.junit.Test;
 
-import java.util.EmptyStackException;
-
-import cs5004Animator.*;
-import cs5004Animator.Shapes.*;
-import cs5004Animator.Transformations.*;
-
-/*
-import cs5004Animator.AnimationModel;
-import cs5004Animator.AnimationModelImpl;
-import cs5004Animator.Color;
-import cs5004Animator.Shapes.Circle;
-import cs5004Animator.Shapes.Oval;
-import cs5004Animator.Shapes.Rectangle;
-import cs5004Animator.Shapes.Square;
-import cs5004Animator.Shapes.Triangle;
-import cs5004Animator.Transformations.Appearance;
-import cs5004Animator.Transformations.ChangeColor;
-import cs5004Animator.Transformations.ChangeHeight;
-import cs5004Animator.Transformations.ChangeTransparency;
-import cs5004Animator.Transformations.ChangeWidth;
-import cs5004Animator.Transformations.Move;
-import cs5004Animator.Transformations.Scale;
-*/
+import cs5004animator.model.AnimationModel;
+import cs5004animator.model.AnimationModelImpl;
+import cs5004animator.model.Color;
+import cs5004animator.model.shapes.Circle;
+import cs5004animator.model.transformations.Appearance;
+import cs5004animator.model.transformations.TransformationType;
 
 import static org.junit.Assert.assertEquals;
 
 public class TestAnimationModelImpl {
 
   @Test
-  public void genericTest() {
+  public void testAnimationModelImplNoArgConstructor() {
     AnimationModel m = new AnimationModelImpl();
 
-    m.addShape(new Square("1", 10, 10, 20, 20, Color.BLUE));
+    assertEquals("Create window with bottom left corner(-500,-500) "
+            + "top right corner (500,500) with background color white and speed 1.0.",
+            m.toString());
+  }
 
-    m.addTransformation("1", new Move(10, 15, 40, 40));
-    m.addTransformation("1", new Appearance(5, 20));
+  @Test
+  public void testAnimationModelImplTwoArgConstructor() {
+    AnimationModel m = new AnimationModelImpl(100, 100);
 
-    m.addShape(new Triangle("2", 7, 11, 80, 80, 80, Color.GREEN));
-
-    m.addTransformation("2", new Scale(20, 22, 2));
-    m.addTransformation("2", new Appearance(16, 30));
-
-    m.addTransformation("1", new Move(16, 20, 10, 10));
-    //this throws IllegalArgumentException for occupying same space
-    //m.addTransformation("1", new Move(15, 17, 25, 25));
-
-
-    m.removeTransformation("1", TransformationType.MOVE, 10, 15);
-    //m.removeShape("2");
-    //m.addMove("3", 24, 43, 20, 30);
-
-    assertEquals("", m.toString());
+    assertEquals("Create window with bottom left corner(-50,-50) "
+                    + "top right corner (50,50) with background color white and speed 1.0.",
+            m.toString());
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -62,6 +37,15 @@ public class TestAnimationModelImpl {
   @Test(expected = IllegalArgumentException.class)
   public void testAnimationModelImplNegativeHeight() {
     new AnimationModelImpl(10, -10);
+  }
+
+  @Test
+  public void testAnimationModelImplFourArgConstructor() {
+    AnimationModel m = new AnimationModelImpl(-200, 250, -100, 150);
+
+    assertEquals("Create window with bottom left corner(-200,-100) "
+                    + "top right corner (250,150) with background color white and speed 1.0.",
+            m.toString());
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -89,6 +73,24 @@ public class TestAnimationModelImpl {
     AnimationModel m = new AnimationModelImpl();
 
     m.addShape(null);
+  }
+
+  @Test
+  public void testAnimationModelAddShape() {
+    AnimationModel m = new AnimationModelImpl();
+
+    String test = "Create window with bottom left corner(-500,-500) "
+            + "top right corner (500,500) with background color white and speed 1.0.";
+
+    assertEquals(test, m.toString());
+
+    m.addShape(new Circle("C", 0, 10, 0, 0, Color.WHITE));
+
+    test = "Create window with bottom left corner(-500,-500) "
+            + "top right corner (500,500) with background color white and speed 1.0.\n\n"
+            + "Create white circle C with center at (0,0) and radius 10 on layer 0.";
+
+    assertEquals(test, m.toString());
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -234,27 +236,6 @@ public class TestAnimationModelImpl {
     m.addShape(new Circle("circle", 0, 5, 10, 10, Color.WHITE));
     m.addTransformation("circle", new Appearance(10, 20));
     m.removeTransformation("circle", TransformationType.APPEARANCE, 10, 25);
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void testSetSpeedZeroSpeed() {
-    AnimationModel m = new AnimationModelImpl();
-
-    m.setSpeed(0);
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void testSetSpeedNegSpeed() {
-    AnimationModel m = new AnimationModelImpl();
-
-    m.setSpeed(-5);
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void testSetSpeedHighSpeed() {
-    AnimationModel m = new AnimationModelImpl();
-
-    m.setSpeed(16.1);
   }
 
   @Test(expected = IllegalArgumentException.class)

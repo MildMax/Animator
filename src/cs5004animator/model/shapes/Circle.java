@@ -1,10 +1,6 @@
-package cs5004Animator.Shapes;
+package cs5004animator.model.shapes;
 
-import java.util.Comparator;
-import java.util.List;
-
-import cs5004Animator.Color;
-import cs5004Animator.Transformations.Transformation;
+import cs5004animator.model.Color;
 
 /**
  * Create a circle class that extends the Oval class.

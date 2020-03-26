@@ -1,4 +1,4 @@
-package cs5004Animator.Transformations;
+package cs5004animator.model.transformations;
 
 /**
  * The Scale class represents a change in scale of a Shape. Extends the AbstractTransformation

@@ -1,6 +1,6 @@
-package cs5004Animator.Transformations;
+package cs5004animator.model.transformations;
 
-import cs5004Animator.Color;
+import cs5004animator.model.Color;
 
 /**
  * The ChangeColor class holds information needed to change a shape to a new color. Extends

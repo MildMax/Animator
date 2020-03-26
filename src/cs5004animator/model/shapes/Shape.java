@@ -1,9 +1,9 @@
-package cs5004Animator.Shapes;
+package cs5004animator.model.shapes;
 
 import java.util.List;
 
-import cs5004Animator.Transformations.Transformation;
-import cs5004Animator.Transformations.TransformationType;
+import cs5004animator.model.transformations.Transformation;
+import cs5004animator.model.transformations.TransformationType;
 
 /**
  * Create an interface that creates a generic shape.
@@ -19,4 +19,6 @@ public interface Shape {
   ShapeType getType();
 
   String getTransformationDescription();
+
+  List<Transformation> getTransformationList();
 }

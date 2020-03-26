@@ -1,7 +1,6 @@
-package cs5004Animator.Shapes;
+package cs5004animator.model.shapes;
 
-import cs5004Animator.Color;
-import cs5004Animator.Transformations.Transformation;
+import cs5004animator.model.Color;
 
 /**
  * Create a square class that extends the rectangle class.

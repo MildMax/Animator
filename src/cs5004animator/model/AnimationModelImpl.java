@@ -1,11 +1,14 @@
-package cs5004Animator;
+package cs5004animator.model;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import cs5004Animator.Shapes.Shape;
-import cs5004Animator.Transformations.Transformation;
-import cs5004Animator.Transformations.TransformationType;
+import cs5004animator.model.shapes.Shape;
+import cs5004animator.model.transformations.Transformation;
+import cs5004animator.model.transformations.TransformationType;
 
 /**
  * The AnimationModelImpl class holds a series of Shapes and their transformations. Supports
@@ -37,7 +40,7 @@ public class AnimationModelImpl implements AnimationModel {
   private final int windowYMax;
   private Color windowColor;
 
-  private double speed;
+  private int ticks;
   private Map<String, Shape> shapeMap;
 
   /**
@@ -91,7 +94,7 @@ public class AnimationModelImpl implements AnimationModel {
     this.windowYMin = windowYMin;
     this.windowYMax = windowYMax;
 
-    this.speed = 1.0;
+    this.ticks = 0;
     this.windowColor = Color.WHITE;
     this.shapeMap = new HashMap<>();
   }
@@ -159,6 +162,9 @@ public class AnimationModelImpl implements AnimationModel {
     }
     Shape shape = findShape(shapeName);
     shape.addTransformation(t);
+    if (t.getEnd() > this.ticks) {
+      this.ticks = t.getEnd();
+    }
   }
 
   /**
@@ -186,19 +192,87 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   /**
-   * Sets the speed of the animation. Throws IllegalArgumentException if the speed is less than
-   * or equal to 0 or greater than 16.
+   * Returns a List of shapes currently held in the AnimationModelImpl.
    *
-   * @param speed indicates the speed the Animation will be played at.
-   * @throws IllegalArgumentException if the speed is less than or equal to 0 or greater than 16.
+   * @return a List of shapes currently held in the AnimationModelImpl.
    */
   @Override
-  public void setSpeed(double speed) throws IllegalArgumentException {
-    if (speed <= 0 || speed > 16) {
-      throw new IllegalArgumentException("Does not support specified speed");
+  public List<Shape> getShapes() {
+    List<Shape> sList = new ArrayList<>();
+    for (Shape shape : shapeMap.values()) {
+      sList.add(shape);
     }
-    this.speed = speed;
+
+    return sList;
   }
+
+  /**
+   * Returns a list of transformations on shapes currently held in the AnimationModelImpl.
+   *
+   * @return a list of transformations on shapes currently held in the AnimationModelImpl.
+   */
+  @Override
+  public List<Transformation> getTransformations() {
+    List<Transformation> tList = new ArrayList<>();
+    for (Shape shape : shapeMap.values()) {
+      for (Transformation transformation : shape.getTransformationList()) {
+        tList.add(transformation);
+      }
+    }
+    tList.sort(Comparator.comparing(Transformation::getStart));
+    return tList;
+  }
+
+  /**
+   * Returns the total number of ticks in the animation.
+   *
+   * @return the total number of ticks in the animation.
+   */
+  @Override
+  public int getTotalTicks() {
+    return this.ticks;
+  }
+
+  /**
+   * Returns a list of shapes with values corresponding to its transformations at the frame
+   * in the animation specified by parameter tick. Throws IllegalArgumentException if the
+   * specified tick is less than 0.
+   *
+   * @param tick takes an int indicating the current frame of the animation.
+   * @return a list of shapes with values corresponding to its transformations at the frame
+   *         in the animation specified by parameter tick.
+   * @throws IllegalArgumentException if parameter tick is less than 0.
+   */
+  @Override
+  public List<Shape> getShapesAtTick(int tick) throws IllegalArgumentException {
+    if (tick < 0) {
+      throw new IllegalArgumentException("tick cannot be less than 0");
+    }
+    /*
+    This method body will be filled out when we know more about the controller
+    and the view. Returns null currently so project compiles
+     */
+    return null;
+  }
+
+  /**
+   * Returns the height of the window.
+   *
+   * @return the height of the the window.
+   */
+  public int getWindowHeight() {
+    return this.windowYMax - this.windowYMin;
+  }
+
+  /**
+   * Returns the width of the window.
+   *
+   * @return the width of the window.
+   */
+  public int getWindowWidth() {
+    return this.windowXMax - this.windowXMin;
+  }
+
 
   /**
    * Sets the background color of the window. Throws IllegalArgumentException if the windowColor
@@ -226,10 +300,10 @@ public class AnimationModelImpl implements AnimationModel {
    */
   @Override
   public String toString() {
-    String out = "Create window with bottom left corner(" + this.windowXMin + "," + this.windowXMax
-            + ") top right corner (" + this.windowYMin + "," + this.windowYMax
-            + ") with background color " + this.windowColor.toString() + " and speed "
-            + this.speed + ".\n\n";
+    String out = "Create window with bottom left corner(" + this.windowXMin + "," + this.windowYMin
+            + ") top right corner (" + this.windowXMax + "," + this.windowYMax
+            + ") with background color " + this.windowColor.toString() + " and total ticks "
+            + this.ticks + ".\n\n";
 
     for (Shape shape : shapeMap.values()) {
       out += shape.toString() + "\n";
