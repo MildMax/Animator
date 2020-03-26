@@ -38,8 +38,6 @@ import cs5004animator.model.transformations.TransformationType;
  *
  * <p>getWindowWidth() method</p>
  *
- * <p>setBackgroundColor method()</p>
- *
  * <p>getBackgroundColor method()</p>
  *
  * <p>toString() method</p>
@@ -249,7 +247,7 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   /**
-   * Returns a list of shapes with values corresponding to its transformations at the frame
+   * Returns a list of shapes with values corresponding to each shapes transformations at the frame
    * in the animation specified by parameter tick. Throws IllegalArgumentException if the
    * specified tick is less than 0.
    *
