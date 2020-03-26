@@ -24,7 +24,8 @@ public class TestAnimationModelImpl {
     AnimationModel m = new AnimationModelImpl();
 
     assertEquals("Create window with bottom left corner(-500,-500) "
-            + "top right corner (500,500) with background color white and speed 1.0.",
+            + "top right corner (500,500) with background color 0.0,0.0,0.0 "
+                    + "and total ticks 0.",
             m.toString());
   }
 
@@ -33,7 +34,8 @@ public class TestAnimationModelImpl {
     AnimationModel m = new AnimationModelImpl(100, 100);
 
     assertEquals("Create window with bottom left corner(-50,-50) "
-                    + "top right corner (50,50) with background color white and speed 1.0.",
+                    + "top right corner (50,50) with background color 0.0,0.0,0.0"
+                    + " and total ticks 0.",
             m.toString());
   }
 
@@ -52,7 +54,8 @@ public class TestAnimationModelImpl {
     AnimationModel m = new AnimationModelImpl(-200, 250, -100, 150);
 
     assertEquals("Create window with bottom left corner(-200,-100) "
-                    + "top right corner (250,150) with background color white and speed 1.0.",
+                    + "top right corner (250,150) with background color 0.0,0.0,0.0 "
+                    + "and total ticks 0.",
             m.toString());
   }
 
@@ -88,15 +91,17 @@ public class TestAnimationModelImpl {
     AnimationModel m = new AnimationModelImpl();
 
     String test = "Create window with bottom left corner(-500,-500) "
-            + "top right corner (500,500) with background color white and speed 1.0.";
+            + "top right corner (500,500) with background color 0.0,0.0,0.0 "
+            + "and total ticks 0.";
 
     assertEquals(test, m.toString());
 
     m.addShape(new Circle("C", 0, 10, 0, 0, green));
 
     test = "Create window with bottom left corner(-500,-500) "
-            + "top right corner (500,500) with background color white and speed 1.0.\n\n"
-            + "Create white circle C with center at (0,0) and radius 10 on layer 0.";
+            + "top right corner (500,500) with background color 0.0,0.0,0.0 and total ticks 0.\n\n"
+            + "Create circle C with center at (0,0) and radius 10 on layer 0 "
+            + "with color 0.0,1.0,0.0.";
 
     assertEquals(test, m.toString());
   }

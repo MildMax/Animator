@@ -38,11 +38,12 @@ public class Oval extends AbstractShape {
   public String toString() {
     String out = "";
 
-    out += "Create "  + this.initialColor.toString() + " oval " + this.name
-            + " with center at (" + this.initialCenterX + ", "
+    out += "Create oval " + this.name
+            + " with center at (" + this.initialCenterX + ","
             + this.initialCenterY +"), horizontal radius " + this.initialHorizontalRadius
             + ", and vertical radius " + this.initialVerticalRadius + " on layer "
-            + this.layer + ".\n\n";
+            + this.layer + " with color " + this.initialColor.toString()
+            + ".\n\n";
 
     out += getTransformationDescription();
 

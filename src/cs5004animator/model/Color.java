@@ -67,6 +67,6 @@ public class Color {
    */
   @Override
   public String toString() {
-    return String.format("%.1f, %.1f, %.1f", r, g, b);
+    return String.format("%.1f,%.1f,%.1f", r, g, b);
   }
 }

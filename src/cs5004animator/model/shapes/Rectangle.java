@@ -31,11 +31,12 @@ public class Rectangle extends AbstractShape {
   public String toString() {
     String out = "";
 
-    out += "Create "  + this.initialColor.toString() + " rectangle " + this.name
-            + " with center at (" + this.initialCenterX + ", "
+    out += "Create rectangle " + this.name
+            + " with center at (" + this.initialCenterX + ","
             + this.initialCenterY +"), width " + this.initialWidth
             + ", and height " + this.initialHeight + " on layer "
-            + this.layer + ".\n\n";
+            + this.layer + " with color " + this.initialColor.toString()
+            + ".\n\n";
 
     out += getTransformationDescription();
 

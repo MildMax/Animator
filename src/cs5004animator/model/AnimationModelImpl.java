@@ -16,7 +16,7 @@ import cs5004animator.model.transformations.TransformationType;
  * manually. Allows for the background color to be set manually. Implements the
  * AnimationModel interface. Contains the following features:
  *
- * <p>AnimationMode() constructors</p>
+ * <p>AnimationModel() constructors</p>
  *
  * <p>addShape() method</p>
  *
@@ -26,9 +26,21 @@ import cs5004animator.model.transformations.TransformationType;
  *
  * <p>removeTransformation() method</p>
  *
- * <p>setSpeed() method</p>
+ * <p>getShapes() method</p>
+ *
+ * <p>getTransformations() method</p>
+ *
+ * <p>getTotalTicks() method</p>
+ *
+ * <p>getShapesAtTick() method</p>
+ *
+ * <p>getWindowHeight() method</p>
+ *
+ * <p>getWindowWidth() method</p>
  *
  * <p>setBackgroundColor method()</p>
+ *
+ * <p>getBackgroundColor method()</p>
  *
  * <p>toString() method</p>
  */
@@ -95,7 +107,7 @@ public class AnimationModelImpl implements AnimationModel {
     this.windowYMax = windowYMax;
 
     this.ticks = 0;
-    this.windowColor = Color.WHITE;
+    this.windowColor = new Color(0,0, 0);
     this.shapeMap = new HashMap<>();
   }
 
