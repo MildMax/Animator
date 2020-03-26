@@ -52,7 +52,6 @@ public class AnimationModelImpl implements AnimationModel {
   private final int windowYMax;
   private Color windowColor;
 
-  private int ticks;
   private Map<String, Shape> shapeMap;
 
   /**
@@ -106,7 +105,6 @@ public class AnimationModelImpl implements AnimationModel {
     this.windowYMin = windowYMin;
     this.windowYMax = windowYMax;
 
-    this.ticks = 0;
     this.windowColor = new Color(0,0, 0);
     this.shapeMap = new HashMap<>();
   }
@@ -174,9 +172,6 @@ public class AnimationModelImpl implements AnimationModel {
     }
     Shape shape = findShape(shapeName);
     shape.addTransformation(t);
-    if (t.getEnd() > this.ticks) {
-      this.ticks = t.getEnd();
-    }
   }
 
   /**
@@ -242,7 +237,15 @@ public class AnimationModelImpl implements AnimationModel {
    */
   @Override
   public int getTotalTicks() {
-    return this.ticks;
+    List<Transformation> tList = getTransformations();
+
+    if (tList.size() == 0) {
+      return 0;
+    }
+    else {
+      tList.sort(Comparator.comparing(Transformation::getEnd));
+      return tList.get(tList.size() - 1).getEnd();
+    }
   }
 
   /**
@@ -262,7 +265,7 @@ public class AnimationModelImpl implements AnimationModel {
     }
     /*
     This method body will be filled out when we know more about the controller
-    and the view. Returns null currently so project compiles
+    and the view. Returns null currently so project compiles.
      */
     return null;
   }
@@ -325,7 +328,7 @@ public class AnimationModelImpl implements AnimationModel {
     String out = "Create window with bottom left corner(" + this.windowXMin + "," + this.windowYMin
             + ") top right corner (" + this.windowXMax + "," + this.windowYMax
             + ") with background color " + this.windowColor.toString() + " and total ticks "
-            + this.ticks + ".\n\n";
+            + this.getTotalTicks() + ".\n\n";
 
     for (Shape shape : shapeMap.values()) {
       out += shape.toString() + "\n";

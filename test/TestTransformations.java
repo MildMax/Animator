@@ -320,7 +320,7 @@ public class TestTransformations {
     assertEquals(1, t1.getStart());
     assertEquals(1000, t1.getEnd());
     assertEquals(TransformationType.CHANGECOLOR, t1.getType());
-    assertEquals("changes to blue from time t=1 to time t=1000.", t1.toString());
+    assertEquals("changes to 0.0,0.0,1.0 from time t=1 to time t=1000.", t1.toString());
   }
 
   /**

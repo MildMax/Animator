@@ -10,8 +10,6 @@ public class Color {
   private double g;
   private double b;
 
-  private String name;
-
   /**
    * Takes three doubles indicating the Red, Green, and Blue color values on a scale from 0.0
    * to 1.0, 0 indicating none, 1.0 indicating full. Throws IllegalArgumentException if any
