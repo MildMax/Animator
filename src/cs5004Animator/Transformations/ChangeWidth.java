@@ -2,11 +2,12 @@ package cs5004Animator.Transformations;
 
 /**
  * The Resize class handles resizing a shape according to the new width
- * of the shapes x value. Contains the following features:
+ * of the shapes x value. Extends the AbstractTransformation class which
+ * implements the Transformation interface. Contains the following features:
  *
  * <p>Resize() constructor</p>
  *
- * <p>getWidth() method</p>
+ * <p>toString() method</p>
  */
 public class ChangeWidth extends AbstractTransformation {
 
@@ -37,6 +38,13 @@ public class ChangeWidth extends AbstractTransformation {
     this.newWidth = newWidth;
   }
 
+  /**
+   * Returns a String indicating the new width of the Shape and the start and end
+   * time of the ChangeWidth transformation.
+   *
+   * @return a String indicating the new width of the Shape and the start and end
+   *         time of the ChangeWidth transformation.
+   */
   @Override
   public String toString() {
     return "changes to width:" + this.newWidth + " " + super.toString();

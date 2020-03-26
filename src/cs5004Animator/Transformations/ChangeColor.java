@@ -3,12 +3,13 @@ package cs5004Animator.Transformations;
 import cs5004Animator.Color;
 
 /**
- * The ChangeColor class holds information needed to change a shape to a new color. Contains
+ * The ChangeColor class holds information needed to change a shape to a new color. Extends
+ * the AbstractTransformation class which implements the Transformation interface. Contains
  * the following features:
  *
  * <p>ChangeColor() constructor</p>
  *
- * <p>getColor() method</p>
+ * <p>toString() method</p>
  */
 public class ChangeColor extends AbstractTransformation {
 
@@ -36,6 +37,13 @@ public class ChangeColor extends AbstractTransformation {
     this.newColor = newColor;
   }
 
+  /**
+   * Returns a string indicating the new color and the start and end time of the
+   * ChangeColor transformation.
+   *
+   * @return a String indicating the new color and the start and end time of the
+   *         ChangeColor transformation.
+   */
   @Override
   public String toString() {
     return "changes to " + newColor.toString() +  " " + super.toString();

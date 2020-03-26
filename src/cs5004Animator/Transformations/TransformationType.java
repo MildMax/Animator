@@ -1,5 +1,9 @@
 package cs5004Animator.Transformations;
 
+/**
+ * The TransformationType enum contains enum values indicating the type of each transformation
+ * a Shape can undergo.
+ */
 public enum TransformationType {
   APPEARANCE("appearance"),
   CHANGECOLOR("change color"),
@@ -15,6 +19,11 @@ public enum TransformationType {
     this.name = name;
   }
 
+  /**
+   * Returns a String indicating the name of the Transformation's type.
+   *
+   * @return a String indicating the name of the Transformation's type.
+   */
   @Override
   public String toString() {
     return this.name;

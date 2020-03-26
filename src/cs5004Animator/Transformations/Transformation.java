@@ -8,7 +8,7 @@ package cs5004Animator.Transformations;
  *
  * <p>- getStart() method</p>
  *
- * <p>- getEnd() method</p>
+ * <p>- getType() method</p>
  *
  * <p>- getDescription() method</p>
  */
@@ -29,7 +29,10 @@ public interface Transformation {
    */
   int getEnd();
 
+  /**
+   * Returns the TransformationType enum of the transformation.
+   *
+   * @return the TransformationType enum of the transformation.
+   */
   TransformationType getType();
-
-  String toString();
 }

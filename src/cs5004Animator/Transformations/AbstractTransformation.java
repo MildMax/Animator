@@ -22,8 +22,10 @@ public abstract class AbstractTransformation implements Transformation {
 
   /**
    * The AbstractTransformation constructor takes two ints indicating the start of the
-   * transformation animation and the end of the transformation animation. Throws
-   * IllegalArgumentException if start is less than 0 or if end is before start.
+   * transformation animation and the end of the transformation animation and a
+   * TransformationType enum indicating the type of the transformation. Throws
+   * IllegalArgumentException if start is less than 0 or if end is before start or if
+   * the TransformationType enum is null.
    *
    * @param startTime takes an int indicating the start time of the transformation.
    * @param endTime takes an int indicating the end time of the transformation
@@ -38,9 +40,7 @@ public abstract class AbstractTransformation implements Transformation {
     else if (endTime < startTime) {
       throw new IllegalArgumentException("End time cannot be before start time");
     }
-    else if (type == null) {
-      throw new IllegalArgumentException("TransformationType cannot be null");
-    }
+
     this.startTime = startTime;
     this.endTime = endTime;
     this.type = type;

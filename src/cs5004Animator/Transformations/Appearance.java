@@ -2,7 +2,12 @@ package cs5004Animator.Transformations;
 
 /**
  * The Appearance class holds the values at which an object appears on screen and when
- * the object disappears.
+ * the object disappears. Extends the AbstractInformation class which implements the
+ * Transformation interface. Contains the following features:
+ *
+ * <p>Appearance() constructor</p>
+ *
+ * <p>toString() method</p>
  */
 
 public class Appearance extends AbstractTransformation {

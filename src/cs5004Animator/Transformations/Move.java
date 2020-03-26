@@ -2,13 +2,12 @@ package cs5004Animator.Transformations;
 
 /**
  * The Move class describes a transformation that moves a shape from its current location
- * to another location on screen. Contains the following methods:
+ * to another location on screen. Extends the AbstractTransformation class which implements
+ * the Transformation interface. Contains the following methods:
  *
  * <p>Move() constructor</p>
  *
- * <p>getX() method</p>
- *
- * <p>getY() method</p>
+ * <p>toString() method</p>
  */
 public class Move extends AbstractTransformation {
 
@@ -17,7 +16,7 @@ public class Move extends AbstractTransformation {
 
   /**
    * The Move constructor takes two ints indicating the start time and the end time of the
-   * move animation and two ints indicating the position the shape is moving to. Throws
+   * move animation and two ints indicating the (x,y) position the shape is moving to. Throws
    * IllegalArgumentException in AbstractTransformation if start time is less than 0 or if
    * the end time is before the start time.
    *
@@ -35,6 +34,13 @@ public class Move extends AbstractTransformation {
     this.newY = newY;
   }
 
+  /**
+   * Return a String indicating the new (x,y) coordinate of the Shape and the
+   * start and end time of the Move transformation.
+   *
+   * @return a String indicating the new (x,y) coordinate of the Shape and the start and end
+   *         time of the Move transformation.
+   */
   @Override
   public String toString() {
     return "moves to (" + newX + "," + newY + ") " + super.toString();

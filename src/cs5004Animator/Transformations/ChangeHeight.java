@@ -1,14 +1,13 @@
 package cs5004Animator.Transformations;
 
 /**
- * The Resize class handles resizing a shape according to the new height and height
- * of the shapes x and y values. Contains the following features:
+ * The Resize class handles resizing a shape according to the Shape's new height.
+ * Extends the AbstractTransformation class which implements the Transformation interface.
+ * Contains the following features:
  *
- * <p>Resize() constructor</p>
+ * <p>ChangeHeight() constructor</p>
  *
- * <p>getheight() method</p>
- *
- * <p>getHeight() method</p>
+ * <p>toString() method</p>
  */
 public class ChangeHeight extends AbstractTransformation {
 
@@ -16,17 +15,17 @@ public class ChangeHeight extends AbstractTransformation {
 
   /**
    * The Resize constructor takes two ints indicating the start of the transformation
-   * animation and the end of the transformation animation and two ints indicating the
-   * new height and the new height of the shape. Throws IllegalArgumentException if start
+   * animation and the end of the transformation animation and an int indicating the
+   * new height of the shape. Throws IllegalArgumentException if start
    * is less than 0 or if end is before start. Throws IllegalArgumentException if the
-   * new height or height is non-positive.
+   * new height is non-positive.
    *
    * @param startTime takes an int indicating the start time of the transformation.
    * @param endTime   takes an int indicating the end time of the transformation
    * @param newHeight takes the new height value of the shape.
    * @throws IllegalArgumentException if the start time is less than 0.
    *                                  If the end time is before the start time.
-   *                                  If the new height or height is non-positive
+   *                                  If the new height is non-positive
    */
   public ChangeHeight(int startTime, int endTime, int newHeight)
           throws IllegalArgumentException {
@@ -39,6 +38,13 @@ public class ChangeHeight extends AbstractTransformation {
     this.newHeight = newHeight;
   }
 
+  /**
+   * Returns a String indicating the new height of the Shape and the start and
+   * end time of the ChangeHeight transformation.
+   *
+   * @return a String indicating the new height of the Shape and the start and
+   *         end time of the ChangeHeight transformation.
+   */
   @Override
   public String toString() {
     return "changes to height:" + this.newHeight + " " + super.toString();
