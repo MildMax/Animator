@@ -34,9 +34,8 @@ public class TestAnimationModelImpl {
   public void testAnimationModelImplNoArgConstructor() {
     AnimationModel m = new AnimationModelImpl();
 
-    assertEquals("Create window with bottom left corner(-500,-500) "
-            + "top right corner (500,500) with background color 0.0,0.0,0.0 "
-                    + "and total ticks 0.",
+    assertEquals("Create window with width 500 and height 500 "
+                    + "with background color 0.0,0.0,0.0 and total ticks 0.",
             m.toString());
   }
 
@@ -46,11 +45,10 @@ public class TestAnimationModelImpl {
    */
   @Test
   public void testAnimationModelImplTwoArgConstructor() {
-    AnimationModel m = new AnimationModelImpl(100, 100);
+    AnimationModel m = new AnimationModelImpl(100, 20);
 
-    assertEquals("Create window with bottom left corner(-50,-50) "
-                    + "top right corner (50,50) with background color 0.0,0.0,0.0"
-                    + " and total ticks 0.",
+    assertEquals("Create window with width 100 and height 20 with"
+                    + " background color 0.0,0.0,0.0 and total ticks 0.",
             m.toString());
   }
 
@@ -73,53 +71,65 @@ public class TestAnimationModelImpl {
   }
 
   /**
-   * Test creating an AnimationModelImpl with a constructor that takes four arguments
-   * specifying the minimum and maximum x and y values of the window.
+   * Test creating an AnimationModelImpl with a constructor that takes one argument
+   * indicating the color of the window background.
    */
   @Test
-  public void testAnimationModelImplFourArgConstructor() {
-    AnimationModel m = new AnimationModelImpl(-200, 250, -100, 150);
+  public void testAnimationModelImplOneArgConstructor() {
+    AnimationModel m = new AnimationModelImpl(new Color(0, 0, 0));
 
-    assertEquals("Create window with bottom left corner(-200,-100) "
-                    + "top right corner (250,150) with background color 0.0,0.0,0.0 "
-                    + "and total ticks 0.",
+    assertEquals("Create window with width 500 and height 500"
+            + " with background color 0.0,0.0,0.0 and total ticks 0.",
             m.toString());
   }
 
   /**
-   * Test creating an AnimationModelImpl with a constructor that takes four arguments
-   * and the maximum x value is less than the minimum x value.
+   * Test creating an AnimationModelImpl with a constructor that takes one argument
+   * with a null Color value.
    */
   @Test(expected = IllegalArgumentException.class)
-  public void testAnimationModelImplBadXValues() {
-    new AnimationModelImpl(0, -10, 20, 50);
+  public void testAnimationModelOneArgNullColor() {
+    new AnimationModelImpl(null);
   }
 
   /**
-   * Test creating an AnimationModelImpl with a constructor that takes four arguments
-   * and the maximum and minimum x values are the same.
+   * Test creating an AnimationModelImpl object with a constructor that takes three
+   * arguments indicating window width, height and background color.
    */
-  @Test(expected = IllegalArgumentException.class)
-  public void testAnimationModelImplSameXValues() {
-    new AnimationModelImpl(0, 0, 20, 50);
+  @Test
+  public void testAnimationModelThreeArgConstructor() {
+    AnimationModel m = new AnimationModelImpl(100, 50, new Color(1, 1, 1));
+
+    assertEquals(100, m.getWindowWidth());
+    assertEquals(50, m.getWindowHeight());
+    assertEquals("1.0,1.0,1.0", m.getBackgroundColor().toString());
+
+    assertEquals("Create window with width 100 and height 50 with background"
+            + " color 1.0,1.0,1.0 and total ticks 0.", m.toString());
   }
 
   /**
-   * Test creating an AnimationModelImpl with a constructor that takes four arguments
-   * and the maximum y value is less than the minimum y value.
+   * Test creating an AnimationModelImpl object when the specified width is 0.
    */
   @Test(expected = IllegalArgumentException.class)
-  public void testAnimationModelImplBadYValues() {
-    new AnimationModelImpl(-10, 10, 0, -10);
+  public void testAnimationModelThreeArgZeroWidth() {
+    new AnimationModelImpl(0, 100, new Color(1, 1, 1));
   }
 
   /**
-   * Test creating an AnimationModelImpl with a constructor that takes four arguments
-   * and the maximum and minimum y values are the same.
+   * Test creating an AnimationModelImpl object when the specified height is 0.
    */
   @Test(expected = IllegalArgumentException.class)
-  public void testAnimationModelImplSameYValues() {
-    new AnimationModelImpl(-10, 10, 0, 0);
+  public void testAnimationModelThreeArgZeroHeight() {
+    new AnimationModelImpl(100, 0, new Color(0,1,0));
+  }
+
+  /**
+   * Test creating an AnimationModelImpl object when the specified Color value is null.
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void testAnimationModelThreeArgNullColor() {
+    new AnimationModelImpl(100, 100, null);
   }
 
   /**
@@ -129,16 +139,15 @@ public class TestAnimationModelImpl {
   public void testAnimationModelAddShape() {
     AnimationModel m = new AnimationModelImpl();
 
-    String test = "Create window with bottom left corner(-500,-500) "
-            + "top right corner (500,500) with background color 0.0,0.0,0.0 "
+    String test = "Create window with width 500 and height 500 with background color 0.0,0.0,0.0 "
             + "and total ticks 0.";
 
     assertEquals(test, m.toString());
 
     m.addShape(new Circle("C", 0, 10, 0, 0, green));
 
-    test = "Create window with bottom left corner(-500,-500) "
-            + "top right corner (500,500) with background color 0.0,0.0,0.0 and total ticks 0.\n\n"
+    test = "Create window with width 500 and height 500 with background color 0.0,0.0,0.0 "
+            + "and total ticks 0.\n\n"
             + "Create circle C with center at (0,0) and radius 10 on layer 0 "
             + "with color 0.0,1.0,0.0.";
 
@@ -173,16 +182,15 @@ public class TestAnimationModelImpl {
   public void testAnimationModelRemoveShape() {
     AnimationModel m = new AnimationModelImpl();
 
-    String test = "Create window with bottom left corner(-500,-500) "
-            + "top right corner (500,500) with background color 0.0,0.0,0.0 "
+    String test = "Create window with width 500 and height 500 with background color 0.0,0.0,0.0 "
             + "and total ticks 0.";
 
     assertEquals(test, m.toString());
 
     m.addShape(new Circle("C", 0, 10, 0, 0, green));
 
-    test = "Create window with bottom left corner(-500,-500) "
-            + "top right corner (500,500) with background color 0.0,0.0,0.0 and total ticks 0.\n\n"
+    test = "Create window with width 500 and height 500 with background color 0.0,0.0,0.0 "
+            + "and total ticks 0.\n\n"
             + "Create circle C with center at (0,0) and radius 10 on layer 0 "
             + "with color 0.0,1.0,0.0.";
 
@@ -191,8 +199,7 @@ public class TestAnimationModelImpl {
 
     m.removeShape("C");
 
-    test = "Create window with bottom left corner(-500,-500) "
-            + "top right corner (500,500) with background color 0.0,0.0,0.0 "
+    test = "Create window with width 500 and height 500 with background color 0.0,0.0,0.0 "
             + "and total ticks 0.";
 
     assertEquals(test, m.toString());
@@ -226,8 +233,7 @@ public class TestAnimationModelImpl {
   public void testAddTransformation() {
     AnimationModel m = new AnimationModelImpl();
 
-    String test = "Create window with bottom left corner(-500,-500) "
-            + "top right corner (500,500) with background color 0.0,0.0,0.0 "
+    String test = "Create window with width 500 and height 500 with background color 0.0,0.0,0.0 "
             + "and total ticks 0.";
 
     assertEquals(test, m.toString());
@@ -236,8 +242,8 @@ public class TestAnimationModelImpl {
     m.addShape(new Circle("C", 0, 10, 0, 0, green));
     m.addTransformation("C", new Appearance(0, 10));
 
-    test = "Create window with bottom left corner(-500,-500) "
-            + "top right corner (500,500) with background color 0.0,0.0,0.0 and total ticks 10.\n\n"
+    test = "Create window with width 500 and height 500 "
+            + "with background color 0.0,0.0,0.0 and total ticks 10.\n\n"
             + "Create circle C with center at (0,0) and radius 10 on layer 0 "
             + "with color 0.0,1.0,0.0.\n\n"
             + "C appears at time t=0 and disappears at time t=10.";
@@ -353,8 +359,7 @@ public class TestAnimationModelImpl {
   public void testRemoveTransformation() {
     AnimationModel m = new AnimationModelImpl();
 
-    String test = "Create window with bottom left corner(-500,-500) "
-            + "top right corner (500,500) with background color 0.0,0.0,0.0 "
+    String test = "Create window with width 500 and height 500 with background color 0.0,0.0,0.0 "
             + "and total ticks 0.";
 
     assertEquals(test, m.toString());
@@ -363,8 +368,8 @@ public class TestAnimationModelImpl {
     m.addShape(new Circle("C", 0, 10, 0, 0, green));
     m.addTransformation("C", new Appearance(0, 10));
 
-    test = "Create window with bottom left corner(-500,-500) "
-            + "top right corner (500,500) with background color 0.0,0.0,0.0 and total ticks 10.\n\n"
+    test = "Create window with width 500 and height 500 with background color 0.0,0.0,0.0 "
+            + "and total ticks 10.\n\n"
             + "Create circle C with center at (0,0) and radius 10 on layer 0 "
             + "with color 0.0,1.0,0.0.\n\n"
             + "C appears at time t=0 and disappears at time t=10.";
@@ -374,8 +379,8 @@ public class TestAnimationModelImpl {
 
     m.removeTransformation("C", TransformationType.APPEARANCE, 0, 10);
 
-    test = "Create window with bottom left corner(-500,-500) "
-            + "top right corner (500,500) with background color 0.0,0.0,0.0 and total ticks 0.\n\n"
+    test = "Create window with width 500 and height 500 with background color 0.0,0.0,0.0 "
+            + "and total ticks 0.\n\n"
             + "Create circle C with center at (0,0) and radius 10 on layer 0 "
             + "with color 0.0,1.0,0.0.";
 
@@ -539,7 +544,7 @@ public class TestAnimationModelImpl {
   public void testGetWindowHeight() {
     AnimationModel m = new AnimationModelImpl();
 
-    assertEquals(1000, m.getWindowHeight());
+    assertEquals(500, m.getWindowHeight());
   }
 
   /**
@@ -553,16 +558,6 @@ public class TestAnimationModelImpl {
   }
 
   /**
-   * Test setting a null value for background color in AnimationModelImpl.
-   */
-  @Test(expected = IllegalArgumentException.class)
-  public void testSetBackgroundColorNullColor() {
-    AnimationModel m = new AnimationModelImpl();
-
-    m.setBackgroundColor(null);
-  }
-
-  /**
    * Test getting the background color from AnimationModelImpl.
    */
   @Test
@@ -570,10 +565,6 @@ public class TestAnimationModelImpl {
     AnimationModel m = new AnimationModelImpl();
 
     assertEquals("0.0,0.0,0.0", m.getBackgroundColor().toString());
-
-    m.setBackgroundColor(new Color(1.0, 1.0, 1.0));
-
-    assertEquals("1.0,1.0,1.0", m.getBackgroundColor().toString());
   }
 
 }

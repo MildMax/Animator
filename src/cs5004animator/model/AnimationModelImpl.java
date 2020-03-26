@@ -46,26 +46,23 @@ import cs5004animator.model.transformations.TransformationType;
  */
 public class AnimationModelImpl implements AnimationModel {
 
-  private final int windowXMin;
-  private final int windowXMax;
-  private final int windowYMin;
-  private final int windowYMax;
-  private Color windowColor;
+  private final int windowWidth;
+  private final int windowHeight;
+  private final Color windowColor;
 
   private Map<String, Shape> shapeMap;
 
   /**
-   * Sets the window size to have a minimum x and y values of
-   * -500 and max x and y values of 500 centered around (0,0).
-   * Sets the speed of the animation and the background color of the window white.
+   * Sets the window size to have a width and height of 500.
+   * Sets the window background color to 0.0,0.0,0.0 (white).
    */
   public AnimationModelImpl() {
-    this(-500, 500, -500, 500);
+    this(500, 500);
   }
 
   /**
-   * Takes two ints indicating the width and height of the window. Centers the window around (0,0).
-   * Sets the speed of the animation to 1.0. Sets the background color to white. Throws
+   * Takes two ints indicating the width and height of the window.
+   * Sets the background color to 0.0,0.0,0.0 (white). Throws
    * IllegalArgumentException if the window width or height is less than or equal to 0.
    *
    * @param windowWidth indicates the width of the window.
@@ -73,40 +70,42 @@ public class AnimationModelImpl implements AnimationModel {
    * @throws IllegalArgumentException if the window width or height is less than or equal to 0.
    */
   public AnimationModelImpl(int windowWidth, int windowHeight) throws IllegalArgumentException {
-    this((windowWidth / 2) * -1, (windowWidth / 2),
-            (windowHeight / 2) * -1, (windowHeight / 2));
-
-    if (windowWidth <= 0 || windowHeight <= 0) {
-      throw new IllegalArgumentException("Window dimensions cannot be less than or equal to zero");
-    }
+    this(windowWidth, windowHeight, new Color(0,0,0));
   }
 
   /**
-   * Takes four ints indicating the minimum and maximum x and y values of the window. Sets the
-   * speed of the animation to 1.0. Sets the background of the window to white. Throws
-   * IllegalArgumentException if the maximum x or y values are less than or equal to their
-   * respective minimum values.
+   * Takes a Color that specifies the background color of the window. Sets the window height
+   * and width to be 500. Throws IllegalArgumentException if the specified color value is null.
    *
-   * @param windowXMin indicates the minimum x value of the window.
-   * @param windowXMax indicates the maximum x value of the window.
-   * @param windowYMin indicates the minimum y value of the window.
-   * @param windowYMax indicates the minimum y value of the window.
-   * @throws IllegalArgumentException if the maximum x or y values are less than or equal to their
-   *                                  respective minimum values.
+   * @param windowColor takes the background color of the window.
+   * @throws IllegalArgumentException if the specified color value is null.
    */
-  public AnimationModelImpl(int windowXMin, int windowXMax,
-                            int windowYMin, int windowYMax) throws IllegalArgumentException {
-    if (windowXMax <= windowXMin || windowYMax <= windowYMin) {
-      throw new IllegalArgumentException("Invalid window size parameters.");
+  public AnimationModelImpl(Color windowColor) throws IllegalArgumentException {
+    this(500, 500, windowColor);
+  }
+
+  /**
+   * Takes two ints indicating the width and height of the window and a color specifying the
+   * background color of the window. Throws IllegalArgumentException if either the specified
+   * width or height is less than or equal to 0 or if the Color value is null.
+   *
+   * @param windowWidth specifies the width of the window.
+   * @param windowHeight specifies the height of the window.
+   * @param windowColor specifies the background color of the window.
+   * @throws IllegalArgumentException
+   */
+  public AnimationModelImpl(int windowWidth, int windowHeight, Color windowColor)
+          throws IllegalArgumentException {
+    if (windowWidth <= 0 || windowHeight <= 0) {
+      throw new IllegalArgumentException("Window dimensions cannot be less than or equal to zero");
     }
-
-    this.windowXMin = windowXMin;
-    this.windowXMax = windowXMax;
-    this.windowYMin = windowYMin;
-    this.windowYMax = windowYMax;
-
-    this.windowColor = new Color(0,0, 0);
-    this.shapeMap = new HashMap<>();
+    else if (windowColor == null) {
+      throw new IllegalArgumentException("Window color cannot be null");
+    }
+    this.windowWidth = windowWidth;
+    this.windowHeight = windowHeight;
+    this.windowColor = windowColor;
+    shapeMap = new HashMap<>();
   }
 
   /**
@@ -277,7 +276,7 @@ public class AnimationModelImpl implements AnimationModel {
    * @return the height of the the window.
    */
   public int getWindowHeight() {
-    return this.windowYMax - this.windowYMin;
+    return this.windowHeight;
   }
 
   /**
@@ -286,23 +285,7 @@ public class AnimationModelImpl implements AnimationModel {
    * @return the width of the window.
    */
   public int getWindowWidth() {
-    return this.windowXMax - this.windowXMin;
-  }
-
-
-  /**
-   * Sets the background color of the window. Throws IllegalArgumentException if the windowColor
-   * is null.
-   *
-   * @param windowColor indicates the color of the window background.
-   * @throws IllegalArgumentException if the windowColor is null.
-   */
-  @Override
-  public void setBackgroundColor(Color windowColor) throws IllegalArgumentException {
-    if (windowColor == null) {
-      throw new IllegalArgumentException("Window color cannot be null");
-    }
-    this.windowColor = windowColor;
+    return this.windowWidth;
   }
 
   /**
@@ -326,10 +309,9 @@ public class AnimationModelImpl implements AnimationModel {
    */
   @Override
   public String toString() {
-    String out = "Create window with bottom left corner(" + this.windowXMin + "," + this.windowYMin
-            + ") top right corner (" + this.windowXMax + "," + this.windowYMax
-            + ") with background color " + this.windowColor.toString() + " and total ticks "
-            + this.getTotalTicks() + ".\n\n";
+    String out = "Create window with width " + this.windowWidth + " and height "
+            + this.windowHeight + " with background color " + this.windowColor.toString()
+            + " and total ticks " + this.getTotalTicks() + ".\n\n";
 
     for (Shape shape : shapeMap.values()) {
       out += shape.toString() + "\n";

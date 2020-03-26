@@ -109,14 +109,6 @@ public interface AnimationModel {
   int getWindowWidth();
 
   /**
-   * Sets the background color of the window.
-   *
-   * @param windowColor indicates the color of the window background.
-   * @throws IllegalArgumentException if Color windowColor is null.
-   */
-  void setBackgroundColor(Color windowColor) throws IllegalArgumentException;
-
-  /**
    * Returns the color of the window.
    *
    * @return the color of the window.
