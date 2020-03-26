@@ -8,11 +8,13 @@ import cs5004animator.model.shapes.Circle;
 import cs5004animator.model.shapes.Square;
 import cs5004animator.model.transformations.Appearance;
 import cs5004animator.model.transformations.Move;
-import cs5004animator.model.transformations.Transformation;
 import cs5004animator.model.transformations.TransformationType;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * This class tests the methods and constructors in the AnimationModelImpl class.
+ */
 public class TestAnimationModelImpl {
 
   Color green;
@@ -218,7 +220,7 @@ public class TestAnimationModelImpl {
   }
 
   /**
-   * Test adding a transformation to a shape in AnimationModelImpl
+   * Test adding a transformation to a shape in AnimationModelImpl.
    */
   @Test
   public void testAddTransformation() {
@@ -554,7 +556,7 @@ public class TestAnimationModelImpl {
    * Test setting a null value for background color in AnimationModelImpl.
    */
   @Test(expected = IllegalArgumentException.class)
-  public void testSetBackgroundColorNullColor () {
+  public void testSetBackgroundColorNullColor() {
     AnimationModel m = new AnimationModelImpl();
 
     m.setBackgroundColor(null);

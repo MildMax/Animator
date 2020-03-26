@@ -34,7 +34,7 @@ public class Square extends AbstractShape {
 
     out += "Create square " + this.name
             + " with center at (" + this.initialCenterX + ","
-            + this.initialCenterY +") and side " + this.side + " on layer "
+            + this.initialCenterY + ") and side " + this.side + " on layer "
             + this.layer + " with color " + this.initialColor.toString()
             + ".\n\n";
 

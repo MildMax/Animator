@@ -33,7 +33,7 @@ public class Rectangle extends AbstractShape {
 
     out += "Create rectangle " + this.name
             + " with center at (" + this.initialCenterX + ","
-            + this.initialCenterY +"), width " + this.initialWidth
+            + this.initialCenterY + "), width " + this.initialWidth
             + ", and height " + this.initialHeight + " on layer "
             + this.layer + " with color " + this.initialColor.toString()
             + ".\n\n";

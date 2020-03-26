@@ -14,10 +14,11 @@ public class ChangeTransparency extends AbstractTransformation {
   private final double newTransparency;
 
   /**
-   * The AbstractTransformation constructor takes two ints indicating the start of the transformation
-   * animation and the end of the transformation animation. Throws IllegalArgumentException if start
-   * is less than 0 or if end is before start. Throws IllegalArgumentException if new transparency
-   * is less than or equal to 0 or greater than 100.
+   * The AbstractTransformation constructor takes two ints indicating the start of the
+   * transformation animation and the end of the transformation animation. Throws
+   * IllegalArgumentException if start is less than 0 or if end is before start.
+   * Throws IllegalArgumentException if new transparency is less than or equal to 0 or
+   * greater than 100.
    *
    * @param startTime takes an int indicating the start time of the transformation.
    * @param endTime   takes an int indicating the end time of the transformation
@@ -26,7 +27,8 @@ public class ChangeTransparency extends AbstractTransformation {
    *                                  If the new transparency is less than or equal to 0 or
    *                                  greater than 100.
    */
-  public ChangeTransparency(int startTime, int endTime, double newTransparency) throws IllegalArgumentException {
+  public ChangeTransparency(int startTime, int endTime, double newTransparency)
+          throws IllegalArgumentException {
     super(startTime, endTime, TransformationType.CHANGETRANSPARENCY);
 
     if (newTransparency <= 0 || newTransparency > 100) {

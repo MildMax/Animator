@@ -40,7 +40,7 @@ public class Oval extends AbstractShape {
 
     out += "Create oval " + this.name
             + " with center at (" + this.initialCenterX + ","
-            + this.initialCenterY +"), horizontal radius " + this.initialHorizontalRadius
+            + this.initialCenterY + "), horizontal radius " + this.initialHorizontalRadius
             + ", and vertical radius " + this.initialVerticalRadius + " on layer "
             + this.layer + " with color " + this.initialColor.toString()
             + ".\n\n";

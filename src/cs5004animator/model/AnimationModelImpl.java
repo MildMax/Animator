@@ -166,7 +166,8 @@ public class AnimationModelImpl implements AnimationModel {
    *                                  same time of the Transformation t.
    */
   @Override
-  public void addTransformation(String shapeName, Transformation t) throws IllegalArgumentException {
+  public void addTransformation(String shapeName, Transformation t)
+          throws IllegalArgumentException {
     if (shapeName == null || t == null) {
       throw new IllegalArgumentException("Values cannot be null");
     }
