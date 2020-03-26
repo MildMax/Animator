@@ -439,7 +439,7 @@ public class TestShape {
     Move t6 = new Move(45, 50, 151, 201);
     Scale t7 = new Scale(55, 60, 2.0);
 
-    // Test getName()
+    // Test getName().
     assertEquals( "myShape", myShape.getName());
 
     // Test addTransformation() and getTransformationDescription() and getName().

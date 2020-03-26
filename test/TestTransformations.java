@@ -1,6 +1,7 @@
 import org.junit.Test;
 
 import cs5004Animator.*;
+import cs5004Animator.Shapes.*;
 import cs5004Animator.Transformations.*;
 
 /*
