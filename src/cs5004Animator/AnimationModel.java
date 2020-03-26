@@ -30,7 +30,9 @@ public interface AnimationModel {
   void removeShape(String shapeName) throws IllegalArgumentException;
 
   /**
-   * Adds a Transformation to a Shape.
+   * Adds a Transformation to a Shape. Throws IllegalArgumentException if a transformation of the
+   * same type exists with a time frame that overlaps with the time frame of Transformation t or
+   * if the Shape does not exist.
    *
    * @param shapeName the name of the Shape.
    * @param t The transformation to be added.
@@ -41,18 +43,37 @@ public interface AnimationModel {
   void addTransformation(String shapeName, Transformation t) throws IllegalArgumentException;
 
   /**
+   * Removes a Transformation from a Shape according to the name specified by parameter
+   * String shapeName. Throws IllegalArgumentException if the transformation specified by the
+   * type and time frame does not exist or if the shape does not exist. Throws
+   * IllegalArgumentException if the String shapeName or TransformationType type is null.
    *
-   *
-   * @param shapeName
-   * @param type
-   * @param start
-   * @param end
-   * @throws IllegalArgumentException if the shape does not exist.
+   * @param shapeName indicates the name of the Shape the transformation will be added to.
+   * @param type indicates the type of transformation being removed.
+   * @param start indicates the start time of the transformation being removed.
+   * @param end indicates the end time of the transformation being removed.
+   * @throws IllegalArgumentException If the transformation specified by the type and time frame
+   *                                  does not exist.
+   *                                  If the shape does not exist.
    */
-  void removeTransformation(String shapeName, TransformationType type, int start, int end) throws IllegalArgumentException;
+  void removeTransformation(String shapeName, TransformationType type, int start, int end)
+          throws IllegalArgumentException;
 
-  void setSpeed(double speed);
+  /**
+   * Sets the speed the Animation will be played at. Throws IllegalArgumentException if the
+   * specified speed is less than or equal to 0 or greater than 16.
+   *
+   * @param speed indicates the speed the Animation will be played at.
+   * @throws IllegalArgumentException if the specified speed is less than or equal to 0 or
+   *                                  greater than 16.
+   */
+  void setSpeed(double speed) throws IllegalArgumentException;
 
+  /**
+   * Sets the background color of the window.
+   *
+   * @param windowColor indicates the color of the window background.
+   */
   void setBackgroundColor(Color windowColor);
 
 }
