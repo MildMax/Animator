@@ -39,10 +39,8 @@ public class TestShape {
   public void testCircleConstructor() {
     Shape s = new Circle("circle", 1, 25, 30, 35,
             red);
-    assertEquals("Create red circle circle with center at (30, 35) and radius 25 on "
-                    + "layer 1.\n"
-                    + "\n",
-            s.toString());
+    assertEquals("Create circle circle with center at (30,35) and radius 25 on "
+                    + "layer 1 with color 1.0,0.0,0.0.\n\n", s.toString());
   }
 
   /**
@@ -114,8 +112,8 @@ public class TestShape {
   public void testOvalConstructor() {
     Shape o = new Oval("oval", -23, 25, 50,
             -10, -10, red);
-    assertEquals("Create white oval oval with center at (-10, -10), horizontal radius "
-            + "50, and vertical radius 25 on layer -23.\n\n", o.toString());
+    assertEquals("Create oval oval with center at (-10,-10), horizontal radius "
+            + "50, and vertical radius 25 on layer -23 with color 1.0,0.0,0.0.\n\n", o.toString());
   }
 
   /**
@@ -207,8 +205,8 @@ public class TestShape {
   public void testRectangleConstructor() {
     Shape o = new Rectangle("rect", 100, 105, 220,
             -250, 325, red);
-    assertEquals("Create purple rectangle rect with center at (-250, 325), width 220, "
-            + "and height 105 on layer 100.\n\n", o.toString());
+    assertEquals("Create rectangle rect with center at (-250,325), width 220, "
+            + "and height 105 on layer 100 with color 1.0,0.0,0.0.\n\n", o.toString());
   }
 
   /**
@@ -300,8 +298,8 @@ public class TestShape {
   public void testSquareConstructor() {
     Shape s = new Square("square", -1001, 15, 12, 10,
             red);
-    assertEquals("Create blue square square with center at (12, 10) and side 15 on "
-            + "layer -1001.\n\n", s.toString());
+    assertEquals("Create square square with center at (12,10) and side 15 on "
+            + "layer -1001 with color 1.0,0.0,0.0.\n\n", s.toString());
   }
 
   /**
@@ -373,8 +371,8 @@ public class TestShape {
   public void testTriangleConstructor() {
     Shape t = new Triangle("triangle", -1234, 10, 15,
             20, -25, red);
-    assertEquals("Create white triangle triangle with center at (20, -25), width 15, "
-            + "and height 10 on layer -1234.\n\n", t.toString());
+    assertEquals("Create triangle triangle with center at (20,-25), width 15, "
+            + "and height 10 on layer -1234 with color 1.0,0.0,0.0.\n\n", t.toString());
   }
 
   /**
@@ -490,17 +488,17 @@ public class TestShape {
     oval1.addTransformation(t6);
     oval1.addTransformation(t7);
     assertEquals("Oval1 appears at time t=1 and disappears at time t=1000.\n"
-                    + "Oval1 changes to blue from time t=5 to time t=10.\n"
+                    + "Oval1 changes to 1.0,0.0,0.0 from time t=5 to time t=10.\n"
                     + "Oval1 changes to height:150 from time t=15 to time t=20.\n"
                     + "Oval1 changes to transparency 50.0 from time t=25 to time t=30.\n"
                     + "Oval1 changes to width:75 from time t=35 to time t=40.\n"
                     + "Oval1 moves to (151,201) from time t=45 to time t=50.\n"
                     + "Oval1 scales to 2.0 times its current size from time t=55 to time t=60.\n",
             oval1.getTransformationDescription());
-    assertEquals("Create blue oval Oval1 with center at (150, 200), horizontal radius "
-                    + "100, and vertical radius 50 on layer 1.\n\n"
+    assertEquals("Create oval Oval1 with center at (150,200), horizontal radius "
+                    + "100, and vertical radius 50 on layer 1 with color 1.0,0.0,0.0.\n\n"
                     + "Oval1 appears at time t=1 and disappears at time t=1000.\n"
-                    + "Oval1 changes to blue from time t=5 to time t=10.\n"
+                    + "Oval1 changes to 1.0,0.0,0.0 from time t=5 to time t=10.\n"
                     + "Oval1 changes to height:150 from time t=15 to time t=20.\n"
                     + "Oval1 changes to transparency 50.0 from time t=25 to time t=30.\n"
                     + "Oval1 changes to width:75 from time t=35 to time t=40.\n"
@@ -517,8 +515,9 @@ public class TestShape {
     oval1.removeTransformation(t6.getType(), t6.getStart(), t6.getEnd());
     oval1.removeTransformation(t7.getType(), t7.getStart(), t7.getEnd());
     assertEquals("", oval1.getTransformationDescription());
-    assertEquals("Create blue oval Oval1 with center at (150, 200), horizontal radius "
-            + "100, and vertical radius 50 on layer 1.\n\n", oval1.toString());
+    assertEquals("Create oval Oval1 with center at (150,200), horizontal radius "
+            + "100, and vertical radius 50 on layer 1 with color 1.0,0.0,0.0.\n\n",
+            oval1.toString());
   }
 
   /**
@@ -552,7 +551,7 @@ public class TestShape {
     myShape.addTransformation(t6);
     myShape.addTransformation(t7);
     assertEquals("Circle1 appears at time t=1 and disappears at time t=1000.\n"
-                    + "Circle1 changes to blue from time t=5 to time t=10.\n"
+                    + "Circle1 changes to 1.0,0.0,0.0 from time t=5 to time t=10.\n"
                     + "Circle1 changes to height:150 from time t=15 to time t=20.\n"
                     + "Circle1 changes to transparency 50.0 from time t=25 to time t=30.\n"
                     + "Circle1 changes to width:75 from time t=35 to time t=40.\n"
@@ -560,10 +559,10 @@ public class TestShape {
                     + "Circle1 scales to 2.0 times its current size from time t=55 to "
                     + "time t=60.\n",
                       myShape.getTransformationDescription());
-    assertEquals("Create orange circle Circle1 with center at (150, 200) and radius 99 "
-                    + "on layer 1.\n\n"
+    assertEquals("Create circle Circle1 with center at (150,200) and radius 99 "
+                    + "on layer 1 with color 1.0,0.0,0.0.\n\n"
                     + "Circle1 appears at time t=1 and disappears at time t=1000.\n"
-                    + "Circle1 changes to blue from time t=5 to time t=10.\n"
+                    + "Circle1 changes to 1.0,0.0,0.0 from time t=5 to time t=10.\n"
                     + "Circle1 changes to height:150 from time t=15 to time t=20.\n"
                     + "Circle1 changes to transparency 50.0 from time t=25 to time t=30.\n"
                     + "Circle1 changes to width:75 from time t=35 to time t=40.\n"
@@ -581,8 +580,8 @@ public class TestShape {
     myShape.removeTransformation(t6.getType(), t6.getStart(), t6.getEnd());
     myShape.removeTransformation(t7.getType(), t7.getStart(), t7.getEnd());
     assertEquals("", myShape.getTransformationDescription());
-    assertEquals("Create orange circle Circle1 with center at (150, 200) and radius 99 "
-            + "on layer 1.\n\n", myShape.toString());
+    assertEquals("Create circle Circle1 with center at (150,200) and radius 99 "
+            + "on layer 1 with color 1.0,0.0,0.0.\n\n", myShape.toString());
   }
 
   /**
@@ -616,17 +615,17 @@ public class TestShape {
     myShape.addTransformation(t6);
     myShape.addTransformation(t7);
     assertEquals("Rectangle1 appears at time t=1 and disappears at time t=1000.\n"
-            + "Rectangle1 changes to yellow from time t=5 to time t=10.\n"
+            + "Rectangle1 changes to 1.0,0.0,0.0 from time t=5 to time t=10.\n"
             + "Rectangle1 changes to height:150 from time t=15 to time t=20.\n"
             + "Rectangle1 changes to transparency 50.0 from time t=25 to time t=30.\n"
             + "Rectangle1 changes to width:75 from time t=35 to time t=40.\n"
             + "Rectangle1 moves to (151,201) from time t=45 to time t=50.\n"
             + "Rectangle1 scales to 2.0 times its current size from time t=55 to time "
             + "t=60.\n", myShape.getTransformationDescription());
-    assertEquals("Create orange rectangle Rectangle1 with center at (150, 200), width "
-            + "25, and height 25 on layer 1.\n\n"
+    assertEquals("Create rectangle Rectangle1 with center at (150,200), width "
+            + "25, and height 25 on layer 1 with color 1.0,0.0,0.0.\n\n"
             + "Rectangle1 appears at time t=1 and disappears at time t=1000.\n"
-            + "Rectangle1 changes to yellow from time t=5 to time t=10.\n"
+            + "Rectangle1 changes to 1.0,0.0,0.0 from time t=5 to time t=10.\n"
             + "Rectangle1 changes to height:150 from time t=15 to time t=20.\n"
             + "Rectangle1 changes to transparency 50.0 from time t=25 to time t=30.\n"
             + "Rectangle1 changes to width:75 from time t=35 to time t=40.\n"
@@ -643,8 +642,8 @@ public class TestShape {
     myShape.removeTransformation(t6.getType(), t6.getStart(), t6.getEnd());
     myShape.removeTransformation(t7.getType(), t7.getStart(), t7.getEnd());
     assertEquals("", myShape.getTransformationDescription());
-    assertEquals("Create orange rectangle Rectangle1 with center at (150, 200), width "
-            + "25, and height 25 on layer 1.\n\n", myShape.toString());
+    assertEquals("Create rectangle Rectangle1 with center at (150,200), width "
+            + "25, and height 25 on layer 1 with color 1.0,0.0,0.0.\n\n", myShape.toString());
   }
 
   /**
@@ -678,7 +677,7 @@ public class TestShape {
     myShape.addTransformation(t6);
     myShape.addTransformation(t7);
     assertEquals("Square1 appears at time t=1 and disappears at time t=1000.\n"
-                    + "Square1 changes to blue from time t=5 to time t=10.\n"
+                    + "Square1 changes to 1.0,0.0,0.0 from time t=5 to time t=10.\n"
                     + "Square1 changes to height:150 from time t=15 to time t=20.\n"
                     + "Square1 changes to transparency 50.0 from time t=25 to time t=30.\n"
                     + "Square1 changes to width:75 from time t=35 to time t=40.\n"
@@ -686,10 +685,10 @@ public class TestShape {
                     + "Square1 scales to 2.0 times its current size from time t=55 to "
                     + "time t=60.\n",
                       myShape.getTransformationDescription());
-    assertEquals("Create green square Square1 with center at (150, 200) and side 33 on "
-                    + "layer 1.\n\n"
+    assertEquals("Create square Square1 with center at (150,200) and side 33 on "
+                    + "layer 1 with color 1.0,0.0,0.0.\n\n"
                     + "Square1 appears at time t=1 and disappears at time t=1000.\n"
-                    + "Square1 changes to blue from time t=5 to time t=10.\n"
+                    + "Square1 changes to 1.0,0.0,0.0 from time t=5 to time t=10.\n"
                     + "Square1 changes to height:150 from time t=15 to time t=20.\n"
                     + "Square1 changes to transparency 50.0 from time t=25 to time t=30.\n"
                     + "Square1 changes to width:75 from time t=35 to time t=40.\n"
@@ -707,8 +706,8 @@ public class TestShape {
     myShape.removeTransformation(t6.getType(), t6.getStart(), t6.getEnd());
     myShape.removeTransformation(t7.getType(), t7.getStart(), t7.getEnd());
     assertEquals("", myShape.getTransformationDescription());
-    assertEquals("Create green square Square1 with center at (150, 200) and side 33 on "
-                    + "layer 1.\n\n", myShape.toString());
+    assertEquals("Create square Square1 with center at (150,200) and side 33 on "
+                    + "layer 1 with color 1.0,0.0,0.0.\n\n", myShape.toString());
   }
 
   /**
@@ -742,7 +741,7 @@ public class TestShape {
     myShape.addTransformation(t6);
     myShape.addTransformation(t7);
     assertEquals("Triangle1 appears at time t=1 and disappears at time t=1000.\n"
-                    + "Triangle1 changes to blue from time t=5 to time t=10.\n"
+                    + "Triangle1 changes to 1.0,0.0,0.0 from time t=5 to time t=10.\n"
                     + "Triangle1 changes to height:150 from time t=15 to time t=20.\n"
                     + "Triangle1 changes to transparency 50.0 from time t=25 to time t=30.\n"
                     + "Triangle1 changes to width:75 from time t=35 to time t=40.\n"
@@ -750,10 +749,10 @@ public class TestShape {
                     + "Triangle1 scales to 2.0 times its current size from time t=55 to time "
                     + "t=60.\n",
                       myShape.getTransformationDescription());
-    assertEquals("Create purple triangle Triangle1 with center at (150, 200), width 65, "
-                    + "and height 100 on layer 1.\n\n"
+    assertEquals("Create triangle Triangle1 with center at (150,200), width 65, "
+                    + "and height 100 on layer 1 with color 1.0,0.0,0.0.\n\n"
                     + "Triangle1 appears at time t=1 and disappears at time t=1000.\n"
-                    + "Triangle1 changes to blue from time t=5 to time t=10.\n"
+                    + "Triangle1 changes to 1.0,0.0,0.0 from time t=5 to time t=10.\n"
                     + "Triangle1 changes to height:150 from time t=15 to time t=20.\n"
                     + "Triangle1 changes to transparency 50.0 from time t=25 to time t=30.\n"
                     + "Triangle1 changes to width:75 from time t=35 to time t=40.\n"
@@ -771,7 +770,7 @@ public class TestShape {
     myShape.removeTransformation(t6.getType(), t6.getStart(), t6.getEnd());
     myShape.removeTransformation(t7.getType(), t7.getStart(), t7.getEnd());
     assertEquals("", myShape.getTransformationDescription());
-    assertEquals("Create purple triangle Triangle1 with center at (150, 200), width 65, "
-                    + "and height 100 on layer 1.\n\n", myShape.toString());
+    assertEquals("Create triangle Triangle1 with center at (150,200), width 65, "
+                    + "and height 100 on layer 1 with color 1.0,0.0,0.0.\n\n", myShape.toString());
   }
 }
