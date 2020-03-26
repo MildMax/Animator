@@ -32,7 +32,7 @@ public class Square extends AbstractShape {
   public String toString() {
     String out = "";
 
-    out += "Create "  + this.initialColor + " square " + this.name
+    out += "Create "  + this.initialColor.toString() + " square " + this.name
             + " with center at (" + this.initialCenterX + ", "
             + this.initialCenterY +") and side " + this.side + " on layer "
             + this.layer + ".\n\n";

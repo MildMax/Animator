@@ -1,4 +1,5 @@
 import org.junit.Test;
+import org.junit.Before;
 import cs5004animator.model.Color;
 import cs5004animator.model.transformations.Appearance;
 import cs5004animator.model.transformations.ChangeColor;
@@ -15,6 +16,16 @@ import static org.junit.Assert.assertEquals;
  * Create a test class TestTransformations to test all of the transformation classes.
  */
 public class TestTransformations {
+
+  Color blue;
+
+  /**
+   * Initializes color value for blue.
+   */
+  @Before
+  public void setUp() {
+    this.blue = new Color(0.0, 0.0, 1.0);
+  }
 
   /**
    * Test that the Appearance class's constructor works correctly.
@@ -212,7 +223,7 @@ public class TestTransformations {
    */
   @Test(expected = IllegalArgumentException.class)
   public void testChangeColorNegativeStart() {
-    Transformation t = new ChangeColor(-1, 10, Color.RED);
+    Transformation t = new ChangeColor(-1, 10, blue);
     assertEquals("", t.toString());
   }
 
@@ -221,7 +232,7 @@ public class TestTransformations {
    */
   @Test(expected = IllegalArgumentException.class)
   public void testChangeColorNegativeEnd() {
-    Transformation t = new ChangeColor(-10, -5, Color.RED);
+    Transformation t = new ChangeColor(-10, -5, blue);
     assertEquals("", t.toString());
   }
 
@@ -230,7 +241,7 @@ public class TestTransformations {
    */
   @Test(expected = IllegalArgumentException.class)
   public void testChangeColorEndBeforeStart() {
-    Transformation t = new ChangeColor(6, 5, Color.RED);
+    Transformation t = new ChangeColor(6, 5, blue);
     assertEquals("", t.toString());
   }
 
@@ -305,7 +316,7 @@ public class TestTransformations {
    */
   @Test
   public void Test_ChangeColor_All_Valid() {
-    Transformation t1 = new ChangeColor(1, 1000, Color.BLUE);
+    Transformation t1 = new ChangeColor(1, 1000, blue);
     assertEquals(1, t1.getStart());
     assertEquals(1000, t1.getEnd());
     assertEquals(TransformationType.CHANGECOLOR, t1.getType());

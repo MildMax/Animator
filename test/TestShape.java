@@ -1,4 +1,5 @@
 import org.junit.Test;
+import org.junit.Before;
 import cs5004animator.model.Color;
 import cs5004animator.model.shapes.Circle;
 import cs5004animator.model.shapes.Oval;
@@ -21,13 +22,23 @@ import static org.junit.Assert.assertEquals;
  */
 public class TestShape {
 
+  Color red;
+
+  /**
+   * Initializes color red to be used by all classes.
+   */
+  @Before
+  public void setUp() {
+    this.red = new Color(1.0, 0, 0);
+  }
+
   /**
    * Test the circle constructor with valid inputs.
    */
   @Test
   public void testCircleConstructor() {
     Shape s = new Circle("circle", 1, 25, 30, 35,
-            Color.RED);
+            red);
     assertEquals("Create red circle circle with center at (30, 35) and radius 25 on "
                     + "layer 1.\n"
                     + "\n",
@@ -40,7 +51,7 @@ public class TestShape {
   @Test(expected = IllegalArgumentException.class)
   public void testNullNameCircle() {
     Circle shape1 = new Circle(null, 10, 10, 10, 10,
-            Color.YELLOW);
+            red);
     assertEquals("", shape1.toString());
   }
 
@@ -60,7 +71,7 @@ public class TestShape {
   @Test(expected = IllegalArgumentException.class)
   public void testNegativeRadiusHeight() {
     Circle shape1 = new Circle("circle", 10, -5, 10,
-            10, Color.YELLOW);
+            10, red);
     assertEquals("", shape1.toString());
   }
 
@@ -70,7 +81,7 @@ public class TestShape {
   @Test(expected = IllegalArgumentException.class)
   public void testZeroInitialRadius() {
     Circle shape1 = new Circle("circle", 10, 0, 10,
-            10, Color.RED);
+            10, red);
     assertEquals("", shape1.toString());
   }
 
@@ -80,7 +91,7 @@ public class TestShape {
   @Test(expected = IllegalArgumentException.class)
   public void testCircleAddNullTransformation() {
     Shape c = new Circle("Circle", 0, 5, 5, 5,
-            Color.WHITE);
+            red);
     c.addTransformation(null);
     assertEquals("", c.toString());
   }
@@ -91,7 +102,7 @@ public class TestShape {
   @Test(expected = IllegalArgumentException.class)
   public void testCircleRemoveNullTransformation() {
     Shape c = new Circle("Circle", 0, 5, 5, 5,
-            Color.WHITE);
+            red);
     c.removeTransformation(null, 10, 10);
     assertEquals("", c.toString());
   }
@@ -102,7 +113,7 @@ public class TestShape {
   @Test
   public void testOvalConstructor() {
     Shape o = new Oval("oval", -23, 25, 50,
-            -10, -10, Color.WHITE);
+            -10, -10, red);
     assertEquals("Create white oval oval with center at (-10, -10), horizontal radius "
             + "50, and vertical radius 25 on layer -23.\n\n", o.toString());
   }
@@ -113,7 +124,7 @@ public class TestShape {
   @Test(expected = IllegalArgumentException.class)
   public void testNullNameOvalConstructor() {
     Oval shape1 = new Oval(null, 23, 25, 25,
-            25, 25, Color.WHITE);
+            25, 25, red);
     assertEquals("", shape1.toString());
   }
 
@@ -123,7 +134,7 @@ public class TestShape {
   @Test(expected = IllegalArgumentException.class)
   public void testNegativeVerticalRadiusOvalConstructor() {
     Oval shape1 = new Oval("oval", 0, -5, 10,
-            10, 10, Color.WHITE);
+            10, 10, red);
     assertEquals("", shape1.toString());
   }
 
@@ -133,7 +144,7 @@ public class TestShape {
   @Test(expected = IllegalArgumentException.class)
   public void testZeroVerticalRadiusOvalConstructor() {
     Oval shape1 = new Oval("oval", 0, 0, 10,
-            10, 10, Color.WHITE);
+            10, 10, red);
     assertEquals("", shape1.toString());
   }
 
@@ -143,7 +154,7 @@ public class TestShape {
   @Test(expected = IllegalArgumentException.class)
   public void testNegativeHorizontalRadiusOvalConstrucotr() {
     Oval shape1 = new Oval("oval", 0, 10, -10,
-            10, 10, Color.ORANGE);
+            10, 10, red);
     assertEquals("", shape1.toString());
   }
 
@@ -153,7 +164,7 @@ public class TestShape {
   @Test(expected = IllegalArgumentException.class)
   public void testZeroHorizontalRadiusOvalConstructor() {
     Oval shape1 = new Oval("oval", 0, 10, 0,
-            10, 10, Color.PURPLE);
+            10, 10, red);
     assertEquals("", shape1.toString());
   }
 
@@ -173,7 +184,7 @@ public class TestShape {
   @Test(expected = IllegalArgumentException.class)
   public void testOvalAddNullTransformation() {
     Shape c = new Oval("Oval", 0, 5, 5,
-            5, 5, Color.WHITE);
+            5, 5, red);
     c.addTransformation(null);
     assertEquals("", c.toString());
   }
@@ -184,7 +195,7 @@ public class TestShape {
   @Test(expected = IllegalArgumentException.class)
   public void testOvalRemoveNullTransformation() {
     Shape c = new Oval("Oval", 0, 5, 5,
-            5, 5, Color.WHITE);
+            5, 5, red);
     c.removeTransformation(null, 10, 10);
     assertEquals("", c.toString());
   }
@@ -195,7 +206,7 @@ public class TestShape {
   @Test
   public void testRectangleConstructor() {
     Shape o = new Rectangle("rect", 100, 105, 220,
-            -250, 325, Color.PURPLE);
+            -250, 325, red);
     assertEquals("Create purple rectangle rect with center at (-250, 325), width 220, "
             + "and height 105 on layer 100.\n\n", o.toString());
   }
@@ -206,7 +217,7 @@ public class TestShape {
   @Test(expected = IllegalArgumentException.class)
   public void testNullNameRectangleConstructor() {
     Rectangle shape1 = new Rectangle(null, 0, 10, 10,
-            10, 10, Color.GREEN);
+            10, 10, red);
     assertEquals("", shape1.toString());
   }
 
@@ -216,7 +227,7 @@ public class TestShape {
   @Test(expected = IllegalArgumentException.class)
   public void testNegativeHeightRectangleConstructor() {
     Rectangle shape1 = new Rectangle("rect", -5, -5, 10,
-            10, 10, Color.ORANGE);
+            10, 10, red);
     assertEquals("", shape1.toString());
   }
 
@@ -226,7 +237,7 @@ public class TestShape {
   @Test(expected = IllegalArgumentException.class)
   public void testZeroHeightRectangleConstructor() {
     Rectangle shape1 = new Rectangle("rect", 10, 0, 10,
-            10, 10, Color.GREEN);
+            10, 10, red);
     assertEquals("", shape1.toString());
   }
 
@@ -236,7 +247,7 @@ public class TestShape {
   @Test(expected = IllegalArgumentException.class)
   public void testNegativeWidthRectangleConstructor() {
     Rectangle shape1 = new Rectangle("rect", 10, 10, -5,
-            10, 10, Color.RED);
+            10, 10, red);
     assertEquals("", shape1.toString());
   }
 
@@ -246,7 +257,7 @@ public class TestShape {
   @Test(expected = IllegalArgumentException.class)
   public void testZeroWidthRectangleConstructor() {
     Rectangle shape1 = new Rectangle("rect", 10, 10, 0,
-            10, 10, Color.BLACK);
+            10, 10, red);
     assertEquals("", shape1.toString());
   }
 
@@ -266,7 +277,7 @@ public class TestShape {
   @Test(expected = IllegalArgumentException.class)
   public void testRectangleAddNullTransformation() {
     Shape c = new Rectangle("Rectangle", 0, 5, 5,
-            5, 5, Color.WHITE);
+            5, 5, red);
     c.addTransformation(null);
     assertEquals("", c.toString());
   }
@@ -277,7 +288,7 @@ public class TestShape {
   @Test(expected = IllegalArgumentException.class)
   public void testRectangleRemoveNullTransformation() {
     Shape c = new Rectangle("Rectangle", 0, 5, 5,
-            5, 5, Color.WHITE);
+            5, 5, red);
     c.removeTransformation(null, 10, 10);
     assertEquals("", c.toString());
   }
@@ -288,7 +299,7 @@ public class TestShape {
   @Test
   public void testSquareConstructor() {
     Shape s = new Square("square", -1001, 15, 12, 10,
-            Color.BLUE);
+            red);
     assertEquals("Create blue square square with center at (12, 10) and side 15 on "
             + "layer -1001.\n\n", s.toString());
   }
@@ -299,7 +310,7 @@ public class TestShape {
   @Test(expected = IllegalArgumentException.class)
   public void testNullNameSquareConstructor() {
     Shape s = new Square(null, 21, 20, 19, 18,
-            Color.BLACK);
+            red);
     assertEquals("", s.toString());
   }
 
@@ -309,7 +320,7 @@ public class TestShape {
   @Test(expected = IllegalArgumentException.class)
   public void testNegativeSideLengthSquareConstructor() {
     Square shape1 = new Square("square", 21, -5, 15,
-            16, Color.RED);
+            16, red);
     assertEquals("", shape1.toString());
   }
 
@@ -319,7 +330,7 @@ public class TestShape {
   @Test(expected = IllegalArgumentException.class)
   public void testZeroSideLengthSquareConstructor() {
     Square shape1 = new Square("squizzare", 100, 0, 15,
-            20, Color.YELLOW);
+            20, red);
     assertEquals("", shape1.toString());
   }
 
@@ -339,7 +350,7 @@ public class TestShape {
   @Test(expected = IllegalArgumentException.class)
   public void testSquareAddNullTransformation() {
     Shape c = new Square("Square", 0, 5, 5, 5,
-            Color.WHITE);
+            red);
     c.addTransformation(null);
     assertEquals("", c.toString());
   }
@@ -350,7 +361,7 @@ public class TestShape {
   @Test(expected = IllegalArgumentException.class)
   public void testSquareRemoveNullTransformation() {
     Shape c = new Square("Square", 0, 5, 5, 5,
-            Color.WHITE);
+            red);
     c.removeTransformation(null, 10, 10);
     assertEquals("", c.toString());
   }
@@ -361,7 +372,7 @@ public class TestShape {
   @Test
   public void testTriangleConstructor() {
     Shape t = new Triangle("triangle", -1234, 10, 15,
-            20, -25, Color.WHITE);
+            20, -25, red);
     assertEquals("Create white triangle triangle with center at (20, -25), width 15, "
             + "and height 10 on layer -1234.\n\n", t.toString());
   }
@@ -372,7 +383,7 @@ public class TestShape {
   @Test(expected = IllegalArgumentException.class)
   public void testNullNameTriangleConstructor() {
     Triangle shape1 = new Triangle(null, 10, 10, 10,
-            10, 10, Color.WHITE);
+            10, 10, red);
     assertEquals("", shape1.toString());
   }
 
@@ -382,7 +393,7 @@ public class TestShape {
   @Test(expected = IllegalArgumentException.class)
   public void testNegativeHeightTriangleConstructor() {
     Triangle shape1 = new Triangle("triangle", 0, -10, 10,
-            10, 10, Color.WHITE);
+            10, 10, red);
     assertEquals("", shape1.toString());
   }
 
@@ -392,7 +403,7 @@ public class TestShape {
   @Test(expected = IllegalArgumentException.class)
   public void testZeroHeightTriangleConstructor() {
     Triangle shape1 = new Triangle("triangle", -433, 0, 10,
-            10, 10, Color.YELLOW);
+            10, 10, red);
     assertEquals("", shape1.toString());
   }
 
@@ -402,7 +413,7 @@ public class TestShape {
   @Test(expected = IllegalArgumentException.class)
   public void testNegativeWidthTriangleConstructor() {
     Triangle shape1 = new Triangle("triangle", 4, 10, -10,
-            10, 10, Color.BLUE);
+            10, 10, red);
     assertEquals("", shape1.toString());
   }
 
@@ -412,7 +423,7 @@ public class TestShape {
   @Test(expected = IllegalArgumentException.class)
   public void testZeroWidthTriangleConstructor() {
     Triangle shape1 = new Triangle("geometric three-way", 6, 10,
-            0, 10, 10, Color.GREEN);
+            0, 10, 10, red);
     assertEquals("", shape1.toString());
   }
 
@@ -432,7 +443,7 @@ public class TestShape {
   @Test(expected = IllegalArgumentException.class)
   public void testTriangleAddNullTransformation() {
     Shape c = new Triangle("Triangle", 0, 5, 5,5,
-            5, Color.WHITE);
+            5, red);
     c.addTransformation(null);
     assertEquals("", c.toString());
   }
@@ -443,7 +454,7 @@ public class TestShape {
   @Test(expected = IllegalArgumentException.class)
   public void testTriangleRemoveNullTransformation() {
     Shape c = new Triangle("Triangle", 0, 5, 5, 5,
-            5, Color.WHITE);
+            5, red);
     c.removeTransformation(null, 10, 10);
     assertEquals("", c.toString());
   }
@@ -455,11 +466,11 @@ public class TestShape {
   public void Test_Oval_Valid_All() {
     // Test the shape's Constructor.
     Oval oval1 = new Oval("Oval1", 1, 50, 100,
-            150, 200, Color.BLUE);
+            150, 200, red);
 
     // Create some transformations to test adding/removing.
     Appearance t1 = new Appearance(1, 1000);
-    ChangeColor t2 = new ChangeColor(5, 10, Color.BLUE);
+    ChangeColor t2 = new ChangeColor(5, 10, red);
     ChangeHeight t3 = new ChangeHeight(15, 20, 150);
     ChangeTransparency t4 = new ChangeTransparency(25, 30, 50);
     ChangeWidth t5 = new ChangeWidth(35, 40, 75);
@@ -517,11 +528,11 @@ public class TestShape {
   public void Test_Circle_Valid_All() {
     // Test the shape's Constructor.
     Circle myShape = new Circle("Circle1", 1, 99, 150,
-            200, Color.ORANGE);
+            200, red);
 
     // Create some transformations to test adding/removing.
     Appearance t1 = new Appearance(1, 1000);
-    ChangeColor t2 = new ChangeColor(5, 10, Color.BLUE);
+    ChangeColor t2 = new ChangeColor(5, 10, red);
     ChangeHeight t3 = new ChangeHeight(15, 20, 150);
     ChangeTransparency t4 = new ChangeTransparency(25, 30, 50);
     ChangeWidth t5 = new ChangeWidth(35, 40, 75);
@@ -581,11 +592,11 @@ public class TestShape {
   public void Test_Rectangle_Valid_All() {
     // Test the shape's Constructor.
     Rectangle myShape = new Rectangle("Rectangle1", 1, 25, 25,
-            150,200, Color.ORANGE);
+            150,200, red);
 
     // Create some transformations to test adding/removing.
     Appearance t1 = new Appearance(1, 1000);
-    ChangeColor t2 = new ChangeColor(5, 10, Color.YELLOW);
+    ChangeColor t2 = new ChangeColor(5, 10, red);
     ChangeHeight t3 = new ChangeHeight(15, 20, 150);
     ChangeTransparency t4 = new ChangeTransparency(25, 30, 50);
     ChangeWidth t5 = new ChangeWidth(35, 40, 75);
@@ -643,11 +654,11 @@ public class TestShape {
   public void Test_Square_Valid_All() {
     // Test the shape's Constructor.
     Square myShape = new Square("Square1", 1, 33, 150,
-            200, Color.GREEN);
+            200, red);
 
     // Create some transformations to test adding/removing.
     Appearance t1 = new Appearance(1, 1000);
-    ChangeColor t2 = new ChangeColor(5, 10, Color.BLUE);
+    ChangeColor t2 = new ChangeColor(5, 10, red);
     ChangeHeight t3 = new ChangeHeight(15, 20, 150);
     ChangeTransparency t4 = new ChangeTransparency(25, 30, 50);
     ChangeWidth t5 = new ChangeWidth(35, 40, 75);
@@ -707,11 +718,11 @@ public class TestShape {
   public void Test_Triangle_Valid_All() {
     // Test the shape's Constructor.
     Triangle myShape = new Triangle("Triangle1", 1, 100, 65,
-            150,200, Color.PURPLE);
+            150,200, red);
 
     // Create some transformations to test adding/removing.
     Appearance t1 = new Appearance(1, 1000);
-    ChangeColor t2 = new ChangeColor(5, 10, Color.BLUE);
+    ChangeColor t2 = new ChangeColor(5, 10, red);
     ChangeHeight t3 = new ChangeHeight(15, 20, 150);
     ChangeTransparency t4 = new ChangeTransparency(25, 30, 50);
     ChangeWidth t5 = new ChangeWidth(35, 40, 75);

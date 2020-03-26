@@ -1,4 +1,5 @@
 import org.junit.Test;
+import org.junit.Before;
 
 import cs5004animator.model.AnimationModel;
 import cs5004animator.model.AnimationModelImpl;
@@ -10,6 +11,13 @@ import cs5004animator.model.transformations.TransformationType;
 import static org.junit.Assert.assertEquals;
 
 public class TestAnimationModelImpl {
+
+  Color green;
+
+  @Before
+  public void setUp() {
+    this.green = new Color(0.0, 1.0, 0.0);
+  }
 
   @Test
   public void testAnimationModelImplNoArgConstructor() {
@@ -84,7 +92,7 @@ public class TestAnimationModelImpl {
 
     assertEquals(test, m.toString());
 
-    m.addShape(new Circle("C", 0, 10, 0, 0, Color.WHITE));
+    m.addShape(new Circle("C", 0, 10, 0, 0, green));
 
     test = "Create window with bottom left corner(-500,-500) "
             + "top right corner (500,500) with background color white and speed 1.0.\n\n"
@@ -97,8 +105,8 @@ public class TestAnimationModelImpl {
   public void testAnimationModelAddExistingShape() {
     AnimationModel m = new AnimationModelImpl();
 
-    m.addShape(new Circle("circle", 0, 5, 10, 10, Color.YELLOW));
-    m.addShape(new Circle("circle", 0, 5, 10, 10, Color.YELLOW));
+    m.addShape(new Circle("circle", 0, 5, 10, 10, green));
+    m.addShape(new Circle("circle", 0, 5, 10, 10, green));
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -119,7 +127,7 @@ public class TestAnimationModelImpl {
   public void testAddTransformationNullName() {
     AnimationModel m = new AnimationModelImpl();
 
-    m.addShape(new Circle("circle", 0, 5, 10, 10, Color.WHITE));
+    m.addShape(new Circle("circle", 0, 5, 10, 10, green));
     m.addTransformation(null, new Appearance(10, 15));
   }
 
@@ -127,7 +135,7 @@ public class TestAnimationModelImpl {
   public void testAddTransformationNullTrans() {
     AnimationModel m = new AnimationModelImpl();
 
-    m.addShape(new Circle("circle", 0, 5, 10, 10, Color.WHITE));
+    m.addShape(new Circle("circle", 0, 5, 10, 10, green));
     m.addTransformation("circle", null);
   }
 
@@ -135,7 +143,7 @@ public class TestAnimationModelImpl {
   public void testAddTransformationExistingTransStart() {
     AnimationModel m = new AnimationModelImpl();
 
-    m.addShape(new Circle("circle", 0, 5, 10, 10, Color.WHITE));
+    m.addShape(new Circle("circle", 0, 5, 10, 10, green));
     m.addTransformation("circle", new Appearance(10, 20));
     m.addTransformation("circle", new Appearance(15, 25));
   }
@@ -144,7 +152,7 @@ public class TestAnimationModelImpl {
   public void testAddTransformationExistingTransSAmeStart() {
     AnimationModel m = new AnimationModelImpl();
 
-    m.addShape(new Circle("circle", 0, 5, 10, 10, Color.WHITE));
+    m.addShape(new Circle("circle", 0, 5, 10, 10, green));
     m.addTransformation("circle", new Appearance(10, 20));
     m.addTransformation("circle", new Appearance(10, 25));
   }
@@ -153,7 +161,7 @@ public class TestAnimationModelImpl {
   public void testAddTransformationExistingTransEnd() {
     AnimationModel m = new AnimationModelImpl();
 
-    m.addShape(new Circle("circle", 0, 5, 10, 10, Color.WHITE));
+    m.addShape(new Circle("circle", 0, 5, 10, 10, green));
     m.addTransformation("circle", new Appearance(10, 20));
     m.addTransformation("circle", new Appearance(5, 15));
   }
@@ -162,7 +170,7 @@ public class TestAnimationModelImpl {
   public void testAddTransformationExistingTransSameEnd() {
     AnimationModel m = new AnimationModelImpl();
 
-    m.addShape(new Circle("circle", 0, 5, 10, 10, Color.WHITE));
+    m.addShape(new Circle("circle", 0, 5, 10, 10, green));
     m.addTransformation("circle", new Appearance(10, 20));
     m.addTransformation("circle", new Appearance(5, 20));
   }
@@ -171,7 +179,7 @@ public class TestAnimationModelImpl {
   public void testAddTransformationExistingTransOutside() {
     AnimationModel m = new AnimationModelImpl();
 
-    m.addShape(new Circle("circle", 0, 5, 10, 10, Color.WHITE));
+    m.addShape(new Circle("circle", 0, 5, 10, 10, green));
     m.addTransformation("circle", new Appearance(10, 20));
     m.addTransformation("circle", new Appearance(5, 25));
   }
@@ -180,7 +188,7 @@ public class TestAnimationModelImpl {
   public void testAddTransformationNonExistentShape() {
     AnimationModel m = new AnimationModelImpl();
 
-    m.addShape(new Circle("circle", 0, 5, 10, 10, Color.WHITE));
+    m.addShape(new Circle("circle", 0, 5, 10, 10, green));
     m.addTransformation("square", new Appearance(10, 20));
   }
 
@@ -188,7 +196,7 @@ public class TestAnimationModelImpl {
   public void testRemoveTransformationNullShapeName() {
     AnimationModel m = new AnimationModelImpl();
 
-    m.addShape(new Circle("circle", 0, 5, 10, 10, Color.WHITE));
+    m.addShape(new Circle("circle", 0, 5, 10, 10, green));
     m.addTransformation("circle", new Appearance(10, 20));
     m.removeTransformation(null, TransformationType.APPEARANCE, 10, 20);
   }
@@ -197,7 +205,7 @@ public class TestAnimationModelImpl {
   public void testRemoveTransformationNullTransType() {
     AnimationModel m = new AnimationModelImpl();
 
-    m.addShape(new Circle("circle", 0, 5, 10, 10, Color.WHITE));
+    m.addShape(new Circle("circle", 0, 5, 10, 10, green));
     m.addTransformation("circle", new Appearance(10, 20));
     m.removeTransformation("circle", null, 10, 20);
   }
@@ -206,7 +214,7 @@ public class TestAnimationModelImpl {
   public void testRemoveTransformationShapeNonExistent() {
     AnimationModel m = new AnimationModelImpl();
 
-    m.addShape(new Circle("circle", 0, 5, 10, 10, Color.WHITE));
+    m.addShape(new Circle("circle", 0, 5, 10, 10, green));
     m.addTransformation("circle", new Appearance(10, 20));
     m.removeTransformation("square", TransformationType.APPEARANCE, 10, 20);
   }
@@ -215,7 +223,7 @@ public class TestAnimationModelImpl {
   public void testRemoveTransformationNonExistentType() {
     AnimationModel m = new AnimationModelImpl();
 
-    m.addShape(new Circle("circle", 0, 5, 10, 10, Color.WHITE));
+    m.addShape(new Circle("circle", 0, 5, 10, 10, green));
     m.addTransformation("circle", new Appearance(10, 20));
     m.removeTransformation("circle", TransformationType.MOVE, 10, 20);
   }
@@ -224,7 +232,7 @@ public class TestAnimationModelImpl {
   public void testRemoveTransformationNonExistentStart() {
     AnimationModel m = new AnimationModelImpl();
 
-    m.addShape(new Circle("circle", 0, 5, 10, 10, Color.WHITE));
+    m.addShape(new Circle("circle", 0, 5, 10, 10, green));
     m.addTransformation("circle", new Appearance(10, 20));
     m.removeTransformation("circle", TransformationType.APPEARANCE, 5, 20);
   }
@@ -233,7 +241,7 @@ public class TestAnimationModelImpl {
   public void testRemoveTransformationNonExistentEnd() {
     AnimationModel m = new AnimationModelImpl();
 
-    m.addShape(new Circle("circle", 0, 5, 10, 10, Color.WHITE));
+    m.addShape(new Circle("circle", 0, 5, 10, 10, green));
     m.addTransformation("circle", new Appearance(10, 20));
     m.removeTransformation("circle", TransformationType.APPEARANCE, 10, 25);
   }

@@ -33,7 +33,7 @@ public class Circle extends AbstractShape {
   public String toString() {
     String out = "";
 
-    out += "Create "  + this.initialColor + " circle " + this.name
+    out += "Create "  + this.initialColor.toString() + " circle " + this.name
             + " with center at (" + this.initialCenterX + ", "
             + this.initialCenterY +") and radius " + this.radius
             + " on layer " + this.layer + ".\n\n";

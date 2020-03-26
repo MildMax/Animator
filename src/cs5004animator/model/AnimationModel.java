@@ -115,4 +115,11 @@ public interface AnimationModel {
    */
   void setBackgroundColor(Color windowColor);
 
+  /**
+   * Returns the color of the window.
+   *
+   * @return the color of the window.
+   */
+  Color getBackgroundColor();
+
 }

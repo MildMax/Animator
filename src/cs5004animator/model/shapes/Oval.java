@@ -38,7 +38,7 @@ public class Oval extends AbstractShape {
   public String toString() {
     String out = "";
 
-    out += "Create "  + this.initialColor + " oval " + this.name
+    out += "Create "  + this.initialColor.toString() + " oval " + this.name
             + " with center at (" + this.initialCenterX + ", "
             + this.initialCenterY +"), horizontal radius " + this.initialHorizontalRadius
             + ", and vertical radius " + this.initialVerticalRadius + " on layer "

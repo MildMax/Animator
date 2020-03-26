@@ -290,6 +290,16 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   /**
+   * Returns the background color of the window.
+   *
+   * @return the background color of the window.
+   */
+  @Override
+  public Color getBackgroundColor() {
+    return  this.windowColor;
+  }
+
+  /**
    * Returns a formatted String indicating the size of the window, the color of the window, the
    * speed of the Animator, and a list of shapes and their respective instructions in
    * chronological order.

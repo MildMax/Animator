@@ -31,7 +31,7 @@ public class Triangle extends AbstractShape {
   public String toString() {
     String out = "";
 
-    out += "Create "  + this.initialColor + " triangle " + this.name
+    out += "Create "  + this.initialColor.toString() + " triangle " + this.name
             + " with center at (" + this.initialCenterX + ", "
             + this.initialCenterY +"), width " + this.initialWidth
             + ", and height " + this.initialHeight + " on layer "
