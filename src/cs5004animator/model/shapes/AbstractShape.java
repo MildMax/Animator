@@ -91,18 +91,21 @@ public abstract class AbstractShape implements Shape {
   }
 
   /**
-   * Remove a transformation from the shape's transformation list.
+   * Remove a transformation from the shape's transformation list. Throws an
+   * IllegalArgumentException of the transformation does not exist or if the
+   * Transformation type is null
    *
    * @param type is the type of transformation.
    * @param start is the start time of the transformation.
    * @param end is the end time of the transformation.
    * @throws IllegalArgumentException if transformation is null.
+   *                                  If the transformation does not exist.
    *
    */
   @Override
   public void removeTransformation(TransformationType type, int start, int end) {
     if (type == null) {
-      throw new IllegalArgumentException("Transformation cannot be null");
+      throw new IllegalArgumentException("Transformation type cannot be null");
     }
     for (Transformation t : transformationList) {
       if (t.getType() == type && t.getStart() == start && t.getEnd() == end) {
@@ -150,12 +153,16 @@ public abstract class AbstractShape implements Shape {
   }
 
   /**
-   * Return the list of all transformations on the shape as a list.
+   * Return a  list of all transformations on the shape.
    *
    * @return a list of all transformations on the shape.
    */
   public List<Transformation> getTransformationList() {
-    return this.transformationList;
+    List<Transformation> tList = new ArrayList<>();
+    for (Transformation t : this.transformationList) {
+      tList.add(t);
+    }
+    return tList;
   }
 
   /**

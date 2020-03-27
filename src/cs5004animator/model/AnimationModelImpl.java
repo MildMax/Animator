@@ -48,6 +48,7 @@ public class AnimationModelImpl implements AnimationModel {
   private final int windowHeight;
   private final Color windowColor;
 
+  private int ticks;
   private Map<String, Shape> shapeMap;
 
   /**
@@ -103,7 +104,8 @@ public class AnimationModelImpl implements AnimationModel {
     this.windowWidth = windowWidth;
     this.windowHeight = windowHeight;
     this.windowColor = windowColor;
-    shapeMap = new HashMap<>();
+    this.shapeMap = new HashMap<>();
+    this.ticks = 0;
   }
 
   /**
@@ -170,6 +172,9 @@ public class AnimationModelImpl implements AnimationModel {
     }
     Shape shape = findShape(shapeName);
     shape.addTransformation(t);
+    if (t.getEnd() > this.ticks) {
+      this.ticks = t.getEnd();
+    }
   }
 
   /**
@@ -194,6 +199,9 @@ public class AnimationModelImpl implements AnimationModel {
     }
     Shape shape = findShape(shapeName);
     shape.removeTransformation(type, start, end);
+    if (end == this.ticks) {
+      this.ticks = findTotalTicks();
+    }
   }
 
   /**
@@ -235,15 +243,7 @@ public class AnimationModelImpl implements AnimationModel {
    */
   @Override
   public int getTotalTicks() {
-    List<Transformation> tList = getTransformations();
-
-    if (tList.size() == 0) {
-      return 0;
-    }
-    else {
-      tList.sort(Comparator.comparing(Transformation::getEnd));
-      return tList.get(tList.size() - 1).getEnd();
-    }
+    return this.ticks;
   }
 
   /**
@@ -258,8 +258,9 @@ public class AnimationModelImpl implements AnimationModel {
    */
   @Override
   public List<Shape> getShapesAtTick(int tick) throws IllegalArgumentException {
-    if (tick < 0) {
-      throw new IllegalArgumentException("tick cannot be less than 0");
+    if (tick < 0 || tick > this.ticks) {
+      throw new IllegalArgumentException("tick cannot be less than 0 or greater than total"
+              + " number of ticks");
     }
     /*
     This method body will be filled out when we know more about the controller
@@ -327,5 +328,17 @@ public class AnimationModelImpl implements AnimationModel {
     }
 
     return shape;
+  }
+
+  private int findTotalTicks() {
+    List<Transformation> tList = getTransformations();
+
+    if (tList.size() == 0) {
+      return 0;
+    }
+    else {
+      tList.sort(Comparator.comparing(Transformation::getEnd));
+      return tList.get(tList.size() - 1).getEnd();
+    }
   }
 }

@@ -6,9 +6,9 @@ package cs5004animator.model;
  */
 public class Color {
 
-  private double r;
-  private double g;
-  private double b;
+  private final double r;
+  private final double g;
+  private final double b;
 
   /**
    * Takes three doubles indicating the Red, Green, and Blue color values on a scale from 0.0

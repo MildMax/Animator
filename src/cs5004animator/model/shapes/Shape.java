@@ -11,20 +11,27 @@ import cs5004animator.model.transformations.TransformationType;
 public interface Shape {
 
   /**
-   * Add a transformation to the shape's transformation list.
+   * Add a transformation to the shape's transformation list. Throws an
+   * IllegalArgumentException if another Transformation of the same type already
+   * exists in the same time frame or if the Transformation is null.
    *
    * @param t is the transformation to be added.
    * @throws IllegalArgumentException if transformation is null.
+   *                                  If another transformation of the same type already
+   *                                  exists in the same time frame.
    */
   void addTransformation(Transformation t);
 
   /**
-   * Remove a transformation from the shape's transformation list.
+   * Remove a transformation from the shape's transformation list. Throws an
+   * IllegalArgumentException if the Transformation corresponding to the type
+   * and time from does not exist or if the TransformationType is null.
    *
    * @param type is the type of transformation.
    * @param start is the start time of the transformation.
    * @param end is the end time of the transformation.
    * @throws IllegalArgumentException if transformation is null.
+   *                                  If the transformation does not exist.
    *
    */
   void removeTransformation(TransformationType type, int start, int end);
