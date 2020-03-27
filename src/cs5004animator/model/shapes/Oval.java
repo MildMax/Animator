@@ -34,6 +34,11 @@ public class Oval extends AbstractShape {
     this.initialHorizontalRadius = initialHorizontalRadius;
   }
 
+  /**
+   * Return the full description of the shape and its transformations.
+   *
+   * @return the full description of the shape and its transformations.
+   */
   @Override
   public String toString() {
     String out = "";

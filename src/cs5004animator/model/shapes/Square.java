@@ -28,6 +28,11 @@ public class Square extends AbstractShape {
     this.side = side;
   }
 
+  /**
+   * Return the full description of the shape and its transformations.
+   *
+   * @return the full description of the shape and its transformations.
+   */
   @Override
   public String toString() {
     String out = "";

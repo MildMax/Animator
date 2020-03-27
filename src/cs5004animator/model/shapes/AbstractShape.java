@@ -21,7 +21,6 @@ public abstract class AbstractShape implements Shape {
   protected final int initialCenterY;
   protected final Color initialColor;
   protected final double initialTransparency;
-
   private final ShapeType type;
   private List<Transformation> transformationList;
 
@@ -35,9 +34,12 @@ public abstract class AbstractShape implements Shape {
    * @param initialCenterX is the X coordinate of the center of the shape.
    * @param initialCenterY is the Y coordinate of the center of the shape.
    * @param initialColor is the color of the shape.
+   * @param type is the type of shape.
    *
    * @throws IllegalArgumentException if initialHeight <= 0.
    * @throws IllegalArgumentException if initialWidth <= 0.
+   * @throws IllegalArgumentException if name is null.
+   * @throws IllegalArgumentException if initialColor is null.
    *
    */
   AbstractShape(String name, int layer, int initialHeight, int initialWidth, int initialCenterX,
@@ -49,7 +51,7 @@ public abstract class AbstractShape implements Shape {
       throw new IllegalArgumentException("Initial width must be greater than zero.");
     }
     else if (name == null) {
-      throw new IllegalArgumentException("String name cannot be null");
+      throw new IllegalArgumentException("Shape name cannot be null");
     }
     else if (initialColor == null) {
       throw new IllegalArgumentException("Color initialColor cannot be null");
@@ -67,6 +69,12 @@ public abstract class AbstractShape implements Shape {
     transformationList = new ArrayList<>();
   }
 
+  /**
+   * Add a transformation to the shape's transformation list.
+   *
+   * @param t is the transformation to be added.
+   * @throws IllegalArgumentException if transformation is null.
+   */
   @Override
   public void addTransformation(Transformation t) {
     if (t == null) {
@@ -82,6 +90,15 @@ public abstract class AbstractShape implements Shape {
     transformationList.add(t);
   }
 
+  /**
+   * Remove a transformation from the shape's transformation list.
+   *
+   * @param type is the type of transformation.
+   * @param start is the start time of the transformation.
+   * @param end is the end time of the transformation.
+   * @throws IllegalArgumentException if transformation is null.
+   *
+   */
   @Override
   public void removeTransformation(TransformationType type, int start, int end) {
     if (type == null) {
@@ -96,16 +113,31 @@ public abstract class AbstractShape implements Shape {
     throw new IllegalArgumentException("That transformation does not exist");
   }
 
+  /**
+   * Return the name of the shape.
+   *
+   * @return the name of the shape.
+   */
   @Override
   public String getName() {
     return this.name;
   }
 
+  /**
+   * Return the type of shape.
+   *
+   * @return the type of shape.
+   */
   @Override
   public ShapeType getType() {
     return this.type;
   }
 
+  /**
+   * Return the list of all transformations on the shape as a string.
+   *
+   * @return all transformations on the string.
+   */
   @Override
   public String getTransformationDescription() {
     String out = "";
@@ -114,14 +146,27 @@ public abstract class AbstractShape implements Shape {
     for (Transformation t : transformationList) {
       out += name + " " + t.toString() + "\n";
     }
-
     return out;
   }
 
+  /**
+   * Return the list of all transformations on the shape as a list.
+   *
+   * @return a list of all transformations on the shape.
+   */
   public List<Transformation> getTransformationList() {
     return this.transformationList;
   }
 
+  /**
+   * Confirm that a set of start and end times are valid.
+   *
+   * @param currStart is the current start time.
+   * @param currEnd is the current end time.
+   * @param newStart is the new start time.
+   * @param newEnd is the new end time.
+   * @return true if the combination of times is valid, else false.
+   */
   private boolean checkTimes(int currStart, int currEnd, int newStart, int newEnd) {
     return (newStart >= currStart && newStart <= currEnd)
             || (newEnd >= currStart && newEnd <= currEnd)

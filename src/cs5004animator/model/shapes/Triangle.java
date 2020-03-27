@@ -27,6 +27,11 @@ public class Triangle extends AbstractShape {
             ShapeType.TRIANGLE);
   }
 
+  /**
+   * Return the full description of the shape and its transformations.
+   *
+   * @return the full description of the shape and its transformations.
+   */
   @Override
   public String toString() {
     String out = "";
