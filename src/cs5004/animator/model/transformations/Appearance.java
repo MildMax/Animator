@@ -1,4 +1,4 @@
-package cs5004animator.model.transformations;
+package cs5004.animator.model.transformations;
 
 /**
  * The Appearance class holds the values at which an object appears on screen and when

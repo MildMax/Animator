@@ -1,7 +1,7 @@
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
-import cs5004animator.model.Color;
+import cs5004.animator.model.Color;
 
 /**
  * This class tests the Color class in cs5004animator.model.color.

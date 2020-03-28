@@ -1,4 +1,4 @@
-package cs5004animator.model.transformations;
+package cs5004.animator.model.transformations;
 
 /**
  * The AbstractTransformation class implements the Transformation interface and defines

@@ -1,4 +1,4 @@
-package cs5004animator.model;
+package cs5004.animator.model;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -6,9 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import cs5004animator.model.shapes.Shape;
-import cs5004animator.model.transformations.Transformation;
-import cs5004animator.model.transformations.TransformationType;
+import cs5004.animator.model.shapes.Shape;
+import cs5004.animator.model.transformations.Transformation;
+import cs5004.animator.model.transformations.TransformationType;
 
 /**
  * The AnimationModelImpl class holds a series of Shapes and their transformations. Supports

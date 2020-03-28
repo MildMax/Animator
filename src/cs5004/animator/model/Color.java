@@ -1,4 +1,4 @@
-package cs5004animator.model;
+package cs5004.animator.model;
 
 /**
  * The Color enum indicates a Color that a Shape can take on. Provides a toString() method that

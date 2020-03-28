@@ -1,9 +1,9 @@
-package cs5004animator.model.shapes;
+package cs5004.animator.model.shapes;
 
 import java.util.List;
 
-import cs5004animator.model.transformations.Transformation;
-import cs5004animator.model.transformations.TransformationType;
+import cs5004.animator.model.transformations.Transformation;
+import cs5004.animator.model.transformations.TransformationType;
 
 /**
  * Create an interface that creates a generic shape.

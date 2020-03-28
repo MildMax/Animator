@@ -1,4 +1,4 @@
-package cs5004animator.model.shapes;
+package cs5004.animator.model.shapes;
 
 /**
  * The shapeType class holds enum values that correspond to shapes that

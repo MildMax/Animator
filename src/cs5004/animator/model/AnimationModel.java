@@ -1,10 +1,10 @@
-package cs5004animator.model;
+package cs5004.animator.model;
 
 import java.util.List;
 
-import cs5004animator.model.shapes.Shape;
-import cs5004animator.model.transformations.Transformation;
-import cs5004animator.model.transformations.TransformationType;
+import cs5004.animator.model.shapes.Shape;
+import cs5004.animator.model.transformations.Transformation;
+import cs5004.animator.model.transformations.TransformationType;
 
 /**
  * The AnimationModel interface declares methods that must be implemented to add shapes,

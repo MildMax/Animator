@@ -1,12 +1,12 @@
-package cs5004animator.model.shapes;
+package cs5004.animator.model.shapes;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import cs5004animator.model.Color;
-import cs5004animator.model.transformations.Transformation;
-import cs5004animator.model.transformations.TransformationType;
+import cs5004.animator.model.Color;
+import cs5004.animator.model.transformations.Transformation;
+import cs5004.animator.model.transformations.TransformationType;
 
 /**
  * Create an abstract class called AbstractShape that is a generic shape. Contains methods
