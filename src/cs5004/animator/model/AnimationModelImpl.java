@@ -6,17 +6,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import cs5004.animator.model.shapes.*;
-import cs5004.animator.model.transformations.*;
-import cs5004.animator.model.*;
-
 import cs5004.animator.model.shapes.Shape;
-import cs5004.animator.model.shapes.AbstractShape;
+import old.AbstractShape;
 import cs5004.animator.model.transformations.Transformation;
-import cs5004.animator.model.transformations.TransformationType;
+import old.AbstractTransformation;
+import old.ChangeColor;
+import old.ChangeHeight;
+import old.ChangeWidth;
+import old.Color;
+import old.Move;
+import old.TransformationType;
 
 import cs5004.animator.util.AnimationBuilder;
-import cs5004.animator.model.Color;
+import old.Circle;
+import old.Ellipse;
+import old.Oval;
+import old.Rectangle;
+import old.Square;
+import old.Triangle;
 
 /**
  * The AnimationModelImpl class holds a series of Shapes and their transformations. Supports

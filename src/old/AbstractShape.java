@@ -1,12 +1,12 @@
-package cs5004.animator.model.shapes;
+package old;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import cs5004.animator.model.Color;
+import cs5004.animator.model.shapes.Shape;
+import cs5004.animator.model.shapes.ShapeType;
 import cs5004.animator.model.transformations.Transformation;
-import cs5004.animator.model.transformations.TransformationType;
 
 /**
  * Create an abstract class called AbstractShape that is a generic shape. Contains methods
@@ -22,7 +22,7 @@ public abstract class AbstractShape implements Shape {
   private  int r;
   private  int g;
   private  int b;
-  private final ShapeType type;
+  private ShapeType type;
   private List<Transformation> transformationList;
   private int appearTime;
   private int disappearTime;
@@ -31,45 +31,17 @@ public abstract class AbstractShape implements Shape {
    * Create a new instance of AbstractShape.
    *
    * @param name is the unique name of the shape.
-   * @param layer is the order (back to front) that the shape appears relative to the other shapes.
-   * @param initialHeight is the height of the shape.
-   * @param initialWidth is the width of the shape.
-   * @param initialCenterX is the X coordinate of the center of the shape.
-   * @param initialCenterY is the Y coordinate of the center of the shape.
-   * @param initialColor is the color of the shape.
-   * @param type is the type of shape.
-   *
    * @throws IllegalArgumentException if initialHeight <= 0.
    * @throws IllegalArgumentException if initialWidth <= 0.
    * @throws IllegalArgumentException if name is null.
    * @throws IllegalArgumentException if initialColor is null.
    *
    */
-  AbstractShape(String name, int layer, int initialHeight, int initialWidth, int initialCenterX,
-                int initialCenterY, int r, int g, int b, ShapeType type) {
-    if (initialHeight <= 0) {
-      throw new IllegalArgumentException("Initial height must be greater than zero.");
-    }
-    else if (initialWidth <= 0) {
-      throw new IllegalArgumentException("Initial width must be greater than zero.");
-    }
-    else if (name == null) {
+  AbstractShape(String name, ShapeType type) {
+    if (name == null) {
       throw new IllegalArgumentException("Shape name cannot be null");
     }
-    else if (r < 0 || g < 0 || b < 0 || r > 255 || g > 255 || b > 255) {
-      throw new IllegalArgumentException("Color initialColor cannot be null");
-    }
-
     this.name = name;
-    this.layer = layer;
-    this.height = initialHeight;
-    this.width = initialWidth;
-    this.centerX = initialCenterX;
-    this.centerY = initialCenterY;
-    this.r = r;
-    this.g = g;
-    this.b = b;
-
     this.type = type;
     transformationList = new ArrayList<>();
   }

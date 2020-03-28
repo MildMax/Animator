@@ -5,20 +5,20 @@ import java.util.List;
 
 import cs5004.animator.model.AnimationModel;
 import cs5004.animator.model.AnimationModelImpl;
-import cs5004.animator.model.Color;
-import cs5004.animator.model.shapes.Circle;
-import cs5004.animator.model.shapes.Oval;
-import cs5004.animator.model.shapes.Rectangle;
+import old.Color;
+import old.Circle;
+import old.Oval;
+import old.Rectangle;
 import cs5004.animator.model.shapes.Shape;
-import cs5004.animator.model.shapes.Square;
-import cs5004.animator.model.shapes.Triangle;
-import cs5004.animator.model.transformations.ChangeColor;
-import cs5004.animator.model.transformations.ChangeHeight;
-import cs5004.animator.model.transformations.ChangeTransparency;
-import cs5004.animator.model.transformations.ChangeWidth;
-import cs5004.animator.model.transformations.Move;
-import cs5004.animator.model.transformations.Scale;
-import cs5004.animator.model.transformations.TransformationType;
+import old.Square;
+import old.Triangle;
+import old.ChangeColor;
+import old.ChangeHeight;
+import old.ChangeTransparency;
+import old.ChangeWidth;
+import old.Move;
+import old.Scale;
+import old.TransformationType;
 
 import static org.junit.Assert.assertEquals;
 

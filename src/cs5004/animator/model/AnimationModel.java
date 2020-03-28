@@ -4,7 +4,8 @@ import java.util.List;
 
 import cs5004.animator.model.shapes.Shape;
 import cs5004.animator.model.transformations.Transformation;
-import cs5004.animator.model.transformations.TransformationType;
+import old.Color;
+import old.TransformationType;
 
 /**
  * The AnimationModel interface declares methods that must be implemented to add shapes,

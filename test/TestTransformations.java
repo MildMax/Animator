@@ -1,14 +1,14 @@
 import org.junit.Test;
 import org.junit.Before;
-import cs5004.animator.model.Color;
-import cs5004.animator.model.transformations.ChangeColor;
-import cs5004.animator.model.transformations.ChangeHeight;
-import cs5004.animator.model.transformations.ChangeTransparency;
-import cs5004.animator.model.transformations.ChangeWidth;
-import cs5004.animator.model.transformations.Move;
-import cs5004.animator.model.transformations.Scale;
+import old.Color;
+import old.ChangeColor;
+import old.ChangeHeight;
+import old.ChangeTransparency;
+import old.ChangeWidth;
+import old.Move;
+import old.Scale;
 import cs5004.animator.model.transformations.Transformation;
-import cs5004.animator.model.transformations.TransformationType;
+import old.TransformationType;
 import static org.junit.Assert.assertEquals;
 
 /**

@@ -3,7 +3,7 @@ package cs5004.animator.model.shapes;
 import java.util.List;
 
 import cs5004.animator.model.transformations.Transformation;
-import cs5004.animator.model.transformations.TransformationType;
+import old.TransformationType;
 
 /**
  * Create an interface that creates a generic shape.
@@ -22,6 +22,7 @@ public interface Shape {
    */
   void addTransformation(Transformation t);
 
+  /*
   /**
    * Remove a transformation from the shape's transformation list. Throws an
    * IllegalArgumentException if the Transformation corresponding to the type
@@ -33,8 +34,9 @@ public interface Shape {
    * @throws IllegalArgumentException if transformation is null.
    *                                  If the transformation does not exist.
    *
-   */
+   *
   void removeTransformation(TransformationType type, int start, int end);
+   */
 
   /**
    * Return the name of the shape.
