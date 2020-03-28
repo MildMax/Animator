@@ -449,20 +449,59 @@ public class AnimationModelImpl implements AnimationModel {
 
     @Override
     public AnimationBuilder<AnimationModel> declareShape(String name, String type) {
-      if (type.equals("rectangle")) {
-        AbstractShape s = new Rectangle(name);
-      } else if (type.equals("ellipse")) {
-        AbstractShape s = new Ellipse(name);
-      } else if () {
-
+      AbstractShape s = null;
+      switch (type) {
+        case "circle": {
+          s = new Circle(name);
+          break;
+        }
+        case "ellipse": {
+          s = new Ellipse(name);
+          break;
+        }
+        case "oval": {
+          s = new Oval(name);
+          break;
+        }
+        case "rectangle": {
+          s = new Rectangle(name);
+          break;
+        }
+        case "square": {
+          s = new Square(name);
+          break;
+        }
+        case "triangle": {
+          s = new Triangle(name);
+          break;
+        }
+        default:
+          throw new IllegalArgumentException("Not a recognized type of shape.");
       }
-      this.m.addShape(name, );
-      return null;
+      this.m.addShape(s);
+      return this;
     }
 
     @Override
-    public AnimationBuilder<AnimationModel> addMotion(String name, int t1, int x1, int y1, int w1, int h1, int r1, int g1, int b1, int t2, int x2, int y2, int w2, int h2, int r2, int g2, int b2) {
-      return null;
+    public AnimationBuilder<AnimationModel> addMotion(String name, int t1, int x1, int y1, int w1,
+                                                      int h1, int r1, int g1, int b1, int t2,
+                                                      int x2, int y2, int w2, int h2, int r2,
+                                                      int g2, int b2) {
+      AbstractTransformation t = null;
+      if (x1 != x2 || y1 != y2) {
+	      t = new Move(t1, t2, int newX, int newY);
+      }
+      if (h1 != h2) {
+        t = new ChangeHeight();
+      }
+      if (w1 != w2) {
+        t = new ChangeWidth();
+      }
+      if (r1 != r2 || g1 != g2 || b1 != b2) {
+        t = new ChangeColor();
+      }
+      this.m.addTransformation(name, t);
+      return this;
     }
 
     @Override
