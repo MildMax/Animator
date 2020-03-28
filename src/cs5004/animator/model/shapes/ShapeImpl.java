@@ -5,7 +5,6 @@ import java.util.Comparator;
 import java.util.List;
 
 import cs5004.animator.model.transformations.Transformation;
-import cs5004.animator.model.transformations.TransformationType;
 
 /**
  * Create an abstract class called AbstractShape that is a generic shape. Contains methods

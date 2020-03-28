@@ -31,10 +31,4 @@ public interface Transformation {
    */
   int getEnd();
 
-  /**
-   * Returns the TransformationType enum of the transformation.
-   *
-   * @return the TransformationType enum of the transformation.
-   */
-  TransformationType getType();
 }

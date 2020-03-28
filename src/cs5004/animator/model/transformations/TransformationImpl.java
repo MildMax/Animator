@@ -1,7 +1,7 @@
 package cs5004.animator.model.transformations;
 import cs5004.animator.model.transformations.Transformation;
 
-public class TransformationImpl implements Transformation{
+public class TransformationImpl implements Transformation {
   private String shapeName;
   private int t1;
   private int t2;
@@ -42,23 +42,73 @@ public class TransformationImpl implements Transformation{
     this.b2 = b2;
   }
 
-  public String getShapeName() { return this.shapeName; }
-  public int getT1() { return this.t1; }
-  public int getT2() { return this.t2; }
-  public int getX1() { return this.x1; }
-  public int getX2() { return this.x2; }
-  public int getY1() { return this.y1; }
-  public int getY2() { return this.y2; }
-  public int getW1() { return this.w1; }
-  public int getW2() { return this.w2; }
-  public int getH1() { return this.h1; }
-  public int getH2() { return this.h2; }
-  public int getR1() { return this.r1; }
-  public int getR2() { return this.r2; }
-  public int getG1() { return this.g1; }
-  public int getG2() { return this.g2; }
-  public int getB1() { return this.b1; }
-  public int getB2() { return this.b2; }
+  public String getShapeName() {
+    return this.shapeName;
+  }
+
+  public int getT1() {
+    return this.t1;
+  }
+
+  public int getT2() {
+    return this.t2;
+  }
+
+  public int getX1() {
+    return this.x1;
+  }
+
+  public int getX2() {
+    return this.x2;
+  }
+
+  public int getY1() {
+    return this.y1;
+  }
+
+  public int getY2() {
+    return this.y2;
+  }
+
+  public int getW1() {
+    return this.w1;
+  }
+
+  public int getW2() {
+    return this.w2;
+  }
+
+  public int getH1() {
+    return this.h1;
+  }
+
+  public int getH2() {
+    return this.h2;
+  }
+
+  public int getR1() {
+    return this.r1;
+  }
+
+  public int getR2() {
+    return this.r2;
+  }
+
+  public int getG1() {
+    return this.g1;
+  }
+
+  public int getG2() {
+    return this.g2;
+  }
+
+  public int getB1() {
+    return this.b1;
+  }
+
+  public int getB2() {
+    return this.b2;
+  }
 
   @Override
   public int getStart() {
@@ -70,8 +120,4 @@ public class TransformationImpl implements Transformation{
     return t2;
   }
 
-  @Override
-  public TransformationType getType() {
-    return null;
-  }
 }

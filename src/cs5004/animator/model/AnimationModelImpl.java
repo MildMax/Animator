@@ -7,23 +7,10 @@ import java.util.List;
 import java.util.Map;
 
 import cs5004.animator.model.shapes.Shape;
-import old.AbstractShape;
 import cs5004.animator.model.transformations.Transformation;
-import old.AbstractTransformation;
-import old.ChangeColor;
-import old.ChangeHeight;
-import old.ChangeWidth;
-import old.Color;
-import old.Move;
-import old.TransformationType;
+import cs5004.animator.model.transformations.TransformationImpl;
 
 import cs5004.animator.util.AnimationBuilder;
-import old.Circle;
-import old.Ellipse;
-import old.Oval;
-import old.Rectangle;
-import old.Square;
-import old.Triangle;
 
 /**
  * The AnimationModelImpl class holds a series of Shapes and their transformations. Supports
@@ -493,7 +480,7 @@ public class AnimationModelImpl implements AnimationModel {
                                                       int h1, int r1, int g1, int b1, int t2,
                                                       int x2, int y2, int w2, int h2, int r2,
                                                       int g2, int b2) {
-      TransformationImpl t = new TransformationImpl(name, t1, x1, y1, w1, h1, r1, g1, b1, t2, x2,
+      Transformation t = new TransformationImpl(name, t1, x1, y1, w1, h1, r1, g1, b1, t2, x2,
                                                     y2, w2, h2, r2, g2, b2);
       this.m.addTransformation(name, t);
       return this;
