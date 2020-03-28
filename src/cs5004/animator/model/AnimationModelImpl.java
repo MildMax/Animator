@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import cs5004.animator.model.shapes.Shape;
+import cs5004.animator.model.shapes.ShapeImpl;
+import cs5004.animator.model.shapes.ShapeType;
 import cs5004.animator.model.transformations.Transformation;
 import cs5004.animator.model.transformations.TransformationImpl;
 
@@ -176,18 +178,7 @@ public class AnimationModelImpl implements AnimationModel {
    */
   @Override
   public List<Shape> getShapesAtTick(int tick) throws IllegalArgumentException {
-    if (tick < 0 || tick > this.ticks) {
-      throw new IllegalArgumentException("tick cannot be less than 0 or greater than total"
-              + " number of ticks");
-    }
-    List<Shape> modShapes = new ArrayList<>();
-    for (Shape s : shapeMap.values()) {
-      Shape mod = s.makeModifiedShape(tick);
-      if (mod != null) {
-        modShapes.add(mod);
-      }
-    }
-    return modShapes;
+    return null;
   }
 
   /**
@@ -241,53 +232,16 @@ public class AnimationModelImpl implements AnimationModel {
     return shape;
   }
 
-  private int findTotalTicks() {
-    List<Transformation> tList = getTransformations();
-
-    if (tList.size() == 0) {
-      return 0;
-    }
-    else {
-      tList.sort(Comparator.comparing(Transformation::getEnd));
-      return tList.get(tList.size() - 1).getEnd();
-    }
-  }
-
-  /**
-   * return a copy of the model;
-   * @return
-   */
-  private AnimationModel copy() {
-    return this;
-  }
-
   /**
    *  Implement Builder.
    */
   public static final class Builder implements AnimationBuilder<AnimationModel> {
-//    private int boundX;
-//    private int boundY;
-//    private int windowWidth;
-//    private int windowHeight;
-//    private Color windowColor;
-//    private int ticks;
-//    private Map<String, Shape> shapeMap;
     private AnimationModel m;
 
 
     public Builder(AnimationModel m) {
       this.m = m;
     }
-//    public Builder(x,y,width,height,s) {
-//      AnimationModel myModel = new AnimationModelImpl();
-//      this.boundX = 0;
-//      this.boundY = 0;
-//      this.windowWidth = 0;
-//      this.windowHeight = 0;
-//      this.windowColor = new Color(0,0,0);
-//      this.ticks = 999;
-//      this.shapeMap = new HashMap<String, Shape>();
-//    }
 
     @Override
     public AnimationModel build() {
@@ -303,30 +257,30 @@ public class AnimationModelImpl implements AnimationModel {
 
     @Override
     public AnimationBuilder<AnimationModel> declareShape(String name, String type) {
-      AbstractShape s = null;
+      ShapeImpl s = null;
       switch (type) {
         case "circle": {
-          s = new Circle(name);
+          s = new ShapeImpl(name, ShapeType.CIRCLE);
           break;
         }
         case "ellipse": {
-          s = new Ellipse(name);
+          s = new ShapeImpl(name, ShapeType.ELLIPSE);
           break;
         }
         case "oval": {
-          s = new Oval(name);
+          s = new ShapeImpl(name, ShapeType.OVAL);
           break;
         }
         case "rectangle": {
-          s = new Rectangle(name);
+          s = new ShapeImpl(name, ShapeType.RECTANGLE);
           break;
         }
         case "square": {
-          s = new Square(name);
+          s = new ShapeImpl(name, ShapeType.SQUARE);
           break;
         }
         case "triangle": {
-          s = new Triangle(name);
+          s = new ShapeImpl(name, ShapeType.TRIANGLE);
           break;
         }
         default:

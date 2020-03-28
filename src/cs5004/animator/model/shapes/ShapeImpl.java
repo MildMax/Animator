@@ -7,10 +7,10 @@ import java.util.List;
 import cs5004.animator.model.transformations.Transformation;
 
 /**
- * Create an abstract class called AbstractShape that is a generic shape. Contains methods
+ * Create a class called AbstractShape that is a generic shape. Contains methods
  * that apply to all shapes. This class implements the Shape interface.
  */
-public abstract class ShapeImpl implements Shape {
+public class ShapeImpl implements Shape {
   private  String name;
   private final ShapeType type;
   private  int layer;
@@ -30,7 +30,7 @@ public abstract class ShapeImpl implements Shape {
    *
    * @param name
    */
-  ShapeImpl(String name, ShapeType type) {
+  public ShapeImpl(String name, ShapeType type) {
     this.name = name;
     this.type = type;
     transformationList = new ArrayList<>();

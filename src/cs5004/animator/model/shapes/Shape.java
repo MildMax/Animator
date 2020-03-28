@@ -73,7 +73,5 @@ public interface Shape {
    */
   List<Transformation> getTransformationList();
 
-  Shape makeModifiedShape(int tick);
-
   List<Transformation> getCurrentTransformations(int tick);
 }
