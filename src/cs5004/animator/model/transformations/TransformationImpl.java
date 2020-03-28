@@ -1,6 +1,7 @@
 package cs5004.animator.model.transformations;
+import cs5004.animator.model.transformations.Transformation;
 
-public class TransformationImpl {
+public class TransformationImpl implements Transformation{
   private String shapeName;
   private int t1;
   private int t2;
@@ -59,4 +60,18 @@ public class TransformationImpl {
   public int getB1() { return this.b1; }
   public int getB2() { return this.b2; }
 
+  @Override
+  public int getStart() {
+    return t1;
+  }
+
+  @Override
+  public int getEnd() {
+    return t2;
+  }
+
+  @Override
+  public TransformationType getType() {
+    return null;
+  }
 }

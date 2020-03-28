@@ -493,19 +493,8 @@ public class AnimationModelImpl implements AnimationModel {
                                                       int h1, int r1, int g1, int b1, int t2,
                                                       int x2, int y2, int w2, int h2, int r2,
                                                       int g2, int b2) {
-      AbstractTransformation t = null;
-      if (x1 != x2 || y1 != y2) {
-	      t = new Move(t1, t2, int newX, int newY);
-      }
-      if (h1 != h2) {
-        t = new ChangeHeight();
-      }
-      if (w1 != w2) {
-        t = new ChangeWidth();
-      }
-      if (r1 != r2 || g1 != g2 || b1 != b2) {
-        t = new ChangeColor();
-      }
+      TransformationImpl t = new TransformationImpl(name, t1, x1, y1, w1, h1, r1, g1, b1, t2, x2,
+                                                    y2, w2, h2, r2, g2, b2);
       this.m.addTransformation(name, t);
       return this;
     }
