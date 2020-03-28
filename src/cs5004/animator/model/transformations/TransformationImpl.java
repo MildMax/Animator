@@ -5,14 +5,17 @@ public class TransformationImpl implements Transformation {
   private String shapeName;
   private int t1;
   private int t2;
+
   private int x1;
   private int x2;
   private int y1;
   private int y2;
+
   private int w1;
   private int w2;
   private int h1;
   private int h2;
+
   private int r1;
   private int r2;
   private int g1;
@@ -120,4 +123,30 @@ public class TransformationImpl implements Transformation {
     return t2;
   }
 
+  @Override
+  public String toString() {
+    String time = " from time t=" + this.t1 + " to time t=" + this.t2 + "\n";
+
+    String total = "";
+
+    if (x1 != x2 || y1 != y2) {
+      total += this.shapeName + " moves from (" + x1 + "," + x2 + ") to (" + x2 + "," + y2
+            + ")" + time;
+    }
+
+    if (w1 != w2) {
+      total += this.shapeName + " changes width from " + w1 + " to " + w2 + time;
+    }
+
+    if (h1 != h2) {
+      total += this.shapeName + " changes height from " + h1 + " to " + h2 + time;
+    }
+
+    if (r1 != r2 || g1 != g2 || b1 != b2) {
+      total += this.shapeName + " changes from color (" + r1 + "," + g1 + "," + b1 + ") to color ("
+            + r2 + "," + g2 + "," + b2 + ")" + time;
+    }
+
+    return total;
+  }
 }

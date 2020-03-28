@@ -9,6 +9,10 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.Scanner;
 
+import cs5004.animator.model.AnimationModel;
+import cs5004.animator.model.AnimationModelImpl;
+import cs5004.animator.util.AnimationReader;
+
 public final class EasyAnimator {
 
   Readable inFile = null;
@@ -24,6 +28,9 @@ public final class EasyAnimator {
     //stringreader <-- stringreader.staticFunc(file, model.builder);
     EasyAnimator e = new EasyAnimator();
     e.parseArgs(args);
+    AnimationModel m = AnimationReader.parseFile(e.inFile, new AnimationModelImpl.Builder());
+    e.writeToOutFile(m.toString());
+
     return;
   }
 
@@ -44,8 +51,8 @@ public final class EasyAnimator {
           }
         } else if (args[i].compareTo("-view") == 0) {
           viewType = args[i + 1];
-          if (viewType.compareTo("svg") != 0 || viewType.compareTo("text") == 0
-              || viewType.compareTo("visual") != 0) {
+          if (viewType.compareTo("svg") != 0 && viewType.compareTo("text") != 0
+              && viewType.compareTo("visual") != 0) {
             throw new IllegalArgumentException("Invalid view type " + viewType);
           }
         } else {
@@ -57,6 +64,16 @@ public final class EasyAnimator {
     }
     if (inFile == null || viewType == null) {
       throw new IllegalArgumentException("must supply infile and a viewtype");
+    }
+  }
+
+  private void writeToOutFile(String str) throws IOException {
+    if (outFile instanceof FileWriter) {
+      ((FileWriter) outFile).write(str);
+      ((FileWriter) outFile).close();
+    }
+    else {
+      outFile.append(str);
     }
   }
 }

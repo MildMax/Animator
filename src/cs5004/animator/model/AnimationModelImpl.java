@@ -211,11 +211,17 @@ public class AnimationModelImpl implements AnimationModel {
   @Override
   public String toString() {
     String out = "Create window with width " + this.windowWidth + " and height "
-            + this.windowHeight
-            + " and total ticks " + this.getTotalTicks() + ".\n\n";
+            + this.windowHeight + " with top left corner (" + this.boundX + "," + this.boundY
+            + ") and total ticks " + this.getTotalTicks() + ".\n\n";
 
     for (Shape shape : shapeMap.values()) {
-      out += shape.toString() + "\n";
+      out += shape.toString();
+    }
+
+    out += "\n";
+
+    for (Transformation t : getTransformations()) {
+      out += t.toString();
     }
     return out.trim();
   }
@@ -238,11 +244,6 @@ public class AnimationModelImpl implements AnimationModel {
   public static final class Builder implements AnimationBuilder<AnimationModel> {
     private AnimationModel m;
 
-
-    public Builder(AnimationModel m) {
-      this.m = m;
-    }
-
     @Override
     public AnimationModel build() {
       return this.m;
@@ -250,9 +251,10 @@ public class AnimationModelImpl implements AnimationModel {
 
     @Override
     public AnimationBuilder<AnimationModel> setBounds(int x, int y, int width, int height) {
-      AnimationModel myModel  = new AnimationModelImpl(x,y,width,height);
-      AnimationBuilder<AnimationModel> myBuilder = new Builder(myModel);
-      return myBuilder;
+      this.m  = new AnimationModelImpl(x,y,width,height);
+      //AnimationBuilder<AnimationModel> myBuilder = new Builder(myModel);
+      //return myBuilder;
+      return this;
     }
 
     @Override

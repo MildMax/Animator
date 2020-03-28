@@ -48,6 +48,10 @@ public class ShapeImpl implements Shape {
       throw new IllegalArgumentException("Transformation cannot be null");
     }
 
+    if (t.getEnd() < t.getStart()) {
+      throw new IllegalArgumentException("End time of transformation cannot be before start");
+    }
+
     for (Transformation transformation : transformationList) {
       if (checkTimes(transformation.getStart(), transformation.getEnd(),
               t.getStart(), t.getEnd())) {
@@ -134,6 +138,12 @@ public class ShapeImpl implements Shape {
   @Override
   public ShapeType getType() {
     return this.type;
+  }
+
+  @Override
+  public String toString() {
+    return this.type + " " + this.name + " appears at " + appearTime +
+            " and disappears at " + disappearTime + ".\n";
   }
 
   /**
