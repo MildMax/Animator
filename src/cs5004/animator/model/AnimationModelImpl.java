@@ -50,6 +50,7 @@ public class AnimationModelImpl implements AnimationModel {
   private final int windowWidth;
   private final int windowHeight;
   private final Color windowColor;
+
   private int ticks;
   private Map<String, Shape> shapeMap;
 
