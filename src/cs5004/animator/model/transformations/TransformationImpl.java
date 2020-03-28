@@ -19,10 +19,9 @@ public class TransformationImpl {
   private int b1;
   private int b2;
 
-  public TransformationImpl(String name, int t1, int x1, int y1, int w1,
-                            int h1, int r1, int g1, int b1, int t2,
-                            int x2, int y2, int w2, int h2, int r2,
-                            int g2, int b2) {
+  public TransformationImpl(String name, int t1, int x1, int y1, int w1, int h1, int r1, int g1,
+                            int b1, int t2, int x2, int y2, int w2, int h2, int r2, int g2,
+                            int b2) {
     this.shapeName = name;
     this.t1 = t1;
     this.t2 = t2;
@@ -41,4 +40,23 @@ public class TransformationImpl {
     this.b1 = b1;
     this.b2 = b2;
   }
+
+  public String getShapeName() { return this.shapeName; }
+  public int getT1() { return this.t1; }
+  public int getT2() { return this.t2; }
+  public int getX1() { return this.x1; }
+  public int getX2() { return this.x2; }
+  public int getY1() { return this.y1; }
+  public int getY2() { return this.y2; }
+  public int getW1() { return this.w1; }
+  public int getW2() { return this.w2; }
+  public int getH1() { return this.h1; }
+  public int getH2() { return this.h2; }
+  public int getR1() { return this.r1; }
+  public int getR2() { return this.r2; }
+  public int getG1() { return this.g1; }
+  public int getG2() { return this.g2; }
+  public int getB1() { return this.b1; }
+  public int getB2() { return this.b2; }
+
 }
