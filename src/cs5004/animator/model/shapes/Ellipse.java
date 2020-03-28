@@ -52,7 +52,7 @@ public class Ellipse extends AbstractShape {
   public String toString() {
     String out = "";
 
-    out += "Create oval " + this.name
+    out += "Create ellipse " + this.name
             + " with center at (" + this.initialCenterX + ","
             + this.initialCenterY + "), horizontal radius " + this.initialHorizontalRadius
             + ", and vertical radius " + this.initialVerticalRadius + " on layer "
@@ -100,7 +100,7 @@ public class Ellipse extends AbstractShape {
           break;
       }
     }
-    Oval c = new Oval(this.name, this.layer, newVerticalRadius, newHorizontalRadius,
+    Ellipse c = new Ellipse(this.name, this.layer, newVerticalRadius, newHorizontalRadius,
             newX, newY, newColor);
     c.initialTransparency = newTransparency;
     if (newTransparency == 0) {
