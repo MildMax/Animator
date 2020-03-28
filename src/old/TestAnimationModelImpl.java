@@ -1,3 +1,5 @@
+package old;
+
 import org.junit.Test;
 import org.junit.Before;
 
@@ -44,7 +46,7 @@ public class TestAnimationModelImpl {
   public void testAnimationModelImplNoArgConstructor() {
     AnimationModel m = new AnimationModelImpl();
 
-    assertEquals("Create window with width 500 and height 500 "
+    Assert.assertEquals("Create window with width 500 and height 500 "
                     + "with background color 0.0,0.0,0.0 and total ticks 0.",
             m.toString());
   }
@@ -57,7 +59,7 @@ public class TestAnimationModelImpl {
   public void testAnimationModelImplTwoArgConstructor() {
     AnimationModel m = new AnimationModelImpl(100, 20);
 
-    assertEquals("Create window with width 100 and height 20 with"
+    Assert.assertEquals("Create window with width 100 and height 20 with"
                     + " background color 0.0,0.0,0.0 and total ticks 0.",
             m.toString());
   }
@@ -88,7 +90,7 @@ public class TestAnimationModelImpl {
   public void testAnimationModelImplOneArgConstructor() {
     AnimationModel m = new AnimationModelImpl(new Color(0, 0, 0));
 
-    assertEquals("Create window with width 500 and height 500"
+    Assert.assertEquals("Create window with width 500 and height 500"
             + " with background color 0.0,0.0,0.0 and total ticks 0.",
             m.toString());
   }
@@ -110,11 +112,11 @@ public class TestAnimationModelImpl {
   public void testAnimationModelThreeArgConstructor() {
     AnimationModel m = new AnimationModelImpl(100, 50, new Color(1, 1, 1));
 
-    assertEquals(100, m.getWindowWidth());
-    assertEquals(50, m.getWindowHeight());
+    Assert.assertEquals(100, m.getWindowWidth());
+    Assert.assertEquals(50, m.getWindowHeight());
     assertEquals("1.0,1.0,1.0", m.getBackgroundColor().toString());
 
-    assertEquals("Create window with width 100 and height 50 with background"
+    Assert.assertEquals("Create window with width 100 and height 50 with background"
             + " color 1.0,1.0,1.0 and total ticks 0.", m.toString());
   }
 
@@ -152,7 +154,7 @@ public class TestAnimationModelImpl {
     String test = "Create window with width 500 and height 500 with background color 0.0,0.0,0.0 "
             + "and total ticks 0.";
 
-    assertEquals(test, m.toString());
+    Assert.assertEquals(test, m.toString());
 
     m.addShape(new Circle("C", 0, 10, 0, 0, green));
 
@@ -161,7 +163,7 @@ public class TestAnimationModelImpl {
             + "Create circle C with center at (0,0) and radius 10 on layer 0 "
             + "with color 0.0,1.0,0.0.";
 
-    assertEquals(test, m.toString());
+    Assert.assertEquals(test, m.toString());
   }
 
   /**
@@ -195,7 +197,7 @@ public class TestAnimationModelImpl {
     String test = "Create window with width 500 and height 500 with background color 0.0,0.0,0.0 "
             + "and total ticks 0.";
 
-    assertEquals(test, m.toString());
+    Assert.assertEquals(test, m.toString());
 
     m.addShape(new Circle("C", 0, 10, 0, 0, green));
 
@@ -204,16 +206,16 @@ public class TestAnimationModelImpl {
             + "Create circle C with center at (0,0) and radius 10 on layer 0 "
             + "with color 0.0,1.0,0.0.";
 
-    assertEquals(test, m.toString());
-    assertEquals(1, m.getShapes().size());
+    Assert.assertEquals(test, m.toString());
+    Assert.assertEquals(1, m.getShapes().size());
 
     m.removeShape("C");
 
     test = "Create window with width 500 and height 500 with background color 0.0,0.0,0.0 "
             + "and total ticks 0.";
 
-    assertEquals(test, m.toString());
-    assertEquals(0, m.getShapes().size());
+    Assert.assertEquals(test, m.toString());
+    Assert.assertEquals(0, m.getShapes().size());
   }
 
   /**
@@ -246,8 +248,8 @@ public class TestAnimationModelImpl {
     String test = "Create window with width 500 and height 500 with background color 0.0,0.0,0.0 "
             + "and total ticks 0.";
 
-    assertEquals(test, m.toString());
-    assertEquals(0, m.getTransformations().size());
+    Assert.assertEquals(test, m.toString());
+    Assert.assertEquals(0, m.getTransformations().size());
 
     m.addShape(new Circle("C", 0, 10, 0, 0, green));
     m.addTransformation("C", new Appearance(0, 10));
@@ -258,8 +260,8 @@ public class TestAnimationModelImpl {
             + "with color 0.0,1.0,0.0.\n\n"
             + "C appears at time t=0 and disappears at time t=10.";
 
-    assertEquals(test, m.toString());
-    assertEquals(1, m.getTransformations().size());
+    Assert.assertEquals(test, m.toString());
+    Assert.assertEquals(1, m.getTransformations().size());
   }
 
   /**
@@ -372,8 +374,8 @@ public class TestAnimationModelImpl {
     String test = "Create window with width 500 and height 500 with background color 0.0,0.0,0.0 "
             + "and total ticks 0.";
 
-    assertEquals(test, m.toString());
-    assertEquals(0, m.getTransformations().size());
+    Assert.assertEquals(test, m.toString());
+    Assert.assertEquals(0, m.getTransformations().size());
 
     m.addShape(new Circle("C", 0, 10, 0, 0, green));
     m.addTransformation("C", new Appearance(0, 10));
@@ -384,8 +386,8 @@ public class TestAnimationModelImpl {
             + "with color 0.0,1.0,0.0.\n\n"
             + "C appears at time t=0 and disappears at time t=10.";
 
-    assertEquals(test, m.toString());
-    assertEquals(1, m.getTransformations().size());
+    Assert.assertEquals(test, m.toString());
+    Assert.assertEquals(1, m.getTransformations().size());
 
     m.removeTransformation("C", TransformationType.APPEARANCE, 0, 10);
 
@@ -394,8 +396,8 @@ public class TestAnimationModelImpl {
             + "Create circle C with center at (0,0) and radius 10 on layer 0 "
             + "with color 0.0,1.0,0.0.";
 
-    assertEquals(test, m.toString());
-    assertEquals(0, m.getTransformations().size());
+    Assert.assertEquals(test, m.toString());
+    Assert.assertEquals(0, m.getTransformations().size());
   }
 
   /**
@@ -486,8 +488,8 @@ public class TestAnimationModelImpl {
     m.addShape(new Circle("c", 1, 5, 0, 0, green));
     m.addShape(new Square("s", 2, 10, 20, 20, green));
 
-    assertEquals("c", m.getShapes().get(0).getName());
-    assertEquals("s", m.getShapes().get(1).getName());
+    Assert.assertEquals("c", m.getShapes().get(0).getName());
+    Assert.assertEquals("s", m.getShapes().get(1).getName());
   }
 
   /**
@@ -503,12 +505,12 @@ public class TestAnimationModelImpl {
     m.addTransformation("s", new Move(5, 15, 0, 0));
     m.addTransformation("c", new Appearance(0, 10));
 
-    assertEquals(0, m.getTransformations().get(0).getStart());
-    assertEquals(10, m.getTransformations().get(0).getEnd());
+    Assert.assertEquals(0, m.getTransformations().get(0).getStart());
+    Assert.assertEquals(10, m.getTransformations().get(0).getEnd());
     assertEquals(TransformationType.APPEARANCE, m.getTransformations().get(0).getType());
 
-    assertEquals(5, m.getTransformations().get(1).getStart());
-    assertEquals(15, m.getTransformations().get(1).getEnd());
+    Assert.assertEquals(5, m.getTransformations().get(1).getStart());
+    Assert.assertEquals(15, m.getTransformations().get(1).getEnd());
     assertEquals(TransformationType.MOVE, m.getTransformations().get(1).getType());
   }
 
@@ -525,15 +527,15 @@ public class TestAnimationModelImpl {
     m.addTransformation("s", new Move(5, 15, 0, 0));
     m.addTransformation("c", new Appearance(0, 10));
 
-    assertEquals(15, m.getTotalTicks());
+    Assert.assertEquals(15, m.getTotalTicks());
 
     m.removeTransformation("s", TransformationType.MOVE, 5, 15);
 
-    assertEquals(10, m.getTotalTicks());
+    Assert.assertEquals(10, m.getTotalTicks());
 
     m.removeTransformation("c", TransformationType.APPEARANCE, 0, 10);
 
-    assertEquals(0, m.getTotalTicks());
+    Assert.assertEquals(0, m.getTotalTicks());
   }
 
   /**
@@ -554,7 +556,7 @@ public class TestAnimationModelImpl {
   public void testGetWindowHeight() {
     AnimationModel m = new AnimationModelImpl();
 
-    assertEquals(500, m.getWindowHeight());
+    Assert.assertEquals(500, m.getWindowHeight());
   }
 
   /**
@@ -564,7 +566,7 @@ public class TestAnimationModelImpl {
   public void testGetWindowWidth() {
     AnimationModel m = new AnimationModelImpl(100, 100);
 
-    assertEquals(100, m.getWindowWidth());
+    Assert.assertEquals(100, m.getWindowWidth());
   }
 
   /**
@@ -629,7 +631,7 @@ public class TestAnimationModelImpl {
 
     List<Shape> modList = m.getShapesAtTick(15);
 
-    assertEquals("", "");
+    Assert.assertEquals("", "");
   }
 
 }

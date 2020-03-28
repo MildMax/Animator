@@ -1,3 +1,5 @@
+package old;
+
 import org.junit.Test;
 import org.junit.Before;
 import old.Color;
@@ -17,7 +19,7 @@ import old.Scale;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Create a test class TestShape to test all of the shape classes.
+ * Create a test class old.TestShape to test all of the shape classes.
  */
 public class TestShape {
 
@@ -38,7 +40,7 @@ public class TestShape {
   public void testCircleConstructor() {
     Shape s = new Circle("circle", 1, 25, 30, 35,
             red);
-    assertEquals("Create circle circle with center at (30,35) and radius 25 on "
+    Assert.assertEquals("Create circle circle with center at (30,35) and radius 25 on "
                     + "layer 1 with color 1.0,0.0,0.0.\n\n", s.toString());
   }
 
@@ -49,7 +51,7 @@ public class TestShape {
   public void testNullNameCircle() {
     Circle shape1 = new Circle(null, 10, 10, 10, 10,
             red);
-    assertEquals("", shape1.toString());
+    Assert.assertEquals("", shape1.toString());
   }
 
   /**
@@ -59,7 +61,7 @@ public class TestShape {
   public void testNullInitColor() {
     Circle shape1 = new Circle("circle", 10, 10, 10,
             10,null);
-    assertEquals("", shape1.toString());
+    Assert.assertEquals("", shape1.toString());
   }
 
   /**
@@ -69,7 +71,7 @@ public class TestShape {
   public void testNegativeRadiusHeight() {
     Circle shape1 = new Circle("circle", 10, -5, 10,
             10, red);
-    assertEquals("", shape1.toString());
+    Assert.assertEquals("", shape1.toString());
   }
 
   /**
@@ -79,7 +81,7 @@ public class TestShape {
   public void testZeroInitialRadius() {
     Circle shape1 = new Circle("circle", 10, 0, 10,
             10, red);
-    assertEquals("", shape1.toString());
+    Assert.assertEquals("", shape1.toString());
   }
 
   /**
@@ -90,7 +92,7 @@ public class TestShape {
     Shape c = new Circle("Circle", 0, 5, 5, 5,
             red);
     c.addTransformation(null);
-    assertEquals("", c.toString());
+    Assert.assertEquals("", c.toString());
   }
 
   /**
@@ -101,7 +103,7 @@ public class TestShape {
     Shape c = new Circle("Circle", 0, 5, 5, 5,
             red);
     c.removeTransformation(null, 10, 10);
-    assertEquals("", c.toString());
+    Assert.assertEquals("", c.toString());
   }
 
   /**
@@ -111,7 +113,7 @@ public class TestShape {
   public void testOvalConstructor() {
     Shape o = new Oval("oval", -23, 25, 50,
             -10, -10, red);
-    assertEquals("Create oval oval with center at (-10,-10), horizontal radius "
+    Assert.assertEquals("Create oval oval with center at (-10,-10), horizontal radius "
             + "50, and vertical radius 25 on layer -23 with color 1.0,0.0,0.0.\n\n", o.toString());
   }
 
@@ -122,7 +124,7 @@ public class TestShape {
   public void testNullNameOvalConstructor() {
     Oval shape1 = new Oval(null, 23, 25, 25,
             25, 25, red);
-    assertEquals("", shape1.toString());
+    Assert.assertEquals("", shape1.toString());
   }
 
   /**
@@ -132,7 +134,7 @@ public class TestShape {
   public void testNegativeVerticalRadiusOvalConstructor() {
     Oval shape1 = new Oval("oval", 0, -5, 10,
             10, 10, red);
-    assertEquals("", shape1.toString());
+    Assert.assertEquals("", shape1.toString());
   }
 
   /**
@@ -142,7 +144,7 @@ public class TestShape {
   public void testZeroVerticalRadiusOvalConstructor() {
     Oval shape1 = new Oval("oval", 0, 0, 10,
             10, 10, red);
-    assertEquals("", shape1.toString());
+    Assert.assertEquals("", shape1.toString());
   }
 
   /**
@@ -152,7 +154,7 @@ public class TestShape {
   public void testNegativeHorizontalRadiusOvalConstrucotr() {
     Oval shape1 = new Oval("oval", 0, 10, -10,
             10, 10, red);
-    assertEquals("", shape1.toString());
+    Assert.assertEquals("", shape1.toString());
   }
 
   /**
@@ -162,7 +164,7 @@ public class TestShape {
   public void testZeroHorizontalRadiusOvalConstructor() {
     Oval shape1 = new Oval("oval", 0, 10, 0,
             10, 10, red);
-    assertEquals("", shape1.toString());
+    Assert.assertEquals("", shape1.toString());
   }
 
   /**
@@ -172,7 +174,7 @@ public class TestShape {
   public void testNullColorEnumOvalConstructor() {
     Oval shape1 = new Oval("oval", 0, 10, 10,
             10, 10, null);
-    assertEquals("", shape1.toString());
+    Assert.assertEquals("", shape1.toString());
   }
 
   /**
@@ -183,7 +185,7 @@ public class TestShape {
     Shape c = new Oval("Oval", 0, 5, 5,
             5, 5, red);
     c.addTransformation(null);
-    assertEquals("", c.toString());
+    Assert.assertEquals("", c.toString());
   }
 
   /**
@@ -194,7 +196,7 @@ public class TestShape {
     Shape c = new Oval("Oval", 0, 5, 5,
             5, 5, red);
     c.removeTransformation(null, 10, 10);
-    assertEquals("", c.toString());
+    Assert.assertEquals("", c.toString());
   }
 
   /**
@@ -204,7 +206,7 @@ public class TestShape {
   public void testRectangleConstructor() {
     Shape o = new Rectangle("rect", 100, 105, 220,
             -250, 325, red);
-    assertEquals("Create rectangle rect with center at (-250,325), width 220, "
+    Assert.assertEquals("Create rectangle rect with center at (-250,325), width 220, "
             + "and height 105 on layer 100 with color 1.0,0.0,0.0.\n\n", o.toString());
   }
 
@@ -215,7 +217,7 @@ public class TestShape {
   public void testNullNameRectangleConstructor() {
     Rectangle shape1 = new Rectangle(null, 0, 10, 10,
             10, 10, red);
-    assertEquals("", shape1.toString());
+    Assert.assertEquals("", shape1.toString());
   }
 
   /**
@@ -225,7 +227,7 @@ public class TestShape {
   public void testNegativeHeightRectangleConstructor() {
     Rectangle shape1 = new Rectangle("rect", -5, -5, 10,
             10, 10, red);
-    assertEquals("", shape1.toString());
+    Assert.assertEquals("", shape1.toString());
   }
 
   /**
@@ -235,7 +237,7 @@ public class TestShape {
   public void testZeroHeightRectangleConstructor() {
     Rectangle shape1 = new Rectangle("rect", 10, 0, 10,
             10, 10, red);
-    assertEquals("", shape1.toString());
+    Assert.assertEquals("", shape1.toString());
   }
 
   /**
@@ -245,7 +247,7 @@ public class TestShape {
   public void testNegativeWidthRectangleConstructor() {
     Rectangle shape1 = new Rectangle("rect", 10, 10, -5,
             10, 10, red);
-    assertEquals("", shape1.toString());
+    Assert.assertEquals("", shape1.toString());
   }
 
   /**
@@ -255,7 +257,7 @@ public class TestShape {
   public void testZeroWidthRectangleConstructor() {
     Rectangle shape1 = new Rectangle("rect", 10, 10, 0,
             10, 10, red);
-    assertEquals("", shape1.toString());
+    Assert.assertEquals("", shape1.toString());
   }
 
   /**
@@ -265,7 +267,7 @@ public class TestShape {
   public void testNullColorEnumRectangleConstructor() {
     Rectangle shape1 = new Rectangle("rect", 10, 10, 10,
             10, 10, null);
-    assertEquals("", shape1.toString());
+    Assert.assertEquals("", shape1.toString());
   }
 
   /**
@@ -276,7 +278,7 @@ public class TestShape {
     Shape c = new Rectangle("Rectangle", 0, 5, 5,
             5, 5, red);
     c.addTransformation(null);
-    assertEquals("", c.toString());
+    Assert.assertEquals("", c.toString());
   }
 
   /**
@@ -287,7 +289,7 @@ public class TestShape {
     Shape c = new Rectangle("Rectangle", 0, 5, 5,
             5, 5, red);
     c.removeTransformation(null, 10, 10);
-    assertEquals("", c.toString());
+    Assert.assertEquals("", c.toString());
   }
 
   /**
@@ -297,7 +299,7 @@ public class TestShape {
   public void testSquareConstructor() {
     Shape s = new Square("square", -1001, 15, 12, 10,
             red);
-    assertEquals("Create square square with center at (12,10) and side 15 on "
+    Assert.assertEquals("Create square square with center at (12,10) and side 15 on "
             + "layer -1001 with color 1.0,0.0,0.0.\n\n", s.toString());
   }
 
@@ -308,7 +310,7 @@ public class TestShape {
   public void testNullNameSquareConstructor() {
     Shape s = new Square(null, 21, 20, 19, 18,
             red);
-    assertEquals("", s.toString());
+    Assert.assertEquals("", s.toString());
   }
 
   /**
@@ -318,7 +320,7 @@ public class TestShape {
   public void testNegativeSideLengthSquareConstructor() {
     Square shape1 = new Square("square", 21, -5, 15,
             16, red);
-    assertEquals("", shape1.toString());
+    Assert.assertEquals("", shape1.toString());
   }
 
   /**
@@ -328,7 +330,7 @@ public class TestShape {
   public void testZeroSideLengthSquareConstructor() {
     Square shape1 = new Square("squizzare", 100, 0, 15,
             20, red);
-    assertEquals("", shape1.toString());
+    Assert.assertEquals("", shape1.toString());
   }
 
   /**
@@ -338,7 +340,7 @@ public class TestShape {
   public void testNullColorSquareConstructor() {
     Square shape1 = new Square("square", 100, 10, 10,
             10, null);
-    assertEquals("", shape1.toString());
+    Assert.assertEquals("", shape1.toString());
   }
 
   /**
@@ -349,7 +351,7 @@ public class TestShape {
     Shape c = new Square("Square", 0, 5, 5, 5,
             red);
     c.addTransformation(null);
-    assertEquals("", c.toString());
+    Assert.assertEquals("", c.toString());
   }
 
   /**
@@ -360,7 +362,7 @@ public class TestShape {
     Shape c = new Square("Square", 0, 5, 5, 5,
             red);
     c.removeTransformation(null, 10, 10);
-    assertEquals("", c.toString());
+    Assert.assertEquals("", c.toString());
   }
 
   /**
@@ -370,7 +372,7 @@ public class TestShape {
   public void testTriangleConstructor() {
     Shape t = new Triangle("triangle", -1234, 10, 15,
             20, -25, red);
-    assertEquals("Create triangle triangle with center at (20,-25), width 15, "
+    Assert.assertEquals("Create triangle triangle with center at (20,-25), width 15, "
             + "and height 10 on layer -1234 with color 1.0,0.0,0.0.\n\n", t.toString());
   }
 
@@ -381,7 +383,7 @@ public class TestShape {
   public void testNullNameTriangleConstructor() {
     Triangle shape1 = new Triangle(null, 10, 10, 10,
             10, 10, red);
-    assertEquals("", shape1.toString());
+    Assert.assertEquals("", shape1.toString());
   }
 
   /**
@@ -391,7 +393,7 @@ public class TestShape {
   public void testNegativeHeightTriangleConstructor() {
     Triangle shape1 = new Triangle("triangle", 0, -10, 10,
             10, 10, red);
-    assertEquals("", shape1.toString());
+    Assert.assertEquals("", shape1.toString());
   }
 
   /**
@@ -401,7 +403,7 @@ public class TestShape {
   public void testZeroHeightTriangleConstructor() {
     Triangle shape1 = new Triangle("triangle", -433, 0, 10,
             10, 10, red);
-    assertEquals("", shape1.toString());
+    Assert.assertEquals("", shape1.toString());
   }
 
   /**
@@ -411,7 +413,7 @@ public class TestShape {
   public void testNegativeWidthTriangleConstructor() {
     Triangle shape1 = new Triangle("triangle", 4, 10, -10,
             10, 10, red);
-    assertEquals("", shape1.toString());
+    Assert.assertEquals("", shape1.toString());
   }
 
   /**
@@ -421,7 +423,7 @@ public class TestShape {
   public void testZeroWidthTriangleConstructor() {
     Triangle shape1 = new Triangle("geometric three-way", 6, 10,
             0, 10, 10, red);
-    assertEquals("", shape1.toString());
+    Assert.assertEquals("", shape1.toString());
   }
 
   /**
@@ -431,7 +433,7 @@ public class TestShape {
   public void testNullColorTriangleConstructor() {
     Triangle shape1 = new Triangle("Triangle", 101, 20, 23,
             50, 60, null);
-    assertEquals("", shape1.toString());
+    Assert.assertEquals("", shape1.toString());
   }
 
   /**
@@ -442,7 +444,7 @@ public class TestShape {
     Shape c = new Triangle("Triangle", 0, 5, 5,5,
             5, red);
     c.addTransformation(null);
-    assertEquals("", c.toString());
+    Assert.assertEquals("", c.toString());
   }
 
   /**
@@ -453,7 +455,7 @@ public class TestShape {
     Shape c = new Triangle("Triangle", 0, 5, 5, 5,
             5, red);
     c.removeTransformation(null, 10, 10);
-    assertEquals("", c.toString());
+    Assert.assertEquals("", c.toString());
   }
 
   /**
@@ -475,8 +477,8 @@ public class TestShape {
     Scale t7 = new Scale(55, 60, 2.0);
 
     // Test getName() and getType().
-    assertEquals( "Oval1", oval1.getName());
-    assertEquals( ShapeType.OVAL, oval1.getType());
+    Assert.assertEquals( "Oval1", oval1.getName());
+    Assert.assertEquals( ShapeType.OVAL, oval1.getType());
 
     // Test addTransformation() and getTransformationDescription() and getName().
     oval1.addTransformation(t1);
@@ -486,7 +488,7 @@ public class TestShape {
     oval1.addTransformation(t5);
     oval1.addTransformation(t6);
     oval1.addTransformation(t7);
-    assertEquals("Oval1 appears at time t=1 and disappears at time t=1000.\n"
+    Assert.assertEquals("Oval1 appears at time t=1 and disappears at time t=1000.\n"
                     + "Oval1 changes to 1.0,0.0,0.0 from time t=5 to time t=10.\n"
                     + "Oval1 changes to height:150 from time t=15 to time t=20.\n"
                     + "Oval1 changes to transparency 50.0 from time t=25 to time t=30.\n"
@@ -494,7 +496,7 @@ public class TestShape {
                     + "Oval1 moves to (151,201) from time t=45 to time t=50.\n"
                     + "Oval1 scales to 2.0 times its current size from time t=55 to time t=60.\n",
             oval1.getTransformationDescription());
-    assertEquals("Create oval Oval1 with center at (150,200), horizontal radius "
+    Assert.assertEquals("Create oval Oval1 with center at (150,200), horizontal radius "
                     + "100, and vertical radius 50 on layer 1 with color 1.0,0.0,0.0.\n\n"
                     + "Oval1 appears at time t=1 and disappears at time t=1000.\n"
                     + "Oval1 changes to 1.0,0.0,0.0 from time t=5 to time t=10.\n"
@@ -513,8 +515,8 @@ public class TestShape {
     oval1.removeTransformation(t5.getType(), t5.getStart(), t5.getEnd());
     oval1.removeTransformation(t6.getType(), t6.getStart(), t6.getEnd());
     oval1.removeTransformation(t7.getType(), t7.getStart(), t7.getEnd());
-    assertEquals("", oval1.getTransformationDescription());
-    assertEquals("Create oval Oval1 with center at (150,200), horizontal radius "
+    Assert.assertEquals("", oval1.getTransformationDescription());
+    Assert.assertEquals("Create oval Oval1 with center at (150,200), horizontal radius "
             + "100, and vertical radius 50 on layer 1 with color 1.0,0.0,0.0.\n\n",
             oval1.toString());
   }
@@ -538,8 +540,8 @@ public class TestShape {
     Scale t7 = new Scale(55, 60, 2.0);
 
     // Test getName() and getType().
-    assertEquals( "Circle1", myShape.getName());
-    assertEquals( ShapeType.CIRCLE, myShape.getType());
+    Assert.assertEquals( "Circle1", myShape.getName());
+    Assert.assertEquals( ShapeType.CIRCLE, myShape.getType());
 
     // Test addTransformation() and getTransformationDescription() and getName().
     myShape.addTransformation(t1);
@@ -549,7 +551,7 @@ public class TestShape {
     myShape.addTransformation(t5);
     myShape.addTransformation(t6);
     myShape.addTransformation(t7);
-    assertEquals("Circle1 appears at time t=1 and disappears at time t=1000.\n"
+    Assert.assertEquals("Circle1 appears at time t=1 and disappears at time t=1000.\n"
                     + "Circle1 changes to 1.0,0.0,0.0 from time t=5 to time t=10.\n"
                     + "Circle1 changes to height:150 from time t=15 to time t=20.\n"
                     + "Circle1 changes to transparency 50.0 from time t=25 to time t=30.\n"
@@ -558,7 +560,7 @@ public class TestShape {
                     + "Circle1 scales to 2.0 times its current size from time t=55 to "
                     + "time t=60.\n",
                       myShape.getTransformationDescription());
-    assertEquals("Create circle Circle1 with center at (150,200) and radius 99 "
+    Assert.assertEquals("Create circle Circle1 with center at (150,200) and radius 99 "
                     + "on layer 1 with color 1.0,0.0,0.0.\n\n"
                     + "Circle1 appears at time t=1 and disappears at time t=1000.\n"
                     + "Circle1 changes to 1.0,0.0,0.0 from time t=5 to time t=10.\n"
@@ -578,8 +580,8 @@ public class TestShape {
     myShape.removeTransformation(t5.getType(), t5.getStart(), t5.getEnd());
     myShape.removeTransformation(t6.getType(), t6.getStart(), t6.getEnd());
     myShape.removeTransformation(t7.getType(), t7.getStart(), t7.getEnd());
-    assertEquals("", myShape.getTransformationDescription());
-    assertEquals("Create circle Circle1 with center at (150,200) and radius 99 "
+    Assert.assertEquals("", myShape.getTransformationDescription());
+    Assert.assertEquals("Create circle Circle1 with center at (150,200) and radius 99 "
             + "on layer 1 with color 1.0,0.0,0.0.\n\n", myShape.toString());
   }
 
@@ -602,8 +604,8 @@ public class TestShape {
     Scale t7 = new Scale(55, 60, 2.0);
 
     // Test getName() and getType().
-    assertEquals( "Rectangle1", myShape.getName());
-    assertEquals( ShapeType.RECTANGLE, myShape.getType());
+    Assert.assertEquals( "Rectangle1", myShape.getName());
+    Assert.assertEquals( ShapeType.RECTANGLE, myShape.getType());
 
     // Test addTransformation() and getTransformationDescription() and getName().
     myShape.addTransformation(t1);
@@ -613,7 +615,7 @@ public class TestShape {
     myShape.addTransformation(t5);
     myShape.addTransformation(t6);
     myShape.addTransformation(t7);
-    assertEquals("Rectangle1 appears at time t=1 and disappears at time t=1000.\n"
+    Assert.assertEquals("Rectangle1 appears at time t=1 and disappears at time t=1000.\n"
             + "Rectangle1 changes to 1.0,0.0,0.0 from time t=5 to time t=10.\n"
             + "Rectangle1 changes to height:150 from time t=15 to time t=20.\n"
             + "Rectangle1 changes to transparency 50.0 from time t=25 to time t=30.\n"
@@ -621,7 +623,7 @@ public class TestShape {
             + "Rectangle1 moves to (151,201) from time t=45 to time t=50.\n"
             + "Rectangle1 scales to 2.0 times its current size from time t=55 to time "
             + "t=60.\n", myShape.getTransformationDescription());
-    assertEquals("Create rectangle Rectangle1 with center at (150,200), width "
+    Assert.assertEquals("Create rectangle Rectangle1 with center at (150,200), width "
             + "25, and height 25 on layer 1 with color 1.0,0.0,0.0.\n\n"
             + "Rectangle1 appears at time t=1 and disappears at time t=1000.\n"
             + "Rectangle1 changes to 1.0,0.0,0.0 from time t=5 to time t=10.\n"
@@ -640,8 +642,8 @@ public class TestShape {
     myShape.removeTransformation(t5.getType(), t5.getStart(), t5.getEnd());
     myShape.removeTransformation(t6.getType(), t6.getStart(), t6.getEnd());
     myShape.removeTransformation(t7.getType(), t7.getStart(), t7.getEnd());
-    assertEquals("", myShape.getTransformationDescription());
-    assertEquals("Create rectangle Rectangle1 with center at (150,200), width "
+    Assert.assertEquals("", myShape.getTransformationDescription());
+    Assert.assertEquals("Create rectangle Rectangle1 with center at (150,200), width "
             + "25, and height 25 on layer 1 with color 1.0,0.0,0.0.\n\n", myShape.toString());
   }
 
@@ -664,8 +666,8 @@ public class TestShape {
     Scale t7 = new Scale(55, 60, 2.0);
 
     // Test getName() and getType().
-    assertEquals( "Square1", myShape.getName());
-    assertEquals( ShapeType.SQUARE, myShape.getType());
+    Assert.assertEquals( "Square1", myShape.getName());
+    Assert.assertEquals( ShapeType.SQUARE, myShape.getType());
 
     // Test addTransformation() and getTransformationDescription() and getName().
     myShape.addTransformation(t1);
@@ -675,7 +677,7 @@ public class TestShape {
     myShape.addTransformation(t5);
     myShape.addTransformation(t6);
     myShape.addTransformation(t7);
-    assertEquals("Square1 appears at time t=1 and disappears at time t=1000.\n"
+    Assert.assertEquals("Square1 appears at time t=1 and disappears at time t=1000.\n"
                     + "Square1 changes to 1.0,0.0,0.0 from time t=5 to time t=10.\n"
                     + "Square1 changes to height:150 from time t=15 to time t=20.\n"
                     + "Square1 changes to transparency 50.0 from time t=25 to time t=30.\n"
@@ -684,7 +686,7 @@ public class TestShape {
                     + "Square1 scales to 2.0 times its current size from time t=55 to "
                     + "time t=60.\n",
                       myShape.getTransformationDescription());
-    assertEquals("Create square Square1 with center at (150,200) and side 33 on "
+    Assert.assertEquals("Create square Square1 with center at (150,200) and side 33 on "
                     + "layer 1 with color 1.0,0.0,0.0.\n\n"
                     + "Square1 appears at time t=1 and disappears at time t=1000.\n"
                     + "Square1 changes to 1.0,0.0,0.0 from time t=5 to time t=10.\n"
@@ -704,8 +706,8 @@ public class TestShape {
     myShape.removeTransformation(t5.getType(), t5.getStart(), t5.getEnd());
     myShape.removeTransformation(t6.getType(), t6.getStart(), t6.getEnd());
     myShape.removeTransformation(t7.getType(), t7.getStart(), t7.getEnd());
-    assertEquals("", myShape.getTransformationDescription());
-    assertEquals("Create square Square1 with center at (150,200) and side 33 on "
+    Assert.assertEquals("", myShape.getTransformationDescription());
+    Assert.assertEquals("Create square Square1 with center at (150,200) and side 33 on "
                     + "layer 1 with color 1.0,0.0,0.0.\n\n", myShape.toString());
   }
 
@@ -728,8 +730,8 @@ public class TestShape {
     Scale t7 = new Scale(55, 60, 2.0);
 
     // Test getName() and getType().
-    assertEquals( "Triangle1", myShape.getName());
-    assertEquals( ShapeType.TRIANGLE, myShape.getType());
+    Assert.assertEquals( "Triangle1", myShape.getName());
+    Assert.assertEquals( ShapeType.TRIANGLE, myShape.getType());
 
     // Test addTransformation() and getTransformationDescription() and getName().
     myShape.addTransformation(t1);
@@ -739,7 +741,7 @@ public class TestShape {
     myShape.addTransformation(t5);
     myShape.addTransformation(t6);
     myShape.addTransformation(t7);
-    assertEquals("Triangle1 appears at time t=1 and disappears at time t=1000.\n"
+    Assert.assertEquals("Triangle1 appears at time t=1 and disappears at time t=1000.\n"
                     + "Triangle1 changes to 1.0,0.0,0.0 from time t=5 to time t=10.\n"
                     + "Triangle1 changes to height:150 from time t=15 to time t=20.\n"
                     + "Triangle1 changes to transparency 50.0 from time t=25 to time t=30.\n"
@@ -748,7 +750,7 @@ public class TestShape {
                     + "Triangle1 scales to 2.0 times its current size from time t=55 to time "
                     + "t=60.\n",
                       myShape.getTransformationDescription());
-    assertEquals("Create triangle Triangle1 with center at (150,200), width 65, "
+    Assert.assertEquals("Create triangle Triangle1 with center at (150,200), width 65, "
                     + "and height 100 on layer 1 with color 1.0,0.0,0.0.\n\n"
                     + "Triangle1 appears at time t=1 and disappears at time t=1000.\n"
                     + "Triangle1 changes to 1.0,0.0,0.0 from time t=5 to time t=10.\n"
@@ -768,8 +770,8 @@ public class TestShape {
     myShape.removeTransformation(t5.getType(), t5.getStart(), t5.getEnd());
     myShape.removeTransformation(t6.getType(), t6.getStart(), t6.getEnd());
     myShape.removeTransformation(t7.getType(), t7.getStart(), t7.getEnd());
-    assertEquals("", myShape.getTransformationDescription());
-    assertEquals("Create triangle Triangle1 with center at (150,200), width 65, "
+    Assert.assertEquals("", myShape.getTransformationDescription());
+    Assert.assertEquals("Create triangle Triangle1 with center at (150,200), width 65, "
                     + "and height 100 on layer 1 with color 1.0,0.0,0.0.\n\n", myShape.toString());
   }
 }

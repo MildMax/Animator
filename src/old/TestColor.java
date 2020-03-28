@@ -1,3 +1,5 @@
+package old;
+
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
@@ -15,11 +17,11 @@ public class TestColor {
   public void testColorConstructor() {
     Color c = new Color(1.0, 0.5, 0.0);
 
-    assertEquals(1.0, c.getR(), 0.01);
-    assertEquals(0.5, c.getG(), 0.01);
-    assertEquals(0.0, c.getB(), 0.01);
+    Assert.assertEquals(1.0, c.getR(), 0.01);
+    Assert.assertEquals(0.5, c.getG(), 0.01);
+    Assert.assertEquals(0.0, c.getB(), 0.01);
 
-    assertEquals("1.0,0.5,0.0", c.toString());
+    Assert.assertEquals("1.0,0.5,0.0", c.toString());
   }
 
   /**
