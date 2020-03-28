@@ -7,6 +7,7 @@ package cs5004.animator.model.shapes;
  */
 public enum ShapeType {
   CIRCLE,
+  ELLIPSE,
   OVAL,
   RECTANGLE,
   SQUARE,

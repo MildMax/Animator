@@ -6,9 +6,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cs5004.animator.model.shapes.*;
+import cs5004.animator.model.transformations.*;
+import cs5004.animator.model.*;
+
 import cs5004.animator.model.shapes.Shape;
+import cs5004.animator.model.shapes.AbstractShape;
 import cs5004.animator.model.transformations.Transformation;
 import cs5004.animator.model.transformations.TransformationType;
+
+import cs5004.animator.util.AnimationBuilder;
+import cs5004.animator.model.Color;
 
 /**
  * The AnimationModelImpl class holds a series of Shapes and their transformations. Supports
@@ -43,21 +51,64 @@ import cs5004.animator.model.transformations.TransformationType;
  * <p>toString() method</p>
  */
 public class AnimationModelImpl implements AnimationModel {
-
+  private final int boundX;
+  private final int boundY;
   private final int windowWidth;
   private final int windowHeight;
   private final Color windowColor;
-
   private int ticks;
   private Map<String, Shape> shapeMap;
+
+
+  /**
+   * Takes two ints indicating the width and height of the window and a color specifying the
+   * background color of the window. Throws IllegalArgumentException if either the specified
+   * width or height is less than or equal to 0 or if the Color value is null.
+   *
+   * @param w specifies the width of the window.
+   * @param h specifies the height of the window.
+   * @throws IllegalArgumentException if the windowHeight or windowWidth is less than or equal
+   *                                  to 0.
+   *                                  If the windowColor us null.
+   */
+  public AnimationModelImpl(int x, int y, int w, int h) {
+    this.boundX = x;
+    this.boundY = y;
+    this.windowWidth = w;
+    this.windowHeight = h;
+    this.ticks = 0;
+    this.windowColor = new Color(0,0,0);
+    this.shapeMap = new HashMap<String, Shape>();
+
+  }
+//          throws IllegalArgumentException {
+//    if (windowWidth <= 0 || windowHeight <= 0) {
+//      throw new IllegalArgumentException("Window dimensions cannot be less than or equal to zero");
+//    }
+//    this.boundX = boundX;
+//    this.boundY = boundY;
+//    this.windowWidth = windowWidth;
+//    this.windowHeight = windowHeight;
+//    this.shapeMap = new HashMap<>();
+//    this.ticks = 0;
+//    this.windowColor = new Color(0,0,0);
+
+
+
+
+
+
+  // BEGIN ORIGINAL CONSTRUCTORS
+  // BEGIN ORIGINAL CONSTRUCTORS
+  // BEGIN ORIGINAL CONSTRUCTORS
 
   /**
    * Sets the window size to have a width and height of 500.
    * Sets the window background color to 0.0,0.0,0.0 (white).
    */
-  public AnimationModelImpl() {
-    this(500, 500);
-  }
+//  public AnimationModelImpl() {
+//    this(500, 500);
+//  }
 
   /**
    * Takes two ints indicating the width and height of the window.
@@ -68,9 +119,9 @@ public class AnimationModelImpl implements AnimationModel {
    * @param windowHeight indicates the height of the window.
    * @throws IllegalArgumentException if the window width or height is less than or equal to 0.
    */
-  public AnimationModelImpl(int windowWidth, int windowHeight) throws IllegalArgumentException {
-    this(windowWidth, windowHeight, new Color(0,0,0));
-  }
+//  public AnimationModelImpl(int windowWidth, int windowHeight) throws IllegalArgumentException {
+//    this(windowWidth, windowHeight, new Color(0,0,0));
+//  }
 
   /**
    * Takes a Color that specifies the background color of the window. Sets the window height
@@ -79,9 +130,9 @@ public class AnimationModelImpl implements AnimationModel {
    * @param windowColor takes the background color of the window.
    * @throws IllegalArgumentException if the specified color value is null.
    */
-  public AnimationModelImpl(Color windowColor) throws IllegalArgumentException {
-    this(500, 500, windowColor);
-  }
+//  public AnimationModelImpl(Color windowColor) throws IllegalArgumentException {
+//    this(500, 500, windowColor);
+//  }
 
   /**
    * Takes two ints indicating the width and height of the window and a color specifying the
@@ -95,26 +146,27 @@ public class AnimationModelImpl implements AnimationModel {
    *                                  to 0.
    *                                  If the windowColor us null.
    */
-  public AnimationModelImpl(int windowWidth, int windowHeight, Color windowColor)
-          throws IllegalArgumentException {
-    if (windowWidth <= 0 || windowHeight <= 0) {
-      throw new IllegalArgumentException("Window dimensions cannot be less than or equal to zero");
-    }
-    else if (windowColor == null) {
-      throw new IllegalArgumentException("Window color cannot be null");
-    }
-    this.windowWidth = windowWidth;
-    this.windowHeight = windowHeight;
-    this.windowColor = windowColor;
-    this.shapeMap = new HashMap<>();
-    this.ticks = 0;
-  }
+//  public AnimationModelImpl(int windowWidth, int windowHeight, Color windowColor)
+//          throws IllegalArgumentException {
+//    if (windowWidth <= 0 || windowHeight <= 0) {
+//      throw new IllegalArgumentException("Window dimensions cannot be less than or equal to zero");
+//    }
+//    else if (windowColor == null) {
+//      throw new IllegalArgumentException("Window color cannot be null");
+//    }
+//    this.windowWidth = windowWidth;
+//    this.windowHeight = windowHeight;
+//    this.windowColor = windowColor;
+//    this.shapeMap = new HashMap<>();
+//    this.ticks = 0;
+//  }
 
   /**
    * Adds a shape to the AnimationModelImpl. Throws IllegalArgumentException if the shape is null
    * or if the shape with the same name already exists.
    *
    * @param shape takes the shape to be added.
+   * @param name takes the name of the shape to be added.
    * @throws IllegalArgumentException if the shape object is null.
    *                                  If the shape with the same name already exists.
    */
@@ -346,4 +398,78 @@ public class AnimationModelImpl implements AnimationModel {
       return tList.get(tList.size() - 1).getEnd();
     }
   }
+
+  /**
+   * return a copy of the model;
+   * @return
+   */
+  private AnimationModel copy() {
+    return this;
+  }
+
+  /**
+   *  Implement Builder.
+   */
+  public static final class Builder implements AnimationBuilder<AnimationModel> {
+//    private int boundX;
+//    private int boundY;
+//    private int windowWidth;
+//    private int windowHeight;
+//    private Color windowColor;
+//    private int ticks;
+//    private Map<String, Shape> shapeMap;
+    private AnimationModel m;
+
+
+    public Builder(AnimationModel m) {
+      this.m = m;
+    }
+//    public Builder(x,y,width,height,s) {
+//      AnimationModel myModel = new AnimationModelImpl();
+//      this.boundX = 0;
+//      this.boundY = 0;
+//      this.windowWidth = 0;
+//      this.windowHeight = 0;
+//      this.windowColor = new Color(0,0,0);
+//      this.ticks = 999;
+//      this.shapeMap = new HashMap<String, Shape>();
+//    }
+
+    @Override
+    public AnimationModel build() {
+      return this.m;
+    }
+
+    @Override
+    public AnimationBuilder<AnimationModel> setBounds(int x, int y, int width, int height) {
+      AnimationModel myModel  = new AnimationModelImpl(x,y,width,height);
+      AnimationBuilder<AnimationModel> myBuilder = new Builder(myModel);
+      return myBuilder;
+    }
+
+    @Override
+    public AnimationBuilder<AnimationModel> declareShape(String name, String type) {
+      if (type.equals("rectangle")) {
+        AbstractShape s = new Rectangle(name);
+      } else if (type.equals("ellipse")) {
+        AbstractShape s = new Ellipse(name);
+      } else if () {
+
+      }
+      this.m.addShape(name, );
+      return null;
+    }
+
+    @Override
+    public AnimationBuilder<AnimationModel> addMotion(String name, int t1, int x1, int y1, int w1, int h1, int r1, int g1, int b1, int t2, int x2, int y2, int w2, int h2, int r2, int g2, int b2) {
+      return null;
+    }
+
+    @Override
+    public AnimationBuilder<AnimationModel> addKeyframe(String name, int t, int x, int y, int w, int h, int r, int g, int b) {
+      return null;
+    }
+    // FILL IN HERE
+  }
+
 }
