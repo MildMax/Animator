@@ -1,7 +1,5 @@
 package cs5004.animator.model.transformations;
 
-import old.TransformationType;
-
 /**
  * The Transformation interface declares methods that must be implemented by every
  * transformation for each animation. Contains the following features:
