@@ -38,6 +38,12 @@ public class ChangeWidth extends AbstractTransformation {
     this.newWidth = newWidth;
   }
 
+  public int modifyWidth(int size, int tick) {
+    int modWidth = newWidth - size;
+    double diff = (double)(tick - getStart()) / (getEnd() - getStart());
+    return (int)(size + (modWidth * diff));
+  }
+
   /**
    * Returns a String indicating the new width of the Shape and the start and end
    * time of the ChangeWidth transformation.

@@ -38,6 +38,16 @@ public class ChangeTransparency extends AbstractTransformation {
     this.newTransparency = newTransparency;
   }
 
+  public double modifyTransparency(double transparency, int tick) {
+    if (getEnd() == getStart()) {
+      return this.newTransparency;
+    }
+
+    double modTransparency = this.newTransparency - transparency;
+    double diff = (double)(tick - getStart()) / (getEnd() - getStart());
+    return (transparency + (modTransparency * diff));
+  }
+
   /**
    * Return a String indicating the new transparency of the Shape and the start
    * and end time of the ChangeTransparency transformation.

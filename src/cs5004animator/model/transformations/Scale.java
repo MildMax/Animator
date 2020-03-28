@@ -38,6 +38,13 @@ public class Scale extends AbstractTransformation {
     this.scaleFactor = scaleFactor;
   }
 
+  public int scaleVal(int size, int tick) {
+    double scaleDiff = scaleFactor - 1.0;
+    double diff = (double)(tick - getStart()) / (getEnd() - getStart());
+    double newScale = scaleDiff * diff;
+    return (int)(size * (1 + newScale));
+  }
+
   /**
    * Returns a String indicating the coefficient by which the size of a Shape will be scaled
    * and the start and end time of the Scale transformation.

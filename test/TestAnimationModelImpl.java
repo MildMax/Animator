@@ -1,13 +1,24 @@
 import org.junit.Test;
 import org.junit.Before;
 
+import java.util.List;
+
 import cs5004animator.model.AnimationModel;
 import cs5004animator.model.AnimationModelImpl;
 import cs5004animator.model.Color;
 import cs5004animator.model.shapes.Circle;
+import cs5004animator.model.shapes.Oval;
+import cs5004animator.model.shapes.Rectangle;
+import cs5004animator.model.shapes.Shape;
 import cs5004animator.model.shapes.Square;
+import cs5004animator.model.shapes.Triangle;
 import cs5004animator.model.transformations.Appearance;
+import cs5004animator.model.transformations.ChangeColor;
+import cs5004animator.model.transformations.ChangeHeight;
+import cs5004animator.model.transformations.ChangeTransparency;
+import cs5004animator.model.transformations.ChangeWidth;
 import cs5004animator.model.transformations.Move;
+import cs5004animator.model.transformations.Scale;
 import cs5004animator.model.transformations.TransformationType;
 
 import static org.junit.Assert.assertEquals;
@@ -565,6 +576,61 @@ public class TestAnimationModelImpl {
     AnimationModel m = new AnimationModelImpl();
 
     assertEquals("0.0,0.0,0.0", m.getBackgroundColor().toString());
+  }
+
+  @Test
+  public void testGetShapesAtTick() {
+    AnimationModel m = new AnimationModelImpl();
+
+    m.addShape(new Circle("circle", 0, 10, 20, 20, new Color(1, 0, 0)));
+    m.addTransformation("circle", new Appearance(5, 20));
+    m.addTransformation("circle", new Move(10, 20, 0, 0));
+    m.addTransformation("circle", new Scale(10, 20, 2.0));
+    m.addTransformation("circle", new ChangeColor(10, 20, new Color(0, 0, 1)));
+    m.addTransformation("circle", new ChangeWidth(10, 20, 30));
+    m.addTransformation("circle", new ChangeHeight(10, 20, 30));
+    m.addTransformation("circle", new ChangeTransparency(10, 20, 50));
+
+
+    m.addShape(new Oval("oval", 1, 20, 25, 0, 0, new Color(0, 1,0)));
+    m.addTransformation("oval", new Appearance(10, 30));
+    m.addTransformation("oval", new Move(10, 20, 100, 100));
+    m.addTransformation("oval", new Scale(10, 20, 2.0));
+    m.addTransformation("oval", new ChangeColor(10, 20, new Color(0, 0, 1)));
+    m.addTransformation("oval", new ChangeWidth(10, 20, 35));
+    m.addTransformation("oval", new ChangeHeight(10, 20, 30));
+    m.addTransformation("oval", new ChangeTransparency(10, 20, 50));
+
+    m.addShape(new Rectangle("rectangle", 2, 15, 15, 100, 100, new Color(0, 1, 1)));
+    m.addTransformation("rectangle", new Appearance(0, 20));
+    m.addTransformation("rectangle", new Move(5, 15, 50, 50));
+    m.addTransformation("rectangle", new Scale(10, 20, 2.0));
+    m.addTransformation("rectangle", new ChangeColor(10, 20, new Color(0, 0, 1)));
+    m.addTransformation("rectangle", new ChangeWidth(10, 20, 35));
+    m.addTransformation("rectangle", new ChangeHeight(10, 20, 30));
+    m.addTransformation("rectangle", new ChangeTransparency(10, 20, 50));
+
+    m.addShape(new Square("square", 3, 5, 10, 10, new Color(1, 0, 0)));
+    m.addTransformation("square", new Appearance(10, 25));
+    m.addTransformation("square", new Move(10, 20, 0, 0));
+    m.addTransformation("square", new Scale(10, 20, 2.0));
+    m.addTransformation("square", new ChangeColor(10, 20, new Color(0, 1, 0)));
+    m.addTransformation("square", new ChangeWidth(10, 20, 25));
+    m.addTransformation("square", new ChangeHeight(10, 20, 25));
+    m.addTransformation("square", new ChangeTransparency(10, 20, 50));
+
+    m.addShape(new Triangle("triangle", 4, 10, 15, 50, 50, new Color(0, 0, 1)));
+    m.addTransformation("triangle", new Appearance(0, 50));
+    m.addTransformation("triangle", new Move(10, 20, 70, 70));
+    m.addTransformation("triangle", new Scale(10, 20, 0.5));
+    m.addTransformation("triangle", new ChangeColor(10, 20, new Color(0.5, 0, 0)));
+    m.addTransformation("triangle", new ChangeWidth(10, 20, 35));
+    m.addTransformation("triangle", new ChangeHeight(10, 20, 30));
+    m.addTransformation("triangle", new ChangeTransparency(15, 15, 50));
+
+    List<Shape> modList = m.getShapesAtTick(15);
+
+    assertEquals("", "");
   }
 
 }

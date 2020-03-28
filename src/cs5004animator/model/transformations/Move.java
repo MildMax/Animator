@@ -34,6 +34,18 @@ public class Move extends AbstractTransformation {
     this.newY = newY;
   }
 
+  public int modifyX(int val, int tick) {
+    int dist = val - newX;
+    double diff = (double)(tick - getStart()) / (getEnd() - getStart());
+    return (int)(newX + (dist * diff));
+  }
+
+  public int modifyY(int val, int tick) {
+    int dist = val - newY;
+    double diff = (double)(tick - getStart()) / (getEnd() - getStart());
+    return (int)(newY + (dist * diff));
+  }
+
   /**
    * Return a String indicating the new (x,y) coordinate of the Shape and the
    * start and end time of the Move transformation.

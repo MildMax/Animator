@@ -1,6 +1,16 @@
 package cs5004animator.model.shapes;
 
+import java.util.List;
+
 import cs5004animator.model.Color;
+import cs5004animator.model.transformations.Appearance;
+import cs5004animator.model.transformations.ChangeColor;
+import cs5004animator.model.transformations.ChangeHeight;
+import cs5004animator.model.transformations.ChangeTransparency;
+import cs5004animator.model.transformations.ChangeWidth;
+import cs5004animator.model.transformations.Move;
+import cs5004animator.model.transformations.Scale;
+import cs5004animator.model.transformations.Transformation;
 
 /**
  * Create a rectangle class that extends the AbstractShape abstract class.
@@ -46,6 +56,53 @@ public class Triangle extends AbstractShape {
     out += getTransformationDescription();
 
     return out;
+  }
+
+  @Override
+  public Shape makeModifiedShape(int tick) {
+    int newHeight = this.initialHeight;
+    int newWidth = this.initialWidth;
+    int newX = this.initialCenterX;
+    int newY = this.initialCenterY;
+    double newTransparency = this.initialTransparency;
+    Color newColor = this.initialColor;
+    List<Transformation> currList = getCurrentTransformations(tick);
+    for (Transformation t : currList) {
+      switch (t.getType()) {
+        case APPEARANCE:
+          newTransparency = ((Appearance) t).setAppearance(tick);
+          break;
+        case MOVE:
+          newX = ((Move) t).modifyX(newX, tick);
+          newY = ((Move) t).modifyY(newY, tick);
+          break;
+        case SCALE:
+          newHeight = ((Scale) t).scaleVal(newHeight, tick);
+          newWidth = ((Scale) t).scaleVal(newWidth, tick);
+          break;
+        case CHANGECOLOR:
+          newColor = ((ChangeColor) t).modifyColor(newColor, tick);
+          break;
+        case CHANGEWIDTH:
+          newWidth = ((ChangeWidth) t).modifyWidth(newWidth, tick);
+          break;
+        case CHANGEHEIGHT:
+          newHeight = ((ChangeHeight) t).modifyHeight(newHeight, tick);
+          break;
+        case CHANGETRANSPARENCY:
+          newTransparency = ((ChangeTransparency) t).modifyTransparency(newTransparency, tick);
+          break;
+      }
+    }
+    Triangle c = new Triangle(this.name, this.layer, newHeight, newWidth,
+            newX, newY, newColor);
+    c.initialTransparency = newTransparency;
+    if (newTransparency == 0) {
+      return null;
+    }
+    else {
+      return c;
+    }
   }
 
 }

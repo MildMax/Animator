@@ -63,4 +63,8 @@ public interface Shape {
    * @return a list of all transformations on the shape as a list.
    */
   List<Transformation> getTransformationList();
+
+  Shape makeModifiedShape(int tick);
+
+  List<Transformation> getCurrentTransformations(int tick);
 }

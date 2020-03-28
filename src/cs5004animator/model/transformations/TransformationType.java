@@ -6,10 +6,10 @@ package cs5004animator.model.transformations;
  */
 public enum TransformationType {
   APPEARANCE,
-  CHANGECOLOR,
-  CHANGEHEIGHT,
   CHANGETRANSPARENCY,
   CHANGEWIDTH,
+  CHANGEHEIGHT,
+  CHANGECOLOR,
   MOVE,
   SCALE
 }

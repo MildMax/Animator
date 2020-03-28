@@ -26,6 +26,16 @@ public class Appearance extends AbstractTransformation {
     super(startTime, endTime, TransformationType.APPEARANCE);
   }
 
+  public double setAppearance(int tick) {
+
+    if (tick >= getStart() && tick <= getEnd()) {
+      return 100;
+    }
+    else {
+      return 0;
+    }
+  }
+
   /**
    * Returns a formatted String representing the time at which a shape appears
    * and disappears on screen.

@@ -38,6 +38,12 @@ public class ChangeHeight extends AbstractTransformation {
     this.newHeight = newHeight;
   }
 
+  public int modifyHeight(int size, int tick) {
+    int modWidth = newHeight - size;
+    double diff = (double)(tick - getStart()) / (getEnd() - getStart());
+    return (int)(size + (modWidth * diff));
+  }
+
   /**
    * Returns a String indicating the new height of the Shape and the start and
    * end time of the ChangeHeight transformation.

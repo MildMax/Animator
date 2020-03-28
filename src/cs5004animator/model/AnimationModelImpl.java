@@ -91,7 +91,9 @@ public class AnimationModelImpl implements AnimationModel {
    * @param windowWidth specifies the width of the window.
    * @param windowHeight specifies the height of the window.
    * @param windowColor specifies the background color of the window.
-   * @throws IllegalArgumentException
+   * @throws IllegalArgumentException if the windowHeight or windowWidth is less than or equal
+   *                                  to 0.
+   *                                  If the windowColor us null.
    */
   public AnimationModelImpl(int windowWidth, int windowHeight, Color windowColor)
           throws IllegalArgumentException {
@@ -262,11 +264,14 @@ public class AnimationModelImpl implements AnimationModel {
       throw new IllegalArgumentException("tick cannot be less than 0 or greater than total"
               + " number of ticks");
     }
-    /*
-    This method body will be filled out when we know more about the controller
-    and the view. Returns null currently so project compiles.
-     */
-    return null;
+    List<Shape> modShapes = new ArrayList<>();
+    for (Shape s : shapeMap.values()) {
+      Shape mod = s.makeModifiedShape(tick);
+      if (mod != null) {
+        modShapes.add(mod);
+      }
+    }
+    return modShapes;
   }
 
   /**

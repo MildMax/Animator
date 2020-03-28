@@ -37,6 +37,17 @@ public class ChangeColor extends AbstractTransformation {
     this.newColor = newColor;
   }
 
+  public Color modifyColor(Color color, int tick) {
+    double modR = newColor.getR() - color.getR();
+    double modG = newColor.getG() - color.getG();
+    double modB = newColor.getB() - color.getB();
+    double diff = (double)(tick - getStart()) / (getEnd() - getStart());
+    modR = (color.getR() + (modR * diff));
+    modG = (color.getG() + (modG * diff));
+    modB = (color.getB() + (modB * diff));
+    return new Color(modR, modG, modB);
+  }
+
   /**
    * Returns a string indicating the new color and the start and end time of the
    * ChangeColor transformation.

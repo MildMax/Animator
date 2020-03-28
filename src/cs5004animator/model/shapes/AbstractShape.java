@@ -9,8 +9,8 @@ import cs5004animator.model.transformations.Transformation;
 import cs5004animator.model.transformations.TransformationType;
 
 /**
- * Create an abstract class called AbstractShape that is a generic shape.
- * This class implements the Shape interface.
+ * Create an abstract class called AbstractShape that is a generic shape. Contains methods
+ * that apply to all shapes. This class implements the Shape interface.
  */
 public abstract class AbstractShape implements Shape {
   protected final String name;
@@ -20,7 +20,7 @@ public abstract class AbstractShape implements Shape {
   protected final int initialCenterX;
   protected final int initialCenterY;
   protected final Color initialColor;
-  protected final double initialTransparency;
+  protected double initialTransparency;
   private final ShapeType type;
   private List<Transformation> transformationList;
 
@@ -178,6 +178,18 @@ public abstract class AbstractShape implements Shape {
     return (newStart >= currStart && newStart <= currEnd)
             || (newEnd >= currStart && newEnd <= currEnd)
             || (currStart > newStart && currEnd < newEnd);
+  }
+
+  @Override
+  public List<Transformation> getCurrentTransformations(int tick) {
+    List<Transformation> current = new ArrayList<>();
+    for (Transformation t : transformationList) {
+      if (tick >= t.getStart() && tick <= t.getEnd()) {
+        current.add(t);
+      }
+    }
+    current.sort(Comparator.comparing(Transformation::getType));
+    return current;
   }
 }
 

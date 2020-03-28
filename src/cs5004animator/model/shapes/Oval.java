@@ -1,6 +1,16 @@
 package cs5004animator.model.shapes;
 
+import java.util.List;
+
 import cs5004animator.model.Color;
+import cs5004animator.model.transformations.Appearance;
+import cs5004animator.model.transformations.ChangeColor;
+import cs5004animator.model.transformations.ChangeHeight;
+import cs5004animator.model.transformations.ChangeTransparency;
+import cs5004animator.model.transformations.ChangeWidth;
+import cs5004animator.model.transformations.Move;
+import cs5004animator.model.transformations.Scale;
+import cs5004animator.model.transformations.Transformation;
 
 /**
  * Create an Oval class that extends the AbstractShape abstract class.
@@ -53,5 +63,52 @@ public class Oval extends AbstractShape {
     out += getTransformationDescription();
 
     return out;
+  }
+
+  @Override
+  public Shape makeModifiedShape(int tick) {
+    int newVerticalRadius = this.initialVerticalRadius;
+    int newHorizontalRadius = this.initialHorizontalRadius;
+    int newX = this.initialCenterX;
+    int newY = this.initialCenterY;
+    double newTransparency = this.initialTransparency;
+    Color newColor = this.initialColor;
+    List<Transformation> currList = getCurrentTransformations(tick);
+    for (Transformation t : currList) {
+      switch (t.getType()) {
+        case APPEARANCE:
+          newTransparency = ((Appearance) t).setAppearance(tick);
+          break;
+        case MOVE:
+          newX = ((Move) t).modifyX(newX, tick);
+          newY = ((Move) t).modifyY(newY, tick);
+          break;
+        case SCALE:
+          newVerticalRadius = ((Scale) t).scaleVal(newVerticalRadius, tick);
+          newHorizontalRadius = ((Scale) t).scaleVal(newHorizontalRadius, tick);
+          break;
+        case CHANGECOLOR:
+          newColor = ((ChangeColor) t).modifyColor(newColor, tick);
+          break;
+        case CHANGEWIDTH:
+          newHorizontalRadius = ((ChangeWidth) t).modifyWidth(newHorizontalRadius, tick);
+          break;
+        case CHANGEHEIGHT:
+          newVerticalRadius = ((ChangeHeight) t).modifyHeight(newVerticalRadius, tick);
+          break;
+        case CHANGETRANSPARENCY:
+          newTransparency = ((ChangeTransparency) t).modifyTransparency(newTransparency, tick);
+          break;
+      }
+    }
+    Oval c = new Oval(this.name, this.layer, newVerticalRadius, newHorizontalRadius,
+            newX, newY, newColor);
+    c.initialTransparency = newTransparency;
+    if (newTransparency == 0) {
+      return null;
+    }
+    else {
+      return c;
+    }
   }
 }

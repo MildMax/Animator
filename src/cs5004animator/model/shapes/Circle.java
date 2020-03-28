@@ -1,6 +1,16 @@
 package cs5004animator.model.shapes;
 
+import java.util.List;
+
 import cs5004animator.model.Color;
+import cs5004animator.model.transformations.Appearance;
+import cs5004animator.model.transformations.ChangeColor;
+import cs5004animator.model.transformations.ChangeHeight;
+import cs5004animator.model.transformations.ChangeTransparency;
+import cs5004animator.model.transformations.ChangeWidth;
+import cs5004animator.model.transformations.Move;
+import cs5004animator.model.transformations.Scale;
+import cs5004animator.model.transformations.Transformation;
 
 /**
  * Create a circle class that extends the Oval class.
@@ -47,5 +57,49 @@ public class Circle extends AbstractShape {
     out += getTransformationDescription();
 
     return out;
+  }
+
+  @Override
+  public Shape makeModifiedShape(int tick) {
+    int newRadius = this.radius;
+    int newX = this.initialCenterX;
+    int newY = this.initialCenterY;
+    double newTransparency = this.initialTransparency;
+    Color newColor = this.initialColor;
+    List<Transformation> currList = getCurrentTransformations(tick);
+    for (Transformation t : currList) {
+      switch (t.getType()) {
+        case APPEARANCE:
+          newTransparency = ((Appearance) t).setAppearance(tick);
+          break;
+        case MOVE:
+          newX = ((Move) t).modifyX(newX, tick);
+          newY = ((Move) t).modifyY(newY, tick);
+          break;
+        case SCALE:
+          newRadius = ((Scale) t).scaleVal(newRadius, tick);
+          break;
+        case CHANGECOLOR:
+          newColor = ((ChangeColor) t).modifyColor(newColor, tick);
+          break;
+        case CHANGEWIDTH:
+          newRadius = ((ChangeWidth) t).modifyWidth(newRadius, tick);
+          break;
+        case CHANGEHEIGHT:
+          newRadius = ((ChangeHeight) t).modifyHeight(newRadius, tick);
+          break;
+        case CHANGETRANSPARENCY:
+          newTransparency = ((ChangeTransparency) t).modifyTransparency(newTransparency, tick);
+          break;
+      }
+    }
+    Circle c = new Circle(this.name, this.layer, newRadius, newX, newY, newColor);
+    c.initialTransparency = newTransparency;
+    if (newTransparency == 0) {
+      return null;
+    }
+    else {
+      return c;
+    }
   }
 }
