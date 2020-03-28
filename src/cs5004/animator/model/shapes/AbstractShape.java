@@ -13,16 +13,19 @@ import cs5004.animator.model.transformations.TransformationType;
  * that apply to all shapes. This class implements the Shape interface.
  */
 public abstract class AbstractShape implements Shape {
-  protected final String name;
-  protected final int layer;
-  protected final int initialHeight;
-  protected final int initialWidth;
-  protected final int initialCenterX;
-  protected final int initialCenterY;
-  protected final Color initialColor;
-  protected double initialTransparency;
+  private  String name;
+  private  int layer;
+  private  int height;
+  private  int width;
+  private  int centerX;
+  private  int centerY;
+  private  int r;
+  private  int g;
+  private  int b;
   private final ShapeType type;
   private List<Transformation> transformationList;
+  private int appearTime;
+  private int disappearTime;
 
   /**
    * Create a new instance of AbstractShape.
@@ -43,7 +46,7 @@ public abstract class AbstractShape implements Shape {
    *
    */
   AbstractShape(String name, int layer, int initialHeight, int initialWidth, int initialCenterX,
-                int initialCenterY, Color initialColor, ShapeType type) {
+                int initialCenterY, int r, int g, int b, ShapeType type) {
     if (initialHeight <= 0) {
       throw new IllegalArgumentException("Initial height must be greater than zero.");
     }
@@ -53,18 +56,20 @@ public abstract class AbstractShape implements Shape {
     else if (name == null) {
       throw new IllegalArgumentException("Shape name cannot be null");
     }
-    else if (initialColor == null) {
+    else if (r < 0 || g < 0 || b < 0 || r > 255 || g > 255 || b > 255) {
       throw new IllegalArgumentException("Color initialColor cannot be null");
     }
 
     this.name = name;
     this.layer = layer;
-    this.initialHeight = initialHeight;
-    this.initialWidth = initialWidth;
-    this.initialCenterX = initialCenterX;
-    this.initialCenterY = initialCenterY;
-    this.initialColor = initialColor;
-    this.initialTransparency = 0.0;
+    this.height = initialHeight;
+    this.width = initialWidth;
+    this.centerX = initialCenterX;
+    this.centerY = initialCenterY;
+    this.r = r;
+    this.g = g;
+    this.b = b;
+
     this.type = type;
     transformationList = new ArrayList<>();
   }
@@ -80,13 +85,27 @@ public abstract class AbstractShape implements Shape {
     if (t == null) {
       throw new IllegalArgumentException("Transformation cannot be null");
     }
+
     for (Transformation transformation : transformationList) {
-      if (t.getType() == transformation.getType()
-              && checkTimes(transformation.getStart(), transformation.getEnd(),
+      if (checkTimes(transformation.getStart(), transformation.getEnd(),
               t.getStart(), t.getEnd())) {
         throw new IllegalArgumentException("Transformation already exists within that period");
       }
     }
+
+    if (transformationList.size() == 0) {
+      this.appearTime = t.getStart();
+      this.disappearTime = t.getEnd();
+    }
+    else {
+      if (t.getStart() < this.appearTime) {
+        this.appearTime = t.getStart();
+      }
+      if (t.getEnd() > this.disappearTime) {
+        this.disappearTime = t.getEnd();
+      }
+    }
+
     transformationList.add(t);
   }
 
@@ -124,6 +143,51 @@ public abstract class AbstractShape implements Shape {
   @Override
   public String getName() {
     return this.name;
+  }
+
+  @Override
+  public int getWidth() {
+    return this.width;
+  }
+
+  @Override
+  public int getHeight() {
+    return this.height;
+  }
+
+  @Override
+  public int getR() {
+    return this.r;
+  }
+
+  @Override
+  public int getG() {
+    return this.g;
+  }
+
+  @Override
+  public int getB() {
+    return this.b;
+  }
+
+  @Override
+  public int getX() {
+    return this.centerX;
+  }
+
+  @Override
+  public int getY() {
+    return this.centerY;
+  }
+
+  @Override
+  public int getStart() {
+    return this.appearTime;
+  }
+
+  @Override
+  public int getEnd() {
+    return this.disappearTime;
   }
 
   /**
@@ -175,8 +239,8 @@ public abstract class AbstractShape implements Shape {
    * @return true if the combination of times is valid, else false.
    */
   private boolean checkTimes(int currStart, int currEnd, int newStart, int newEnd) {
-    return (newStart >= currStart && newStart <= currEnd)
-            || (newEnd >= currStart && newEnd <= currEnd)
+    return (newStart > currStart && newStart < currEnd)
+            || (newEnd > currStart && newEnd < currEnd)
             || (currStart > newStart && currEnd < newEnd);
   }
 
@@ -188,7 +252,6 @@ public abstract class AbstractShape implements Shape {
         current.add(t);
       }
     }
-    current.sort(Comparator.comparing(Transformation::getType));
     return current;
   }
 }

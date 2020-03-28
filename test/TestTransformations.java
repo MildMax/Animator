@@ -1,7 +1,6 @@
 import org.junit.Test;
 import org.junit.Before;
 import cs5004.animator.model.Color;
-import cs5004.animator.model.transformations.Appearance;
 import cs5004.animator.model.transformations.ChangeColor;
 import cs5004.animator.model.transformations.ChangeHeight;
 import cs5004.animator.model.transformations.ChangeTransparency;

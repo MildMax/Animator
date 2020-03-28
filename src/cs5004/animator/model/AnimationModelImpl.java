@@ -166,7 +166,6 @@ public class AnimationModelImpl implements AnimationModel {
    * or if the shape with the same name already exists.
    *
    * @param shape takes the shape to be added.
-   * @param name takes the name of the shape to be added.
    * @throws IllegalArgumentException if the shape object is null.
    *                                  If the shape with the same name already exists.
    */

@@ -3,7 +3,6 @@ package cs5004.animator.model.shapes;
 import java.util.List;
 
 import cs5004.animator.model.Color;
-import cs5004.animator.model.transformations.Appearance;
 import cs5004.animator.model.transformations.ChangeColor;
 import cs5004.animator.model.transformations.ChangeHeight;
 import cs5004.animator.model.transformations.ChangeTransparency;
@@ -68,9 +67,6 @@ public class Square extends AbstractShape {
     List<Transformation> currList = getCurrentTransformations(tick);
     for (Transformation t : currList) {
       switch (t.getType()) {
-        case APPEARANCE:
-          newTransparency = ((Appearance) t).setAppearance(tick);
-          break;
         case MOVE:
           newX = ((Move) t).modifyX(newX, tick);
           newY = ((Move) t).modifyY(newY, tick);

@@ -43,6 +43,16 @@ public interface Shape {
    */
   String getName();
 
+  int getWidth();
+  int getHeight();
+  int getR();
+  int getG();
+  int getB();
+  int getX();
+  int getY();
+  int getStart();
+  int getEnd();
+
   /**
    * Return the type of shape.
    *

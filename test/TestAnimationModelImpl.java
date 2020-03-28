@@ -12,7 +12,6 @@ import cs5004.animator.model.shapes.Rectangle;
 import cs5004.animator.model.shapes.Shape;
 import cs5004.animator.model.shapes.Square;
 import cs5004.animator.model.shapes.Triangle;
-import cs5004.animator.model.transformations.Appearance;
 import cs5004.animator.model.transformations.ChangeColor;
 import cs5004.animator.model.transformations.ChangeHeight;
 import cs5004.animator.model.transformations.ChangeTransparency;

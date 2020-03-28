@@ -5,7 +5,6 @@ package cs5004.animator.model.transformations;
  * a Shape can undergo.
  */
 public enum TransformationType {
-  APPEARANCE,
   CHANGETRANSPARENCY,
   CHANGEWIDTH,
   CHANGEHEIGHT,
