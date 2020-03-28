@@ -23,16 +23,6 @@ public interface AnimationModel {
   void addShape(Shape shape) throws IllegalArgumentException;
 
   /**
-   * Removes a shape with a name corresponding to the parameter String shapeName from the
-   * Animation Model. Throws IllegalArgumentException if there is no shape with a name
-   * corresponding to the parameter String shapeName.
-   *
-   * @param shapeName takes a String that corresponds to the name of an existing Shape.
-   * @throws IllegalArgumentException if the shape does not exist.
-   */
-  void removeShape(String shapeName) throws IllegalArgumentException;
-
-  /**
    * Adds a Transformation to a Shape. Throws IllegalArgumentException if a transformation of the
    * same type exists with a time frame that overlaps with the time frame of Transformation t or
    * if the Shape does not exist.
@@ -44,23 +34,6 @@ public interface AnimationModel {
    *                                  If the shape does not exist.
    */
   void addTransformation(String shapeName, Transformation t) throws IllegalArgumentException;
-
-  /**
-   * Removes a Transformation from a Shape according to the name specified by parameter
-   * String shapeName. Throws IllegalArgumentException if the transformation specified by the
-   * type and time frame does not exist or if the shape does not exist. Throws
-   * IllegalArgumentException if the String shapeName or TransformationType type is null.
-   *
-   * @param shapeName indicates the name of the Shape the transformation will be added to.
-   * @param type indicates the type of transformation being removed.
-   * @param start indicates the start time of the transformation being removed.
-   * @param end indicates the end time of the transformation being removed.
-   * @throws IllegalArgumentException If the transformation specified by the type and time frame
-   *                                  does not exist.
-   *                                  If the shape does not exist.
-   */
-  void removeTransformation(String shapeName, TransformationType type, int start, int end)
-          throws IllegalArgumentException;
 
   /**
    * Returns a list of shapes currently stored in the AnimationModel.
@@ -108,12 +81,5 @@ public interface AnimationModel {
    * @return the width of the window.
    */
   int getWindowWidth();
-
-  /**
-   * Returns the color of the window.
-   *
-   * @return the color of the window.
-   */
-  Color getBackgroundColor();
 
 }

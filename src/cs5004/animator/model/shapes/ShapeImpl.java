@@ -33,6 +33,7 @@ public abstract class ShapeImpl implements Shape {
   ShapeImpl(String name, ShapeType type) {
     this.name = name;
     this.type = type;
+    transformationList = new ArrayList<>();
   }
 
   /**
@@ -70,6 +71,11 @@ public abstract class ShapeImpl implements Shape {
     transformationList.add(t);
   }
 
+  /**
+   * Return the name of the shape.
+   *
+   * @return the name of the shape.
+   */
   @Override
   public String getName() {
     return this.name;

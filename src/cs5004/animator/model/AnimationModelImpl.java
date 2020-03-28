@@ -49,11 +49,9 @@ public class AnimationModelImpl implements AnimationModel {
   private final int boundY;
   private final int windowWidth;
   private final int windowHeight;
-  private final Color windowColor;
 
   private int ticks;
   private Map<String, Shape> shapeMap;
-
 
   /**
    * Takes two ints indicating the width and height of the window and a color specifying the
@@ -72,89 +70,9 @@ public class AnimationModelImpl implements AnimationModel {
     this.windowWidth = w;
     this.windowHeight = h;
     this.ticks = 0;
-    this.windowColor = new Color(0,0,0);
     this.shapeMap = new HashMap<String, Shape>();
 
   }
-//          throws IllegalArgumentException {
-//    if (windowWidth <= 0 || windowHeight <= 0) {
-//      throw new IllegalArgumentException("Window dimensions cannot be less than or equal to zero");
-//    }
-//    this.boundX = boundX;
-//    this.boundY = boundY;
-//    this.windowWidth = windowWidth;
-//    this.windowHeight = windowHeight;
-//    this.shapeMap = new HashMap<>();
-//    this.ticks = 0;
-//    this.windowColor = new Color(0,0,0);
-
-
-
-
-
-
-  // BEGIN ORIGINAL CONSTRUCTORS
-  // BEGIN ORIGINAL CONSTRUCTORS
-  // BEGIN ORIGINAL CONSTRUCTORS
-
-  /**
-   * Sets the window size to have a width and height of 500.
-   * Sets the window background color to 0.0,0.0,0.0 (white).
-   */
-//  public AnimationModelImpl() {
-//    this(500, 500);
-//  }
-
-  /**
-   * Takes two ints indicating the width and height of the window.
-   * Sets the background color to 0.0,0.0,0.0 (white). Throws
-   * IllegalArgumentException if the window width or height is less than or equal to 0.
-   *
-   * @param windowWidth indicates the width of the window.
-   * @param windowHeight indicates the height of the window.
-   * @throws IllegalArgumentException if the window width or height is less than or equal to 0.
-   */
-//  public AnimationModelImpl(int windowWidth, int windowHeight) throws IllegalArgumentException {
-//    this(windowWidth, windowHeight, new Color(0,0,0));
-//  }
-
-  /**
-   * Takes a Color that specifies the background color of the window. Sets the window height
-   * and width to be 500. Throws IllegalArgumentException if the specified color value is null.
-   *
-   * @param windowColor takes the background color of the window.
-   * @throws IllegalArgumentException if the specified color value is null.
-   */
-//  public AnimationModelImpl(Color windowColor) throws IllegalArgumentException {
-//    this(500, 500, windowColor);
-//  }
-
-  /**
-   * Takes two ints indicating the width and height of the window and a color specifying the
-   * background color of the window. Throws IllegalArgumentException if either the specified
-   * width or height is less than or equal to 0 or if the Color value is null.
-   *
-   * @param windowWidth specifies the width of the window.
-   * @param windowHeight specifies the height of the window.
-   * @param windowColor specifies the background color of the window.
-   * @throws IllegalArgumentException if the windowHeight or windowWidth is less than or equal
-   *                                  to 0.
-   *                                  If the windowColor us null.
-   */
-//  public AnimationModelImpl(int windowWidth, int windowHeight, Color windowColor)
-//          throws IllegalArgumentException {
-//    if (windowWidth <= 0 || windowHeight <= 0) {
-//      throw new IllegalArgumentException("Window dimensions cannot be less than or equal to zero");
-//    }
-//    else if (windowColor == null) {
-//      throw new IllegalArgumentException("Window color cannot be null");
-//    }
-//    this.windowWidth = windowWidth;
-//    this.windowHeight = windowHeight;
-//    this.windowColor = windowColor;
-//    this.shapeMap = new HashMap<>();
-//    this.ticks = 0;
-//  }
 
   /**
    * Adds a shape to the AnimationModelImpl. Throws IllegalArgumentException if the shape is null
@@ -174,27 +92,6 @@ public class AnimationModelImpl implements AnimationModel {
     }
     else {
       shapeMap.put(shape.getName(), shape);
-    }
-  }
-
-  /**
-   * Removes a shape from the AnimationModelImpl. Throws IllegalArgumentException if the String
-   * shapeName is null or if there is no shape associated with the shapeName.
-   *
-   * @param shapeName takes a String that corresponds to the name of an existing Shape.
-   * @throws IllegalArgumentException if the String shapeName is null.
-   *                                  If there is no shape associated with the shapeName.
-   */
-  @Override
-  public void removeShape(String shapeName) throws IllegalArgumentException {
-    if (shapeName == null) {
-      throw new IllegalArgumentException("String shapeName cannot be null");
-    }
-    else if (shapeMap.containsKey(shapeName)) {
-      shapeMap.remove(shapeName);
-    }
-    else {
-      throw new IllegalArgumentException("That shape does not exist");
     }
   }
 
@@ -222,33 +119,6 @@ public class AnimationModelImpl implements AnimationModel {
     shape.addTransformation(t);
     if (t.getEnd() > this.ticks) {
       this.ticks = t.getEnd();
-    }
-  }
-
-  /**
-   * Removes a transformation from a shape in AnimationModelImpl. Throws IllegalArgumentException
-   * if the String shapeName is null, if TransformationType is null, if there is no shape
-   * associated with shapeName, or if the transformation does not exist.
-   *
-   * @param shapeName indicates the name of the Shape the transformation will be added to.
-   * @param type indicates the type of transformation being removed.
-   * @param start indicates the start time of the transformation being removed.
-   * @param end indicates the end time of the transformation being removed.
-   * @throws IllegalArgumentException if the String shapeName is null.
-   *                                  If the TransformationType is null.
-   *                                  If there is no shape associated with shapeName.
-   *                                  If the transformation does not exist.
-   */
-  @Override
-  public void removeTransformation(String shapeName, TransformationType type, int start, int end)
-          throws IllegalArgumentException {
-    if (shapeName == null || type == null) {
-      throw new IllegalArgumentException("Values cannot be null");
-    }
-    Shape shape = findShape(shapeName);
-    shape.removeTransformation(type, start, end);
-    if (end == this.ticks) {
-      this.ticks = findTotalTicks();
     }
   }
 
@@ -339,16 +209,6 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   /**
-   * Returns the background color of the window.
-   *
-   * @return the background color of the window.
-   */
-  @Override
-  public Color getBackgroundColor() {
-    return  this.windowColor;
-  }
-
-  /**
    * Returns a formatted String indicating the size of the window, the color of the window, the
    * speed of the Animator, and a list of shapes and their respective instructions in
    * chronological order.
@@ -360,7 +220,7 @@ public class AnimationModelImpl implements AnimationModel {
   @Override
   public String toString() {
     String out = "Create window with width " + this.windowWidth + " and height "
-            + this.windowHeight + " with background color " + this.windowColor.toString()
+            + this.windowHeight
             + " and total ticks " + this.getTotalTicks() + ".\n\n";
 
     for (Shape shape : shapeMap.values()) {
