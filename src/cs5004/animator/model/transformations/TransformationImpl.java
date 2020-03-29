@@ -57,58 +57,72 @@ public class TransformationImpl implements Transformation {
     return this.t2;
   }
 
+  @Override
   public int getX1() {
     return this.x1;
   }
 
+  @Override
   public int getX2() {
     return this.x2;
   }
 
+  @Override
   public int getY1() {
     return this.y1;
   }
 
+  @Override
   public int getY2() {
     return this.y2;
   }
 
+  @Override
   public int getW1() {
     return this.w1;
   }
 
+  @Override
   public int getW2() {
     return this.w2;
   }
 
+  @Override
   public int getH1() {
     return this.h1;
   }
 
+  @Override
   public int getH2() {
     return this.h2;
   }
 
+  @Override
   public int getR1() {
     return this.r1;
   }
 
+  @Override
   public int getR2() {
     return this.r2;
   }
 
+  @Override
   public int getG1() {
     return this.g1;
   }
 
+  @Override
   public int getG2() {
     return this.g2;
   }
 
+  @Override
   public int getB1() {
     return this.b1;
   }
 
+  @Override
   public int getB2() {
     return this.b2;
   }

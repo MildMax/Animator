@@ -52,6 +52,8 @@ public interface Shape {
   int getStart();
   int getEnd();
 
+  Shape getShapeAtTick(int tick);
+
   /**
    * Return the type of shape.
    *

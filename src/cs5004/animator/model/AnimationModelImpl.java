@@ -178,7 +178,15 @@ public class AnimationModelImpl implements AnimationModel {
    */
   @Override
   public List<Shape> getShapesAtTick(int tick) throws IllegalArgumentException {
-    return null;
+    List<Shape> shapeList = new ArrayList<>();
+    for (Shape shape : this.shapeMap.values()) {
+      try {
+        shapeList.add(shape.getShapeAtTick(tick));
+      } catch (IllegalArgumentException e) {
+        System.out.println("Shape does not exist yet");
+      }
+    }
+    return shapeList;
   }
 
   /**
@@ -197,6 +205,16 @@ public class AnimationModelImpl implements AnimationModel {
    */
   public int getWindowWidth() {
     return this.windowWidth;
+  }
+
+  @Override
+  public int getBoundX() {
+    return this.boundX;
+  }
+
+  @Override
+  public int getBoundY() {
+    return this.boundY;
   }
 
   /**

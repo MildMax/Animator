@@ -29,4 +29,32 @@ public interface Transformation {
    */
   int getEnd();
 
+  int getX1();
+
+  int getX2();
+
+  int getY1();
+
+  int getY2();
+
+  int getW1();
+
+  int getW2();
+
+  int getH1();
+
+  int getH2();
+
+  int getR1();
+
+  int getR2();
+
+  int getG1();
+
+  int getG2();
+
+  int getB1();
+
+  int getB2();
+
 }

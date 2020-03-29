@@ -80,4 +80,8 @@ public interface AnimationModel {
    */
   int getWindowWidth();
 
+  int getBoundX();
+
+  int getBoundY();
+
 }

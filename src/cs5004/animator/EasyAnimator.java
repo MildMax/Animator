@@ -7,11 +7,14 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.util.List;
 import java.util.Scanner;
 
 import cs5004.animator.model.AnimationModel;
 import cs5004.animator.model.AnimationModelImpl;
+import cs5004.animator.model.shapes.Shape;
 import cs5004.animator.util.AnimationReader;
+import cs5004.animator.view.AnimationViewImpl;
 
 public final class EasyAnimator {
 
@@ -21,15 +24,44 @@ public final class EasyAnimator {
   int speed = 1;
 
 
-  public static void main(String[] args) throws IOException {
+  public static void main(String[] args) throws IOException, InterruptedException {
     // FILL IN HERE
     //create model <--- this is where our builder is
     //create a view
     //stringreader <-- stringreader.staticFunc(file, model.builder);
+
+    //create the animator
     EasyAnimator e = new EasyAnimator();
+
+    //parse arguments and create model
     e.parseArgs(args);
     AnimationModel m = AnimationReader.parseFile(e.inFile, new AnimationModelImpl.Builder());
+
+    //write out put to file
+    //TODO - write output to specific file type (svg, text, some other one)
     e.writeToOutFile(m.toString());
+
+    //set up the view
+    AnimationViewImpl v = new AnimationViewImpl();
+    v.setFrameSize(m.getWindowWidth(), m.getWindowHeight());
+    v.setFrameLocation(m.getBoundX(), m.getBoundY());
+    v.displayFrame();
+
+    //draw the animation
+
+    //List<Shape> sList = m.getShapesAtTick(20);
+
+    int ticks = 0;
+    while (ticks < m.getTotalTicks()) {
+      //control animation flow here
+      List<Shape> sList = m.getShapesAtTick(ticks);
+      v.drawNewFrame(sList);
+      ++ticks;
+      Thread.sleep(10);
+    }
+
+
+    v.setVisible(false);
 
     return;
   }

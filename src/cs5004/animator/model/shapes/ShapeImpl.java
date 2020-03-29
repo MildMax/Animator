@@ -141,6 +141,45 @@ public class ShapeImpl implements Shape {
   }
 
   @Override
+  public Shape getShapeAtTick(int tick) {
+    if (tick < appearTime || tick > disappearTime) {
+      throw new IllegalArgumentException("Shape does not appear at tick");
+    }
+
+    Transformation t = null;
+
+    for (Transformation transformation : transformationList) {
+      if (tick >= transformation.getStart() && tick <= transformation.getEnd()) {
+        t = transformation;
+        break;
+      }
+    }
+
+    double diff;
+    if (t.getStart() == t.getEnd()) {
+      diff = 0;
+    } else {
+      diff = (double)(tick - t.getStart()) / (t.getEnd() - t.getStart());
+    }
+
+    //calculate pos
+    this.x = t.getX1() + (int)(diff * (t.getX2() - t.getX1()));
+    this.y = t.getY1() + (int)(diff * (t.getY2() - t.getY1()));
+
+    //calculate dims
+    this.width = t.getW1() + (int)(diff * (t.getW2() - t.getW1()));
+    this.height = t.getH1() + (int)(diff * (t.getH2() - t.getH1()));
+
+    //calculate color
+    this.r = t.getR1() + (int)Math.round(diff * (t.getR2() - t.getR1()));
+    this.g = t.getG1() + (int)Math.round(diff * (t.getG2() - t.getG1()));
+    this.b = t.getB1() + (int)Math.round(diff * (t.getB2() - t.getB1()));
+
+    return this;
+  }
+
+
+  @Override
   public String toString() {
     return this.type + " " + this.name + " appears at " + appearTime +
             " and disappears at " + disappearTime + ".\n";
