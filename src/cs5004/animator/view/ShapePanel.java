@@ -1,6 +1,7 @@
 package cs5004.animator.view;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.util.List;
 
 import cs5004.animator.model.shapes.Shape;
@@ -21,6 +22,8 @@ public class ShapePanel extends JPanel {
     super.paintComponent(g);
 
     Graphics2D g2d = (Graphics2D)g;
+
+
 
     for (Shape shape : shapeList) {
       //System.out.println("r:" + shape.getR() + " g:" + shape.getG() + " b:" + shape.getB());

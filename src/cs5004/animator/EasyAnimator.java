@@ -47,21 +47,21 @@ public final class EasyAnimator {
     v.setFrameLocation(m.getBoundX(), m.getBoundY());
     v.displayFrame();
 
+    System.out.println(v.getPreferredSize().width + " : " + v.getPreferredSize().height);
+
     //draw the animation
-
-    //List<Shape> sList = m.getShapesAtTick(20);
-
+    //TODO -- set ticks relative to speed
+    int sleepTime = 1000 / e.speed;
     int ticks = 0;
     while (ticks < m.getTotalTicks()) {
       //control animation flow here
       List<Shape> sList = m.getShapesAtTick(ticks);
       v.drawNewFrame(sList);
       ++ticks;
-      Thread.sleep(10);
+      Thread.sleep(sleepTime);
     }
 
-
-    v.setVisible(false);
+    v.closeFrame();
 
     return;
   }

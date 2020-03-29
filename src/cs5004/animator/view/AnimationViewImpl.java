@@ -37,4 +37,7 @@ public class AnimationViewImpl extends JFrame {
     this.revalidate();
   }
 
+  public void closeFrame() {
+    this.dispose();
+  }
 }
