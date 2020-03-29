@@ -80,8 +80,22 @@ public interface AnimationModel {
    */
   int getWindowWidth();
 
+  /**
+   * Returns the x value of the window's initial position with regard to the upper left corner of
+   * the screen.
+   *
+   * @return the x value of the window's initial position with regard to the upper left corner
+   *         of the screen.
+   */
   int getBoundX();
 
+  /**
+   * Returns the y value of the window's initial position with regard to the upper left corner of
+   * the screen.
+   *
+   * @return the y value of the window's initial position with regard to the upper left corner
+   *         of the screen.
+   */
   int getBoundY();
 
 }

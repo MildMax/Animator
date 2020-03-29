@@ -24,11 +24,7 @@ import cs5004.animator.util.AnimationBuilder;
  *
  * <p>addShape() method</p>
  *
- * <p>removeShape() method</p>
- *
  * <p>addTransformation() method</p>
- *
- * <p>removeTransformation() method</p>
  *
  * <p>getShapes() method</p>
  *
@@ -42,7 +38,9 @@ import cs5004.animator.util.AnimationBuilder;
  *
  * <p>getWindowWidth() method</p>
  *
- * <p>getBackgroundColor method()</p>
+ * <p>getBoundX() method</p>
+ *
+ * <p>getBoundY() method</p>
  *
  * <p>toString() method</p>
  */
@@ -207,20 +205,33 @@ public class AnimationModelImpl implements AnimationModel {
     return this.windowWidth;
   }
 
+  /**
+   * Returns the x value of the window's initial position with regard to the upper left corner of
+   * the screen.
+   *
+   * @return the x value of the window's initial position with regard to the upper left corner
+   *         of the screen.
+   */
   @Override
   public int getBoundX() {
     return this.boundX;
   }
 
+  /**
+   * Returns the y value of the window's initial position with regard to the upper left corner of
+   * the screen.
+   *
+   * @return the y value of the window's initial position with regard to the upper left corner
+   *         of the screen.
+   */
   @Override
   public int getBoundY() {
     return this.boundY;
   }
 
   /**
-   * Returns a formatted String indicating the size of the window, the color of the window, the
-   * speed of the Animator, and a list of shapes and their respective instructions in
-   * chronological order.
+   * Returns a formatted String indicating the size of the window, the color of the window,
+   * and a list of shapes and their respective instructions in chronological order.
    *
    * @return a formatted String indicating the size of the window, the color of the window, the
    *         speed of the Animator, and a list of shapes and their respective instructions in
@@ -257,17 +268,42 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   /**
-   *  Implement Builder.
+   *  Builds and returns an AnimationModel object with a specified height, width,
+   *  initial x and y positions relative to the upper left hand corner of the screen,
+   *  and a list of shapes and their transformations over the course of the animation.
    */
   public static final class Builder implements AnimationBuilder<AnimationModel> {
     private AnimationModel m;
     int layer = 0;
 
+    /**
+     * Returns the instance of AnimationModel in in this builder. Throws IllegalArgumentException
+     * if the model has not had its start position and width and height defined.
+     *
+     * @return the AnimationModel in this builder.
+     * @throws IllegalArgumentException if the model has not been assigned a width and height
+     *                                  value and an x and y value.
+     */
     @Override
-    public AnimationModel build() {
+    public AnimationModel build() throws IllegalArgumentException {
+      if (m == null) {
+        throw new IllegalArgumentException("Must declare bounds and width"
+                + "of the animation");
+      }
       return this.m;
     }
 
+    /**
+     * Initializes the AnimationModel in this object with width and height values specifying
+     * the width and height of the window as well as the x and y coordinates the screen will
+     * be displayed at with respect to the top left corner of the screen.
+     *
+     * @param x The leftmost x value
+     * @param y The topmost y value
+     * @param width The width of the bounding box
+     * @param height The height of the bounding box
+     * @return this instance of AnimationBuilder
+     */
     @Override
     public AnimationBuilder<AnimationModel> setBounds(int x, int y, int width, int height) {
       this.m  = new AnimationModelImpl(x,y,width,height);
@@ -276,6 +312,16 @@ public class AnimationModelImpl implements AnimationModel {
       return this;
     }
 
+    /**
+     * Adds a shape to the AnimationModel in this AnimationBuilder.
+     *
+     * @param name The unique name of the shape to be added.
+     *             No shape with this name should already exist.
+     * @param type The type of shape (e.g. "ellipse", "rectangle") to be added.
+     *             The set of supported shapes is unspecified, but should
+     *             include "ellipse" and "rectangle" as a minimum.
+     * @return this instance of AnimationBuilder.
+     */
     @Override
     public AnimationBuilder<AnimationModel> declareShape(String name, String type) {
       ShapeImpl s = null;
@@ -312,6 +358,28 @@ public class AnimationModelImpl implements AnimationModel {
       return this;
     }
 
+    /**
+     * Adds a transformation to the shape indicated by its associated name.
+     *
+     * @param name The name of the shape (added with {@link AnimationBuilder#declareShape})
+     * @param t1   The start time of this transformation
+     * @param x1   The initial x-position of the shape
+     * @param y1   The initial y-position of the shape
+     * @param w1   The initial width of the shape
+     * @param h1   The initial height of the shape
+     * @param r1   The initial red color-value of the shape
+     * @param g1   The initial green color-value of the shape
+     * @param b1   The initial blue color-value of the shape
+     * @param t2   The end time of this transformation
+     * @param x2   The final x-position of the shape
+     * @param y2   The final y-position of the shape
+     * @param w2   The final width of the shape
+     * @param h2   The final height of the shape
+     * @param r2   The final red color-value of the shape
+     * @param g2   The final green color-value of the shape
+     * @param b2   The final blue color-value of the shape
+     * @return
+     */
     @Override
     public AnimationBuilder<AnimationModel> addMotion(String name, int t1, int x1, int y1, int w1,
                                                       int h1, int r1, int g1, int b1, int t2,
