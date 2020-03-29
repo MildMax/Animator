@@ -22,37 +22,86 @@ public interface Shape {
   void addTransformation(Transformation t);
 
   /**
-   * Remove a transformation from the shape's transformation list. Throws an
-   * IllegalArgumentException if the Transformation corresponding to the type
-   * and time from does not exist or if the TransformationType is null.
-   *
-   * @param type is the type of transformation.
-   * @param start is the start time of the transformation.
-   * @param end is the end time of the transformation.
-   * @throws IllegalArgumentException if transformation is null.
-   *                                  If the transformation does not exist.
-   *
-   */
-//  void removeTransformation(TransformationType type, int start, int end);
-
-  /**
    * Return the name of the shape.
    *
    * @return the name of the shape.
    */
   String getName();
 
+  /**
+   * Returns the width of the shape.
+   *
+   * @return the width of the shape.
+   */
   int getWidth();
+
+  /**
+   * Return the height of the shape.
+   *
+   * @return the height of the shape.
+   */
   int getHeight();
+
+  /**
+   * Return the red color value of the shape.
+   *
+   * @return the red color value of the shape.
+   */
   int getR();
+
+  /**
+   * Return the green color value of the shape.
+   *
+   * @return the green color value of the shape.
+   */
   int getG();
+
+  /**
+   * Return the blue color value of the shape.
+   *
+   * @return the blue color value of the shape.
+   */
   int getB();
+
+  /**
+   * Return the center x value of the shape.
+   *
+   * @return the center x value of the shape.
+   */
   int getX();
+
+  /**
+   * Return the center y value of the shape.
+   *
+   * @return the center y value of the shape.
+   */
   int getY();
+
+  /**
+   * Return the time at which the shape appears.
+   *
+   * @return the time at which the shape appears.
+   */
   int getStart();
+
+  /**
+   * Return the time at which the shape disappears.
+   *
+   * @return the time at which the shape disappears.
+   */
   int getEnd();
 
-  Shape getShapeAtTick(int tick);
+  /**
+   * Changes the internal values of the shape according to its list of
+   * transformations at a given tick indicating the frame of the
+   * animation and returns itself.
+   *
+   * @param tick the frame of the animation.
+   * @return itself with modified values.
+   * @throws IllegalArgumentException if the shape is not visible at the frame specified
+   *                                  by the tick.
+   */
+  Shape getShapeAtTick(int tick) throws IllegalArgumentException;
 
   /**
    * Return the type of shape.
@@ -61,6 +110,11 @@ public interface Shape {
    */
   ShapeType getType();
 
+  /**
+   * Return the layer the shape will be displayed on.
+   *
+   * @return the layer the shape will be displayed on.
+   */
   int getLayer();
 
   /**
@@ -76,6 +130,4 @@ public interface Shape {
    * @return a list of all transformations on the shape as a list.
    */
   List<Transformation> getTransformationList();
-
-  List<Transformation> getCurrentTransformations(int tick);
 }

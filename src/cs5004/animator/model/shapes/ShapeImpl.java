@@ -26,11 +26,20 @@ public class ShapeImpl implements Shape {
   private int disappearTime;
 
   /**
-   * New Constructor
+   * Take a String name indicating the name of the shape, a ShapeType enum indicating the type of
+   * the shape, and a layer that the shape will be displayed on. Throws IllegalArgumentException
+   * if the String name is null or of the ShapeType type is null.
    *
-   * @param name
+   * @param name takes the name associated with the shape.
+   * @param type takes the type of the shape.
+   * @param layer takes the layer the shape will be displayed on.
+   * @throws IllegalArgumentException If the String name is null.
+   *                                  If the ShapeType type is null.
    */
   public ShapeImpl(String name, ShapeType type, int layer) {
+    if (name == null || type == null) {
+      throw new IllegalArgumentException("Name and/or type cannot be null");
+    }
     this.name = name;
     this.type = type;
     this.layer = layer;
@@ -42,15 +51,13 @@ public class ShapeImpl implements Shape {
    *
    * @param t is the transformation to be added.
    * @throws IllegalArgumentException if transformation is null.
+   *                                  If a transformation already exists on the shape
+   *                                  in the same time period.
    */
   @Override
   public void addTransformation(Transformation t) {
     if (t == null) {
       throw new IllegalArgumentException("Transformation cannot be null");
-    }
-
-    if (t.getEnd() < t.getStart()) {
-      throw new IllegalArgumentException("End time of transformation cannot be before start");
     }
 
     for (Transformation transformation : transformationList) {
@@ -86,46 +93,91 @@ public class ShapeImpl implements Shape {
     return this.name;
   }
 
+  /**
+   * Return the width of the shape.
+   *
+   * @return the width of the shape.
+   */
   @Override
   public int getWidth() {
     return this.width;
   }
 
+  /**
+   * Return the height of the shape.
+   *
+   * @return the height of the shape.
+   */
   @Override
   public int getHeight() {
     return this.height;
   }
 
+  /**
+   * Return the red color value of the shape.
+   *
+   * @return the red color value of the shape.
+   */
   @Override
   public int getR() {
     return this.r;
   }
 
+  /**
+   * Return the green color value of the shape.
+   *
+   * @return the green color value of the shape.
+   */
   @Override
   public int getG() {
     return this.g;
   }
 
+  /**
+   * Return the blue color value of the shape.
+   *
+   * @return the blue color value of the shape.
+   */
   @Override
   public int getB() {
     return this.b;
   }
 
+  /**
+   * Return the center x value of the shape.
+   *
+   * @return the center x value of the shape.
+   */
   @Override
   public int getX() {
     return this.x;
   }
 
+  /**
+   * Return the center y value of the shape.
+   *
+   * @return the center y value of the shape.
+   */
   @Override
   public int getY() {
     return this.y;
   }
 
+  /**
+   * Return the time at which the shape appears.
+   *
+   * @return the time at which the shape appears.
+   */
   @Override
   public int getStart() {
     return this.appearTime;
   }
 
+  /**
+   * Return the time at which the shape disappears.
+   *
+   * @return the time at which the shape disappears.
+   */
   @Override
   public int getEnd() {
     return this.disappearTime;
@@ -141,11 +193,26 @@ public class ShapeImpl implements Shape {
     return this.type;
   }
 
+  /**
+   * Return the layer at which the shape will be displayed.
+   *
+   * @return the layer on which the shape will be displayed.
+   */
   @Override
   public int getLayer() {
     return this.layer;
   }
 
+  /**
+   * Changes the internal values of the shape according to its list of
+   * transformations at a given tick indicating the frame of the
+   * animation and returns itself.
+   *
+   * @param tick the frame of the animation.
+   * @return itself with modified values.
+   * @throws IllegalArgumentException if the shape is not visible at the frame specified
+   *                                  by the tick.
+   */
   @Override
   public Shape getShapeAtTick(int tick) {
     if (tick < appearTime || tick > disappearTime) {
@@ -184,13 +251,6 @@ public class ShapeImpl implements Shape {
     return this;
   }
 
-
-  @Override
-  public String toString() {
-    return this.type + " " + this.name + " appears at " + appearTime +
-            " and disappears at " + disappearTime + ".\n";
-  }
-
   /**
    * Return the list of all transformations on the shape as a string.
    *
@@ -221,6 +281,19 @@ public class ShapeImpl implements Shape {
   }
 
   /**
+   * Returns a String representation of the shape's name and the ticks at which it appears
+   * and disappears on screen.
+   *
+   * @return a String representation of the shape's name and the ticks at which it appears
+   *         and disappears on screen.
+   */
+  @Override
+  public String toString() {
+    return this.type + " " + this.name + " appears at " + appearTime +
+            " and disappears at " + disappearTime + ".\n";
+  }
+
+  /**
    * Confirm that a set of start and end times are valid.
    *
    * @param currStart is the current start time.
@@ -235,16 +308,6 @@ public class ShapeImpl implements Shape {
             || (currStart > newStart && currEnd < newEnd);
   }
 
-  @Override
-  public List<Transformation> getCurrentTransformations(int tick) {
-    List<Transformation> current = new ArrayList<>();
-    for (Transformation t : transformationList) {
-      if (tick >= t.getStart() && tick <= t.getEnd()) {
-        current.add(t);
-      }
-    }
-    return current;
-  }
 }
 
 
