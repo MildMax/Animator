@@ -12,14 +12,14 @@ public class TestAnimationModelImpl {
   @Test
   public void genericTest() {
     AnimationModel m = new AnimationModelImpl(10, 10, 10, 10);
-    m.addShape(new ShapeImpl("R", ShapeType.RECTANGLE));
+    m.addShape(new ShapeImpl("R", ShapeType.RECTANGLE, 1));
     m.addTransformation("R", new TransformationImpl("R", 0, 0, 10, 10,
             10, 50, 50, 50, 20, 100, 100, 20, 20, 100, 100, 100));
 
     m.addTransformation("R", new TransformationImpl("R", 20, 5, 5, 5, 5, 5, 5, 5,
             20, 5, 5, 5, 5,5, 5, 5));
 
-    m.addShape(new ShapeImpl("Q", ShapeType.RECTANGLE));
+    m.addShape(new ShapeImpl("Q", ShapeType.RECTANGLE, 2));
 
     m.addTransformation("Q", new TransformationImpl("Q", 10, 5, 5, 5, 5, 5, 5, 5,
             20, 5, 5, 5, 5,5, 5, 10));

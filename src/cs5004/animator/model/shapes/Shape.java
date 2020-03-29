@@ -61,6 +61,8 @@ public interface Shape {
    */
   ShapeType getType();
 
+  int getLayer();
+
   /**
    * Return the list of all transformations on the shape as a string.
    *

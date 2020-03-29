@@ -30,9 +30,10 @@ public class ShapeImpl implements Shape {
    *
    * @param name
    */
-  public ShapeImpl(String name, ShapeType type) {
+  public ShapeImpl(String name, ShapeType type, int layer) {
     this.name = name;
     this.type = type;
+    this.layer = layer;
     transformationList = new ArrayList<>();
   }
 
@@ -141,6 +142,11 @@ public class ShapeImpl implements Shape {
   }
 
   @Override
+  public int getLayer() {
+    return this.layer;
+  }
+
+  @Override
   public Shape getShapeAtTick(int tick) {
     if (tick < appearTime || tick > disappearTime) {
       throw new IllegalArgumentException("Shape does not appear at tick");
@@ -171,9 +177,9 @@ public class ShapeImpl implements Shape {
     this.height = t.getH1() + (int)(diff * (t.getH2() - t.getH1()));
 
     //calculate color
-    this.r = t.getR1() + (int)Math.round(diff * (t.getR2() - t.getR1()));
-    this.g = t.getG1() + (int)Math.round(diff * (t.getG2() - t.getG1()));
-    this.b = t.getB1() + (int)Math.round(diff * (t.getB2() - t.getB1()));
+    this.r = t.getR1() + (int)(diff * (t.getR2() - t.getR1()));
+    this.g = t.getG1() + (int)(diff * (t.getG2() - t.getG1()));
+    this.b = t.getB1() + (int)(diff * (t.getB2() - t.getB1()));
 
     return this;
   }

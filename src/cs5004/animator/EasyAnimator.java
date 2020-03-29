@@ -42,9 +42,9 @@ public final class EasyAnimator {
     e.writeToOutFile(m.toString());
 
     //set up the view
-    AnimationViewImpl v = new AnimationViewImpl();
-    v.setFrameSize(m.getWindowWidth(), m.getWindowHeight());
-    v.setFrameLocation(m.getBoundX(), m.getBoundY());
+    AnimationViewImpl v = new AnimationViewImpl(m.getBoundX(), m.getBoundY(),
+            m.getWindowWidth(), m.getWindowHeight());
+
     v.displayFrame();
 
     System.out.println(v.getPreferredSize().width + " : " + v.getPreferredSize().height);

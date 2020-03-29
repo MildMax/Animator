@@ -261,6 +261,7 @@ public class AnimationModelImpl implements AnimationModel {
    */
   public static final class Builder implements AnimationBuilder<AnimationModel> {
     private AnimationModel m;
+    int layer = 0;
 
     @Override
     public AnimationModel build() {
@@ -280,33 +281,34 @@ public class AnimationModelImpl implements AnimationModel {
       ShapeImpl s = null;
       switch (type) {
         case "circle": {
-          s = new ShapeImpl(name, ShapeType.CIRCLE);
+          s = new ShapeImpl(name, ShapeType.CIRCLE, layer);
           break;
         }
         case "ellipse": {
-          s = new ShapeImpl(name, ShapeType.ELLIPSE);
+          s = new ShapeImpl(name, ShapeType.ELLIPSE, layer);
           break;
         }
         case "oval": {
-          s = new ShapeImpl(name, ShapeType.OVAL);
+          s = new ShapeImpl(name, ShapeType.OVAL, layer);
           break;
         }
         case "rectangle": {
-          s = new ShapeImpl(name, ShapeType.RECTANGLE);
+          s = new ShapeImpl(name, ShapeType.RECTANGLE, layer);
           break;
         }
         case "square": {
-          s = new ShapeImpl(name, ShapeType.SQUARE);
+          s = new ShapeImpl(name, ShapeType.SQUARE, layer);
           break;
         }
         case "triangle": {
-          s = new ShapeImpl(name, ShapeType.TRIANGLE);
+          s = new ShapeImpl(name, ShapeType.TRIANGLE, layer);
           break;
         }
         default:
           throw new IllegalArgumentException("Not a recognized type of shape.");
       }
       this.m.addShape(s);
+      ++layer;
       return this;
     }
 
