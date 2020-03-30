@@ -3,6 +3,8 @@ import cs5004.animator.model.shapes.Shape;
 
 import java.util.List;
 
+import javax.swing.*;
+
 /**
  * This Interface outlines the methods necessary for creating and displaying a
  * frame on screen, drawing simple shapes to that frame, and closing the frame.
@@ -26,4 +28,17 @@ public interface AnimationView {
    * Closes the frame on screen and exits the animation.
    */
   void closeFrame();
+
+  /**
+   * Creates an error message on screen corresponding to String parameter Message.
+   *
+   * @param message the error message to be printed to the screen.
+   */
+  static void displayErrorMessage(String message) {
+    JOptionPane optionPane = new JOptionPane(message, JOptionPane.ERROR_MESSAGE);
+    JDialog dialog = optionPane.createDialog("Easy Animator -- Error");
+    dialog.setAlwaysOnTop(true);
+    dialog.setVisible(true);
+    System.exit(-2);
+  }
 }

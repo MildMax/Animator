@@ -14,6 +14,7 @@ import cs5004.animator.model.AnimationModel;
 import cs5004.animator.model.AnimationModelImpl;
 import cs5004.animator.model.shapes.Shape;
 import cs5004.animator.util.AnimationReader;
+import cs5004.animator.view.AnimationView;
 import cs5004.animator.view.AnimationViewImpl;
 
 public final class EasyAnimator {
@@ -33,24 +34,22 @@ public final class EasyAnimator {
     //create the animator
     EasyAnimator e = new EasyAnimator();
 
-    //parse arguments and create model
+    //parse commandLineArguments
     e.parseArgs(args);
+    //set up the model
     AnimationModel m = AnimationReader.parseFile(e.inFile, new AnimationModelImpl.Builder());
+    //set up the view
+    AnimationViewImpl v = new AnimationViewImpl(m.getBoundX(), m.getBoundY(),
+            m.getWindowWidth(), m.getWindowHeight());
 
     //write out put to file
     //TODO - write output to specific file type (svg, text, some other one)
     e.writeToOutFile(m.toString());
 
-    //set up the view
-    AnimationViewImpl v = new AnimationViewImpl(m.getBoundX(), m.getBoundY(),
-            m.getWindowWidth(), m.getWindowHeight());
-
+    //make frame visible
     v.displayFrame();
 
-    System.out.println(v.getPreferredSize().width + " : " + v.getPreferredSize().height);
-
-    //draw the animation
-    //TODO -- set ticks relative to speed
+    //run the animation
     int sleepTime = 1000 / e.speed;
     int ticks = 0;
     while (ticks < m.getTotalTicks()) {
@@ -61,6 +60,7 @@ public final class EasyAnimator {
       Thread.sleep(sleepTime);
     }
 
+    //make frame invisible, close frame
     v.closeFrame();
 
     return;
@@ -88,14 +88,14 @@ public final class EasyAnimator {
             throw new IllegalArgumentException("Invalid view type " + viewType);
           }
         } else {
-          throw new IllegalArgumentException("Invalid command line argument " + args[i]);
+          AnimationView.displayErrorMessage("Invalid command line argument " + args[i]);
         }
       }
     } catch (IndexOutOfBoundsException e) {
-      throw new IllegalArgumentException("Insufficient number of arguments supplied");
+      AnimationView.displayErrorMessage("Insufficient number of arguments supplied");
     }
     if (inFile == null || viewType == null) {
-      throw new IllegalArgumentException("must supply infile and a viewtype");
+      AnimationView.displayErrorMessage("Must supply an in-file and a view-type");
     }
   }
 
