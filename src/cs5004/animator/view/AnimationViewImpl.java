@@ -29,8 +29,8 @@ public class AnimationViewImpl extends JFrame implements AnimationView {
    * @param height takes the height of the display.
    * @throws IllegalArgumentException if the x or y values indicating the position of the
    *                                  upper left corner of the display are less than 0.
-   *                                   If the width or height values of the display window are less
-   *                                   than or equal to 0.
+   *                                  If the width or height values of the display window are less
+   *                                  than or equal to 0.
    */
   public AnimationViewImpl(int x, int y, int width, int height) throws IllegalArgumentException {
     super();
