@@ -67,6 +67,7 @@ public class TransformationImpl implements Transformation {
    *
    * @return the name of the shape as a String.
    */
+  @Override
   public String getShapeName() {
     return this.shapeName;
   }

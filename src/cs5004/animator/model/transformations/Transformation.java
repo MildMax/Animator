@@ -16,6 +16,13 @@ package cs5004.animator.model.transformations;
 public interface Transformation {
 
   /**
+   * Return the name of the shape as a String.
+   *
+   * @return the name of the shape as a String.
+   */
+  String getShapeName();
+
+  /**
    * Returns the start time of the transformation.
    *
    * @return an int indicating the start time of the transformation.

@@ -56,21 +56,24 @@ public class AnimationModelImpl implements AnimationModel {
   /**
    * Takes two ints indicating the width and height of the window and a color specifying the
    * background color of the window. Throws IllegalArgumentException if either the specified
-   * width or height is less than or equal to 0 or if the Color value is null.
+   * width or height is less than or equal to 0.
    *
    * @param w specifies the width of the window.
    * @param h specifies the height of the window.
    * @throws IllegalArgumentException if the windowHeight or windowWidth is less than or equal
    *                                  to 0.
-   *                                  If the windowColor us null.
    */
   public AnimationModelImpl(int x, int y, int w, int h) {
+    if (w <= 0 || h <= 0) {
+      throw new IllegalArgumentException("Height and width values cannot be less than"
+              + "or equal to 0.");
+    }
     this.boundX = x;
     this.boundY = y;
     this.windowWidth = w;
     this.windowHeight = h;
     this.ticks = 0;
-    this.shapeMap = new HashMap<String, Shape>();
+    this.shapeMap = new HashMap<>();
 
   }
 
@@ -115,7 +118,12 @@ public class AnimationModelImpl implements AnimationModel {
     if (shapeName == null || t == null) {
       throw new IllegalArgumentException("Values cannot be null");
     }
-    Shape shape = findShape(shapeName);
+    Shape shape = shapeMap.get(shapeName);
+
+    if (shape == null) {
+      throw new IllegalArgumentException("Shape with name " + shapeName + " does not exist");
+    }
+
     shape.addTransformation(t);
     if (t.getEnd() > this.ticks) {
       this.ticks = t.getEnd();
@@ -172,10 +180,14 @@ public class AnimationModelImpl implements AnimationModel {
    * @param tick takes an int indicating the current frame of the animation.
    * @return a list of shapes with values corresponding to its transformations at the frame
    *         in the animation specified by parameter tick.
-   * @throws IllegalArgumentException if parameter tick is less than 0.
+   * @throws IllegalArgumentException if parameter tick is less than 0 or greater than the
+   *                                  total number of ticks in the animation.
    */
   @Override
   public List<Shape> getShapesAtTick(int tick) throws IllegalArgumentException {
+    if (tick < 0 || tick > this.ticks) {
+      throw new IllegalArgumentException("invalid tick specifier");
+    }
     List<Shape> shapeList = new ArrayList<>();
     for (Shape shape : this.shapeMap.values()) {
       try {
@@ -241,7 +253,7 @@ public class AnimationModelImpl implements AnimationModel {
   public String toString() {
     String out = "Create window with width " + this.windowWidth + " and height "
             + this.windowHeight + " with top left corner (" + this.boundX + "," + this.boundY
-            + ") and total ticks " + this.getTotalTicks() + ".\n\n";
+            + ") and total ticks " + this.getTotalTicks() + "\n\n";
 
     for (Shape shape : shapeMap.values()) {
       out += shape.toString();
@@ -253,18 +265,6 @@ public class AnimationModelImpl implements AnimationModel {
       out += t.toString();
     }
     return out.trim();
-  }
-
-  //finds a shape according to String shapeName
-  //throws IllegalArgumentException if there is not shape associated with shapeName.
-  private Shape findShape(String shapeName) {
-    Shape shape = shapeMap.get(shapeName);
-
-    if (shape == null) {
-      throw new IllegalArgumentException("Shape with name " + shapeName + " does not exist");
-    }
-
-    return shape;
   }
 
   /**

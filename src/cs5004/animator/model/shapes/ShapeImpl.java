@@ -61,9 +61,10 @@ public class ShapeImpl implements Shape {
     }
 
     for (Transformation transformation : transformationList) {
-      if (checkTimes(transformation.getStart(), transformation.getEnd(),
+      if (!checkTimes(transformation.getStart(), transformation.getEnd(),
               t.getStart(), t.getEnd())) {
-        throw new IllegalArgumentException("Transformation already exists within that period");
+        throw new IllegalArgumentException("Transformation already exists within that period"
+        + transformation.getStart() + " " + transformation.getEnd() + " " + t.getStart() + " " + t.getEnd());
       }
     }
 
@@ -289,8 +290,8 @@ public class ShapeImpl implements Shape {
    */
   @Override
   public String toString() {
-    return this.type.toString() + " " + this.name + " appears at " + appearTime +
-            " and disappears at " + disappearTime + ".\n";
+    return this.type.toString() + " " + this.name + " appears at time t=" + appearTime +
+            " and disappears at time t=" + disappearTime + "\n";
   }
 
   /**
@@ -303,9 +304,8 @@ public class ShapeImpl implements Shape {
    * @return true if the combination of times is valid, else false.
    */
   private boolean checkTimes(int currStart, int currEnd, int newStart, int newEnd) {
-    return (newStart > currStart && newStart < currEnd)
-            || (newEnd > currStart && newEnd < currEnd)
-            || (currStart > newStart && currEnd < newEnd);
+    return (newStart <= currStart && newEnd <= currStart)
+            || (newStart >= currEnd && newEnd >= currEnd);
   }
 
 }
