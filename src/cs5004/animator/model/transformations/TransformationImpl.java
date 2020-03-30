@@ -244,20 +244,20 @@ public class TransformationImpl implements Transformation {
 
     if (x1 != x2 || y1 != y2) {
       total += this.shapeName + " moves from (" + x1 + "," + x2 + ") to (" + x2 + "," + y2
-            + ")" + time + "\n";
+            + ")" + time;
     }
 
     if (w1 != w2) {
-      total += this.shapeName + " changes width from " + w1 + " to " + w2 + time + "\n";
+      total += this.shapeName + " changes width from " + w1 + " to " + w2 + time;
     }
 
     if (h1 != h2) {
-      total += this.shapeName + " changes height from " + h1 + " to " + h2 + time + "\n";
+      total += this.shapeName + " changes height from " + h1 + " to " + h2 + time;
     }
 
     if (r1 != r2 || g1 != g2 || b1 != b2) {
       total += this.shapeName + " changes from color (" + r1 + "," + g1 + "," + b1 + ") to color ("
-            + r2 + "," + g2 + "," + b2 + ")" + time + "\n";
+            + r2 + "," + g2 + "," + b2 + ")" + time;
     }
 
     return total;

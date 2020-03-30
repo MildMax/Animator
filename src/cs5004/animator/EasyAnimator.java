@@ -10,6 +10,8 @@ import java.io.OutputStreamWriter;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.swing.*;
+
 import cs5004.animator.model.AnimationModel;
 import cs5004.animator.model.AnimationModelImpl;
 import cs5004.animator.model.shapes.Shape;
@@ -44,26 +46,41 @@ public final class EasyAnimator {
 
     //write out put to file
     //TODO - write output to specific file type (svg, text, some other one)
-    e.writeToOutFile(m.toString());
+    //e.writeToOutFile(m.toString());
 
-    //make frame visible
-    v.displayFrame();
+    if (e.viewType.compareTo("visual") == 0) {
+      //make frame visible
+      v.displayFrame();
 
-    //run the animation
-    int sleepTime = 1000 / e.speed;
-    int ticks = 0;
-    while (ticks < m.getTotalTicks()) {
-      //control animation flow here
-      List<Shape> sList = m.getShapesAtTick(ticks);
-      v.drawNewFrame(sList);
-      ++ticks;
-      Thread.sleep(sleepTime);
+      //run the animation
+      int sleepTime = 1000 / e.speed;
+      int ticks = 0;
+      while (ticks < m.getTotalTicks()) {
+        //control animation flow here
+        List<Shape> sList = m.getShapesAtTick(ticks);
+        v.drawNewFrame(sList);
+        ++ticks;
+        Thread.sleep(sleepTime);
+      }
+
+      //make frame invisible, close frame
+      v.closeFrame();
+    }
+    else if (e.viewType.compareTo("svg") == 0) {
+      //TODO -- write to SVG file
+      //create method that formats string for SVG
+      //and place into svg file
+      //e.writeToOutFile(String formattedString); <-- will write properly
     }
 
-    //make frame invisible, close frame
-    v.closeFrame();
+    else {
+      //print text visualization
+      //if -text is specified, and an outfile is specified, will write to outfile
+      //if -text is specified and no outfile is specified, will write to system.out
+      e.writeToOutFile(m.toString());
+    }
 
-    return;
+    System.exit(0);
   }
 
   private void parseArgs(String[] args) throws IOException {
