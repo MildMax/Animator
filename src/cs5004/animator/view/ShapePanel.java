@@ -18,17 +18,9 @@ public class ShapePanel extends JPanel {
 
   private List<Shape> shapeList;
 
-  /**
-   * This constructor takes a list of shapes that will be drawn to the screen and stores them.
-   *
-   * @param shapeList takes a list of shapes to be drawn to the screen.
-   * @throws IllegalArgumentException if the list of shapes is null.
-   */
-  public ShapePanel(List<Shape> shapeList) {
-    if (shapeList == null) {
-      throw new IllegalArgumentException("shapeList cannot be null");
-    }
+  public void addFrame(List<Shape> shapeList) {
     this.shapeList = shapeList;
+    repaint();
   }
 
   /**

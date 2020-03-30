@@ -1,6 +1,6 @@
 package cs5004.animator.view;
 
-import java.awt.Dimension;
+import java.awt.*;
 import java.util.Comparator;
 import java.util.List;
 
@@ -14,6 +14,8 @@ import javax.swing.*;
 import cs5004.animator.model.shapes.Shape;
 
 public class AnimationViewImpl extends JFrame implements AnimationView {
+
+  private ShapePanel shapePanel;
 
   /**
    * The AnimationViewImpl constructor takes x and y values specifying the
@@ -38,6 +40,9 @@ public class AnimationViewImpl extends JFrame implements AnimationView {
     } else if (x < 0 || y < 0) {
       throw new IllegalArgumentException("x and y position ");
     }
+
+    shapePanel = new ShapePanel();
+    shapePanel.setPreferredSize(new Dimension(width, height));
 
     this.setTitle("Easy Animator");
     this.setPreferredSize(new Dimension(width, height));
@@ -66,7 +71,8 @@ public class AnimationViewImpl extends JFrame implements AnimationView {
     }
     this.getContentPane().removeAll();
     //add new rects and ellipses in here
-    this.add(new ShapePanel(shapeList));
+    shapePanel.addFrame(shapeList);
+    this.add(shapePanel);
 
     this.repaint();
     this.revalidate();
