@@ -20,7 +20,6 @@ public class ShapePanel extends JPanel {
 
   public void addFrame(List<Shape> shapeList) {
     this.shapeList = shapeList;
-    repaint();
   }
 
   /**

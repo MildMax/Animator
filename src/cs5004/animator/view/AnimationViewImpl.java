@@ -16,6 +16,7 @@ import cs5004.animator.model.shapes.Shape;
 public class AnimationViewImpl extends JFrame implements AnimationView {
 
   private ShapePanel shapePanel;
+  private JScrollPane scrollPane;
 
   /**
    * The AnimationViewImpl constructor takes x and y values specifying the
@@ -44,6 +45,10 @@ public class AnimationViewImpl extends JFrame implements AnimationView {
     shapePanel = new ShapePanel();
     shapePanel.setPreferredSize(new Dimension(width, height));
 
+    scrollPane = new JScrollPane(shapePanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+    this.add(scrollPane);
     this.setTitle("Easy Animator");
     this.setPreferredSize(new Dimension(width, height));
     this.setLocation(x, y);
@@ -69,10 +74,9 @@ public class AnimationViewImpl extends JFrame implements AnimationView {
     if (shapeList == null) {
       throw new IllegalArgumentException("shapeList cannot be null");
     }
-    this.getContentPane().removeAll();
+
     //add new rects and ellipses in here
     shapePanel.addFrame(shapeList);
-    this.add(shapePanel);
 
     this.repaint();
     this.revalidate();
