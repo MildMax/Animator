@@ -6,10 +6,22 @@ package cs5004.animator.model.shapes;
  * for type checking.
  */
 public enum ShapeType {
-  CIRCLE,
-  ELLIPSE,
-  OVAL,
-  RECTANGLE,
-  SQUARE,
-  TRIANGLE
+  CIRCLE("circle"),
+  ELLIPSE("ellipse"),
+  OVAL("oval"),
+  RECTANGLE("rectangle"),
+  SQUARE("square"),
+  TRIANGLE("triangle");
+
+  private String name;
+
+  ShapeType(String name) {
+    this.name = name;
+  }
+
+
+  @Override
+  public String toString() {
+    return this.name;
+  }
 }

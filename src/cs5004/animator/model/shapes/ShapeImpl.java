@@ -13,14 +13,14 @@ import cs5004.animator.model.transformations.Transformation;
 public class ShapeImpl implements Shape {
   private  String name;
   private final ShapeType type;
-  private  int layer;
-  private  int height;
-  private  int width;
-  private  int x;
-  private  int y;
-  private  int r;
-  private  int g;
-  private  int b;
+  private int layer;
+  private int height;
+  private int width;
+  private int x;
+  private int y;
+  private int r;
+  private int g;
+  private int b;
   private List<Transformation> transformationList;
   private int appearTime;
   private int disappearTime;
@@ -289,7 +289,7 @@ public class ShapeImpl implements Shape {
    */
   @Override
   public String toString() {
-    return this.type + " " + this.name + " appears at " + appearTime +
+    return this.type.toString() + " " + this.name + " appears at " + appearTime +
             " and disappears at " + disappearTime + ".\n";
   }
 
