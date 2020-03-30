@@ -10,8 +10,16 @@ import cs5004.animator.model.transformations.TransformationImpl;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Tests the ShapeImpl class.
+ */
 public class ShapeImplTest {
 
+  /**
+   * Test constructing a Shape. Test adding Shapes. Test adding Transformations to
+   * the Shape. Test get methods on Shape. Test getShapeAtTick(). Test getTransformationList().
+   * Test getTransformationDescription(). Test toString().
+   */
   @Test
   public void testShapeImplConstructor() {
     Shape s = new ShapeImpl("rectangle", ShapeType.RECTANGLE, 1);
@@ -105,22 +113,35 @@ public class ShapeImplTest {
     assertEquals(test, s.getTransformationDescription());
   }
 
+  /**
+   * Test passing null shape name to ShapeImpl constructor.
+   */
   @Test(expected = IllegalArgumentException.class)
   public void testShapeImplNullName() {
     new ShapeImpl(null, ShapeType.RECTANGLE, 0);
   }
 
+  /**
+   * Test passing null ShapeType to ShapeImpl constructor.
+   */
   @Test(expected = IllegalArgumentException.class)
   public void testShapeImplNullType() {
     new ShapeImpl("name", null, 0);
   }
 
+  /**
+   * Test adding null transformation to shape.
+   */
   @Test(expected = IllegalArgumentException.class)
   public void testShapeImplAddNullTransformation() {
     Shape s = new ShapeImpl("shape", ShapeType.RECTANGLE, 1);
     s.addTransformation(null);
   }
 
+  /**
+   * Test adding an existing transformation to the shape when they have the same start time
+   * and different end times.
+   */
   @Test(expected = IllegalArgumentException.class)
   public void testShapeImplAddExistingTransformation() {
     Shape s = new ShapeImpl("shape", ShapeType.RECTANGLE, 1);
@@ -130,6 +151,10 @@ public class ShapeImplTest {
             10, 10, 25, 20, 20, 20, 20, 20, 20, 20));
   }
 
+  /**
+   * Test adding an existing transformation when they have the same end time but different
+   * start times.
+   */
   @Test(expected = IllegalArgumentException.class)
   public void testShapeImplAddExistingTransformation1() {
     Shape s = new ShapeImpl("shape", ShapeType.RECTANGLE, 1);
@@ -139,6 +164,9 @@ public class ShapeImplTest {
             10, 10, 20, 20, 20, 20, 20, 20, 20, 20));
   }
 
+  /**
+   * Test adding a transformation tha already exists when they have the same start and end time.
+   */
   @Test(expected = IllegalArgumentException.class)
   public void testShapeImplAddExistingTransformation2() {
     Shape s = new ShapeImpl("shape", ShapeType.RECTANGLE, 1);
@@ -148,6 +176,10 @@ public class ShapeImplTest {
             10, 10, 20, 20, 20, 20, 20, 20, 20, 20));
   }
 
+  /**
+   * Test adding a transformation when the new start and end times exist within the existing
+   * transformation's start and end times.
+   */
   @Test(expected = IllegalArgumentException.class)
   public void testShapeImplAddExistingTransformation3() {
     Shape s = new ShapeImpl("shape", ShapeType.RECTANGLE, 1);
@@ -157,6 +189,9 @@ public class ShapeImplTest {
             10, 10, 19, 20, 20, 20, 20, 20, 20, 20));
   }
 
+  /**
+   * Test getting shapes at a tick when the shape doesn't appear yet.
+   */
   @Test(expected = IllegalArgumentException.class)
   public void testShapeImplGetShapesAtTickEarly() {
     Shape s = new ShapeImpl("shape", ShapeType.RECTANGLE, 1);
@@ -165,6 +200,9 @@ public class ShapeImplTest {
     s.getShapeAtTick(5);
   }
 
+  /**
+   * Test getting shape when tick is after the time the Shape disappears.
+   */
   @Test(expected = IllegalArgumentException.class)
   public void testShapeImplGetShapesAtTickLate() {
     Shape s = new ShapeImpl("shape", ShapeType.RECTANGLE, 1);

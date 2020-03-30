@@ -11,8 +11,18 @@ import cs5004.animator.model.shapes.ShapeImpl;
 import cs5004.animator.model.shapes.ShapeType;
 import cs5004.animator.model.transformations.TransformationImpl;
 
+/**
+ * This class tests the AnimationModelImpl class.
+ */
 public class TestAnimationModelImpl {
 
+  /**
+   * Test creating an empty AnimationModel. Test adding shapes to the animation model. Test adding
+   * transformations to the shapes in the animation model. Test getting the shapes in the animation
+   * at different ticks in the animation. Test getting total ticks in the animation. Test
+   * toString output representation of the animation. Test getMethods in the AnimationModel.
+   * Test getting the shapes in the animation.
+   */
   @Test
   public void testAnimationModelImpl() {
     AnimationModel m = new AnimationModelImpl(0, 100, 200, 300);
@@ -91,22 +101,34 @@ public class TestAnimationModelImpl {
     assertEquals(test, m.toString());
   }
 
+  /**
+   * Test creating an AnimationModelImpl with negative width.
+   */
   @Test(expected = IllegalArgumentException.class)
   public void testAnimationModelImplNegativeWidth() {
     new AnimationModelImpl(0, 0, -10, 500);
   }
 
+  /**
+   * Test creating an AnimationModelImpl with negative height.
+   */
   @Test(expected = IllegalArgumentException.class)
   public void testAnimationModelImplNegativeHeight() {
     new AnimationModelImpl(0, 0, 500, -10);
   }
 
+  /**
+   * Test adding a null Shape value to addShape in AnimationModelImpl.
+   */
   @Test(expected = IllegalArgumentException.class)
   public void testAnimationModelImplAddNullShape() {
     AnimationModel m = new AnimationModelImpl(0, 0, 100, 100);
     m.addShape(null);
   }
 
+  /**
+   * Test adding an existing shape to the AnimationModelImpl.
+   */
   @Test(expected = IllegalArgumentException.class)
   public void testAnimationModelImplAddExistingShape() {
     AnimationModel m = new AnimationModelImpl(0, 0, 100, 100);
@@ -114,6 +136,9 @@ public class TestAnimationModelImpl {
     m.addShape(new ShapeImpl("rectangle", ShapeType.RECTANGLE, 1));
   }
 
+  /**
+   * Test adding a transformation with a null String name value to AnimationModelImpl.
+   */
   @Test(expected = IllegalArgumentException.class)
   public void testAnimationModelImplAddTransformationNullName() {
     AnimationModel m = new AnimationModelImpl(0, 0, 100, 100);
@@ -123,6 +148,9 @@ public class TestAnimationModelImpl {
             200, 200, 200));
   }
 
+  /**
+   * Test adding a transformation with a null Transformation value to the AnimationModelImpl.
+   */
   @Test(expected = IllegalArgumentException.class)
   public void testAnimationModelImplAddTransformationNullTransformation() {
     AnimationModel m = new AnimationModelImpl(0, 0, 100, 100);
@@ -130,6 +158,9 @@ public class TestAnimationModelImpl {
     m.addTransformation("rectangle", null);
   }
 
+  /**
+   * Test adding a transformation that already exists to a Shape in the AnimationModelImpl.
+   */
   @Test(expected = IllegalArgumentException.class)
   public void testAnimationModelImplAddTransformationExisting() {
     AnimationModel m = new AnimationModelImpl(0, 0, 100, 100);
@@ -142,6 +173,9 @@ public class TestAnimationModelImpl {
             200, 200, 200));
   }
 
+  /**
+   * Test getting shapes at a negative tick value from AnimationModelImpl.
+   */
   @Test(expected = IllegalArgumentException.class)
   public void testAnimationModelImplGetShapesNegativeTick() {
     AnimationModel m = new AnimationModelImpl(0,0, 100, 100);
@@ -149,6 +183,10 @@ public class TestAnimationModelImpl {
     m.getShapesAtTick(-5);
   }
 
+  /**
+   * Test getting shapes at a tick past the total frame length of the animation from
+   * AnimationModelImpl.
+   */
   @Test(expected = IllegalArgumentException.class)
   public void testAnimationModelImplGetShapesHighTick() {
     AnimationModel m = new AnimationModelImpl(0,0, 100, 100);
