@@ -89,6 +89,6 @@ public class VisualViewImpl extends JFrame implements VisualView {
   @Override
   public void closeDisplay() {
     this.setVisible(false);
-    //this.dispose();
+    this.dispose();
   }
 }

@@ -61,8 +61,8 @@ public final class EasyAnimator {
       Timer tickTimer = new Timer(1000 / e.speed, tickListener);
       tickTimer.start();
 
-      while(((TickActionListener) tickListener).getTick() < m.getTotalTicks()) {
-        System.out.println("displaying animation...");
+      while(((TickActionListener) tickListener).getTick() <= m.getTotalTicks()) {
+        System.out.println("hello");
       }
 
       tickTimer.stop();
