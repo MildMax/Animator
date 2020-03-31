@@ -244,7 +244,7 @@ public class TransformationImpl implements Transformation {
     String total = "";
 
     if (x1 != x2 || y1 != y2) {
-      total += this.shapeName + " moves from (" + x1 + "," + x2 + ") to (" + x2 + "," + y2
+      total += this.shapeName + " moves from (" + x1 + "," + y1 + ") to (" + x2 + "," + y2
             + ")" + time;
     }
 
