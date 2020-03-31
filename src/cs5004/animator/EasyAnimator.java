@@ -11,40 +11,51 @@ import cs5004.animator.model.AnimationModelImpl;
 import cs5004.animator.model.shapes.Shape;
 import cs5004.animator.util.AnimationReader;
 import cs5004.animator.view.AnimationView;
-import cs5004.animator.view.AnimationViewImpl;
+import cs5004.animator.view.TextView;
+import cs5004.animator.view.VisualView;
+import cs5004.animator.view.VisualViewImpl;
 
 public final class EasyAnimator {
 
   Readable inFile = null;
-  Appendable outFile = System.out;
+  String outFile = null;
   String viewType = null;
   int speed = 1;
 
 
   public static void main(String[] args) throws IOException, InterruptedException {
-    // FILL IN HERE
-    //create model <--- this is where our builder is
-    //create a view
-    //stringreader <-- stringreader.staticFunc(file, model.builder);
-
     //create the animator
     EasyAnimator e = new EasyAnimator();
-
     //parse commandLineArguments
     e.parseArgs(args);
     //set up the model
     AnimationModel m = AnimationReader.parseFile(e.inFile, new AnimationModelImpl.Builder());
     //set up the view
-    AnimationViewImpl v = new AnimationViewImpl(m.getBoundX(), m.getBoundY(),
-            m.getWindowWidth(), m.getWindowHeight());
-
-    //write out put to file
-    //TODO - write output to specific file type (svg, text, some other one)
-    //e.writeToOutFile(m.toString());
+    AnimationView view = null;
 
     if (e.viewType.compareTo("visual") == 0) {
-      //make frame visible
-      v.displayFrame();
+      view = new VisualViewImpl(m.getBoundX(), m.getBoundY(),
+              m.getWindowWidth(), m.getWindowHeight());
+    }
+    else if (e.viewType.compareTo("text") == 0) {
+      if (e.outFile != null) {
+        view = new TextView(m.toString(), e.outFile);
+      } else {
+        view = new TextView(m.toString());
+      }
+    }
+    else if (e.viewType.compareTo("svg") == 0) {
+      //initialize view here
+    }
+    else {
+      VisualView.displayErrorMessage("Invalid view type " + e.viewType);
+    }
+
+    //run the file
+    view.openDisplay();
+
+    if (view instanceof VisualView) {
+      VisualView v = (VisualView) view;
 
       //run the animation
       int sleepTime = 1000 / e.speed;
@@ -56,23 +67,9 @@ public final class EasyAnimator {
         ++ticks;
         Thread.sleep(sleepTime);
       }
-
-      //make frame invisible, close frame
-      v.closeFrame();
-    }
-    else if (e.viewType.compareTo("svg") == 0) {
-      //TODO -- write to SVG file
-      //create method that formats string for SVG
-      //and place into svg file
-      //e.writeToOutFile(String formattedString); <-- will write properly
     }
 
-    else {
-      //print text visualization
-      //if -text is specified, and an outfile is specified, will write to outfile
-      //if -text is specified and no outfile is specified, will write to system.out
-      e.writeToOutFile(m.toString());
-    }
+    view.closeDisplay();
 
     System.exit(0);
   }
@@ -84,8 +81,7 @@ public final class EasyAnimator {
           File f = new File(args[i + 1]);
           inFile = new FileReader(f);
         } else if (args[i].compareTo("-out") == 0) {
-          File f = new File(args[i + 1]);
-          outFile = new FileWriter(f);
+          outFile = args[i + 1];
         } else if (args[i].compareTo("-speed") == 0) {
           try {
             this.speed = Integer.parseInt(args[i + 1]);
@@ -96,27 +92,17 @@ public final class EasyAnimator {
           viewType = args[i + 1];
           if (viewType.compareTo("svg") != 0 && viewType.compareTo("text") != 0
               && viewType.compareTo("visual") != 0) {
-            throw new IllegalArgumentException("Invalid view type " + viewType);
+            VisualView.displayErrorMessage("Invalid view type " + viewType);
           }
         } else {
-          AnimationView.displayErrorMessage("Invalid command line argument " + args[i]);
+          VisualView.displayErrorMessage("Invalid command line argument " + args[i]);
         }
       }
     } catch (IndexOutOfBoundsException e) {
-      AnimationView.displayErrorMessage("Insufficient number of arguments supplied");
+      VisualView.displayErrorMessage("Insufficient number of arguments supplied");
     }
     if (inFile == null || viewType == null) {
-      AnimationView.displayErrorMessage("Must supply an in-file and a view-type");
-    }
-  }
-
-  private void writeToOutFile(String str) throws IOException {
-    if (outFile instanceof FileWriter) {
-      ((FileWriter) outFile).write(str);
-      ((FileWriter) outFile).close();
-    }
-    else {
-      outFile.append(str);
+      VisualView.displayErrorMessage("Must supply an in-file and a view-type");
     }
   }
 }

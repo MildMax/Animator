@@ -1,6 +1,6 @@
 import org.junit.Test;
 
-import cs5004.animator.view.AnimationViewImpl;
+import cs5004.animator.view.VisualViewImpl;
 
 /**
  * Test the AnimationViewImpl class.
@@ -12,7 +12,7 @@ public class AnimationViewImplTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void testAnimationViewImplNegativeWidth() {
-    new AnimationViewImpl(0, 0, -1, 100);
+    new VisualViewImpl(0, 0, -1, 100);
   }
 
   /**
@@ -20,7 +20,7 @@ public class AnimationViewImplTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void testAnimationViewImplNegativeHeight() {
-    new AnimationViewImpl(0, 0, 100, -1);
+    new VisualViewImpl(0, 0, 100, -1);
   }
 
   /**
@@ -28,7 +28,7 @@ public class AnimationViewImplTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void testAnimationViewImplNegativeX() {
-    new AnimationViewImpl(-10, 0, 100, 100);
+    new VisualViewImpl(-10, 0, 100, 100);
   }
 
   /**
@@ -36,6 +36,6 @@ public class AnimationViewImplTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void testAnimationViewImplNegativeY() {
-    new AnimationViewImpl(0, -5, 100, 100);
+    new VisualViewImpl(0, -5, 100, 100);
   }
 }

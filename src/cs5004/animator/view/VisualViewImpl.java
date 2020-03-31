@@ -1,7 +1,6 @@
 package cs5004.animator.view;
 
 import java.awt.*;
-import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.*;
@@ -13,7 +12,7 @@ import javax.swing.*;
  */
 import cs5004.animator.model.shapes.Shape;
 
-public class AnimationViewImpl extends JFrame implements AnimationView {
+public class VisualViewImpl extends JFrame implements VisualView {
 
   private ShapePanel shapePanel;
   private JScrollPane scrollPane;
@@ -32,7 +31,7 @@ public class AnimationViewImpl extends JFrame implements AnimationView {
    *                                  If the width or height values of the display window are less
    *                                  than or equal to 0.
    */
-  public AnimationViewImpl(int x, int y, int width, int height) throws IllegalArgumentException {
+  public VisualViewImpl(int x, int y, int width, int height) throws IllegalArgumentException {
     super();
 
     if (width <= 0 || height <= 0) {
@@ -59,7 +58,7 @@ public class AnimationViewImpl extends JFrame implements AnimationView {
   /**
    * Displays the window on screen.
    */
-  public void displayFrame() {
+  public void openDisplay() {
     this.setVisible(true);
   }
 
@@ -85,7 +84,7 @@ public class AnimationViewImpl extends JFrame implements AnimationView {
   /**
    * Closes the window on screen.
    */
-  public void closeFrame() {
+  public void closeDisplay() {
     this.setVisible(false);
     this.dispose();
   }
