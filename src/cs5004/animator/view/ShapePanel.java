@@ -33,17 +33,19 @@ public class ShapePanel extends JPanel {
 
     Graphics2D g2d = (Graphics2D)g;
 
-    shapeList.sort(Comparator.comparing(Shape::getLayer));
-    for (Shape shape : shapeList) {
-      switch (shape.getType()) {
-        case RECTANGLE:
-          g2d.setColor(new Color(shape.getR(), shape.getG(), shape.getB()));
-          g2d.fillRect(shape.getX(), shape.getY(), shape.getWidth(), shape.getHeight());
-          break;
-        case ELLIPSE:
-          g2d.setColor(new Color(shape.getR(), shape.getG(), shape.getB()));
-          g2d.fillOval(shape.getX(), shape.getY(), shape.getWidth(), shape.getHeight());
-          break;
+    if (shapeList != null) {
+      shapeList.sort(Comparator.comparing(Shape::getLayer));
+      for (Shape shape : shapeList) {
+        switch (shape.getType()) {
+          case RECTANGLE:
+            g2d.setColor(new Color(shape.getR(), shape.getG(), shape.getB()));
+            g2d.fillRect(shape.getX(), shape.getY(), shape.getWidth(), shape.getHeight());
+            break;
+          case ELLIPSE:
+            g2d.setColor(new Color(shape.getR(), shape.getG(), shape.getB()));
+            g2d.fillOval(shape.getX(), shape.getY(), shape.getWidth(), shape.getHeight());
+            break;
+        }
       }
     }
   }

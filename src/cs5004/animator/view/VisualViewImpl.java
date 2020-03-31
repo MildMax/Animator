@@ -38,7 +38,7 @@ public class VisualViewImpl extends JFrame implements VisualView {
       throw new IllegalArgumentException("Width and height must be greater"
               + "than 0");
     } else if (x < 0 || y < 0) {
-      throw new IllegalArgumentException("x and y position ");
+      throw new IllegalArgumentException("x and y positions cannot be negative");
     }
 
     shapePanel = new ShapePanel();
@@ -58,6 +58,7 @@ public class VisualViewImpl extends JFrame implements VisualView {
   /**
    * Displays the window on screen.
    */
+  @Override
   public void openDisplay() {
     this.setVisible(true);
   }
@@ -69,6 +70,7 @@ public class VisualViewImpl extends JFrame implements VisualView {
    * @param shapeList takes a list of shapes to be drawn.
    * @throws IllegalArgumentException if the list of shapes is null.
    */
+  @Override
   public void drawNewFrame(List<Shape> shapeList) throws IllegalArgumentException {
     if (shapeList == null) {
       throw new IllegalArgumentException("shapeList cannot be null");
@@ -84,8 +86,9 @@ public class VisualViewImpl extends JFrame implements VisualView {
   /**
    * Closes the window on screen.
    */
+  @Override
   public void closeDisplay() {
     this.setVisible(false);
-    this.dispose();
+    //this.dispose();
   }
 }

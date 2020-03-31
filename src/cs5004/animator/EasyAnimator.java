@@ -1,17 +1,18 @@
 package cs5004.animator;
 
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
+
+import javax.swing.*;
 
 import cs5004.animator.model.AnimationModel;
 import cs5004.animator.model.AnimationModelImpl;
-import cs5004.animator.model.shapes.Shape;
 import cs5004.animator.util.AnimationReader;
 import cs5004.animator.view.AnimationView;
 import cs5004.animator.view.TextView;
+import cs5004.animator.view.TextualView;
 import cs5004.animator.view.VisualView;
 import cs5004.animator.view.VisualViewImpl;
 
@@ -21,7 +22,6 @@ public final class EasyAnimator {
   String outFile = null;
   String viewType = null;
   int speed = 1;
-
 
   public static void main(String[] args) throws IOException, InterruptedException {
     //create the animator
@@ -39,9 +39,9 @@ public final class EasyAnimator {
     }
     else if (e.viewType.compareTo("text") == 0) {
       if (e.outFile != null) {
-        view = new TextView(m.toString(), e.outFile);
+        view = new TextView(e.outFile);
       } else {
-        view = new TextView(m.toString());
+        view = new TextView();
       }
     }
     else if (e.viewType.compareTo("svg") == 0) {
@@ -57,16 +57,20 @@ public final class EasyAnimator {
     if (view instanceof VisualView) {
       VisualView v = (VisualView) view;
 
-      //run the animation
-      int sleepTime = 1000 / e.speed;
-      int ticks = 0;
-      while (ticks < m.getTotalTicks()) {
-        //control animation flow here
-        List<Shape> sList = m.getShapesAtTick(ticks);
-        v.drawNewFrame(sList);
-        ++ticks;
-        Thread.sleep(sleepTime);
+      ActionListener tickListener = new TickActionListener(m, v);
+      Timer tickTimer = new Timer(1000 / e.speed, tickListener);
+      tickTimer.start();
+
+      while(((TickActionListener) tickListener).getTick() < m.getTotalTicks()) {
+        System.out.println("displaying animation...");
       }
+
+      tickTimer.stop();
+    }
+    else if (view instanceof TextualView) {
+      TextualView v = (TextualView) view;
+
+      v.write(m);
     }
 
     view.closeDisplay();

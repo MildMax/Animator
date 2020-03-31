@@ -186,7 +186,7 @@ public class AnimationModelImpl implements AnimationModel {
   @Override
   public List<Shape> getShapesAtTick(int tick) throws IllegalArgumentException {
     if (tick < 0 || tick > this.ticks) {
-      throw new IllegalArgumentException("invalid tick specifier");
+      throw new IllegalArgumentException("invalid tick specifier: " + tick);
     }
     List<Shape> shapeList = new ArrayList<>();
     for (Shape shape : this.shapeMap.values()) {
