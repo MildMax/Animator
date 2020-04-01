@@ -52,7 +52,7 @@ public class SVGView extends AbstractTextView {
     b.append(m.getWindowWidth());
     b.append("\" height=\"");
     b.append(m.getWindowHeight());
-    b.append(" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\">\n\n");
+    b.append("\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\"> \n\n");
 
     // Loop through all of the shapes in the model.
     List<Shape> shapeList = m.getShapes();
@@ -148,7 +148,7 @@ public class SVGView extends AbstractTextView {
         b.append(s.getG());
         b.append(",");
         b.append(s.getB());
-        b.append(")\"visibility=\"visible\" >\n\n");
+        b.append(")\" visibility=\"visible\" > \n\n");
 
       // Loop through all of the transformations on each shape.
       for (Transformation t : s.getTransformationList()) {
@@ -165,7 +165,7 @@ public class SVGView extends AbstractTextView {
           b.append(t.getX1());
           b.append("\" to=\"");
           b.append(t.getX2());
-          b.append("\" fill=\"freeze\" />\\n\\n");
+          b.append("\" fill=\"freeze\" /> \n\n");
         }
 
         // If Y value changes, animate the Y change.
@@ -180,7 +180,7 @@ public class SVGView extends AbstractTextView {
           b.append(t.getY1());
           b.append("\" to=\"");
           b.append(t.getY2());
-          b.append("\" fill=\"freeze\" />\\n\\n");
+          b.append("\" fill=\"freeze\" /> \n\n");
         }
 
         // If Height value changes, animate the Height change.
@@ -195,7 +195,7 @@ public class SVGView extends AbstractTextView {
           b.append(t.getH1());
           b.append("\" to=\"");
           b.append(t.getH2());
-          b.append("\" fill=\"freeze\" />\\n\\n");
+          b.append("\" fill=\"freeze\" /> \n\n");
         }
 
         // If Width value changes, animate the Width change.
@@ -210,7 +210,7 @@ public class SVGView extends AbstractTextView {
           b.append(t.getW1());
           b.append("\" to=\"");
           b.append(t.getW2());
-          b.append("\" fill=\"freeze\" />\\n\\n");
+          b.append("\" fill=\"freeze\" /> \n\n");
         }
 
         // If color changes, animate the color change.
@@ -233,7 +233,7 @@ public class SVGView extends AbstractTextView {
           b.append(t.getG2());
           b.append(",");
           b.append(t.getB2());
-          b.append(")\" fill=\"freeze\" />\\n\\n");
+          b.append(")\" fill=\"freeze\" /> \n\n");
         }
       }
       b.append("</");
@@ -245,7 +245,9 @@ public class SVGView extends AbstractTextView {
     String finalString = b.toString();
 
     try {
+      openDisplay();
       ((FileWriter) out).write(finalString);
+      closeDisplay();
     } catch (IOException e) {
       throw new IllegalStateException("Cannot write to FileWriter " + fileName);
     }

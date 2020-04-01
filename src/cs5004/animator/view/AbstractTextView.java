@@ -24,7 +24,6 @@ public abstract class AbstractTextView implements AnimationView {
     this.fileName = fileName;
   }
 
-
   /**
    * If there is a specified file to be written to, opens file associated with
    * specified fileName and sets file to be written to. Else, sets output to be
