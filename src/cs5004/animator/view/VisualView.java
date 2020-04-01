@@ -27,19 +27,22 @@ public class VisualView extends JFrame implements AnimationView {
    *
    * @param x takes the x coordinate of the position of the upper left corner of the display.
    * @param y takes the y coordinate of the position of the upper left corner of the display.
-   * @param width takes the width of the display.
-   * @param height takes the height of the display.
+   * @param windowWidth takes the width of the display.
+   * @param windowHeight takes the height of the display.
    * @throws IllegalArgumentException if the x or y values indicating the position of the
    *                                  upper left corner of the display are less than 0.
    *                                  If the width or height values of the display window are less
    *                                  than or equal to 0.
    */
-  public VisualView(int x, int y, int width, int height,
+  public VisualView(int x, int y, int windowWidth, int windowHeight,
                     int maxWidth, int maxHeight) throws IllegalArgumentException {
     super();
 
-    if (width <= 0 || height <= 0) {
+    if (windowWidth <= 0 || windowHeight <= 0) {
       throw new IllegalArgumentException("Width and height must be greater"
+              + "than 0");
+    } else if (maxWidth <= 0 || maxHeight <= 0) {
+      throw new IllegalArgumentException("Max window width and height must be greater"
               + "than 0");
     } else if (x < 0 || y < 0) {
       throw new IllegalArgumentException("x and y positions cannot be negative");
@@ -54,7 +57,7 @@ public class VisualView extends JFrame implements AnimationView {
 
     this.add(scrollPane);
     this.setTitle("Easy Animator");
-    this.setPreferredSize(new Dimension(width, height));
+    this.setPreferredSize(new Dimension(windowWidth, windowHeight));
     this.setLocation(x, y);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.pack();

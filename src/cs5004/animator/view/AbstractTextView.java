@@ -48,7 +48,7 @@ public abstract class AbstractTextView implements AnimationView {
   }
 
   /**
-   * If out has not been initialized, initializes out.
+   * If out has not been initialized, initializes output destination.
    *
    * @param m takes an AnimationModel that stores an animation to be written to
    */

@@ -98,4 +98,18 @@ public interface AnimationModel {
    */
   int getBoundY();
 
+  /**
+   * Return the maximum width of the window that displays the animation.
+   *
+   * @return the maximum width of the window that displays the animation.
+   */
+  int getMaxWidth();
+
+  /**
+   * Return the maximum height of the window that displays the animation.
+   *
+   * @return the maximum height of the window that displays the animation.
+   */
+  int getMaxHeight();
+
 }

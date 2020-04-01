@@ -242,6 +242,33 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   /**
+   * Return the maximum width of the window that displays the animation.
+   *
+   * @return the maximum width of the window that displays the animation.
+   */
+  public int getMaxWidth() {
+    List<Transformation> tList = getTransformations();
+
+    tList.sort(Comparator.comparing(Transformation::getX2));
+    Transformation transformation = tList.get(tList.size() - 1);
+    return transformation.getX2() + (int)(transformation.getW2() * 1.5);
+
+  }
+
+  /**
+   * Return the maximum height of the window that displays the animation.
+   *
+   * @return the maximum height of the window that displays the animation.
+   */
+   public int getMaxHeight() {
+    List<Transformation> tList = getTransformations();
+
+    tList.sort(Comparator.comparing(Transformation::getY2));
+    Transformation transformation = tList.get(tList.size() - 1);
+    return transformation.getY2() + (int)(transformation.getH2() * 1.5);
+  }
+
+  /**
    * Returns a formatted String indicating the size of the window, the color of the window,
    * and a list of shapes and their respective instructions in chronological order.
    *

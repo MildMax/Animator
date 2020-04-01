@@ -46,19 +46,9 @@ public final class EasyAnimator {
     AnimationView view = null;
 
     if (e.viewType.compareTo("visual") == 0) {
-      List<Transformation> tList = new ArrayList<>();
-      for (Shape shape : m.getShapes()) {
-        for (Transformation transformation : shape.getTransformationList()) {
-          tList.add(transformation);
-        }
-      }
-      tList.sort(Comparator.comparing(Transformation::getW2));
-      int maxWidth = tList.get(tList.size() - 1).getW2();
-      tList.sort(Comparator.comparing(Transformation::getH2));
-      int maxHeight = tList.get(tList.size() - 1).getH2();
       view = new VisualView(m.getBoundX(), m.getBoundY(),
               m.getWindowWidth(), m.getWindowHeight(),
-              maxWidth, maxHeight);
+              m.getMaxWidth(), m.getMaxHeight());
     }
     else if (e.viewType.compareTo("text") == 0) {
       if (e.outFile != null) {
@@ -113,7 +103,7 @@ public final class EasyAnimator {
           try {
             this.speed = Integer.parseInt(args[i + 1]);
           } catch (NumberFormatException e) {
-            System.out.println("specified speed is not an int, setting speed to 1");
+            AnimationView.displayErrorMessage("Invalid speed value: " + args[i + 1]);
           }
         } else if (args[i].compareTo("-view") == 0) {
           viewType = args[i + 1];
