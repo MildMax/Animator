@@ -39,7 +39,7 @@ public final class EasyAnimator {
     AnimationView view = e.initializeView(m);
 
     //open the file/display
-    view.openDisplay();
+    view.openView();
 
     //populate display/view
     if (view instanceof VisualView) {
@@ -51,7 +51,7 @@ public final class EasyAnimator {
     }
 
     //close the file/display
-    view.closeDisplay();
+    view.closeView();
 
     System.exit(0);
   }
@@ -64,8 +64,7 @@ public final class EasyAnimator {
           try {
             inFile = new FileReader(f);
           } catch (IOException e) {
-            System.out.println("Could not open specified input file");
-            e.getStackTrace();
+            AnimationView.displayErrorMessage("Could not open specified input file");
           }
         } else if (args[i].compareTo("-out") == 0) {
           outFile = args[i + 1];

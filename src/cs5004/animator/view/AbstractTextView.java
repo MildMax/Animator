@@ -15,7 +15,7 @@ import cs5004.animator.model.shapes.Shape;
 public abstract class AbstractTextView implements AnimationView {
 
   protected String fileName;
-  protected Appendable out = null;
+  protected Appendable out = System.out;
 
   /**
    * Takes a String containing the filename of the file that the description will be written to.
@@ -34,7 +34,7 @@ public abstract class AbstractTextView implements AnimationView {
    * @throws IllegalStateException if FileWriter cannot be created.
    */
   @Override
-  public void openDisplay() throws IllegalStateException {
+  public void openView() throws IllegalStateException {
     if (fileName != null) {
       File f = new File(fileName);
       try {
@@ -42,20 +42,6 @@ public abstract class AbstractTextView implements AnimationView {
       } catch (IOException e) {
         throw new IllegalStateException("Cannot open FileWriter " + fileName);
       }
-    } else {
-      out = System.out;
-    }
-  }
-
-  /**
-   * If out has not been initialized, initializes output destination.
-   *
-   * @param m takes an AnimationModel that stores an animation to be written to
-   */
-  @Override
-  public void write(AnimationModel m) {
-    if (out == null) {
-      this.openDisplay();
     }
   }
 
@@ -67,7 +53,7 @@ public abstract class AbstractTextView implements AnimationView {
    *                               If data cannot be appended to System.out.
    */
   @Override
-  public void closeDisplay() throws IllegalStateException {
+  public void closeView() throws IllegalStateException {
     if (out != null && out instanceof FileWriter) {
       try {
         ((FileWriter) out).close();

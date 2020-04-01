@@ -47,7 +47,6 @@ public class TextView extends AbstractTextView {
    */
   @Override
   public void write(AnimationModel m) {
-    super.write(m);
     if (out instanceof FileWriter) {
       try {
         ((FileWriter) out).write(m.toString());

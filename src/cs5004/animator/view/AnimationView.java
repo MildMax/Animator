@@ -15,14 +15,14 @@ import cs5004.animator.model.shapes.Shape;
 public interface AnimationView {
 
   /**
-   * Opens the display of the view.
+   * Opens the view.
    */
-  void openDisplay();
+  void openView();
 
   /**
-   * Closes the display of the view.
+   * Closes the view.
    */
-  void closeDisplay();
+  void closeView();
 
   /**
    * Writes String representing an animation to a file.

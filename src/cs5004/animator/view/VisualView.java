@@ -67,7 +67,7 @@ public class VisualView extends JFrame implements AnimationView {
    * Displays the window on screen.
    */
   @Override
-  public void openDisplay() {
+  public void openView() {
     this.setVisible(true);
   }
 
@@ -95,7 +95,7 @@ public class VisualView extends JFrame implements AnimationView {
    * Closes the window on screen.
    */
   @Override
-  public void closeDisplay() {
+  public void closeView() {
     this.setVisible(false);
     this.dispose();
   }

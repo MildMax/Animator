@@ -32,7 +32,6 @@ public class SVGView extends AbstractTextView {
 
   @Override
   public void write(AnimationModel m) {
-    super.write(m);
     String SVGTyp = "";
     String xTyp = "";
     String yTyp = "";
