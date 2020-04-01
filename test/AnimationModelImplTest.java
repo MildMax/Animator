@@ -14,7 +14,7 @@ import cs5004.animator.model.transformations.TransformationImpl;
 /**
  * This class tests the AnimationModelImpl class.
  */
-public class TestAnimationModelImpl {
+public class AnimationModelImplTest {
 
   /**
    * Test creating an empty AnimationModel. Test adding shapes to the animation model. Test adding
@@ -42,9 +42,7 @@ public class TestAnimationModelImpl {
     m.addShape(new ShapeImpl("ellipse", ShapeType.ELLIPSE, 2));
 
     test = "Create window with width 200 and height 300 with top left corner "
-            + "(0,100) and total ticks 0\n\n"
-            + "rectangle rectangle appears at time t=0 and disappears at time t=0\n"
-            + "ellipse ellipse appears at time t=0 and disappears at time t=0";
+            + "(0,100) and total ticks 0";
 
     assertEquals(test, m.toString());
     assertEquals(2, m.getShapes().size());
@@ -85,14 +83,18 @@ public class TestAnimationModelImpl {
 
     test = "Create window with width 200 and height 300 with top left corner "
             + "(0,100) and total ticks 40\n\n"
+            + "Create rectangle rectangle with center at (20,-20) with width 20 "
+            + "and height 40 and color (100,100,100)\n"
+            + "Create ellipse ellipse with center at (0,0) with width 10 and "
+            + "height 30 and color (50,50,50)\n\n"
             + "rectangle rectangle appears at time t=10 and disappears at time t=20\n"
             + "ellipse ellipse appears at time t=20 and disappears at time t=40\n\n"
-            + "rectangle moves from (20,40) to (40,-40) from time t=10 to time t=20\n"
+            + "rectangle moves from (20,-20) to (40,-40) from time t=10 to time t=20\n"
             + "rectangle changes width from 20 to 40 from time t=10 to time t=20\n"
             + "rectangle changes height from 40 to 60 from time t=10 to time t=20\n"
             + "rectangle changes from color (100,100,100) to color (200,200,200) "
             + "from time t=10 to time t=20\n"
-            + "ellipse moves from (0,40) to (40,-40) from time t=20 to time t=40\n"
+            + "ellipse moves from (0,0) to (40,-40) from time t=20 to time t=40\n"
             + "ellipse changes width from 10 to 40 from time t=20 to time t=40\n"
             + "ellipse changes height from 30 to 60 from time t=20 to time t=40\n"
             + "ellipse changes from color (50,50,50) to color (150,150,150) from "

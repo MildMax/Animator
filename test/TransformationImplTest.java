@@ -28,7 +28,7 @@ public class TransformationImplTest {
     assertEquals(10, t.getStart());
     assertEquals(20, t.getEnd());
 
-    String test = "shape moves from (20,60) to (60,70) from time t=10 to time t=20\n"
+    String test = "shape moves from (20,30) to (60,70) from time t=10 to time t=20\n"
     + "shape changes width from 40 to 80 from time t=10 to time t=20\n"
     + "shape changes height from 50 to 90 from time t=10 to time t=20\n"
     + "shape changes from color (100,110,120) to color (200,210,220) from time t=10 to time t=20\n";

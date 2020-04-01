@@ -37,7 +37,7 @@ public class ShapeImplTest {
     assertEquals(ShapeType.RECTANGLE, s.getType());
     assertEquals(1, s.getLayer());
     assertEquals("rectangle rectangle appears at time t=0 and disappears" +
-            " at time t=0\n", s.toString());
+            " at time t=0\n", s.getAppearStatement());
 
     s.addTransformation(new TransformationImpl(s.getName(), 10, 10, 10, 20, 20,
             100, 100, 100, 20, 40, 40, 80, 80, 200, 200, 200));
@@ -52,6 +52,10 @@ public class ShapeImplTest {
     assertEquals(10, s.getY());
     assertEquals(10, s.getStart());
     assertEquals(20, s.getEnd());
+    assertEquals("Create rectangle rectangle with center at (10,10) "
+            + "with width 20 and height 20 and color (100,100,100)\n", s.getCreateStatement());
+    assertEquals("rectangle rectangle appears at time t=10 and disappears" +
+            " at time t=20\n", s.getAppearStatement());
 
     s.getShapeAtTick(15);
 
@@ -99,12 +103,12 @@ public class ShapeImplTest {
     assertEquals(20, transformationList.get(1).getStart());
     assertEquals(30, transformationList.get(1).getEnd());
 
-    String test = "rectangle rectangle moves from (10,40) to (40,40) from time t=10 to time t=20\n"
+    String test = "rectangle rectangle moves from (10,10) to (40,40) from time t=10 to time t=20\n"
     + "rectangle changes width from 20 to 80 from time t=10 to time t=20\n"
     + "rectangle changes height from 20 to 80 from time t=10 to time t=20\n"
     + "rectangle changes from color (100,100,100) to color (200,200,200) "
     + "from time t=10 to time t=20\n\n"
-    + "rectangle rectangle moves from (40,60) to (60,50) from time t=20 to time t=30\n"
+    + "rectangle rectangle moves from (40,40) to (60,50) from time t=20 to time t=30\n"
     + "rectangle changes width from 80 to 100 from time t=20 to time t=30\n"
     + "rectangle changes height from 80 to 120 from time t=20 to time t=30\n"
     + "rectangle changes from color (200,200,200) to color (240,230,220)"
@@ -209,6 +213,12 @@ public class ShapeImplTest {
     s.addTransformation(new TransformationImpl(s.getName(), 10, 10, 10, 15, 15,
             100, 100, 100, 20, 20, 20, 40, 40, 200, 200, 200));
     s.getShapeAtTick(25);
+  }
+
+  @Test(expected = IllegalStateException.class)
+  public void testShapeImplGetShapeAtTickNoTransformations() {
+    Shape s = new ShapeImpl("shape", ShapeType.RECTANGLE, 1);
+    s.getShapeAtTick(s.getStart());
   }
 
 }

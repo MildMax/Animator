@@ -213,6 +213,7 @@ public class ShapeImpl implements Shape {
    * @return itself with modified values.
    * @throws IllegalArgumentException if the shape is not visible at the frame specified
    *                                  by the tick.
+   * @throws IllegalStateException if there are no transformations on the current shape.
    */
   @Override
   public Shape getShapeAtTick(int tick) {
@@ -227,6 +228,10 @@ public class ShapeImpl implements Shape {
         t = transformation;
         break;
       }
+    }
+
+    if (t == null) {
+      throw new IllegalStateException("No transformations exist on shape");
     }
 
     double diff;
@@ -283,10 +288,14 @@ public class ShapeImpl implements Shape {
 
   @Override
   public String getCreateStatement() {
-    getShapeAtTick(getStart());
-    return "Create " + this.type.toString() + " " + this.name + " with center at ("
-            + this.x + "," + this.y + ") with width " + this.width + " and height "
-            + this.height + " and color (" + this.r + "," + this.g + "," + this.b + ")\n";
+    try {
+      getShapeAtTick(getStart());
+      return "Create " + this.type.toString() + " " + this.name + " with center at ("
+              + this.x + "," + this.y + ") with width " + this.width + " and height "
+              + this.height + " and color (" + this.r + "," + this.g + "," + this.b + ")\n";
+    } catch (IllegalStateException e) {
+      return "";
+    }
   }
 
   /**
@@ -298,12 +307,17 @@ public class ShapeImpl implements Shape {
    */
   @Override
   public String getAppearStatement() {
-    return this.type.toString() + " " + this.name + " appears at time t=" + appearTime +
-            " and disappears at time t=" + disappearTime + "\n";
+    if (transformationList.size() > 0) {
+      return this.type.toString() + " " + this.name + " appears at time t=" + appearTime +
+              " and disappears at time t=" + disappearTime + "\n";
+    } else {
+      return "";
+    }
   }
 
   /**
-   * Confirm that a set of start and end times are valid.
+   * Confirm that a set of start and end times are valid and returns true if the timestamps
+   * provided are outside the bounds of the current timestamps
    *
    * @param currStart is the current start time.
    * @param currEnd is the current end time.
