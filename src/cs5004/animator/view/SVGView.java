@@ -8,7 +8,6 @@ import cs5004.animator.model.AnimationModel;
 import cs5004.animator.model.shapes.Shape;
 import cs5004.animator.model.shapes.ShapeType;
 import cs5004.animator.model.transformations.Transformation;
-import cs5004.animator.model.transformations.TransformationImpl;
 
 public class SVGView extends AbstractTextView {
 
@@ -243,10 +242,10 @@ public class SVGView extends AbstractTextView {
     }
     b.append("</svg>");
 
-    String myString = b.toString();
+    String finalString = b.toString();
 
     try {
-      ((FileWriter) out).write(m.toString());
+      ((FileWriter) out).write(finalString);
     } catch (IOException e) {
       throw new IllegalStateException("Cannot write to FileWriter " + fileName);
     }
