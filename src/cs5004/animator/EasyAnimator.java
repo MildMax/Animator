@@ -4,16 +4,9 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-
-import javax.xml.crypto.dsig.Transform;
 
 import cs5004.animator.model.AnimationModel;
 import cs5004.animator.model.AnimationModelImpl;
-import cs5004.animator.model.shapes.Shape;
-import cs5004.animator.model.transformations.Transformation;
 import cs5004.animator.util.AnimationReader;
 import cs5004.animator.view.AnimationView;
 import cs5004.animator.view.SVGView;
@@ -43,44 +36,21 @@ public final class EasyAnimator {
     //set up the model
     AnimationModel m = AnimationReader.parseFile(e.inFile, new AnimationModelImpl.Builder());
     //set up the view
-    AnimationView view = null;
+    AnimationView view = e.initializeView(m);
 
-    if (e.viewType.compareTo("visual") == 0) {
-      view = new VisualView(m.getBoundX(), m.getBoundY(),
-              m.getWindowWidth(), m.getWindowHeight(),
-              m.getMaxWidth(), m.getMaxHeight());
-    }
-    else if (e.viewType.compareTo("text") == 0) {
-      if (e.outFile != null) {
-        view = new TextView(e.outFile);
-      } else {
-        view = new TextView();
-      }
-    }
-    else if (e.viewType.compareTo("svg") == 0) {
-      view = new SVGView(e.outFile);
-    }
-    else {
-      AnimationView.displayErrorMessage("Invalid view type " + e.viewType);
-    }
-
-    try {
-      Thread.sleep(2);
-    } catch (InterruptedException excep) {
-
-    }
-
-    //run the file
+    //open the file/display
     view.openDisplay();
 
+    //populate display/view
     if (view instanceof VisualView) {
-      ActionListener tickListener = new TickActionListener(m, view, 1000 / e.speed);
-      ((TickActionListener)tickListener).runAnim();
+      ActionListener animRunner = new AnimationRunner(m, view, 1000 / e.speed);
+      ((AnimationRunner)animRunner).runAnim();
     }
     else {
       view.write(m);
     }
 
+    //close the file/display
     view.closeDisplay();
 
     System.exit(0);
@@ -121,5 +91,28 @@ public final class EasyAnimator {
     if (inFile == null || viewType == null) {
       AnimationView.displayErrorMessage("Must supply an in-file and a view-type");
     }
+  }
+
+  private AnimationView initializeView(AnimationModel m) {
+    AnimationView view = null;
+    if (viewType.compareTo("visual") == 0) {
+      view = new VisualView(m.getBoundX(), m.getBoundY(),
+              m.getWindowWidth(), m.getWindowHeight(),
+              m.getAnimationWidth(), m.getAnimationHeight());
+    }
+    else if (viewType.compareTo("text") == 0) {
+      if (outFile != null) {
+        view = new TextView(outFile);
+      } else {
+        view = new TextView();
+      }
+    }
+    else if (viewType.compareTo("svg") == 0) {
+      view = new SVGView(outFile);
+    }
+    else {
+      AnimationView.displayErrorMessage("Invalid view type " + viewType);
+    }
+    return view;
   }
 }

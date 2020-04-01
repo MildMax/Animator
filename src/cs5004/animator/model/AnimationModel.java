@@ -103,13 +103,13 @@ public interface AnimationModel {
    *
    * @return the maximum width of the window that displays the animation.
    */
-  int getMaxWidth();
+  int getAnimationWidth();
 
   /**
    * Return the maximum height of the window that displays the animation.
    *
    * @return the maximum height of the window that displays the animation.
    */
-  int getMaxHeight();
+  int getAnimationHeight();
 
 }

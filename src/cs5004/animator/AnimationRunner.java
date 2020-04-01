@@ -13,7 +13,7 @@ import cs5004.animator.view.AnimationView;
  * that start the animation, check if the animation is running, adds frames to
  * the animation, and exits the animation. Implements the ActionListener interface.
  */
-public class TickActionListener implements ActionListener {
+public class AnimationRunner implements ActionListener {
 
   private int tick = 0;
   private AnimationModel model;
@@ -31,7 +31,7 @@ public class TickActionListener implements ActionListener {
    * @throws IllegalArgumentException If the AnimationModel argument is null.
    *                                  If the AnimationView argument is null.
    */
-  public TickActionListener(AnimationModel m, AnimationView v, int delay) {
+  public AnimationRunner(AnimationModel m, AnimationView v, int delay) {
     if (m == null || v == null) {
       throw new IllegalArgumentException("Model/View cannot be null");
     }

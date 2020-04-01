@@ -49,6 +49,7 @@ public class AnimationModelImpl implements AnimationModel {
   private final int boundY;
   private final int windowWidth;
   private final int windowHeight;
+  private final int WINDOW_BUFFER = 25;
 
   private int ticks;
   private Map<String, Shape> shapeMap;
@@ -246,12 +247,12 @@ public class AnimationModelImpl implements AnimationModel {
    *
    * @return the maximum width of the window that displays the animation.
    */
-  public int getMaxWidth() {
+  public int getAnimationWidth() {
     List<Transformation> tList = getTransformations();
 
     tList.sort(Comparator.comparing(Transformation::getX2));
     Transformation transformation = tList.get(tList.size() - 1);
-    return transformation.getX2() + (int)(transformation.getW2() * 1.5);
+    return transformation.getX2() + transformation.getW2() + WINDOW_BUFFER;
 
   }
 
@@ -260,12 +261,12 @@ public class AnimationModelImpl implements AnimationModel {
    *
    * @return the maximum height of the window that displays the animation.
    */
-   public int getMaxHeight() {
+   public int getAnimationHeight() {
     List<Transformation> tList = getTransformations();
 
     tList.sort(Comparator.comparing(Transformation::getY2));
     Transformation transformation = tList.get(tList.size() - 1);
-    return transformation.getY2() + (int)(transformation.getH2() * 1.5);
+    return transformation.getY2() + transformation.getH2() + WINDOW_BUFFER;
   }
 
   /**
