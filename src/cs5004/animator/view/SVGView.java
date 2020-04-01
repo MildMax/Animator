@@ -239,7 +239,7 @@ public class SVGView extends AbstractTextView {
       }
       b.append("</");
       b.append(SVGTyp);
-      b.append(">");
+      b.append("> \n\n");
     }
     b.append("</svg>");
 
