@@ -1,6 +1,7 @@
 package cs5004.animator.view;
 
 import java.awt.Dimension;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -19,6 +20,7 @@ public class VisualView extends JFrame implements AnimationView {
 
   private ShapePanel shapePanel;
   private JScrollPane scrollPane;
+  private int delay;
 
   /**
    * The AnimationViewImpl constructor takes x and y values specifying the
@@ -33,10 +35,13 @@ public class VisualView extends JFrame implements AnimationView {
    *                                  upper left corner of the display are less than 0.
    *                                  If the width or height values of the display window are less
    *                                  than or equal to 0.
+   *                                  If the specified delay is less than 1.
    */
   public VisualView(int x, int y, int windowWidth, int windowHeight,
-                    int maxWidth, int maxHeight) throws IllegalArgumentException {
+                    int maxWidth, int maxHeight, int delay) throws IllegalArgumentException {
     super();
+
+    this.delay = delay;
 
     if (windowWidth <= 0 || windowHeight <= 0) {
       throw new IllegalArgumentException("Width and height must be greater"
@@ -46,6 +51,8 @@ public class VisualView extends JFrame implements AnimationView {
               + "than 0");
     } else if (x < 0 || y < 0) {
       throw new IllegalArgumentException("x and y positions cannot be negative");
+    } else if (delay < 1) {
+      throw new IllegalArgumentException("Delay cannot be less than 1");
     }
 
     shapePanel = new ShapePanel();
@@ -101,13 +108,17 @@ public class VisualView extends JFrame implements AnimationView {
   }
 
   /**
-   * Not supported in visual view -- throws IllegalArgumentException.
+   * Runs the visual animation in a window displayed on screen.
    *
    * @param m takes an AnimationModel that stores an animation to be written to
-   * @throws UnsupportedOperationException if method is called -- writing not supported by visual view.
+   * @throws IllegalArgumentException if AnimationModel m is null.
    */
   @Override
-  public void write(AnimationModel m) throws IllegalStateException {
-    throw new UnsupportedOperationException("Visual view does not support writing");
+  public void run(AnimationModel m) throws IllegalArgumentException {
+    if (m == null) {
+      throw new IllegalArgumentException("Animation Model cannot be null.");
+    }
+    ActionListener animRunner = new AnimationRunner(m, this, this.delay);
+    ((AnimationRunner)animRunner).runAnim();
   }
 }

@@ -37,7 +37,7 @@ public class TestTextView {
             40, 60, 150, 150, 150));
 
     t.openView();
-    t.write(m);
+    t.run(m);
     t.closeView();
 
     String test = "Create window with width 500 and height 600 with top left "
@@ -86,7 +86,7 @@ public class TestTextView {
     TextView textView = new TextView();
 
     textView.openView();
-    textView.write(m);
+    textView.run(m);
     textView.closeView();
 
     String test = "Create window with width 500 and height 600 with top left "
@@ -144,7 +144,7 @@ public class TestTextView {
   public void testTextViewWriteNullAnimationModel() {
     TextView textView = new TextView();
 
-    textView.write(null);
+    textView.run(null);
   }
 
   /**
@@ -156,6 +156,6 @@ public class TestTextView {
             + "\\Northeastern\\5004\\Animator\\test_out.txt");
     AnimationModel m = new AnimationModelImpl(50, 60, 500, 600);
 
-    t.write(m);
+    t.run(m);
   }
 }

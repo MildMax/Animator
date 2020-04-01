@@ -1,6 +1,5 @@
 package cs5004.animator;
 
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -42,13 +41,7 @@ public final class EasyAnimator {
     view.openView();
 
     //populate display/view
-    if (view instanceof VisualView) {
-      ActionListener animRunner = new AnimationRunner(m, view, e.speed);
-      ((AnimationRunner)animRunner).runAnim();
-    }
-    else {
-      view.write(m);
-    }
+    view.run(m);
 
     //close the file/display
     view.closeView();
@@ -102,7 +95,7 @@ public final class EasyAnimator {
     if (viewType.compareTo("visual") == 0) {
       view = new VisualView(m.getBoundX(), m.getBoundY(),
               m.getWindowWidth(), m.getWindowHeight(),
-              m.getAnimationWidth(), m.getAnimationHeight());
+              m.getAnimationWidth(), m.getAnimationHeight(), speed);
     }
     else if (viewType.compareTo("text") == 0) {
       if (outFile != null) {

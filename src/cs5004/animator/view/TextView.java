@@ -54,7 +54,7 @@ public class TextView extends AbstractTextView {
    *                               If an out file is specified but has not been opened.
    */
   @Override
-  public void write(AnimationModel m) throws IllegalArgumentException {
+  public void run(AnimationModel m) throws IllegalArgumentException {
     if (m == null) {
       throw new IllegalArgumentException("AnimationModel cannot be null");
     }

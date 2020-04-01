@@ -30,7 +30,7 @@ public interface AnimationView {
    * @param m takes an AnimationModel that stores an animation to be written to
    *          a text file.
    */
-  void write(AnimationModel m);
+  void run(AnimationModel m);
 
   /**
    * Draws a new frame to the window according to the shapes in shapeList.

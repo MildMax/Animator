@@ -12,7 +12,7 @@ public class VisualViewTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void testAnimationViewImplNegativeWidth() {
-    new VisualView(0, 0, -1, 100, 500, 600);
+    new VisualView(0, 0, -1, 100, 500, 600, 50);
   }
 
   /**
@@ -20,7 +20,7 @@ public class VisualViewTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void testAnimationViewImplNegativeHeight() {
-    new VisualView(0, 0, 100, -1, 500, 600);
+    new VisualView(0, 0, 100, -1, 500, 600, 50);
   }
 
   /**
@@ -28,7 +28,7 @@ public class VisualViewTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void testAnimationViewImplNegativeX() {
-    new VisualView(-10, 0, 100, 100, 500, 600);
+    new VisualView(-10, 0, 100, 100, 500, 600, 50);
   }
 
   /**
@@ -36,7 +36,7 @@ public class VisualViewTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void testAnimationViewImplNegativeY() {
-    new VisualView(0, -5, 100, 100, 500, 600);
+    new VisualView(0, -5, 100, 100, 500, 600, 50);
   }
 
   /**
@@ -44,7 +44,7 @@ public class VisualViewTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void testAnimationViewNegativeMaxWidth() {
-    new VisualView(0, 0, 100, 100, -1, 600);
+    new VisualView(0, 0, 100, 100, -1, 600, 50);
   }
 
   /**
@@ -52,6 +52,16 @@ public class VisualViewTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void testAnimationViewNegativeMaxHeight() {
-    new VisualView(0, 0, 100, 100, 500, -1);
+    new VisualView(0, 0, 100, 100, 500, -1, 50);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testAnimationViewZeroDelay() {
+    new VisualView(0, 0, 100, 100, 200, 200, 0);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testAnimationViewNegativeDelay() {
+    new VisualView(0, 0, 100, 100, 200, 200, -1);
   }
 }

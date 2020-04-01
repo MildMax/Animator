@@ -1,4 +1,4 @@
-package cs5004.animator;
+package cs5004.animator.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
