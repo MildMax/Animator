@@ -15,11 +15,20 @@ public enum ShapeType {
 
   private String name;
 
+  /**
+   * Sets the String representation of the ShapeType enum.
+   *
+   * @param name the name of the shape.
+   */
   ShapeType(String name) {
     this.name = name;
   }
 
-
+  /**
+   * Returns the String representation of the ShapeType.
+   *
+   * @return the String representation of the ShapeType.
+   */
   @Override
   public String toString() {
     return this.name;

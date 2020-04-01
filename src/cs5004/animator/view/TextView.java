@@ -1,12 +1,9 @@
 package cs5004.animator.view;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
 
 import cs5004.animator.model.AnimationModel;
-import cs5004.animator.model.shapes.Shape;
 
 /**
  * This class holds the textual view used to write a description of the animation
@@ -41,8 +38,16 @@ public class TextView extends AbstractTextView {
     super(null);
   }
 
+  /**
+   * Writes a String representation of an AnimationModel to a text file if one has been
+   * specified in command line arguments. Otherwise, prints String representation of an
+   * AnimationModel to System.out.
+   *
+   * @param m takes an AnimationModel that stores an animation.
+   */
   @Override
   public void write(AnimationModel m) {
+    super.write(m);
     if (out instanceof FileWriter) {
       try {
         ((FileWriter) out).write(m.toString());

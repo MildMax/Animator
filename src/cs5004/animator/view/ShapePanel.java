@@ -18,6 +18,12 @@ public class ShapePanel extends JPanel {
 
   private List<Shape> shapeList;
 
+  /**
+   * Adds a shapelist containing data representing a frame of an animation
+   * to be displayed on screen.
+   *
+   * @param shapeList takes list of shapes to be displayed on screen.
+   */
   public void addFrame(List<Shape> shapeList) {
     this.shapeList = shapeList;
   }

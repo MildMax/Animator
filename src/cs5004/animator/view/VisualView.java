@@ -1,9 +1,11 @@
 package cs5004.animator.view;
 
-import java.awt.*;
+import java.awt.Dimension;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 /**
  * This class displays a window with an animation of simple shapes
@@ -32,7 +34,8 @@ public class VisualView extends JFrame implements AnimationView {
    *                                  If the width or height values of the display window are less
    *                                  than or equal to 0.
    */
-  public VisualView(int x, int y, int width, int height) throws IllegalArgumentException {
+  public VisualView(int x, int y, int width, int height,
+                    int maxWidth, int maxHeight) throws IllegalArgumentException {
     super();
 
     if (width <= 0 || height <= 0) {
@@ -43,10 +46,11 @@ public class VisualView extends JFrame implements AnimationView {
     }
 
     shapePanel = new ShapePanel();
-    shapePanel.setPreferredSize(new Dimension(width, height));
+    shapePanel.setPreferredSize(new Dimension(maxWidth, maxHeight));
 
     scrollPane = new JScrollPane(shapePanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
             ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+    scrollPane.setPreferredSize(new Dimension(maxWidth, maxHeight));
 
     this.add(scrollPane);
     this.setTitle("Easy Animator");

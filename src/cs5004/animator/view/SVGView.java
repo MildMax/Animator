@@ -32,6 +32,7 @@ public class SVGView extends AbstractTextView {
 
   @Override
   public void write(AnimationModel m) {
+    super.write(m);
     String SVGTyp = "";
     String xTyp = "";
     String yTyp = "";
@@ -245,9 +246,7 @@ public class SVGView extends AbstractTextView {
     String finalString = b.toString();
 
     try {
-      openDisplay();
       ((FileWriter) out).write(finalString);
-      closeDisplay();
     } catch (IOException e) {
       throw new IllegalStateException("Cannot write to FileWriter " + fileName);
     }

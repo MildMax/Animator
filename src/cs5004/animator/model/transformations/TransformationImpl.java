@@ -1,5 +1,4 @@
 package cs5004.animator.model.transformations;
-import cs5004.animator.model.transformations.Transformation;
 
 /**
  * The TransformationImpl class holds values that describes the values a

@@ -25,44 +25,41 @@ public class TickActionListener implements ActionListener {
    * visually, and a delay to initialize a Timer and play the animation at the specified
    * speed.
    *
-   * @param m
-   * @param v
-   * @param delay
+   * @param m takes an AnimationModel with shapes to be printed to the screen.
+   * @param v takes a View that will display the animation.
+   * @param delay specifies the frames per second of the animation.
+   * @throws IllegalArgumentException If the AnimationModel argument is null.
+   *                                  If the AnimationView argument is null.
    */
   public TickActionListener(AnimationModel m, AnimationView v, int delay) {
+    if (m == null || v == null) {
+      throw new IllegalArgumentException("Model/View cannot be null");
+    }
     this.model = m;
     this.view = v;
     this.timer = new Timer(delay, this);
   }
 
-  public int getTick() {
-    return this.tick;
-  }
-
-  public void start() {
+  /**
+   * Runs the timer in the Listener.
+   */
+  public void runAnim() {
     timer.start();
+    while (timer.isRunning());
   }
 
-  public boolean isRunning() {
-    return timer.isRunning();
-  }
-
+  /**
+   * Increments frames of animation and displays a frame of the animation on screen.
+   *
+   * @param e an ActionEvent object.
+   */
   @Override
   public void actionPerformed(ActionEvent e) {
     if (this.tick > this.model.getTotalTicks()) {
-      System.out.println("Stopping action listener");
       timer.stop();
       return;
     }
+    this.view.drawNewFrame(this.model.getShapesAtTick(this.tick));
     ++tick;
-
-    System.out.println("ticks in listener: " + this.tick);
-    System.out.println("ticks in anim: " + this.model.getTotalTicks());
-
-    try {
-      this.view.drawNewFrame(this.model.getShapesAtTick(this.tick));
-    } catch (IllegalArgumentException ex) {
-      return;
-    }
   }
 }
