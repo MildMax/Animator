@@ -91,7 +91,7 @@ public class TestSVGView {
 
     assertEquals(test, m.toString());
 
-    SVGView view1 = new SVGView("C:\\Users\\WilliC13\\Documents\\CS Masters\\CS 5004 Object Oriented Design\\Homeworks\\Homework07 GitHub V2\\Animator\\view1.svg");
+    SVGView view1 = new SVGView("C:\\Users\\WilliC13\\Documents\\CS Masters\\CS 5004 Object Oriented Design\\Homeworks\\Homework07 GitHub V2\\Animator\\view1.svg", 1);
     view1.write(m);
 
 

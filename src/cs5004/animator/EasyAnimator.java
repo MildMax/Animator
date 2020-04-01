@@ -43,7 +43,7 @@ public final class EasyAnimator {
 
     //populate display/view
     if (view instanceof VisualView) {
-      ActionListener animRunner = new AnimationRunner(m, view, 1000 / e.speed);
+      ActionListener animRunner = new AnimationRunner(m, view, e.speed);
       ((AnimationRunner)animRunner).runAnim();
     }
     else {
@@ -70,7 +70,11 @@ public final class EasyAnimator {
           outFile = args[i + 1];
         } else if (args[i].toLowerCase().compareTo("-speed") == 0) {
           try {
-            this.speed = Integer.parseInt(args[i + 1]);
+            int speedInt = Integer.parseInt(args[i + 1]);
+            if (speedInt < 1) {
+              AnimationView.displayErrorMessage("Invalid speed value: " + args[i + 1]);
+            }
+            this.speed = 1000 / speedInt;
           } catch (NumberFormatException e) {
             AnimationView.displayErrorMessage("Invalid speed value: " + args[i + 1]);
           }
@@ -108,7 +112,7 @@ public final class EasyAnimator {
       }
     }
     else if (viewType.compareTo("svg") == 0) {
-      view = new SVGView(outFile);
+      view = new SVGView(outFile, speed);
     }
     else {
       AnimationView.displayErrorMessage("Invalid view type " + viewType);

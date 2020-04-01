@@ -65,7 +65,7 @@ public class TextView extends AbstractTextView {
         throw new IllegalStateException("Cannot write to FileWriter " + fileName);
       }
     }
-    else if (out != null) {
+    else if (fileName != null) {
       throw new IllegalStateException("Out file has not been initialized for writing");
     }
     else {

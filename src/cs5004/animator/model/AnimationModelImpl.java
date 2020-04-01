@@ -194,7 +194,7 @@ public class AnimationModelImpl implements AnimationModel {
       try {
         shapeList.add(shape.getShapeAtTick(tick));
       } catch (IllegalArgumentException e) {
-        System.out.println("Shape does not exist yet");
+
       }
     }
     return shapeList;
