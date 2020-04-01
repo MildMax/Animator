@@ -98,10 +98,9 @@ public interface Shape {
    *
    * @param tick the frame of the animation.
    * @return itself with modified values.
-   * @throws IllegalArgumentException if the shape is not visible at the frame specified
-   *                                  by the tick.
+   * @throws IllegalStateException if there are no transformations on the current shape.
    */
-  Shape getShapeAtTick(int tick) throws IllegalArgumentException;
+  Shape getShapeAtTick(int tick) throws IllegalStateException;
 
   /**
    * Return the type of shape.

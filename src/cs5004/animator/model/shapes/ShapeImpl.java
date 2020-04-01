@@ -211,14 +211,12 @@ public class ShapeImpl implements Shape {
    *
    * @param tick the frame of the animation.
    * @return itself with modified values.
-   * @throws IllegalArgumentException if the shape is not visible at the frame specified
-   *                                  by the tick.
    * @throws IllegalStateException if there are no transformations on the current shape.
    */
   @Override
-  public Shape getShapeAtTick(int tick) {
+  public Shape getShapeAtTick(int tick) throws IllegalStateException {
     if (tick < appearTime || tick > disappearTime) {
-      throw new IllegalArgumentException("Shape does not appear at tick");
+      return null;
     }
 
     Transformation t = null;

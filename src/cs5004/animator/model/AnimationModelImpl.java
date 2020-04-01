@@ -191,10 +191,9 @@ public class AnimationModelImpl implements AnimationModel {
     }
     List<Shape> shapeList = new ArrayList<>();
     for (Shape shape : this.shapeMap.values()) {
-      try {
-        shapeList.add(shape.getShapeAtTick(tick));
-      } catch (IllegalArgumentException e) {
-
+      Shape s = shape.getShapeAtTick(tick);
+      if (s != null) {
+        shapeList.add(s);
       }
     }
     return shapeList;

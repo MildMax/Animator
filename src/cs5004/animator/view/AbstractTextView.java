@@ -64,10 +64,10 @@ public abstract class AbstractTextView implements AnimationView {
    * Is overridden and nullified -- textual views do not support drawing frames.
    *
    * @param shapeList takes a list of shapes to be drawn to the window.
-   * @throws IllegalArgumentException
+   * @throws UnsupportedOperationException text view does not support drawing frames.
    */
   @Override
   public void drawNewFrame(List<Shape> shapeList) throws IllegalArgumentException {
-    throw new IllegalStateException("Text-based outputs do not support drawing frames");
+    throw new UnsupportedOperationException("Text-based outputs do not support drawing frames");
   }
 }

@@ -72,11 +72,11 @@ public final class EasyAnimator {
           try {
             int speedInt = Integer.parseInt(args[i + 1]);
             if (speedInt < 1) {
-              AnimationView.displayErrorMessage("Invalid speed value: " + args[i + 1]);
+              AnimationView.displayErrorMessage("Invalid non-positive speed value: " + args[i + 1]);
             }
             this.speed = 1000 / speedInt;
           } catch (NumberFormatException e) {
-            AnimationView.displayErrorMessage("Invalid speed value: " + args[i + 1]);
+            AnimationView.displayErrorMessage("Invalid integer speed value: " + args[i + 1]);
           }
         } else if (args[i].compareTo("-view") == 0) {
           viewType = args[i + 1];
