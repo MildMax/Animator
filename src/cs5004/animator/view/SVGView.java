@@ -16,6 +16,11 @@ public class SVGView extends AbstractTextView {
     if (fileName == null) {
       throw new IllegalArgumentException("String fileName cannot be null");
     }
+    else if (fileName.length() < 5
+            || fileName.substring(fileName.length() - 4).compareTo(".svg") != 0) {
+      throw new IllegalArgumentException("Specified file must have a "
+              + "valid name and '.svg' extension");
+    }
   }
 
   @Override

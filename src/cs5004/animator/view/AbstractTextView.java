@@ -3,10 +3,12 @@ package cs5004.animator.view;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 import cs5004.animator.model.AnimationModel;
+import cs5004.animator.model.shapes.Shape;
 
-public abstract class AbstractTextView implements TextualView {
+public abstract class AbstractTextView implements AnimationView {
 
   protected String fileName;
   protected Appendable out = null;
@@ -54,7 +56,7 @@ public abstract class AbstractTextView implements TextualView {
    */
   @Override
   public void closeDisplay() throws IllegalStateException {
-    if (out instanceof FileWriter) {
+    if (out != null && out instanceof FileWriter) {
       try {
         ((FileWriter) out).close();
       } catch (IOException e) {
@@ -63,4 +65,8 @@ public abstract class AbstractTextView implements TextualView {
     }
   }
 
+  @Override
+  public void drawNewFrame(List<Shape> shapeList) throws IllegalArgumentException {
+    throw new IllegalStateException("Text-based outputs do not support drawing frames");
+  }
 }

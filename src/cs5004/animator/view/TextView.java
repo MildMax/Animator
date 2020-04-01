@@ -27,6 +27,11 @@ public class TextView extends AbstractTextView {
     if (fileName == null) {
       throw new IllegalArgumentException("String data and filename cannot be null");
     }
+    else if (fileName.length() < 5
+            || fileName.substring(fileName.length() - 4).compareTo(".txt") != 0) {
+      throw new IllegalArgumentException("Specified file must have a "
+              + "valid name and '.txt' extension");
+    }
   }
 
   /**

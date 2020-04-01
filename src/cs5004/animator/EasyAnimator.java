@@ -1,5 +1,6 @@
 package cs5004.animator;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileReader;
@@ -10,11 +11,11 @@ import javax.swing.*;
 import cs5004.animator.model.AnimationModel;
 import cs5004.animator.model.AnimationModelImpl;
 import cs5004.animator.util.AnimationReader;
+import cs5004.animator.view.AbstractTextView;
 import cs5004.animator.view.AnimationView;
+import cs5004.animator.view.SVGView;
 import cs5004.animator.view.TextView;
-import cs5004.animator.view.TextualView;
 import cs5004.animator.view.VisualView;
-import cs5004.animator.view.VisualViewImpl;
 
 public final class EasyAnimator {
 
@@ -23,7 +24,7 @@ public final class EasyAnimator {
   String viewType = null;
   int speed = 1;
 
-  public static void main(String[] args) throws IOException, InterruptedException {
+  public static void main(String[] args) throws IOException {
     //create the animator
     EasyAnimator e = new EasyAnimator();
     //parse commandLineArguments
@@ -34,7 +35,7 @@ public final class EasyAnimator {
     AnimationView view = null;
 
     if (e.viewType.compareTo("visual") == 0) {
-      view = new VisualViewImpl(m.getBoundX(), m.getBoundY(),
+      view = new VisualView(m.getBoundX(), m.getBoundY(),
               m.getWindowWidth(), m.getWindowHeight());
     }
     else if (e.viewType.compareTo("text") == 0) {
@@ -45,21 +46,29 @@ public final class EasyAnimator {
       }
     }
     else if (e.viewType.compareTo("svg") == 0) {
-      //initialize view here
+      view = new SVGView(e.outFile);
     }
     else {
-      VisualView.displayErrorMessage("Invalid view type " + e.viewType);
+      AnimationView.displayErrorMessage("Invalid view type " + e.viewType);
     }
 
     //run the file
     view.openDisplay();
 
     if (view instanceof VisualView) {
-      VisualView v = (VisualView) view;
 
-      ActionListener tickListener = new TickActionListener(m, v);
-      Timer tickTimer = new Timer(1000 / e.speed, tickListener);
-      tickTimer.start();
+      ActionListener tickListener = new TickActionListener(m, view);
+      Timer tickTimer = new Timer(1000 / e.speed, new ActionListener() {
+        int ticks = 0;
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+          if (ticks == 0) {
+
+          }
+        }
+      });
+
 
       while(((TickActionListener) tickListener).getTick() <= m.getTotalTicks()) {
         System.out.println("hello");
@@ -67,10 +76,8 @@ public final class EasyAnimator {
 
       tickTimer.stop();
     }
-    else if (view instanceof TextualView) {
-      TextualView v = (TextualView) view;
-
-      v.write(m);
+    else {
+      view.write(m);
     }
 
     view.closeDisplay();
@@ -96,17 +103,17 @@ public final class EasyAnimator {
           viewType = args[i + 1];
           if (viewType.compareTo("svg") != 0 && viewType.compareTo("text") != 0
               && viewType.compareTo("visual") != 0) {
-            VisualView.displayErrorMessage("Invalid view type " + viewType);
+            AnimationView.displayErrorMessage("Invalid view type " + viewType);
           }
         } else {
-          VisualView.displayErrorMessage("Invalid command line argument " + args[i]);
+          AnimationView.displayErrorMessage("Invalid command line argument " + args[i]);
         }
       }
     } catch (IndexOutOfBoundsException e) {
-      VisualView.displayErrorMessage("Insufficient number of arguments supplied");
+      AnimationView.displayErrorMessage("Insufficient number of arguments supplied");
     }
     if (inFile == null || viewType == null) {
-      VisualView.displayErrorMessage("Must supply an in-file and a view-type");
+      AnimationView.displayErrorMessage("Must supply an in-file and a view-type");
     }
   }
 }
