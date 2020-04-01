@@ -24,7 +24,7 @@ public final class EasyAnimator {
   String viewType = null;
   int speed = 1;
 
-  public static void main(String[] args) throws IOException {
+  public static void main(String[] args) throws IOException, InterruptedException {
     //create the animator
     EasyAnimator e = new EasyAnimator();
     //parse commandLineArguments
@@ -56,25 +56,9 @@ public final class EasyAnimator {
     view.openDisplay();
 
     if (view instanceof VisualView) {
-
-      ActionListener tickListener = new TickActionListener(m, view);
-      Timer tickTimer = new Timer(1000 / e.speed, new ActionListener() {
-        int ticks = 0;
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-          if (ticks == 0) {
-
-          }
-        }
-      });
-
-
-      while(((TickActionListener) tickListener).getTick() <= m.getTotalTicks()) {
-        System.out.println("hello");
-      }
-
-      tickTimer.stop();
+      ActionListener tickListener = new TickActionListener(m, view, 1000 / e.speed);
+      ((TickActionListener)tickListener).start();
+      while(((TickActionListener)tickListener).isRunning());
     }
     else {
       view.write(m);
