@@ -24,11 +24,6 @@ public class ShapeImpl implements Shape {
   private List<Transformation> transformationList;
   private int appearTime;
   private int disappearTime;
-  private String typeSVG;
-  private String xTypeSVG;
-  private String yTypeSVG;
-  private String wTypeSVG;
-  private String hTypeSVG;
 
   /**
    * Take a String name indicating the name of the shape, a ShapeType enum indicating the type of
@@ -49,53 +44,6 @@ public class ShapeImpl implements Shape {
     this.type = type;
     this.layer = layer;
     transformationList = new ArrayList<>();
-
-    // Assign the shape type and x/y/w/h attribute types in SVG language to create SVG more easily.
-    if (type == ShapeType.CIRCLE) {
-      typeSVG = "ellipse";
-      this.xTypeSVG = "cx";
-      this.yTypeSVG = "cy";
-      this.wTypeSVG = "rx";
-      this.hTypeSVG = "ry";
-    } else if (type == ShapeType.ELLIPSE) {
-      this.typeSVG = "ellipse";
-      this.xTypeSVG = "cx";
-      this.yTypeSVG = "cy";
-      this.wTypeSVG = "rx";
-      this.hTypeSVG = "ry";
-    } else if (type == ShapeType.OVAL) {
-      typeSVG = "ellipse";
-      this.xTypeSVG = "cx";
-      this.yTypeSVG = "cy";
-      this.wTypeSVG = "rx";
-      this.hTypeSVG = "ry";
-    } else if (type == ShapeType.RECTANGLE) {
-      typeSVG = "rect";
-      this.xTypeSVG = "x";
-      this.yTypeSVG = "y";
-      this.wTypeSVG = "width";
-      this.hTypeSVG = "height";
-    } else if (type == ShapeType.SQUARE) {
-      typeSVG = "rect";
-      this.xTypeSVG = "x";
-      this.yTypeSVG = "y";
-      this.wTypeSVG = "width";
-      this.hTypeSVG = "height";
-    } else if (type == ShapeType.TRIANGLE) {
-      typeSVG = "polygon";
-      this.xTypeSVG = "x";
-      this.yTypeSVG = "y";
-      this.wTypeSVG = "width";
-      this.hTypeSVG = "height";
-    }
-  }
-
-
-  /**
-   * Get the shape's SVG type value.
-   */
-  public String getTypeSVG() {
-    return this.typeSVG;
   }
 
   /**
@@ -359,7 +307,6 @@ public class ShapeImpl implements Shape {
     return (newStart <= currStart && newEnd <= currStart)
             || (newStart >= currEnd && newEnd >= currEnd);
   }
-
 }
 
 

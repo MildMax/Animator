@@ -130,11 +130,4 @@ public interface Shape {
    * @return a list of all transformations on the shape as a list.
    */
   List<Transformation> getTransformationList();
-
-
-  /**
-   * Get the shape's SVG type value.
-   */
-  String getTypeSVG();
-
 }
