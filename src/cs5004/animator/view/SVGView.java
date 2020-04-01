@@ -2,6 +2,7 @@ package cs5004.animator.view;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 
 import cs5004.animator.model.AnimationModel;
@@ -56,7 +57,8 @@ public class SVGView extends AbstractTextView {
 
     // Loop through all of the shapes in the model.
     List<Shape> shapeList = m.getShapes();
-    for (Shape s : m.getShapes()) {
+    shapeList.sort(Comparator.comparing(Shape::getLayer));
+    for (Shape s : shapeList) {
 
       // Get the initial color values for the shape.
       rInit = s.getShapeAtTick(s.getStart()).getR();
@@ -157,9 +159,9 @@ public class SVGView extends AbstractTextView {
         if (t.getX1() != t.getX2()) {
           b.append("<animate attributeType=\"xml\" begin=\"");
           b.append(t.getStart());
-          b.append("000ms\" dur=\"");
+          b.append("00ms\" dur=\"");
           b.append(t.getEnd() - t.getStart());
-          b.append("000ms\" attributeName=\"");
+          b.append("00ms\" attributeName=\"");
           b.append(xTyp);
           b.append("\" from=\"");
           b.append(t.getX1());
@@ -172,9 +174,9 @@ public class SVGView extends AbstractTextView {
         if (t.getY1() != t.getY2()) {
           b.append("<animate attributeType=\"xml\" begin=\"");
           b.append(t.getStart());
-          b.append("000ms\" dur=\"");
+          b.append("00ms\" dur=\"");
           b.append(t.getEnd() - t.getStart());
-          b.append("000ms\" attributeName=\"");
+          b.append("00ms\" attributeName=\"");
           b.append(yTyp);
           b.append("\" from=\"");
           b.append(t.getY1());
@@ -187,9 +189,9 @@ public class SVGView extends AbstractTextView {
         if (t.getY1() != t.getY2()) {
           b.append("<animate attributeType=\"xml\" begin=\"");
           b.append(t.getStart());
-          b.append("000ms\" dur=\"");
+          b.append("00ms\" dur=\"");
           b.append(t.getEnd() - t.getStart());
-          b.append("000ms\" attributeName=\"");
+          b.append("00ms\" attributeName=\"");
           b.append(hTyp);
           b.append("\" from=\"");
           b.append(t.getH1());
@@ -202,9 +204,9 @@ public class SVGView extends AbstractTextView {
         if (t.getY1() != t.getY2()) {
           b.append("<animate attributeType=\"xml\" begin=\"");
           b.append(t.getStart());
-          b.append("000ms\" dur=\"");
+          b.append("00ms\" dur=\"");
           b.append(t.getEnd() - t.getStart());
-          b.append("000ms\" attributeName=\"");
+          b.append("00ms\" attributeName=\"");
           b.append(wTyp);
           b.append("\" from=\"");
           b.append(t.getW1());
@@ -217,9 +219,9 @@ public class SVGView extends AbstractTextView {
         if (t.getR1() != t.getR2() || t.getG1() != t.getG2() || t.getB1() != t.getB2()) {
           b.append("<animate attributeType=\"xml\" begin=\"");
           b.append(t.getStart());
-          b.append("000ms\" dur=\"");
+          b.append("00ms\" dur=\"");
           b.append(t.getEnd() - t.getStart());
-          b.append("000ms\" attributeName=\"");
+          b.append("00ms\" attributeName=\"");
           b.append("fill");
           b.append("\" from=\"rgb(");
           b.append(t.getR1());
@@ -244,10 +246,15 @@ public class SVGView extends AbstractTextView {
 
     String finalString = b.toString();
 
-    try {
-      ((FileWriter) out).write(finalString);
-    } catch (IOException e) {
-      throw new IllegalStateException("Cannot write to FileWriter " + fileName);
+    if (out instanceof FileWriter) {
+      try {
+        ((FileWriter) out).write(finalString);
+      } catch (IOException e) {
+        throw new IllegalStateException("Cannot write to FileWriter " + fileName);
+      }
+    }
+    else {
+      throw new IllegalStateException("Must initialize out file before writing.");
     }
   }
 

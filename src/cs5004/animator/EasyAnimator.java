@@ -59,16 +59,16 @@ public final class EasyAnimator {
   private void parseArgs(String[] args) {
     try {
       for (int i = 0; i < args.length; i += 2) {
-        if (args[i].compareTo("-in") == 0) {
+        if (args[i].toLowerCase().compareTo("-in") == 0) {
           File f = new File(args[i + 1]);
           try {
             inFile = new FileReader(f);
           } catch (IOException e) {
             AnimationView.displayErrorMessage("Could not open specified input file");
           }
-        } else if (args[i].compareTo("-out") == 0) {
+        } else if (args[i].toLowerCase().compareTo("-out") == 0) {
           outFile = args[i + 1];
-        } else if (args[i].compareTo("-speed") == 0) {
+        } else if (args[i].toLowerCase().compareTo("-speed") == 0) {
           try {
             this.speed = Integer.parseInt(args[i + 1]);
           } catch (NumberFormatException e) {
@@ -76,8 +76,9 @@ public final class EasyAnimator {
           }
         } else if (args[i].compareTo("-view") == 0) {
           viewType = args[i + 1];
-          if (viewType.compareTo("svg") != 0 && viewType.compareTo("text") != 0
-              && viewType.compareTo("visual") != 0) {
+          if (viewType.toLowerCase().compareTo("svg") != 0
+                  && viewType.toLowerCase().compareTo("text") != 0
+              && viewType.toLowerCase().compareTo("visual") != 0) {
             AnimationView.displayErrorMessage("Invalid view type " + viewType);
           }
         } else {

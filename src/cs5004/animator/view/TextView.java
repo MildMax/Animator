@@ -22,7 +22,7 @@ public class TextView extends AbstractTextView {
   public TextView(String fileName) throws IllegalArgumentException {
     super (fileName);
     if (fileName == null) {
-      throw new IllegalArgumentException("String data and filename cannot be null");
+      throw new IllegalArgumentException("String fileName cannot be null");
     }
     else if (fileName.length() < 5
             || fileName.substring(fileName.length() - 4).compareTo(".txt") != 0) {
