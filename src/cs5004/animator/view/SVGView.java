@@ -13,11 +13,13 @@ import cs5004.animator.model.transformations.Transformation;
 public class SVGView extends AbstractTextView {
 
   /**
-   * This constructor takes a String containing data to be written to the view and a filename of the
-   * text file that the description will be written to.
+   * This constructor takes a String a filename of the
+   * text file that the formatted SVG description will be written to.
    *
    * @param fileName the name of the text file to be written to.
-   * @throws IllegalArgumentException if the String data or filename arguments are null.
+   * @throws IllegalArgumentException if the String filename arguments is null.
+   *                                  If the specified file does not contain .svg file extension.
+   *                                  If the specified file does not have a valid name.
    */
   public SVGView(String fileName) throws IllegalArgumentException {
     super(fileName);
@@ -31,8 +33,19 @@ public class SVGView extends AbstractTextView {
     }
   }
 
+  /**
+   * Writes a description of the animation held in an AnimationModel to the specified file
+   * as a String formatted in SVG.
+   *
+   * @param m takes an AnimationModel that stores an animation to be written to
+   * @throws IllegalArgumentException if the AnimationModel m is null.
+   * @throws IllegalStateException if the specified outfile has not been initialized.
+   */
   @Override
   public void write(AnimationModel m) {
+    if (m == null) {
+      throw new IllegalArgumentException("AnimationModel m cannot be null");
+    }
     String SVGTyp = "";
     String xTyp = "";
     String yTyp = "";

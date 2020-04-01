@@ -281,6 +281,14 @@ public class ShapeImpl implements Shape {
     return tList;
   }
 
+  @Override
+  public String getCreateStatement() {
+    getShapeAtTick(getStart());
+    return "Create " + this.type.toString() + " " + this.name + " with center at ("
+            + this.x + "," + this.y + ") with width " + this.width + " and height "
+            + this.height + " and color (" + this.r + "," + this.g + "," + this.b + ")\n";
+  }
+
   /**
    * Returns a String representation of the shape's name and the ticks at which it appears
    * and disappears on screen.
@@ -289,7 +297,7 @@ public class ShapeImpl implements Shape {
    *         and disappears on screen.
    */
   @Override
-  public String toString() {
+  public String getAppearStatement() {
     return this.type.toString() + " " + this.name + " appears at time t=" + appearTime +
             " and disappears at time t=" + disappearTime + "\n";
   }

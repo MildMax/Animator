@@ -100,6 +100,12 @@ public class VisualView extends JFrame implements AnimationView {
     this.dispose();
   }
 
+  /**
+   * Not supported in visual view -- throws IllegalArgumentException.
+   *
+   * @param m takes an AnimationModel that stores an animation to be written to
+   * @throws IllegalStateException if method is called -- writing not supported by visual view.
+   */
   @Override
   public void write(AnimationModel m) throws IllegalStateException {
     throw new IllegalStateException("Visual view does not support writing");

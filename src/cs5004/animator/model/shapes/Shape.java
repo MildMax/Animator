@@ -130,4 +130,21 @@ public interface Shape {
    * @return a list of all transformations on the shape as a list.
    */
   List<Transformation> getTransformationList();
+
+  /**
+   * Creates a String representing the creation of the shape.
+   *
+   * @return a String representing the creation of the shape.
+   */
+  String getCreateStatement();
+
+  /**
+   * Returns a String representation of the shape's name and the ticks at which it appears
+   * and disappears on screen.
+   *
+   * @return a String representation of the shape's name and the ticks at which it appears
+   *         and disappears on screen.
+   */
+  String getAppearStatement();
+
 }

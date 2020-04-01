@@ -28,8 +28,7 @@ public abstract class AbstractTextView implements AnimationView {
 
   /**
    * If there is a specified file to be written to, opens file associated with
-   * fileName specified in constructor and sets file to be written to. Else, sets output to be
-   * System.out. Initializes out.
+   * fileName specified in constructor and sets file to be written to.
    *
    * @throws IllegalStateException if FileWriter cannot be created.
    */
@@ -48,9 +47,7 @@ public abstract class AbstractTextView implements AnimationView {
   /**
    * If writing to a File, closes the file.
    *
-   * @throws IllegalStateException if output cannot be written to specified File.
-   *                               If File cannot be closed.
-   *                               If data cannot be appended to System.out.
+   * @throws IllegalStateException If File cannot be closed.
    */
   @Override
   public void closeView() throws IllegalStateException {
@@ -64,7 +61,7 @@ public abstract class AbstractTextView implements AnimationView {
   }
 
   /**
-   * Is overridden and nullified.
+   * Is overridden and nullified -- textual views do not support drawing frames.
    *
    * @param shapeList takes a list of shapes to be drawn to the window.
    * @throws IllegalArgumentException

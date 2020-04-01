@@ -283,11 +283,15 @@ public class AnimationModelImpl implements AnimationModel {
             + this.windowHeight + " with top left corner (" + this.boundX + "," + this.boundY
             + ") and total ticks " + this.getTotalTicks() + "\n\n";
 
+    String createStatements = "";
+    String appearStatements = "";
+
     for (Shape shape : shapeMap.values()) {
-      out += shape.toString();
+      createStatements += shape.getCreateStatement();
+      appearStatements += shape.getAppearStatement();
     }
 
-    out += "\n";
+    out += createStatements + "\n" + appearStatements + "\n";
 
     for (Transformation t : getTransformations()) {
       out += t.toString();

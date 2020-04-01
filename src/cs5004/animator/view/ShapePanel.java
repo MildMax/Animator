@@ -9,8 +9,6 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
-
-
 /**
  * This class represents a panel that paints images to a frame that extends the JFrame class.
  */
@@ -23,8 +21,12 @@ public class ShapePanel extends JPanel {
    * to be displayed on screen.
    *
    * @param shapeList takes list of shapes to be displayed on screen.
+   * @throws IllegalArgumentException if the shape list is null.
    */
-  public void addFrame(List<Shape> shapeList) {
+  public void addFrame(List<Shape> shapeList) throws IllegalArgumentException {
+    if (shapeList == null) {
+      throw new IllegalArgumentException("shapeList cannot be null");
+    }
     this.shapeList = shapeList;
   }
 
