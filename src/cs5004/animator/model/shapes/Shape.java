@@ -97,7 +97,7 @@ public interface Shape {
   /**
    * Changes the internal values of the shape according to its list of
    * transformations at a given tick indicating the frame of the
-   * animation and returns itself. 
+   * animation and returns itself.
    *
    * @param tick the frame of the animation.
    * @return itself with modified values.

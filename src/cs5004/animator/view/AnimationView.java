@@ -25,7 +25,7 @@ public interface AnimationView {
   void closeView();
 
   /**
-   * Writes String representing an animation to a file.
+   * Runs the animation in the view.
    *
    * @param m takes an AnimationModel that stores an animation to be written to
    *          a text file.

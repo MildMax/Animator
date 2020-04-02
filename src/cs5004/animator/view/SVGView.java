@@ -10,20 +10,27 @@ import cs5004.animator.model.shapes.Shape;
 import cs5004.animator.model.shapes.ShapeType;
 import cs5004.animator.model.transformations.Transformation;
 
+/**
+ * This class holds the functionality necessary to open an SVG file, format a String in the
+ * SVG format, write the formatted string to the file, and then close the file. Extends the
+ * AbstractTextView class which implements the AnimationView interface.
+ */
 public class SVGView extends AbstractTextView {
 
-  private int speed;
+  private int delay;
 
   /**
    * This constructor takes a String a filename of the
    * text file that the formatted SVG description will be written to.
    *
    * @param fileName the name of the text file to be written to.
+   * @param delay represents the delay of each frame of the animation in milliseconds.
    * @throws IllegalArgumentException if the String filename arguments is null.
    *                                  If the specified file does not contain .svg file extension.
    *                                  If the specified file does not have a valid name.
+   *                                  If the specified delay is less than 1.
    */
-  public SVGView(String fileName, int speed) throws IllegalArgumentException {
+  public SVGView(String fileName, int delay) throws IllegalArgumentException {
     super(fileName);
     if (fileName == null) {
       throw new IllegalArgumentException("String fileName cannot be null");
@@ -33,11 +40,11 @@ public class SVGView extends AbstractTextView {
       throw new IllegalArgumentException("Specified file must have a "
               + "valid name and '.svg' extension");
     }
-    else if (speed < 1) {
+    else if (delay < 1) {
       throw new IllegalArgumentException("speed cannot be less than 1");
     }
 
-    this.speed = speed;
+    this.delay = delay;
   }
 
   /**
@@ -179,9 +186,9 @@ public class SVGView extends AbstractTextView {
         // If X value changes, animate the X change.
         if (t.getX1() != t.getX2()) {
           b.append("<animate attributeType=\"xml\" begin=\"");
-          b.append(t.getStart() * speed);
+          b.append(t.getStart() * delay);
           b.append("ms\" dur=\"");
-          b.append((t.getEnd() - t.getStart()) * speed);
+          b.append((t.getEnd() - t.getStart()) * delay);
           b.append("ms\" attributeName=\"");
           b.append(xTyp);
           b.append("\" from=\"");
@@ -194,9 +201,9 @@ public class SVGView extends AbstractTextView {
         // If Y value changes, animate the Y change.
         if (t.getY1() != t.getY2()) {
           b.append("<animate attributeType=\"xml\" begin=\"");
-          b.append(t.getStart() * speed);
+          b.append(t.getStart() * delay);
           b.append("ms\" dur=\"");
-          b.append((t.getEnd() - t.getStart()) * speed);
+          b.append((t.getEnd() - t.getStart()) * delay);
           b.append("ms\" attributeName=\"");
           b.append(yTyp);
           b.append("\" from=\"");
@@ -209,9 +216,9 @@ public class SVGView extends AbstractTextView {
         // If Height value changes, animate the Height change.
         if (t.getY1() != t.getY2()) {
           b.append("<animate attributeType=\"xml\" begin=\"");
-          b.append(t.getStart() * speed);
+          b.append(t.getStart() * delay);
           b.append("ms\" dur=\"");
-          b.append((t.getEnd() - t.getStart()) * speed);
+          b.append((t.getEnd() - t.getStart()) * delay);
           b.append("ms\" attributeName=\"");
           b.append(hTyp);
           b.append("\" from=\"");
@@ -224,9 +231,9 @@ public class SVGView extends AbstractTextView {
         // If Width value changes, animate the Width change.
         if (t.getY1() != t.getY2()) {
           b.append("<animate attributeType=\"xml\" begin=\"");
-          b.append(t.getStart() * speed);
+          b.append(t.getStart() * delay);
           b.append("ms\" dur=\"");
-          b.append((t.getEnd() - t.getStart()) * speed);
+          b.append((t.getEnd() - t.getStart()) * delay);
           b.append("ms\" attributeName=\"");
           b.append(wTyp);
           b.append("\" from=\"");
@@ -239,9 +246,9 @@ public class SVGView extends AbstractTextView {
         // If color changes, animate the color change.
         if (t.getR1() != t.getR2() || t.getG1() != t.getG2() || t.getB1() != t.getB2()) {
           b.append("<animate attributeType=\"xml\" begin=\"");
-          b.append(t.getStart() * speed);
+          b.append(t.getStart() * delay);
           b.append("ms\" dur=\"");
-          b.append((t.getEnd() - t.getStart()) * speed);
+          b.append((t.getEnd() - t.getStart()) * delay);
           b.append("ms\" attributeName=\"");
           b.append("fill");
           b.append("\" from=\"rgb(");

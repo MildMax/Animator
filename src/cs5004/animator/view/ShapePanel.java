@@ -31,7 +31,7 @@ public class ShapePanel extends JPanel {
   }
 
   /**
-   * Paints the list of shapes in order of their layer to the screen.
+   * Paints the list of shapes in order of their layer to the screen in JFrame.
    *
    * @param g takes a Graphics g object.
    */

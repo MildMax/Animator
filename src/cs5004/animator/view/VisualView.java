@@ -25,12 +25,14 @@ public class VisualView extends JFrame implements AnimationView {
   /**
    * The AnimationViewImpl constructor takes x and y values specifying the
    * coordinates of the upper left corner of the display and a width and height
-   * specifying the width and height of the screen.
+   * specifying the width and height of the screen and a int delay that specifies
+   * the delay in milliseconds between drawing frames.
    *
    * @param x takes the x coordinate of the position of the upper left corner of the display.
    * @param y takes the y coordinate of the position of the upper left corner of the display.
    * @param windowWidth takes the width of the display.
    * @param windowHeight takes the height of the display.
+   * @param delay takes the delay between frames of the animation in milliseconds.
    * @throws IllegalArgumentException if the x or y values indicating the position of the
    *                                  upper left corner of the display are less than 0.
    *                                  If the width or height values of the display window are less

@@ -9,7 +9,8 @@ import cs5004.animator.model.AnimationModel;
 
 /**
  * This class holds the textual view used to write a description of the animation
- * either to a text file or to System.out. Implements the AnimationView interface.
+ * either to a text file or to System.out. Extends the AbstractTextView class which
+ * implements the AnimationView interface.
  */
 
 public class TextView extends AbstractTextView {

@@ -22,7 +22,7 @@ public abstract class AbstractTextView implements AnimationView {
    *
    * @param fileName the name of the text file to be written to.
    */
-  public AbstractTextView(String fileName) throws IllegalArgumentException {
+  public AbstractTextView(String fileName) {
     this.fileName = fileName;
   }
 
