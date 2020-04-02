@@ -33,10 +33,8 @@ public class TestSVGView {
     m.addShape(new ShapeImpl("rectangle", ShapeType.RECTANGLE, 1));
     m.addShape(new ShapeImpl("ellipse", ShapeType.ELLIPSE, 2));
 
-    test = "Create window with width 200 and height 300 with top left corner "
-            + "(0,100) and total ticks 0\n\n"
-            + "rectangle rectangle appears at time t=0 and disappears at time t=0\n"
-            + "ellipse ellipse appears at time t=0 and disappears at time t=0";
+    test = "Create window with width 200 and height 300 with top left corner (0,100) and " +
+            "total ticks 0";
 
     assertEquals(test, m.toString());
     assertEquals(2, m.getShapes().size());
@@ -77,6 +75,9 @@ public class TestSVGView {
 
     test = "Create window with width 200 and height 300 with top left corner (0,100) and total ticks 40\n" +
             "\n" +
+            "Create rectangle rectangle with center at (20,20) with width 20 and height 40 and color (100,100,100)\n" +
+            "Create ellipse ellipse with center at (0,0) with width 10 and height 30 and color (50,50,50)\n" +
+            "\n" +
             "rectangle rectangle appears at time t=10 and disappears at time t=20\n" +
             "ellipse ellipse appears at time t=20 and disappears at time t=40\n" +
             "\n" +
@@ -92,7 +93,10 @@ public class TestSVGView {
     assertEquals(test, m.toString());
 
     SVGView view1 = new SVGView("C:\\Users\\WilliC13\\Documents\\CS Masters\\CS 5004 Object Oriented Design\\Homeworks\\Homework07 GitHub V2\\Animator\\view1.svg", 1);
+
+    view1.openView();
     view1.run(m);
+    view1.closeView();
 
 
   }
