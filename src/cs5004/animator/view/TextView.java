@@ -59,15 +59,14 @@ public class TextView extends AbstractTextView {
     if (m == null) {
       throw new IllegalArgumentException("AnimationModel cannot be null");
     }
+    openView();
     if (out instanceof FileWriter) {
+
       try {
         ((FileWriter) out).write(m.toString());
       } catch (IOException e) {
         throw new IllegalStateException("Cannot write to FileWriter " + fileName);
       }
-    }
-    else if (fileName != null) {
-      throw new IllegalStateException("Out file has not been initialized for writing");
     }
     else {
       try {
@@ -76,6 +75,7 @@ public class TextView extends AbstractTextView {
         throw new IllegalStateException("Cannot append to System.out");
       }
     }
+    closeView();
   }
 
   /**

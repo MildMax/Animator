@@ -20,6 +20,7 @@ public final class EasyAnimator {
   private Readable inFile = null;
   private String outFile = null;
   private String viewType = null;
+  private int ticksPerSecond = 1;
   private int delay = 1000;
 
   /**
@@ -37,16 +38,10 @@ public final class EasyAnimator {
     //set up the view
     AnimationView view = e.initializeView(model);
 
-    //open the file/display
-    view.openView();
-
     //populate display/view
     view.run(model);
 
-    //close the file/display
-    view.closeView();
-
-    System.exit(0);
+    //System.exit(0);
   }
 
   private void parseArgs(String[] args) {
@@ -68,6 +63,7 @@ public final class EasyAnimator {
               AnimationView.displayErrorMessage("Invalid non-positive speed value: " + args[i + 1]);
             }
             this.delay = 1000 / speedInt;
+            this.ticksPerSecond = speedInt;
           } catch (NumberFormatException e) {
             AnimationView.displayErrorMessage("Invalid integer speed value: " + args[i + 1]);
           }
@@ -95,7 +91,7 @@ public final class EasyAnimator {
     if (viewType.compareTo("visual") == 0) {
       view = new VisualView(m.getBoundX(), m.getBoundY(),
               m.getWindowWidth(), m.getWindowHeight(),
-              m.getAnimationWidth(), m.getAnimationHeight(), delay);
+              m.getAnimationWidth(), m.getAnimationHeight(), this.ticksPerSecond);
     }
     else if (viewType.compareTo("text") == 0) {
       if (outFile != null) {

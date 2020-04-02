@@ -291,16 +291,13 @@ public class SVGView extends AbstractTextView {
 
     String finalString = b.toString();
 
-    if (out instanceof FileWriter) {
-      try {
-        ((FileWriter) out).write(finalString);
-      } catch (IOException e) {
-        throw new IllegalStateException("Cannot write to FileWriter " + fileName);
-      }
+    openView();
+    try {
+      ((FileWriter) out).write(finalString);
+    } catch (IOException e) {
+      throw new IllegalStateException("Cannot write to FileWriter " + fileName);
     }
-    else {
-      throw new IllegalStateException("Must initialize out file before writing.");
-    }
+    closeView();
   }
 
 }

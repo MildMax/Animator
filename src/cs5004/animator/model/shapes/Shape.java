@@ -102,7 +102,7 @@ public interface Shape {
    * @param tick the frame of the animation.
    * @return itself with modified values.
    */
-  Shape getShapeAtTick(int tick);
+  Shape getShapeAtTick(double tick);
 
   /**
    * Return the type of shape.

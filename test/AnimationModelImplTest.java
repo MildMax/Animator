@@ -32,6 +32,8 @@ public class AnimationModelImplTest {
     assertEquals(200, m.getWindowWidth());
     assertEquals(300, m.getWindowHeight());
     assertEquals(0, m.getTotalTicks());
+    assertEquals(25, m.getAnimationHeight());
+    assertEquals(25, m.getAnimationWidth());
 
     String test = "Create window with width 200 and height 300 with top left corner "
             + "(0,100) and total ticks 0";
@@ -48,6 +50,8 @@ public class AnimationModelImplTest {
     assertEquals(2, m.getShapes().size());
     assertEquals("rectangle", m.getShapes().get(0).getName());
     assertEquals("ellipse", m.getShapes().get(1).getName());
+    assertEquals(25, m.getAnimationHeight());
+    assertEquals(25, m.getAnimationWidth());
 
     m.addTransformation("rectangle", new TransformationImpl("rectangle", 10,
             20, -20, 20, 40, 100, 100, 100, 20, 40, -40,

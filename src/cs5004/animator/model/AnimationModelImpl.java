@@ -163,7 +163,7 @@ public class AnimationModelImpl implements AnimationModel {
    *                                  total number of ticks in the animation.
    */
   @Override
-  public List<Shape> getShapesAtTick(int tick) throws IllegalArgumentException {
+  public List<Shape> getShapesAtTick(double tick) throws IllegalArgumentException {
     if (tick < 0 || tick > this.ticks) {
       throw new IllegalArgumentException("invalid tick specifier: " + tick);
     }
@@ -227,10 +227,17 @@ public class AnimationModelImpl implements AnimationModel {
   public int getAnimationWidth() {
     List<Transformation> tList = getTransformations();
 
-    tList.sort(Comparator.comparing(Transformation::getX2));
-    Transformation transformation = tList.get(tList.size() - 1);
-    return transformation.getX2() + transformation.getW2() + WINDOW_BUFFER;
+    int maxWidth = 0;
 
+    for (Transformation t : tList) {
+      int maxW = Math.max(t.getW2(), t.getW1());
+      int maxX = Math.max(t.getX2(), t.getX1());
+      if (maxW + maxX > maxWidth) {
+        maxWidth = maxW + maxX;
+      }
+    }
+
+    return maxWidth + WINDOW_BUFFER;
   }
 
   /**
@@ -241,10 +248,17 @@ public class AnimationModelImpl implements AnimationModel {
    public int getAnimationHeight() {
     List<Transformation> tList = getTransformations();
 
-    tList.sort(Comparator.comparing(Transformation::getY2));
-    Transformation transformation = tList.get(tList.size() - 1);
-    return transformation.getY2() + transformation.getH2() + WINDOW_BUFFER;
-  }
+    int maxHeight = 0;
+
+    for (Transformation t : tList) {
+      int maxW = Math.max(t.getH2(), t.getH1());
+      int maxX = Math.max(t.getY2(), t.getY1());
+      if (maxW + maxX > maxHeight) {
+        maxHeight = maxW + maxX;
+      }
+    }
+    return maxHeight + WINDOW_BUFFER;
+   }
 
   /**
    * Returns a formatted String indicating the size of the window, the color of the window,

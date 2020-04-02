@@ -14,14 +14,15 @@ import cs5004.animator.model.AnimationModel;
  */
 public class AnimationRunner implements ActionListener {
 
-  private int tick = 0;
+  private double ticksPerFrame = 0;
+  private int frames = 0;
   private AnimationModel model;
   private AnimationView view;
   private Timer timer;
 
   /**
    * Takes an AnimationModel to pull data from, an AnimationView to display the data
-   * visually, and a delay in millisecons to initialize a Timer and play the animation at
+   * visually, and a delay in milliseconds to initialize a Timer and play the animation at
    * a specified speed.
    *
    * @param m takes an AnimationModel with shapes to be printed to the screen.
@@ -31,25 +32,28 @@ public class AnimationRunner implements ActionListener {
    *                                  If the AnimationView argument is null.
    *                                  If the delay is less than 1.
    */
-  public AnimationRunner(AnimationModel m, AnimationView v, int delay) {
+  public AnimationRunner(AnimationModel m, AnimationView v, int ticksPerSecond) {
     if (m == null || v == null) {
       throw new IllegalArgumentException("Model/View cannot be null");
     }
-    else if (delay < 1) {
+    else if (ticksPerSecond < 1) {
       throw new IllegalArgumentException("Delay cannot be less than 1");
     }
 
+    ticksPerFrame = (double)ticksPerSecond / 60.0;
+    int millisecondsPerFrame = (int) Math.round(1000.0 / 60.0);
+
     this.model = m;
     this.view = v;
-    this.timer = new Timer(delay, this);
+    this.timer = new Timer(millisecondsPerFrame, this);
   }
 
   /**
    * Runs the timer in the Listener.
    */
   public void runAnim() {
+    view.openView();
     timer.start();
-    while (timer.isRunning());
   }
 
   /**
@@ -59,13 +63,14 @@ public class AnimationRunner implements ActionListener {
    */
   @Override
   public void actionPerformed(ActionEvent e) {
-    if (this.tick > this.model.getTotalTicks()) {
+    if ((this.frames * this.ticksPerFrame) > this.model.getTotalTicks()) {
+      view.closeView();
       timer.stop();
       //System.out.println("timer has been stopped");
       return;
     }
-    this.view.drawNewFrame(this.model.getShapesAtTick(this.tick));
+    this.view.drawNewFrame(this.model.getShapesAtTick((double)this.frames * this.ticksPerFrame));
 
-    ++tick;
+    ++frames;
   }
 }

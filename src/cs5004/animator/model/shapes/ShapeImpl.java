@@ -216,7 +216,7 @@ public class ShapeImpl implements Shape {
    *         or doesn't have any transformations.
    */
   @Override
-  public Shape getShapeAtTick(int tick) {
+  public Shape getShapeAtTick(double tick) {
     if (tick < appearTime || tick > disappearTime) {
       return null;
     }
@@ -238,7 +238,7 @@ public class ShapeImpl implements Shape {
     if (t.getStart() == t.getEnd()) {
       diff = 0;
     } else {
-      diff = (double)(tick - t.getStart()) / (t.getEnd() - t.getStart());
+      diff = (tick - (double)t.getStart()) / ((double)t.getEnd() - (double)t.getStart());
     }
 
     //calculate pos

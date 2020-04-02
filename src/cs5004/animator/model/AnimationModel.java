@@ -64,7 +64,7 @@ public interface AnimationModel {
    * @return a list of Shapes and their respective values at the frame specified by parameter tick.
    * @throws IllegalArgumentException if parameter tick is less than 0.
    */
-  List<Shape> getShapesAtTick(int tick) throws IllegalArgumentException;
+  List<Shape> getShapesAtTick(double tick) throws IllegalArgumentException;
 
   /**
    * Returns the height of the window.
