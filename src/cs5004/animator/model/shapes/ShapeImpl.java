@@ -47,7 +47,9 @@ public class ShapeImpl implements Shape {
   }
 
   /**
-   * Add a transformation to the shape's transformation list.
+   * Add a transformation to the shape's transformation list. If the transformation
+   * starts before the appear time of the Shape or after the disappear time of the Shape,
+   * resets the appear or disappear time of the shape respectively.
    *
    * @param t is the transformation to be added.
    * @throws IllegalArgumentException if transformation is null.
@@ -63,8 +65,7 @@ public class ShapeImpl implements Shape {
     for (Transformation transformation : transformationList) {
       if (!checkTimes(transformation.getStart(), transformation.getEnd(),
               t.getStart(), t.getEnd())) {
-        throw new IllegalArgumentException("Transformation already exists within that period"
-        + transformation.getStart() + " " + transformation.getEnd() + " " + t.getStart() + " " + t.getEnd());
+        throw new IllegalArgumentException("Transformation already exists within that period");
       }
     }
 
@@ -207,14 +208,15 @@ public class ShapeImpl implements Shape {
   /**
    * Changes the internal values of the shape according to its list of
    * transformations at a given tick indicating the frame of the
-   * animation and returns itself.
+   * animation and returns itself. Returns null if the shape doesn't appear
+   * or doesn't have any transformations yet.
    *
    * @param tick the frame of the animation.
-   * @return itself with modified values.
-   * @throws IllegalStateException if there are no transformations on the current shape.
+   * @return itself with modified values or null if shape doesn't appear at tick
+   *         or doesn't have any transformations.
    */
   @Override
-  public Shape getShapeAtTick(int tick) throws IllegalStateException {
+  public Shape getShapeAtTick(int tick) {
     if (tick < appearTime || tick > disappearTime) {
       return null;
     }
@@ -229,7 +231,7 @@ public class ShapeImpl implements Shape {
     }
 
     if (t == null) {
-      throw new IllegalStateException("No transformations exist on shape");
+      return null;
     }
 
     double diff;
@@ -284,32 +286,38 @@ public class ShapeImpl implements Shape {
     return tList;
   }
 
+  /**
+   * Creates a String representing the creation of the shape. Returns an empty
+   * string if there are no transformations on the shape.
+   *
+   * @return a String representing the creation of the shape.
+   */
   @Override
   public String getCreateStatement() {
-    try {
-      getShapeAtTick(getStart());
-      return "Create " + this.type.toString() + " " + this.name + " with center at ("
-              + this.x + "," + this.y + ") with width " + this.width + " and height "
-              + this.height + " and color (" + this.r + "," + this.g + "," + this.b + ")\n";
-    } catch (IllegalStateException e) {
+    if (transformationList.size() == 0) {
       return "";
     }
+    getShapeAtTick(getStart());
+    return "Create " + this.type.toString() + " " + this.name + " with center at ("
+            + this.x + "," + this.y + ") with width " + this.width + " and height "
+            + this.height + " and color (" + this.r + "," + this.g + "," + this.b + ")\n";
   }
 
   /**
    * Returns a String representation of the shape's name and the ticks at which it appears
-   * and disappears on screen.
+   * and disappears on screen. Return an empty String if Shape has no transformations.
    *
    * @return a String representation of the shape's name and the ticks at which it appears
-   *         and disappears on screen.
+   *         and disappears on screen or an empty String if Shape has not transformations.
    */
   @Override
   public String getAppearStatement() {
-    if (transformationList.size() > 0) {
+    if (transformationList.size() == 0) {
+      return "";
+    }
+    else {
       return this.type.toString() + " " + this.name + " appears at time t=" + appearTime +
               " and disappears at time t=" + disappearTime + "\n";
-    } else {
-      return "";
     }
   }
 

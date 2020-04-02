@@ -18,31 +18,7 @@ import cs5004.animator.util.AnimationBuilder;
  * The AnimationModelImpl class holds a series of Shapes and their transformations. Supports
  * adding and removing shapes and transformations. Allows for speed of the animation to be set
  * manually. Allows for the background color to be set manually. Implements the
- * AnimationModel interface. Contains the following features:
- *
- * <p>AnimationModel() constructors</p>
- *
- * <p>addShape() method</p>
- *
- * <p>addTransformation() method</p>
- *
- * <p>getShapes() method</p>
- *
- * <p>getTransformations() method</p>
- *
- * <p>getTotalTicks() method</p>
- *
- * <p>getShapesAtTick() method</p>
- *
- * <p>getWindowHeight() method</p>
- *
- * <p>getWindowWidth() method</p>
- *
- * <p>getBoundX() method</p>
- *
- * <p>getBoundY() method</p>
- *
- * <p>toString() method</p>
+ * AnimationModel interface.
  */
 public class AnimationModelImpl implements AnimationModel {
   private final int boundX;
@@ -55,10 +31,12 @@ public class AnimationModelImpl implements AnimationModel {
   private Map<String, Shape> shapeMap;
 
   /**
-   * Takes two ints indicating the width and height of the window and a color specifying the
-   * background color of the window. Throws IllegalArgumentException if either the specified
-   * width or height is less than or equal to 0.
+   * Takes two ints indicating the width and height of the window and set of x and y values
+   * indicating the top left corner of the Animation window. Throws IllegalArgumentException
+   * if either the specified width or height is less than or equal to 0.
    *
+   * @param x takes the x value of the top left corner of the window of the animation.
+   * @param y takes the y value of the top left corner of the window of the animation.
    * @param w specifies the width of the window.
    * @param h specifies the height of the window.
    * @throws IllegalArgumentException if the windowHeight or windowWidth is less than or equal

@@ -5,14 +5,17 @@ import java.util.List;
 import cs5004.animator.model.transformations.Transformation;
 
 /**
- * Create an interface that creates a generic shape.
+ * Contains the methods that must be implemented by every Shape. Contains methods for
+ * getting information from the Shape as well as adding Transformations to the Shape.
  */
 public interface Shape {
 
   /**
    * Add a transformation to the shape's transformation list. Throws an
    * IllegalArgumentException if another Transformation of the same type already
-   * exists in the same time frame or if the Transformation is null.
+   * exists in the same time frame or if the Transformation is null. If the transformation
+   * starts before the appear time of the Shape or after the disappear time of the Shape,
+   * resets the appear or disappear time of the shape respectively.
    *
    * @param t is the transformation to be added.
    * @throws IllegalArgumentException if transformation is null.
@@ -94,13 +97,12 @@ public interface Shape {
   /**
    * Changes the internal values of the shape according to its list of
    * transformations at a given tick indicating the frame of the
-   * animation and returns itself.
+   * animation and returns itself. 
    *
    * @param tick the frame of the animation.
    * @return itself with modified values.
-   * @throws IllegalStateException if there are no transformations on the current shape.
    */
-  Shape getShapeAtTick(int tick) throws IllegalStateException;
+  Shape getShapeAtTick(int tick);
 
   /**
    * Return the type of shape.

@@ -60,7 +60,6 @@ public class VisualView extends JFrame implements AnimationView {
 
     scrollPane = new JScrollPane(shapePanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
             ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-    scrollPane.setPreferredSize(new Dimension(maxWidth, maxHeight));
 
     this.add(scrollPane);
     this.setTitle("Easy Animator");
@@ -118,7 +117,6 @@ public class VisualView extends JFrame implements AnimationView {
     if (m == null) {
       throw new IllegalArgumentException("Animation Model cannot be null.");
     }
-    ActionListener animRunner = new AnimationRunner(m, this, this.delay);
-    ((AnimationRunner)animRunner).runAnim();
+    new AnimationRunner(m, this, this.delay).runAnim();
   }
 }

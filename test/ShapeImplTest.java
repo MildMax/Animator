@@ -36,8 +36,8 @@ public class ShapeImplTest {
     assertEquals(0, s.getEnd());
     assertEquals(ShapeType.RECTANGLE, s.getType());
     assertEquals(1, s.getLayer());
-    assertEquals("rectangle rectangle appears at time t=0 and disappears" +
-            " at time t=0\n", s.getAppearStatement());
+    assertEquals("", s.getAppearStatement());
+    assertEquals("", s.getCreateStatement());
 
     s.addTransformation(new TransformationImpl(s.getName(), 10, 10, 10, 20, 20,
             100, 100, 100, 20, 40, 40, 80, 80, 200, 200, 200));
@@ -196,29 +196,29 @@ public class ShapeImplTest {
   /**
    * Test getting shapes at a tick when the shape doesn't appear yet.
    */
-  @Test(expected = IllegalArgumentException.class)
-  public void testShapeImplGetShapesAtTickEarly() {
+  @Test
+  public void  testShapeImplGetShapesAtTickEarly() {
     Shape s = new ShapeImpl("shape", ShapeType.RECTANGLE, 1);
     s.addTransformation(new TransformationImpl(s.getName(), 10, 10, 10, 15, 15,
             100, 100, 100, 20, 20, 20, 40, 40, 200, 200, 200));
-    s.getShapeAtTick(5);
+    assertEquals(null, s.getShapeAtTick(5));
   }
 
   /**
    * Test getting shape when tick is after the time the Shape disappears.
    */
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void testShapeImplGetShapesAtTickLate() {
     Shape s = new ShapeImpl("shape", ShapeType.RECTANGLE, 1);
     s.addTransformation(new TransformationImpl(s.getName(), 10, 10, 10, 15, 15,
             100, 100, 100, 20, 20, 20, 40, 40, 200, 200, 200));
-    s.getShapeAtTick(25);
+    assertEquals(null, s.getShapeAtTick(25));
   }
 
-  @Test(expected = IllegalStateException.class)
+  @Test
   public void testShapeImplGetShapeAtTickNoTransformations() {
     Shape s = new ShapeImpl("shape", ShapeType.RECTANGLE, 1);
-    s.getShapeAtTick(s.getStart());
+    assertEquals(null, s.getShapeAtTick(s.getStart()));
   }
 
 }
