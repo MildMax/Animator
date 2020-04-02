@@ -20,7 +20,7 @@ public final class EasyAnimator {
   Readable inFile = null;
   String outFile = null;
   String viewType = null;
-  int speed = 1;
+  int speed = 1000;
 
   /**
    * Plays the animation according to supplied command line arguments.
@@ -63,10 +63,11 @@ public final class EasyAnimator {
           outFile = args[i + 1];
         } else if (args[i].toLowerCase().compareTo("-speed") == 0) {
           try {
-            this.speed = Integer.parseInt(args[i + 1]);
-            if (this.speed < 1) {
+            int speedInt = Integer.parseInt(args[i + 1]);
+            if (speedInt < 1) {
               AnimationView.displayErrorMessage("Invalid non-positive speed value: " + args[i + 1]);
             }
+            this.speed = 1000 / speedInt;
           } catch (NumberFormatException e) {
             AnimationView.displayErrorMessage("Invalid integer speed value: " + args[i + 1]);
           }
@@ -94,7 +95,7 @@ public final class EasyAnimator {
     if (viewType.compareTo("visual") == 0) {
       view = new VisualView(m.getBoundX(), m.getBoundY(),
               m.getWindowWidth(), m.getWindowHeight(),
-              m.getAnimationWidth(), m.getAnimationHeight(), 1000 / this.speed);
+              m.getAnimationWidth(), m.getAnimationHeight(), speed);
     }
     else if (viewType.compareTo("text") == 0) {
       if (outFile != null) {
