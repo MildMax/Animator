@@ -61,9 +61,11 @@ public class AnimationRunner implements ActionListener {
   public void actionPerformed(ActionEvent e) {
     if (this.tick > this.model.getTotalTicks()) {
       timer.stop();
+      //System.out.println("timer has been stopped");
       return;
     }
     this.view.drawNewFrame(this.model.getShapesAtTick(this.tick));
+
     ++tick;
   }
 }

@@ -17,10 +17,10 @@ import cs5004.animator.view.VisualView;
  */
 public final class EasyAnimator {
 
-  Readable inFile = null;
-  String outFile = null;
-  String viewType = null;
-  int speed = 1000;
+  private Readable inFile = null;
+  private String outFile = null;
+  private String viewType = null;
+  private int delay = 1000;
 
   /**
    * Plays the animation according to supplied command line arguments.
@@ -33,15 +33,15 @@ public final class EasyAnimator {
     //parse commandLineArguments
     e.parseArgs(args);
     //set up the model
-    AnimationModel m = AnimationReader.parseFile(e.inFile, new AnimationModelImpl.Builder());
+    AnimationModel model = AnimationReader.parseFile(e.inFile, new AnimationModelImpl.Builder());
     //set up the view
-    AnimationView view = e.initializeView(m);
+    AnimationView view = e.initializeView(model);
 
     //open the file/display
     view.openView();
 
     //populate display/view
-    view.run(m);
+    view.run(model);
 
     //close the file/display
     view.closeView();
@@ -67,7 +67,7 @@ public final class EasyAnimator {
             if (speedInt < 1) {
               AnimationView.displayErrorMessage("Invalid non-positive speed value: " + args[i + 1]);
             }
-            this.speed = 1000 / speedInt;
+            this.delay = 1000 / speedInt;
           } catch (NumberFormatException e) {
             AnimationView.displayErrorMessage("Invalid integer speed value: " + args[i + 1]);
           }
@@ -95,7 +95,7 @@ public final class EasyAnimator {
     if (viewType.compareTo("visual") == 0) {
       view = new VisualView(m.getBoundX(), m.getBoundY(),
               m.getWindowWidth(), m.getWindowHeight(),
-              m.getAnimationWidth(), m.getAnimationHeight(), speed);
+              m.getAnimationWidth(), m.getAnimationHeight(), delay);
     }
     else if (viewType.compareTo("text") == 0) {
       if (outFile != null) {
@@ -105,7 +105,7 @@ public final class EasyAnimator {
       }
     }
     else if (viewType.compareTo("svg") == 0) {
-      view = new SVGView(outFile, speed);
+      view = new SVGView(outFile, delay);
     }
     else {
       AnimationView.displayErrorMessage("Invalid view type " + viewType);
