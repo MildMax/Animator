@@ -182,7 +182,7 @@ public class SVGView extends AbstractTextView {
         b.append(gInit);
         b.append(",");
         b.append(bInit);
-        b.append(")\" visibility=\"visible\" > \n\n");
+        b.append(")\" opacity=\"1.0\" visibility=\"visible\" > \n\n");
 
       // Loop through all of the transformations on each shape.
       for (Transformation t : s.getTransformationList()) {
