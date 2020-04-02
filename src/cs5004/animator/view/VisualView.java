@@ -7,14 +7,14 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
+import cs5004.animator.model.AnimationModel;
+import cs5004.animator.model.shapes.Shape;
+
 /**
  * This class displays a window with an animation of simple shapes
  * as supplied by the AnimationModelImpl. Extends the JFrame class
  * and implements the AnimationView interface.
  */
-import cs5004.animator.model.AnimationModel;
-import cs5004.animator.model.shapes.Shape;
-
 public class VisualView extends JFrame implements AnimationView {
 
   private ShapePanel shapePanel;

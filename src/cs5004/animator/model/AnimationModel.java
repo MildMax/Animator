@@ -60,7 +60,7 @@ public interface AnimationModel {
    * Returns a new list of shapes and their respective values at the frame specified by parameter
    * tick.
    *
-   * @param tick takes an int indicating the current frame of the animation.
+   * @param tick takes a double indicating the current frame of the animation.
    * @return a list of Shapes and their respective values at the frame specified by parameter tick.
    * @throws IllegalArgumentException if parameter tick is less than 0.
    */
