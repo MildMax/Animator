@@ -73,6 +73,10 @@ public class SVGView extends AbstractTextView {
     int rInit = 0;
     int gInit = 0;
     int bInit = 0;
+    int h1 = 0;
+    int h2 = 0;
+    int w1 = 0;
+    int w2 = 0;
 
     StringBuffer b = new StringBuffer();
 
@@ -103,8 +107,8 @@ public class SVGView extends AbstractTextView {
         hTyp = "ry";
         xInit = s.getShapeAtTick(s.getStart()).getX();
         yInit = s.getShapeAtTick(s.getStart()).getY();
-        wInit = s.getShapeAtTick(s.getStart()).getWidth(); // Change depending on whether data provides radius or diameter.
-        hInit = s.getShapeAtTick(s.getStart()).getHeight(); // Change depending on whether data provides radius or diameter.
+        wInit = s.getShapeAtTick(s.getStart()).getWidth() / 2;
+        hInit = s.getShapeAtTick(s.getStart()).getHeight() / 2;
 
       } else if (s.getType() == ShapeType.ELLIPSE) {
         SVGTyp = "ellipse";
@@ -114,8 +118,8 @@ public class SVGView extends AbstractTextView {
         hTyp = "ry";
         xInit = s.getShapeAtTick(s.getStart()).getX();
         yInit = s.getShapeAtTick(s.getStart()).getY();
-        wInit = s.getShapeAtTick(s.getStart()).getWidth(); // Change depending on whether data provides radius or diameter.
-        hInit = s.getShapeAtTick(s.getStart()).getHeight(); // Change depending on whether data provides radius or diameter.
+        wInit = s.getShapeAtTick(s.getStart()).getWidth() / 2;
+        hInit = s.getShapeAtTick(s.getStart()).getHeight() / 2;
 
       } else if (s.getType() == ShapeType.OVAL) {
         SVGTyp = "ellipse";
@@ -125,8 +129,8 @@ public class SVGView extends AbstractTextView {
         hTyp = "ry";
         xInit = s.getShapeAtTick(s.getStart()).getX();
         yInit = s.getShapeAtTick(s.getStart()).getY();
-        wInit = s.getShapeAtTick(s.getStart()).getWidth(); // Change depending on whether data provides radius or diameter.
-        hInit = s.getShapeAtTick(s.getStart()).getHeight(); // Change depending on whether data provides radius or diameter.
+        wInit = s.getShapeAtTick(s.getStart()).getWidth() / 2;
+        hInit = s.getShapeAtTick(s.getStart()).getHeight() / 2;
 
       } else if (s.getType() == ShapeType.RECTANGLE) {
         SVGTyp = "rect";
@@ -183,6 +187,19 @@ public class SVGView extends AbstractTextView {
       // Loop through all of the transformations on each shape.
       for (Transformation t : s.getTransformationList()) {
 
+        // Height and Width depend on shape type. need to divide by 2 for ellipses.
+        if (SVGTyp.equals("ellipse")) {
+          h1 = t.getH1() / 2;
+          h2 = t.getH2() / 2;
+          w1 = t.getW1() / 2;
+          w2 = t.getW2() / 2;
+        } else {
+          h1 = t.getH1();
+          h2 = t.getH2();
+          w1 = t.getW1();
+          w2 = t.getW2();
+        }
+
         // If X value changes, animate the X change.
         if (t.getX1() != t.getX2()) {
           b.append("<animate attributeType=\"xml\" begin=\"");
@@ -222,9 +239,9 @@ public class SVGView extends AbstractTextView {
           b.append("ms\" attributeName=\"");
           b.append(hTyp);
           b.append("\" from=\"");
-          b.append(t.getH1());
+          b.append(h1);
           b.append("\" to=\"");
-          b.append(t.getH2());
+          b.append(h2);
           b.append("\" fill=\"freeze\" /> \n\n");
         }
 
@@ -237,9 +254,9 @@ public class SVGView extends AbstractTextView {
           b.append("ms\" attributeName=\"");
           b.append(wTyp);
           b.append("\" from=\"");
-          b.append(t.getW1());
+          b.append(w1);
           b.append("\" to=\"");
-          b.append(t.getW2());
+          b.append(w2);
           b.append("\" fill=\"freeze\" /> \n\n");
         }
 
