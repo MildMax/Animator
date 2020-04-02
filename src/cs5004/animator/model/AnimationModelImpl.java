@@ -156,7 +156,7 @@ public class AnimationModelImpl implements AnimationModel {
    * in the animation specified by parameter tick. Throws IllegalArgumentException if the
    * specified tick is less than 0.
    *
-   * @param tick takes an int indicating the current frame of the animation.
+   * @param tick takes a double indicating the current frame of the animation.
    * @return a list of shapes with values corresponding to its transformations at the frame
    *         in the animation specified by parameter tick.
    * @throws IllegalArgumentException if parameter tick is less than 0 or greater than the

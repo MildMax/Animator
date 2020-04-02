@@ -2,12 +2,15 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 
 import cs5004.animator.model.AnimationModel;
 import cs5004.animator.model.AnimationModelImpl;
 import cs5004.animator.model.shapes.ShapeImpl;
 import cs5004.animator.model.shapes.ShapeType;
 import cs5004.animator.model.transformations.TransformationImpl;
+import cs5004.animator.view.AnimationView;
 import cs5004.animator.view.TextView;
 
 import static org.junit.Assert.assertEquals;
@@ -22,12 +25,28 @@ public class TestTextView {
    */
   @Test
   public void testTextViewFileNameConstructor() {
-    TextView t = new TextView("C:\\Users\\josep\\OneDrive\\Documents"
-            + "\\Northeastern\\5004\\Animator\\test_out.txt");
+    String path = Paths.get("").toAbsolutePath().toString() + "\\test_out.txt";
+
+    AnimationView t = new TextView(path);
     AnimationModel m = new AnimationModelImpl(50, 60, 500, 600);
+
+    t.run(m);
+
+    String test = "Create window with width 500 and height 600 with top left "
+            + "corner (50,60) and total ticks 0";
+
+    assertEquals(test, t.getOutFileContents());
 
     m.addShape(new ShapeImpl("rectangle", ShapeType.RECTANGLE, 1));
     m.addShape(new ShapeImpl("ellipse", ShapeType.ELLIPSE, 2));
+
+    t.run(m);
+
+    test = "Create window with width 500 and height 600 with top left "
+            + "corner (50,60) and total ticks 0";
+
+    assertEquals(test, t.getOutFileContents());
+
 
     m.addTransformation("rectangle", new TransformationImpl("rectangle", 10,
             20, -20, 20, 40, 100, 100, 100, 20, 40, -40,
@@ -36,11 +55,9 @@ public class TestTextView {
             0, 0, 10, 30, 50, 50, 50, 40, 40, -40,
             40, 60, 150, 150, 150));
 
-    t.openView();
     t.run(m);
-    t.closeView();
 
-    String test = "Create window with width 500 and height 600 with top left "
+    test = "Create window with width 500 and height 600 with top left "
             + "corner (50,60) and total ticks 40\n\n"
             + "Create rectangle rectangle with center at (20,-20) with width 20 "
             + "and height 40 and color (100,100,100)\n"
@@ -69,8 +86,32 @@ public class TestTextView {
   public void testTextViewToSystemOut() {
     AnimationModel m = new AnimationModelImpl(50, 60, 500, 600);
 
+    ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    PrintStream originalOut = System.out;
+    System.setOut(new PrintStream(outContent));
+
+    AnimationView textView = new TextView();
+
+    textView.run(m);
+
+    String test = "Create window with width 500 and height 600 with top left "
+            + "corner (50,60) and total ticks 0";
+
+    assertEquals(test, outContent.toString());
+
+    outContent.reset();
+
     m.addShape(new ShapeImpl("rectangle", ShapeType.RECTANGLE, 1));
     m.addShape(new ShapeImpl("ellipse", ShapeType.ELLIPSE, 2));
+
+    textView.run(m);
+
+    test = "Create window with width 500 and height 600 with top left "
+            + "corner (50,60) and total ticks 0";
+
+    assertEquals(test, outContent.toString());
+
+    outContent.reset();
 
     m.addTransformation("rectangle", new TransformationImpl("rectangle", 10,
             20, -20, 20, 40, 100, 100, 100, 20, 40, -40,
@@ -79,17 +120,9 @@ public class TestTextView {
             0, 0, 10, 30, 50, 50, 50, 40, 40, -40,
             40, 60, 150, 150, 150));
 
-    ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    PrintStream originalOut = System.out;
-    System.setOut(new PrintStream(outContent));
-
-    TextView textView = new TextView();
-
-    textView.openView();
     textView.run(m);
-    textView.closeView();
 
-    String test = "Create window with width 500 and height 600 with top left "
+    test = "Create window with width 500 and height 600 with top left "
             + "corner (50,60) and total ticks 40\n\n"
             + "Create rectangle rectangle with center at (20,-20) with width 20 "
             + "and height 40 and color (100,100,100)\n"
@@ -142,20 +175,25 @@ public class TestTextView {
    */
   @Test(expected = IllegalArgumentException.class)
   public void testTextViewWriteNullAnimationModel() {
-    TextView textView = new TextView();
+    AnimationView textView = new TextView();
 
     textView.run(null);
   }
 
   /**
-   * Test writing to a text file that has not been opened.
+   * Test drawing a new frame in TextView.
+   */
+  @Test(expected = UnsupportedOperationException.class)
+  public void testTextDrawNewFrame() {
+    new TextView().drawNewFrame(new ArrayList<>());
+  }
+
+  /**
+   * Test getting content from file when no file is specified in TextView.
    */
   @Test(expected = IllegalStateException.class)
-  public void testTextViewWriteToUnopenedFile() {
-    TextView t = new TextView("C:\\Users\\josep\\OneDrive\\Documents"
-            + "\\Northeastern\\5004\\Animator\\test_out.txt");
-    AnimationModel m = new AnimationModelImpl(50, 60, 500, 600);
-
-    t.run(m);
+  public void testTextViewGetOutFileNullName() {
+    new TextView().getOutFileContents();
   }
+
 }

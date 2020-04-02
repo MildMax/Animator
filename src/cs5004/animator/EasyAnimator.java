@@ -40,8 +40,6 @@ public final class EasyAnimator {
 
     //populate display/view
     view.run(model);
-
-    //System.exit(0);
   }
 
   private void parseArgs(String[] args) {

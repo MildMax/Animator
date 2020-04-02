@@ -41,7 +41,7 @@ public class SVGView extends AbstractTextView {
               + "valid name and '.svg' extension");
     }
     else if (delay < 1) {
-      throw new IllegalArgumentException("speed cannot be less than 1");
+      throw new IllegalArgumentException("delay cannot be less than 1");
     }
 
     this.delay = delay;
@@ -57,7 +57,8 @@ public class SVGView extends AbstractTextView {
    *                               If the specified outfile cannot be written to.
    */
   @Override
-  public void run(AnimationModel m) {
+  public void run(AnimationModel m)
+          throws IllegalArgumentException, IllegalStateException {
     if (m == null) {
       throw new IllegalArgumentException("AnimationModel m cannot be null");
     }

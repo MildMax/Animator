@@ -27,12 +27,13 @@ public class AnimationRunner implements ActionListener {
    *
    * @param m takes an AnimationModel with shapes to be printed to the screen.
    * @param v takes a View that will display the animation.
-   * @param delay specifies the frames per second of the animation.
+   * @param ticksPerSecond specifies the ticks per second of the animation.
    * @throws IllegalArgumentException If the AnimationModel argument is null.
    *                                  If the AnimationView argument is null.
    *                                  If the delay is less than 1.
    */
-  public AnimationRunner(AnimationModel m, AnimationView v, int ticksPerSecond) {
+  public AnimationRunner(AnimationModel m, AnimationView v, int ticksPerSecond)
+          throws IllegalArgumentException{
     if (m == null || v == null) {
       throw new IllegalArgumentException("Model/View cannot be null");
     }
@@ -63,14 +64,14 @@ public class AnimationRunner implements ActionListener {
    */
   @Override
   public void actionPerformed(ActionEvent e) {
+    ++frames;
     if ((this.frames * this.ticksPerFrame) > this.model.getTotalTicks()) {
-      view.closeView();
       timer.stop();
-      //System.out.println("timer has been stopped");
+      view.closeView();
       return;
     }
     this.view.drawNewFrame(this.model.getShapesAtTick((double)this.frames * this.ticksPerFrame));
 
-    ++frames;
+
   }
 }

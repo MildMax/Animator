@@ -215,6 +215,9 @@ public class ShapeImplTest {
     assertEquals(null, s.getShapeAtTick(25));
   }
 
+  /**
+   * Test getting shape at tick when there are no transformations.
+   */
   @Test
   public void testShapeImplGetShapeAtTickNoTransformations() {
     Shape s = new ShapeImpl("shape", ShapeType.RECTANGLE, 1);

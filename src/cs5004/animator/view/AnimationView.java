@@ -29,8 +29,9 @@ public interface AnimationView {
    *
    * @param m takes an AnimationModel that stores an animation to be written to
    *          a text file.
+   * @throws IllegalArgumentException if the AnimationModel is null.
    */
-  void run(AnimationModel m);
+  void run(AnimationModel m) throws IllegalArgumentException;
 
   /**
    * Draws a new frame to the window according to the shapes in shapeList.
@@ -39,6 +40,15 @@ public interface AnimationView {
    * @throws IllegalArgumentException if the list of shapes is null.
    */
   void drawNewFrame(List<Shape> shapeList) throws IllegalArgumentException;
+
+  /**
+   * Returns a String with the contents written to the specified out file
+   * in the current TextView. Used for testing purposes.
+   *
+   * @return a String with the contents written to the specified out file
+   *         in the current TextView.
+   */
+  String getOutFileContents();
 
   /**
    * Creates an error message on screen corresponding to String parameter Message.

@@ -10,7 +10,8 @@ import java.util.List;
 import javax.swing.JPanel;
 
 /**
- * This class represents a panel that paints images to a frame that extends the JFrame class.
+ * This class represents a panel that paints shapes to a window in JFrame.
+ * Extends the JFrame class.
  */
 public class ShapePanel extends JPanel {
 

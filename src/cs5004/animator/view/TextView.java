@@ -37,7 +37,8 @@ public class TextView extends AbstractTextView {
   }
 
   /**
-   * This constructor passes a null value for the fileName.
+   * This constructor passes a null value for the fileName. Will instantiate
+   * out to be System.out.
    */
   public TextView() {
     super(null);
@@ -52,16 +53,15 @@ public class TextView extends AbstractTextView {
    * @throws IllegalArgumentException if the AnimationModel is null.
    * @throws IllegalStateException if the FileWriter cannot be written to.
    *                               If System.out cannot be written to.
-   *                               If an out file is specified but has not been opened.
    */
   @Override
-  public void run(AnimationModel m) throws IllegalArgumentException {
+  public void run(AnimationModel m)
+          throws IllegalArgumentException , IllegalStateException{
     if (m == null) {
       throw new IllegalArgumentException("AnimationModel cannot be null");
     }
     openView();
     if (out instanceof FileWriter) {
-
       try {
         ((FileWriter) out).write(m.toString());
       } catch (IOException e) {
@@ -76,33 +76,6 @@ public class TextView extends AbstractTextView {
       }
     }
     closeView();
-  }
-
-  /**
-   * Returns a String with the contents written to the speicifed out file
-   * in the current TextView. Used for testing purposes.
-   *
-   * @return a String with the contents written to the specified out file
-   *         in the current TextView.
-   */
-  public String getOutFileContents() {
-    FileReader r;
-    try {
-      r = new FileReader(fileName);
-    } catch (IOException e) {
-      throw new IllegalStateException("Cannot open file at destination");
-    }
-    String fileContents = "";
-    Scanner s = new Scanner(r);
-    while (s.hasNextLine()) {
-      fileContents += s.nextLine() + "\n";
-    }
-    try {
-      r.close();
-    } catch (IOException e) {
-      throw new IllegalStateException("Cannot close file at destination");
-    }
-    return fileContents.trim();
   }
 
 }

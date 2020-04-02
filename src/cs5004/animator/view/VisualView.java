@@ -1,7 +1,6 @@
 package cs5004.animator.view;
 
 import java.awt.Dimension;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -20,30 +19,31 @@ public class VisualView extends JFrame implements AnimationView {
 
   private ShapePanel shapePanel;
   private JScrollPane scrollPane;
-  private int delay;
+  private int ticksPerSecond;
 
   /**
    * The AnimationViewImpl constructor takes x and y values specifying the
    * coordinates of the upper left corner of the display and a width and height
-   * specifying the width and height of the screen and a int delay that specifies
-   * the delay in milliseconds between drawing frames.
+   * specifying the width and height of the screen and a int ticksPerSecond
+   * that specifies the ticks of the animation played over the course of one second.
    *
    * @param x takes the x coordinate of the position of the upper left corner of the display.
    * @param y takes the y coordinate of the position of the upper left corner of the display.
    * @param windowWidth takes the width of the display.
    * @param windowHeight takes the height of the display.
-   * @param delay takes the delay between frames of the animation in milliseconds.
+   * @param ticksPerSecond takes the ticks per second between frames of the animation
+   *                       in milliseconds.
    * @throws IllegalArgumentException if the x or y values indicating the position of the
    *                                  upper left corner of the display are less than 0.
    *                                  If the width or height values of the display window are less
    *                                  than or equal to 0.
-   *                                  If the specified delay is less than 1.
+   *                                  If the specified ticks per second is less than 1.
    */
   public VisualView(int x, int y, int windowWidth, int windowHeight,
-                    int maxWidth, int maxHeight, int delay) throws IllegalArgumentException {
+                    int maxWidth, int maxHeight, int ticksPerSecond) throws IllegalArgumentException {
     super();
 
-    this.delay = delay;
+    this.ticksPerSecond = ticksPerSecond;
 
     if (windowWidth <= 0 || windowHeight <= 0) {
       throw new IllegalArgumentException("Width and height must be greater"
@@ -53,7 +53,7 @@ public class VisualView extends JFrame implements AnimationView {
               + "than 0");
     } else if (x < 0 || y < 0) {
       throw new IllegalArgumentException("x and y positions cannot be negative");
-    } else if (delay < 1) {
+    } else if (ticksPerSecond < 1) {
       throw new IllegalArgumentException("Delay cannot be less than 1");
     }
 
@@ -100,6 +100,17 @@ public class VisualView extends JFrame implements AnimationView {
   }
 
   /**
+   * Throws UnsupportedOperationException since visual view does not write any data to a file.
+   *
+   * @return always throws exception.
+   * @throws UnsupportedOperationException since visual views do not write any data to a file.
+   */
+  @Override
+  public String getOutFileContents() throws UnsupportedOperationException {
+    throw new UnsupportedOperationException("VisualView does not support getting file contents");
+  }
+
+  /**
    * Closes the window on screen.
    */
   @Override
@@ -119,6 +130,6 @@ public class VisualView extends JFrame implements AnimationView {
     if (m == null) {
       throw new IllegalArgumentException("Animation Model cannot be null.");
     }
-    new AnimationRunner(m, this, this.delay).runAnim();
+    new AnimationRunner(m, this, this.ticksPerSecond).runAnim();
   }
 }
