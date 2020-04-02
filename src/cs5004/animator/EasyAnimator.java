@@ -20,7 +20,7 @@ public final class EasyAnimator {
   Readable inFile = null;
   String outFile = null;
   String viewType = null;
-  int speed = 1;
+  int speed = 1000;
 
   /**
    * Plays the animation according to supplied command line arguments.
