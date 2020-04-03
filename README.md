@@ -298,3 +298,11 @@ The runAnim() method opens the view and starts the timer that will call the acti
 
 --actionPerformed() method--
 The actionPerformed() method keeps track of the number of frames that have passed. Determines if the number of frames surpasses the number of ticks in the animation, and once the animation has run, stops the timer and closes the view. Otherwise, increments the frames and draws a new frame according to the values of the shapes at the given frame in the AnimationModel to the view.
+
+------------------------------------------------
+
+--EasyAnimator class--
+The EasyAnimator class contains a static Main method that runs the application. Parses command line arguments and initializes the AnimationModel and the AnimationView according to the command line arguments. If invalid command line arguments are supplied or there are missing command line arguments, uses the static displayAnimationView from AnimationView interface to display an error message to the screen. Is responsible for letting the model and the view communicate with one another. 
+
+--main() method--
+A static method that creates an EasyAnimator object that lets an AnimationModel and AnimationView communicate with one another to create an animation. Parses command line arguments and uses them to populate the AnimationModel with data representing an aanimation and creating a specific Textual, SVG, or Visual view. Runs the animation.

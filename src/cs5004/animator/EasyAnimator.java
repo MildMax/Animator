@@ -24,9 +24,11 @@ public final class EasyAnimator {
   private int delay = 1000;
 
   /**
-   * Plays the animation according to supplied command line arguments.
+   * Plays the animation according to supplied command line arguments. Displays error messages
+   * to the screen for bad input to command line arguments.
    *
-   * @param args command line arguments specifying the type of view, the
+   * @param args command line arguments specifying the type of view, the speed of the animation,
+   *             the input file, and the output file.
    */
   public static void main(String[] args) {
     //create the animator
