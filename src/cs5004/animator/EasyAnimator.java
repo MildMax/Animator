@@ -8,9 +8,9 @@ import cs5004.animator.model.AnimationModel;
 import cs5004.animator.model.AnimationModelImpl;
 import cs5004.animator.util.AnimationReader;
 import cs5004.animator.view.AnimationView;
-import cs5004.animator.view.SVGView;
-import cs5004.animator.view.TextView;
-import cs5004.animator.view.VisualView;
+import cs5004.animator.view.SVGViewImpl;
+import cs5004.animator.view.TextViewImpl;
+import cs5004.animator.view.VisualViewImpl;
 
 /**
  * Plays the animation and manages interaction between the view and the model.
@@ -87,19 +87,19 @@ public final class EasyAnimator {
   private AnimationView initializeView(AnimationModel m) {
     AnimationView view = null;
     if (viewType.compareTo("visual") == 0) {
-      view = new VisualView(m.getBoundX(), m.getBoundY(),
+      view = new VisualViewImpl(m.getBoundX(), m.getBoundY(),
               m.getWindowWidth(), m.getWindowHeight(),
               m.getAnimationWidth(), m.getAnimationHeight(), this.ticksPerSecond);
     }
     else if (viewType.compareTo("text") == 0) {
       if (outFile != null) {
-        view = new TextView(outFile);
+        view = new TextViewImpl(outFile);
       } else {
-        view = new TextView();
+        view = new TextViewImpl();
       }
     }
     else if (viewType.compareTo("svg") == 0) {
-      view = new SVGView(outFile, delay);
+      view = new SVGViewImpl(outFile, delay);
     }
     else {
       AnimationView.displayErrorMessage("Invalid view type " + viewType);

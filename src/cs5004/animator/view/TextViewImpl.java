@@ -13,7 +13,7 @@ import cs5004.animator.model.AnimationModel;
  * implements the AnimationView interface.
  */
 
-public class TextView extends AbstractTextView {
+public class TextViewImpl extends AbstractTextView {
 
   /**
    * This constructor takes a String containing the filename of the text file that
@@ -24,7 +24,7 @@ public class TextView extends AbstractTextView {
    *                                  If the specified fileName does not end with '.txt' or
    *                                  does not contain a valid name.
    */
-  public TextView(String fileName) throws IllegalArgumentException {
+  public TextViewImpl(String fileName) throws IllegalArgumentException {
     super (fileName);
     if (fileName == null) {
       throw new IllegalArgumentException("String fileName cannot be null");
@@ -40,7 +40,7 @@ public class TextView extends AbstractTextView {
    * This constructor passes a null value for the fileName. Will instantiate
    * out to be System.out.
    */
-  public TextView() {
+  public TextViewImpl() {
     super(null);
   }
 

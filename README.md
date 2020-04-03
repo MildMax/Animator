@@ -2,14 +2,23 @@
 Repository for animator project for 5004
 README
 
-Animation Model Assignment 7 – Joseph Burns, Chris Williams
+Animation Model Assignment 7+8 – Joseph Burns, Chris Williams
+
+-----------------------------------------
+
+CHANGES FROM ASSIGNMENT7:
+The biggest change from Assignment 7 to 8 was how we implemented storing shapes and transformations. We realized that the shape and transformation information we were receiving was far more generic than we had anticipated, and our method of creating shapes and transformations was overly complex. As a result, we changed our multiple Shape classes (Circle, Oval Rectangle, Triangle, Square) to be stored in a single ShapeImpl class, and instead use our original ShapeType enum to specify the type of the shape. We also changed our Transformation classes to contain data regarding all types of transformations in a single TransformationImpl class, and return values specific to the transformation being made based on whether or not the start and end values of the width/height/position/color of a shape are the same at the beginning and end of the transformation. We also decided to store RGB color values directly in the Transformation instead of creating our own custom Color class. Our class hierarchy largely stayed the same though, with the AnimationModel storing a list of shapes and each shape storing its own list of transformations. The design stayed the same, the storage of data is what necessitated new design choices. Our choices were largely reductionist for the purpose of simplifying the design.
+
+------------------------------------------
 
 This README describes the classes, interfaces and enums used in our Animation Model as well as verbose descriptions of why we made the decisions to design our classes in such a way. 
 
 --AnimationModel interface--
-Our AnimationModel interface declares methods necessary for adding and removing shapes and transformations to the model. These are necessary so that the Animator can dynamically create and remove shapes according to the user’s input. The AnimationModel also defines several getters, including getShapes(), getTransformations(), getTotalTicks(), getShapesAtTick(), getWindowHeight(), getWindowWidth(), and getBackgroundColor() so that the state of the AnimationModel can be checked.
+Our AnimationModel interface declares methods necessary for adding shapes and transformations to the model. These are necessary so that the Animator can dynamically create shapes according to the user’s input. The AnimationModel also defines several getters, including getShapes(), getTransformations(), getTotalTicks(), getShapesAtTick(), getWindowHeight(), getWindowWidth(), and getBackgroundColor() so that the state of the AnimationModel can be checked.
 
 ---------------------------------------------
+
+CHANGES TO ANIMATIONMODELIMPL -- we removed the removeShapes and removeTransformations method based on the input in the text files. We believe they are useful methods, but based on our prior assumptions of input, we realized that our implementation of the removal methods was too specific, and lacked the flexibility to accomodate the potential different types of input. As a result, we decided to remove the method until (theoretically) we saw how a method might be removed. There does remain a method to access transformations on a shape as well as the shapes in the model itself, and there exist methods for sorting and traversing either list so, depending on input, the methods for removal would be simple to implement. We also decided to reduce the number of offered constructors, as our view requires some kind of height, width and starting (x,y) values to initialize our SVG and Visual views. We developed methods of arithmetically calculating the size of an animation to guaruntee that the height and width of a window contain the entire animation in the event that the input would not be supplied. As such, developing constructors based on new types of input would be as simple as either employing our methods for calculating height and width or setting a default (0,0) starting value for the window.
 
 --AnimationModelImpl class--
 Our AnimationModelImpl class defines the method bodies for the methods declared in the AnimationModel interface. It seeks to provide a snapshot of the information held inside the AnimationModelImpl and to maintain a hierarchical order of Shapes that are responsible for their own transformations.
@@ -21,14 +30,8 @@ The first constructor is the default constructor: it sets the height and width o
 --addShape()--
 Our addShape() method takes a Shape object and checks to see if a Shape already exists with the same name. If it does not, it adds the shape to the HashMap. If the shape does exist, it throws an exception. This helps maintain a unique set of shapes. Note, shapes may be added to the same layer; it is up to the user or the controller to determine how layers will be assigned. Shapes that exist on the same layer may clash based on the implementation of the view. Layer does not play into whether or not adding a shape is valid.
 
---removeShape()--
-Our removeShape() method takes a String shapeName and tries to find a value in the HashMap corresponding to the shapeName. If it does not exist, it throws an exception. Otherwise, it removes the shape with the associated name from the HashMap so it no longer exists in our Animator.
-
 --addTransformation()--
 Our addTransformation() method takes a String shapeName indicating the name of the shape the transformation should be added to and a Transformation to be added to the shape. If the shape does not exist, throws an exception. If the shape does exist, it checks to see if the shape already has a like transformation that occurs in the same time frame. If a transformation of the same type does exist in the same time frame, it throws an exception. Otherwise, it adds the Transformation to the Shape’s list of transformations. It then determines whether or not the end time of the transformation exceeds the current total number of ticks in the AnimationModelImpl, and if it does, sets the total number of ticks to the end time of the transformation.
-
---removeTransformation()-- 
-Our removeTransformation() method takes a String shapeName that indicates the Shape the transformation is on, a TransformationType that indicates the type of transformation, and the start and end times of the transformation to be removed. If the Shape as specified by shapeName doesn’t exist, it throws an exception. If the transformation does not exist, it throws an exception. Then, if the end value matches the total number of ticks in the AnimationModelImpl, it gets a list of all transformations, finds the transformation with the greatest end time, and sets the total number of ticks to that value.
 
 --getShapes()--
 Our getShapes() method returns a list of Shapes held in the AnimationModelImpl. The values in our Shapes are all final, so we do not create copies of the shapes as their attributes cannot be changed. We do place the Shapes into a new List so that the HashMap that holds the shapes cannot be modified outside of the class. This provides the user a way of looking at all the shapes inside the AnimationModelImpl.
@@ -40,7 +43,7 @@ Our getTransformations() method returns a list of all Transformations on every S
 Our getTotalTicks() method returns the number of ticks in the AnimationModelImpl. This provides the user a way of checking how long, arbitrarily, the animation will be.
 
 --getShapesAtTick()--
-Our getShapesAtTick() method will create a new container of shapes with modified values to be evaluated at a given tick. It takes an int indicating the tick against which the shapes and their transformations will be evaluated. Since we are unsure currently of how the controller or the view will be evaluating these Shapes, we have left the method body blank so we can adapt our design to the specifications of the other aspects of the overall design. This may require adding additional methods to our Shape and Transformation interfaces, though any changes will be a direct reflection of what occurs in this method. 
+Our getShapesAtTick() method will create a new container of shapes with modified values to be evaluated at a given tick. It takes an int indicating the tick against which the shapes and their transformations will be evaluated. The tick is then passed to each shape in the shapeList's getShapeAtTick method which returns itself with modified values. If the return value is null, the shape does not appear at the given tick. All return values that are not null are placed into a new list and then the list is returned.
 
 --getWindowHeight()--
 Our getWindowHeight() method will return an int indicating the height of the window.
@@ -48,31 +51,20 @@ Our getWindowHeight() method will return an int indicating the height of the win
 --getWindowWidth()--
 Our getWindowWidth() method will return an int indicating the width of the window.
 
---getBackgroundColor()--
-Our getBackgroundColor method will return a Color indicating the background color of the window. 
+--getBoundX()--
+Our getBoundX() method returns the x value of the upper left corner of the screen for the visual view.
+
+--getBoundY()--
+Our getBoundY() method returns the y value of the upper left corner of the screen for the visual view. 
+
+--getAnimationWidth()--
+Our getAnimationWidth() method returns the largest window width that the animation needs in order to be displayed on screen without the edges of the window clipping parts of the animation.
+
+--getAnimationHeight()--
+Our getAnimationHeight() method returns the largest window height that the animation needs in order to be displayed on screen without the edges of the window clipping parts of the animation.
 
 --toString()--
-Our toString() override method creates a verbose description of the window size and color, and a list of shapes with each shape’s respective transformations in chronological order by start time below the shape’s description. We decided to format our verbose description in this way so each Shape has its transformations associated with it in a visually simplistic way. As the list of Shapes and Transformations gets large, finding a particular transformation associated with a shape would become difficult. By keeping the Transformations on a shape directly below each shape’s description, a user can more efficiently evaluate all of the transformations occurring on that particular shape. This can be used for debugging purposes later on. 
-
----------------------------------------------
-
---Color class--
-The Color class simply holds three RGB values as doubles with a value between 0.0 and 1.0. It provides get methods to access the RGB values individually and a toString method that provides a string representation of the values such that “R,G,B” is “0.0,0.5,1.0” when R is 0.0, G is 0.5 and B is 1.0. All attributes are final and may not be changed.
-
---Constructor--
-The Color constructor takes three floating point values indicating the RGB values of the color. The floating point values may not be less than 0 or greater than 1, otherwise it throws an exception.
-
---getR()--
-The getR() method returns the red value for the color. Provides a way of getting information associated with the color.
-
---getG()--
-The getG() method returns the green value for the color. Provides a way of getting information associated with the color.
-
---getB()--
-The getB() method returns the blue value for the color. Provides a way of getting information associated with the color.
-
---toString()--
-The toString() override method provides a String description of the color such that “R,G,B” is “0.0,0.5,1.0” when R is 0.0, G is 0.5 and B is 1.0. 
+Our toString() override method creates a verbose description of the window size and color, the list of shapes that are being created, a list of the appearance and disappearance times of the shapes, and then a list of transformations sorted by chronological order. It is very similar to the original text output specified in Assignment 7, except we list the colors as RGB values instead of "red" or "blue".
 
 ---------------------------------------------
 
@@ -81,17 +73,19 @@ The Shape interface declares the methods that each Shape should provide such tha
 
 ---------------------------------------------
 
---AbstractShape class--
-The Abstract Shape class implements the Shape interface and defines all of the methods described in the Shape interface such that each Shape returns a uniform set of data in all instances to be evaluated by the AnimationModelImpl. Holds attributes for the String name associated with the shape, the layer the shape is on, the initial height, width, x and y position values, and Color of the Shape at the start of the animation. Also holds a list of transformations on the Shape, the type of the shape used for type-checking, and the transparency of the shape. Note, we chose to define the position of the Shape by its center since all shapes have a center value, but not all shapes have a corner value. Those shapes that utilize a corner value, such as a Rectangle or a Triangle, can be calculated using width and height dimensions and the center value. Until we know how the controller and the view will handle displaying these shapes, we have left all Shape objects to define their position per their center. Note, the type associated with the shape exists to be used in the future so that any transformations specific to a type can be checked and then casted up into the Shape’s concrete type to access any methods specific to that shape. Until we know how Transformations should affect and produce new Shape values, type is only used to ensure type is properly assigned in testing.
+CHANGES TO SHAPE CLASSES FROM ASSIGNMENT 7:
+We realized that our shapes would all be described as having the same type of height and width values as well as position and color values, so to accomodate the input and simplify the design, we merged all of our shapes into a simple ShapeImpl class, and based on the ShapeType enum, arithmetically recalculate values specific to a type of shape from their overall height/width values when we call the data. Still offers the same functionality as before, just changes the way that the data is stored.
+
+---------------------------------------------
+
+--ShapeImpl class--
+The ShapeImpl class implements the Shape interface and defines all of the methods described in the Shape interface such that each Shape returns a uniform set of data in all instances to be evaluated by the AnimationModelImpl. Holds attributes for the String name associated with the shape, the layer the shape is on, the height, width, x and y position values, and Color of the Shape represented as 3 RGB values as well as a ShapeType enum so the type of shape can be specified and checked. Holds methods for adding transformations to the shape, getting transformations on the shape, and a method for changing the internal values of the shape based on the current tick of the animation called getShapeAtTick(). Provides get methods for accessing individual fields in the Shape such as getWidth(), getHeight(), getX(), getY(), getR(), getG(), and getB(). We also decided to create two methods getCreateStatement() and getAppearStatement() that return strings providing information about the shape to be used when creating a textual description of the shape. Since these statements appear in different places in our text representation of the animation, we decided to use to specific methods instead of overriding the toString method and putting them in the same place.
 
 --Constructor--
-The AbstractShape constructor takes a String name to be associated with the shape, the initial height and width of the shape, the initial center x and y positions of the shape, the Color of the shape, and the type of the shape. The ShapeType will be defined in the concrete classes, and is not set by the user. Initializes an ArrayList to hold Transformations that will be added to the Shape. Sets the initial transparency of the Shape to 0.0 so it can be modified by Appearance and ChangeTransparency transformations as necessary.
+The ShapeImpl constructor takes a String name to be associated with the shape, a ShapeType enum that describes the type of the shape, and a layer that the shape will be displayed on. Sets the initial values of the shape, such as height, width, position (x,y), and color RGB values to 0. Initializes empty list of transformations on construction.
 
 --addTransformation()--
 The addTransformation() method takes a Transformation t and checks to see if another Transformation of the same type with overlapping start and end times already exists on the object. If another Transformation of the same type exists in the same time frame, throws an exception. Otherwise, it adds the transformation to the list of transformations on the Shape.
-
---removeTransformation()--
-The removeTransformation() method takes a TransformationType and a start and end time indicating the start and end of the Transformation. If the Transformation does not exist, throws an exception. Otherwise, it removes the element from the list of Transformations on the object.
 
 --getName()--
 The getName() method returns the String name associated with the Shape. Is used in AnimationModelImpl to check if a shape already exists and to create a key in the HashMap that corresponds to the Shape.
@@ -105,169 +99,202 @@ The getTransformationDescription() method returns verbose String description of 
 --getTransformationList()--
 The getTransformationList() method creates a new list that consists of the same elements in the list of transformations in the Shape and returns the new list. The elements in the list, the Transformations, all have final attributes so they may not be changed, and are thus added directly rather than creating copies of each transformation. We place the Transformations in a new list, though, so that the list inside of the Shape object cannot be modified outside of the Shape object. Any changes to the list will be reflected in the returned list, not the Transformation list in Shape.
 
----------------------------------------------
+--getWidth()--
+Returns the width of the shape.
 
---Circle class--
-The Circle class has a constructor that reflects the values associated with a Circle, so that different height and width cannot be defined for the Circle as well as a toString() override method that reflects the initial values of the Circle. Extends the AbstractShape class which implements the Shape interface.
+--getHeight()--
+Returns the height of the shape.
 
---Constructor--
-The constructor for the Circle class takes a String name to be associated with the object, a layer, a radius, an initial x and y position values, and a Color the Circle will take on. Stores the radius in its own field to be used later when using transformations to modify the Shape’s attributes in some way for the view and controller. Passes the ShapeType.Circle type to the super constructor so the Circle class can be identified as a circle without using reflection.
+--getR()--
+Returns the red color value of the shape.
 
---toString()--
-The toString() override method provides a unique verbose String description of a circle to reflect its radius as well as its attributes regarding position, color and layer. Also produces a list of Transformations as a String that are associated with the Circle.
+--getG()--
+Returns the green color value of the shape.
 
----------------------------------------------
+--getB()--
+Returns the blue color value of the shape.
 
---Oval class--
-The Oval class has a constructor that reflects the values associated with an oval, so the height and width values are calculated from the vertical and horizontal radius of the Oval. Also contains a toString() override method that reflects these values specific to the Oval. Extends the AbstractShape class which implements the Shape interface.
+--getX()--
+Returns the x coordinate of the shape.
 
---Constructor--
-The Oval constructor takes a String name to be associated with the Oval, vertical and horizontal radii, the initial x and y values indicating the position of the oval, and a Color that the Oval takes on initially. Calculates the width and height from the radii and passes those values to the super constructor, also passes ShapeType.Oval to the super constructor so that the Oval type may be checked later on when calculating modified values at each tick in the animation.
+--getY()--
+Returns the y coordinate of the shape.
 
---toString()--
-The toString() override method provides a unique description of the Oval according to its specific values (radii v height and width) and other starting values as well as a verbose String of Transformations on the oval.
+--getStart()--
+Returns the time that the shape appears on screen.
 
----------------------------------------------
+--getEnd()--
+Returns the time that the shape disappears from the screen.
 
---Rectangle class--
-The Rectangle class has a constructor that takes its initial values and passes them directly to the super constructor in addition to its own ShapeType so that the object may be identified as a Rectangle without using reflection to check the class type. Also contains a toString() method that reflects these values as they pertain to a Rectangle. Extends the AbstractShape class which implements the Shape interface.
+--getLayer()--
+Returns the layer tha the shape will appear on in the animation.
 
---Constructor--
-The Rectangle constructor takes a String name to be associated with the Rectangle, a layer, initial height and width of the Rectangle, initial x and y center positions of the Rectangle, and an initial Color that the Rectangle will take on. Passes all values directly to super constructor as well as ShapeType.Rectangle so that the Rectangle may be identified as a Rectangle.
+--getShapeAtTick()--
+Takes a double tick that represents a certain frame in the animation and modifies the internal values of the shape according to the transformation that is affecting the shape at the specified tick. Returns itself. If the shape does not appear or has no transformations, returns a null value.
 
---toString()--
-The toString() override method provides a verbose String description of the values associated with the Rectangle as well as verbose list represented as a String of Transformations on the Rectangle.
+--getCreateStatement()--
+Returns a String indicating the values of the shape when it first appears on screen.
 
----------------------------------------------
-
---Square class--
-The Square class has a constructor that takes the values specific to a Sqaure (one width/height parameter so they cannot be defined separately) and passes its side length to the width and height parameters in the super constructor as well as a ShapeType that can be used to identify the object as a Square. Also contains a toString() method that reflects the specific attributes of a Square. Extends the AbstractShape class which implements the Shape interface.
-
---Constructor--
-The Square constructor takes a String name to be associated with the shape, a layer the Square will exist on, a side value that will represent the height and width of the Square in the super constructor, and values indicating the initial x and y positions of the center of the Square, and a Color indicating the initial color of the Square. Stores the side length of the Square in its own field to be used by the Square class later on. Passes its ShapeType.Square directly to super constructor so class can be identified as a Square later on.
-
---toString()--
-The toString() override method provides a verbose String description of the values specific to a Square (one side length, not a height and width of the same value) as well as a list of Transformations as a String associated with the Square.
-
----------------------------------------------
-
---Triangle class--
-The Triangle class has a constructor that takes the values associated with a generic Shape and passes its ShapeType to the super constructor so it may be identified as a Triangle without using reflection. Also contains a toString() method that reflects the attributes of a Triangle. Extends the AbstractShape class which implements the Shape interface.
-
---Constructor--
-The Triangle constructor takes a String name to be associated with the Shape as well as a layer, initial height, initial width, and x and y center values of the shape, as well as an initial Color that the Triangle will take on. Passes all values to super constructor as is, as well as ShapeType.Triangle so that the Shape may be identified as a Triangle later on.
-
---toString()--
-The toString() override method describes the attributes of the Triangle as well as a verbose list of Transformations as a String associated with the Triangle.
+--getAppearStatement()--
+Returns a String indicating when the shape appears and disappears on String.
 
 ---------------------------------------------
 
 --ShapeType enum--
-The ShapeType enum describes 5 types of shapes implemented in our model: CIRCLE, OVAL, RECTANGLE, SQUARE, and TRIANGLE. The purpose of this enum is to allow Shapes to pass their ShapeType from their concrete class to their super class so that the type of each Shape can be checked without using reflection(i.e. instanceof, obj.getClass()) which requires a substantial amount of overhead. This way, we can guarantee how the types of shapes will be checked. We deemed this necessary since different transformations affect different attributes of each Shape in a unique manner, and in order to make the correct modifications to Shape objects over the course of the animation, we need to know what shape we will be modifying so we modify it properly. This way, we don’t modify the vertical radius of an Oval the same way we modify the height of a Rectangle, since a radius is half the diameter of an oval while the height of the Rectangle describes its total height already.
+The ShapeType enum describes 6 types of shapes implemented in our model: CIRCLE, OVAL, ELLIPSE, RECTANGLE, SQUARE, and TRIANGLE. The purpose of this enum is to allow the ShapeImpl class to differentiate between different types of shapes that it can store. This is used for type-checking in the Views so that the view may construct and modify the values in the shape as necessary to produce the correct output. For instance, in the SVG view, the ellipse requires a radius, but we store the overall height of the ellipse. AS such, by checking that the ShapeType is an ELLIPSE, we can appropriately make the necessary arithmetic changes to reflect the height as a vertical radius.
 
 ---------------------------------------------
 
 --Transformation interface--
-The Transformation interface describes the methods necessary to get information pertaining to every type of Transformation. Provides getStart() to get the start tick of the Transformation, getEnd() to get the end tick of the Transformation, and getType() to check the type of the Transformation. Until we know how Transformations will affect Shapes over the course of the animation, our get methods are primarily designed to ensure that erroneous, duplicate, or otherwise conflicting Transformations are not added to Shapes in a way that would cause an issue with the view. Also provides a way of checking what Transformations are affect the state of a Shape at a particular tick by comparing the tick value against start and end times of a particular Transformation. Note: Until we know how the controller and the view seeks to change the objects, we have not inserted any methods that would change a Shape’s value according to the transformation, just attributes that can be used later on to transform a shape’s properties according to the type of transformation. For now, all methods are used for checking to make sure conflicting Transformations are not added to the AnimationModel or a Shape.
+The Transformation interface describes the methods necessary to get information pertaining to the Transformation via get methods.
 
----------------------------------------------
+----------------------------------------------
 
---AbstractTransformation class--
-The AbstractTransformation class implements the Transformation interface and defines the method bodies declared in the interface. Also stores attributes such as startTime, endTime and TransformationType that are used by all Transformations. 
+CHANGES TO TRANSFORMATIONS FROM ASSIGNMENT 7:
+We realized that the way our data was being presented to us was more uniform than we had anticipated, and our prior design with dedicated classes for each transformation wasn't flexible enough to handle the input. So, we consolidated the different classes into a single TransformationImpl class and stored the changes as raw data and calculate the difference between starting and end values when the data is called rather than parsing and analyzing the data when it is stored.
+
+----------------------------------------------
+
+--TransformationImpl class--
+The TransformationImpl class implements the Transformation interface and defines the method bodies declared in the interface. Stores the start and end time of the transformation as well as the start and end values for a shapes x position, y position, width, height, and rgb color values. Provides get methods for all informaton in order to evaluate what's being changed over the course of the transformation and to adequately modify the shape that the transformation belongs to and a toString() override method that provides a String representation of the transformation.
 
 --Constructor--
-The AbstractTransformation constructor takes a start time for the Transformation, an end time for the Transformation, and a TransformationType type that describes the type of Transformation. Throws an exception if the start time is less than 0 or if the end time less than start or if the TransformationType is null. 
+The TransformationImpl constructor takes a start time for the Transformation, an end time for the Transformation, starting and ending x and y values of the shape's position over the transformation, starting and ending width and height values of the shape's dimensions over the transformation, and starting and ending RGB values of the shape's color over the transformation. Checks to make sure that the start time is not less than 0, the end time is not before the start time, that height and width values are not less than or equal to zero, and that RGB color values are not less than 0 or greater than 255.
+
+--getShapeName()--
+Returns the name of the shape that the transformation is associated with.
+
+--getX1()--
+Returns the initial x coordinate of the shape over the transformation.
+
+--getX2()--
+Returns the ending x coordinate of the shape over the transformation.
+
+--getY1()--
+Returns the initial y coordinate of the shape over the transformation.
+
+--getY2()--
+Returns the ending y coordinate of the shape over the transformation.
+
+--getW1()--
+Returns the initial width of the shape over the transformation.
+
+--getW2()--
+Returns the ending width of the shape over the transformation.
+
+--getH1()--
+Returns the initial height of the shape over the transformation.
+
+--getH2()--
+Returns the ending height of the shape over the transformation.
+
+--getR1()--
+Returns the initial red color value of the shape over the transformation.
+
+--getR2()--
+Returns the ending red color value of the shape over the transformation.
+
+--getG1()--
+Returns the initial green color value of the shape over the transformation.
+
+--getG2()--
+Returns the ending green color value of the shape over the transformation.
+
+--getB1()--
+Returns the initial blue color value of the shape over the transformation.
+
+--getB2()--
+Returns the ending blue color value of the shape over the transformation.
 
 --getStart()--
-The getStart() method returns the start tick of the Transformation. Is used to check if other Transformations exist in the same time frame as the current Transformation in AnimationModelImpl and AbstractShape. Will also be used to calculate the modified value of a shape according to a specified tick by giving a frame of reference in relation to the type of change.
+The getStart() method returns the start tick of the Transformation. Is used to check if other Transformations exist in the same time frame as the current Transformation in AnimationModelImpl and ShapeImpl. Is also used to calculate the modified value of a Shape according to a specified tick by give a frame of reference in relation to the type of change.
 
 --getEnd()--
-The getEnd() method returns the end tick of the Transformation. Is used to check if other Transformations exist in the same time frame as the current Transformation in AnimationModelImpl and AbstractShape. Will also be used to calculate the modified value of a Shape according to a specified tick by give a frame of reference in relation to the type of change.
-
---getType()--
-The getType() method returns the enum TransformationType of the Transformation. Is used to check the type of the transformation without using reflection (i.e. instanceof, obj.getClass()) to reduce overhead. Is used to check type when adding transformations to a Shape.
+The getEnd() method returns the end tick of the Transformation. Is used to check if other Transformations exist in the same time frame as the current Transformation in AnimationModelImpl and ShapeImpl. Is also used to calculate the modified value of a Shape according to a specified tick by give a frame of reference in relation to the type of change.
 
 --toString()--
-The toString() method returns a String that indicates the time frame in which the Transformation is used. Will be used in concrete classes to generate a String that describes the entire Transformation according to specific criteria of the transformation, including values and type. 
+The toString() method returns a String that indicates the time frame in which the Transformation is used as well as specific changes in the transformation. For example, if a shape changes width and height and position over a transformation, states these changes in their own lines and returns them so that specific changes can be evaluated textually.
 
 ---------------------------------------------
 
---Appearance class--
-The Appearance class describes the points at which an object appears and disappears during the animation. An object may appear and disappear multiple times (for instance, to make an object blink across the screen), and thus multiple Appearance Transformations may be added to a single Shape object. To increase functionality, the user may define Transformations that occur while the object is “disappeared”, though this does require the user to be more careful about adding Appearance in order to make the objects appear. Sets Transparency of object to 0 or 100 instantaneously, Transparency may also be modified to a different value between and including these values in ChangeTransparency. Extends the AbstractTransformation class which implements the Transformation interface.
+--AnimationView interface--
+Our AnimationView interface declares the methods that must in some sense be implemented by every view. These include openView(), which initializes the view, closeView(), which closes the view, run(), which runs the animation, and drawNewFrame(), which takes a list of shapes and draws them to the screen. Also provides a public static method available to all views called DisplayErrorMessage, which uses JOptionPane to display an error message to the screen.
+
+---------------------------------------------
+
+--AbstractTextView class--
+The AbstractTextView class defines the methods that are relevant to all views that utilize some sort of textual output. Has a constructor that sets the fileName that the textual view will be writing to if one is specified -- fileName may be null in the event that the view writes to System.out and not a file. Sets out to be System.out be default. Defines methods for opening and closing a text file to be written to as well as a method for checking the contents of the file that is being written to. Overrides drawNewFrame() method and throws UnsupportedOperationException. 
 
 --Constructor--
-The Appearance constructor takes a start time and an end time at which the object will appear and disappear on screen. Passes these values to the super constructor for checking as well a TransformationType.Appearance so that the Transformation may be identified as an Appearance without using reflection to check class types.
+The AbstractTextView constructor takes a single String fileName indicating the file that the text output will be written to. Does not check for a null filename since a null filename indicates that the view should write its output to System.out rather than a specific file.
 
---toString()--
-The toString() override method returns a String indicating the time at which the transformation is set to make the object appear and disappear.
+--openView() method--
+If the fileName is not null, opens a file by the fileName stored in the String fileName field and sets the view to write to opened file. If the file cannot be opened, catches an IOException and throws IllegalStateException to indicate that the view cannot write to the file specified.
 
----------------------------------------------
+--closeView() method--
+If the output is a file and not System.out, closes the file. Catches an IOException and throws IllegalStateException to indicate that the view could not close the specified file.
 
---ChangeColor class--
-The ChangeColor class describes the times at which a Shape will change color as well as the color that the Shape will be changing to. Stores the new Color in the concrete class. Extends the AbstractTransformation class which implements the Transformation interface.
+--getOutFileContents() method--
+If the view is set to write to a file and not System.out, opens the file, reads the contents from the file, places it into a string, closes the file and returns the contents as a String. Exists for testing purposes to ensure view properly writes contents to the file.
+
+--drawNewFrame() method--
+Throws an UnspportedOperationException since text views do not draw frames to the screen.
+
+-----------------------------------------------
+
+--TextViewImpl class--
+The TextViewImpl class writes a textual description of the animation to either a specified output .txt file or to System.out. Has two constructors since a fileName does not need to be supplied to create a TextView.
+
+--TextViewImpl single argument constructor--
+The TextViewImpl constructor that takes a single argument takes a String indicating the name of a file that the text output will be written to. If the fileName is null, throws IllegalARgumentException since the file must exist in this instance. If the filename does not end with ".txt", throws IllegalArugmentException since the class must write to a text file if it writes to a file. If the filename is less than 5 characters, including the ".txt", then it does not contain a valid filename, and throws IllegalArgumentException. Passes fileName to the super constructor.
+
+--TextViewImpl no argument constructor--
+The TextViewImpl constructor that takes no arugments passes a null fileName value to the super constructor. This will be used to indicate that the textual view should write its output to System.out, the default output for textual views. 
+
+--run() method--
+Takes an AnimationModel object that holds the data representing the animation. Calls openView() and closeView() internally to guaruntee that the file is opened and closed each time the run() operation is called. If the output of for the text view is an instance of FileWriter, casts 'out' up to a FileWriter object and writes the textual representation of the animation to the file. Otherwise, appends the textual representation of the animation to System.out. Throws IllegalArgumentException if the AnimationModel is null. Throws IllegalStateException if the FileWriter object of System.Out cannot be written to.
+
+-----------------------------------------------
+
+--VisualViewImpl class--
+The VisualViewImpl class is responsible for creating a visual view that can display an animation on screen. Extends the JFrame class and implements the AnimationView interface. Initializes a frame based on values supplied from the AnimationModel and contains methods for displaying the frame, closing the frame, and running the animation.
+
+--VisualViewImpl constructor--
+The VisualViewImpl constructor takes an int x and y values inicating the top left corner of the screen, an int windowWidth and windowHeight indicating the width and height of the window, an int maxWidth and maxHeight indicating the max width and height of the animation, and an in ticksPerSecond that indicates how many ticks pass in a second. If either widths or heights are less than or equal to 0, throws an IllegalArgumentException. IF x or y is less than 0, throws IllegalArgumentException so window cannot be instantiated off the screen. If the ticksPerSecond is less than 1, throws IllegalArgumentException. Creates a ShapePanel object that the shapes will be drawn to, places the ShapePanel in a JScrollPane class, and places the JScrollPane into the current JFrame class. Sets the width and height of the window to windowWidth and windowHeight, sets width and height of the ShapePanel to the maxWidth and maxHeight class so scroll bars can be used to view entire animation. Sets default close operation on JFrame to exit on close.
+
+--openView() method--
+Makes the Display window visible.
+
+--run() method--
+The run method takes an AnimationModel object to be passed to an AnimationRunner class. Creates a new instance of the AnimationRunner class and passes the AnimationModel parameter as the model, itself as the view, and the ticks per second stored in the class. Calls runAnim() on the AnimationRunner instance to play the animation. Throws an IllegalArgumentException if the AnimationModel parameter is null since the AnimationRunner cannot produce a visual without it.
+
+--closeView() method--
+Makes the Display window invisible and removes the window from the current class.
+
+--getOutFileContents() method--
+Throws an UnspportedOperationException since the visual view does not write textual output to a file.
+
+-----------------------------------------------
+
+--ShapePanel class--
+The ShapePanel class handles drawing shapes to a JPanel object that will be displayed in the view. Extends the JPanel Class. Has an addFrame() method that takes a list of shapes that will be drawn in the paintComponent() method.
+
+--addFrame() method--
+The addFrame method takes a list of Shapes with values at a particular frame in the animation and stores it to be accessed by the paintComponent method. Throws an IllegalArgumentException if the shapeList is null. 
+
+--paintComponent() method--
+Overrides the paintComponent method from the JPanel class and draws shapes stored in shapeList to the panel. 
+
+-----------------------------------------------
+
+--AnimationRunner class--
+The AnimationRunner class contains operations for determining the frames per tick, starting the animation, checking the state of the animation, and then closing the animation. Extends the ActionListener class and implements the JSwing timer class. Passes itself to JSwing timer. Takes a value in ticks per second and converts it to frames per tick and runs at approximately 60 frames per second while still reflecting the specified speed of the animation in ticks. Handles running the animation. Is only public for testing purposes, otherwise will be made package protected since it should be internal to the visual view.
 
 --Constructor--
-The constructor for ChangeColor takes a start and an end time at which the color on a shape will begin to change as well as a Color object that describes the Color the Shape will be changing too. Throws an exception if the Color is null. Passes start and end times to the super constructor as well as TransformationType.CHANGECOLOR so that the Transformation can be determined to be ChangeColor without using reflection.
+The AnimationRunner constructor takes an AnimationModel, an AnimationView that will display the shapes at each frame to the screen, and an int value ticksPerSecond. Converts the ticks per second into ticksPerFrame. Sets the delay for the timer stored in the class to milliseconds per frame, which is found by dividing 1000/60 to ensure the animation always plays at approximately 60 frames per second.
 
---toString()--
-The toString() override method returns a String that describes the Color that the Shape will be changing to as well as the time in which the change will be occurring from the super toString() method.
+--runAnim() method--
+The runAnim() method opens the view and starts the timer that will call the actionPerformed method in the current listener.
 
----------------------------------------------
-
---ChangeHeight class--
-The ChangeHeight class describes the times at which a Shape will change its height as well as the new height that the Shape will take on. Stores the new height in its concrete class. Extends the AbstractTransformation class which implements the Transformation interface.
-
---Constructor--
-The constructor for ChangeHeight takes a start and an end time that indicate the start and end of the Transformation as well as a new height that that the Shape’s dimensions will be taking on. Stores new height in its own newHeight field and passes the start and end time to the super constructor along with the TransformationType.CHANGEHEIGHT so that the type of the Transformation can be checked without reflection.
-
---toString()--
-The toString() override method returns a String that describes the new height the Shape’s dimensions will be taking on as well as the time frame in which the Transformation will be occurring over, which it gets from the super toString() method.
-
----------------------------------------------
-
---ChangeWidth class--
-The ChangeWidth class describes the times at which a Shape will change its width as well as the new width that the Shape will take on. Stores the new width in its concrete class. Extends the AbstractTransformation class which implements the Transformation interface. Will operate very similarly to ChangeHeight, save for the attribute it changes. 
-
---Constructor--
-The constructor for ChangeWidth takes a start and an end time that indicate the start and end of the Transformation as well as a new width that that the Shape’s dimensions will be taking on. Stores new width in its own newWidth field and passes the start and end time to the super constructor along with the TransformationType.CHANGEWIDTH so that the type of the Transformation can be checked without reflection.
-
---toString()--
-The toString() override method returns a String that describes the new width the Shape’s dimensions will be taking on as well as the time frame in which the Transformation will be occurring over, which it gets from the super toString() method.
-
----------------------------------------------
-
---ChangeTransparency class--
-The ChangeTransparency class describes the time frame in which a Shape will change it’s Transparency as well as the new level of transparency in the object. Sets Transparency to exist on a scale from 0 to 100, where 0 is invisible and 100 is totally visible. Affects the same attribute as Appearance, but can be used in a more specific manner, creating changes in Transparency over a period of time instead of instantaneously. Offers more functionality than Appearance in terms of changing transparency, but requires specific instructions (Same start and end, transparency set to 0 or 100) to produce the same functionality. Extends the AbstractTransformation class which implements the Transformation interface.
-
---Constructor--
-The ChangeTransparency constructor takes a start and end time for the Transformation as well as a new target transparency that the Shape will be changed to over the specified time frame. The new Transparency value cannot be less than 0 or greater than 100. Throws an exception if the transparency value is less than 0 or greater than 100. Passes the start and end times to the super constructor as well as TransformationType.CHANGETRANSPARENCY so that the type of the transformation may be checked without using reflection. 
-
---toString()--
-The toString() override method returns a String that describes the new transparency that the Shape will take on as well as the time frame the Transformation takes place, which it gets from the super toString() method.
-
----------------------------------------------
-
---Move class--
-The Move class describes the time frame in which an object will move to a location specified by an x and y coordinate value that corresponds to a place on or off of the screen. The x and y values can also be negative, as we assume that the view describes the window as a Cartesian Coordinate Plane with some respect to origin (0,0). Extends the AbstracTransformation class, which implements the Transformation interface.
-
---Constructor--
-The Move constructor takes a start and end time at which the Move transformation will occur over as well as an x and y coordinate value that indicates the position on or off the screen that the Shape will move to during the Transformation. Stores the x and y coordinate values of the Move in the concrete class. Passes the start and end times of the Transformation to the super constructor as well as TransformationType.MOVE so that the Transformation can be identified without using reflection.
-
---toString()--
-The toString() override method provides a String that describes the position the Shape will be moving to as well as the time frame over which the Move will occur, which it gets from the super toString() method.
-
----------------------------------------------
-
---Scale class--
-The Scale class describes the time frame in which an object will be scaled to a size specified by a floating point value. The new value that the Shape will be scaled to cannot be less than or equal to 0, such as to make the shape disappear in an invalid manner. Extends the AbstractTransformation class, which implements the Transformation interface.
-
---Constructor--
-The Scale constructor takes a start and end time at which the Scale Transformation will occur as well as a floating point value that describes the scale to which the Shape will be modified. 0.5 would reduce the shape’s size by half, whereas 2.0 would double its size. There is no limit on how large the shape can be made, as we do not know the scale of the screen according to the view or the controller yet. Stores the new scale value in its own field and passes the start and end times to the super constructor as well as TransformationType.SCALE so the type of the Transformation can be determined without reflection.
-
---toString()--
-The toString() override method provides a String that describes the scale value the Shape will be modified by as well as the time frame over which the scaling will occur, which it gets from the super toString() method.
-
----------------------------------------------
-
---TranformationType enum--
-The TransformationType enum describes the different types of Transformations that can be applied to a Shape. We use the enum to check types so that we can avoid using reflection (i.e., instanceof, obj.getClass()) and reduce overhead when checking to see if other Transformations already exist on a shape. This way of type checking transformations will also be important when modifying new values for Shapes over the course of the animation according to the Transformation. Scale does not change a Shape’s values the same way changing its color does, so having the ability to easily check one transformation against another will make implementing some kind of method that provides modified Shapes at a particular tick in the animation much easier. 
+--actionPerformed() method--
+The actionPerformed() method keeps track of the number of frames that have passed. Determines if the number of frames surpasses the number of ticks in the animation, and once the animation has run, stops the timer and closes the view. Otherwise, increments the frames and draws a new frame according to the values of the shapes at the given frame in the AnimationModel to the view.

@@ -15,7 +15,7 @@ import cs5004.animator.model.transformations.Transformation;
  * SVG format, write the formatted string to the file, and then close the file. Extends the
  * AbstractTextView class which implements the AnimationView interface.
  */
-public class SVGView extends AbstractTextView {
+public class SVGViewImpl extends AbstractTextView {
 
   private int delay;
 
@@ -30,7 +30,7 @@ public class SVGView extends AbstractTextView {
    *                                  If the specified file does not have a valid name.
    *                                  If the specified delay is less than 1.
    */
-  public SVGView(String fileName, int delay) throws IllegalArgumentException {
+  public SVGViewImpl(String fileName, int delay) throws IllegalArgumentException {
     super(fileName);
     if (fileName == null) {
       throw new IllegalArgumentException("String fileName cannot be null");

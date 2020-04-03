@@ -15,7 +15,7 @@ import cs5004.animator.model.shapes.Shape;
  * as supplied by the AnimationModelImpl. Extends the JFrame class
  * and implements the AnimationView interface.
  */
-public class VisualView extends JFrame implements AnimationView {
+public class VisualViewImpl extends JFrame implements AnimationView {
 
   private ShapePanel shapePanel;
   private JScrollPane scrollPane;
@@ -39,8 +39,8 @@ public class VisualView extends JFrame implements AnimationView {
    *                                  than or equal to 0.
    *                                  If the specified ticks per second is less than 1.
    */
-  public VisualView(int x, int y, int windowWidth, int windowHeight,
-                    int maxWidth, int maxHeight, int ticksPerSecond) throws IllegalArgumentException {
+  public VisualViewImpl(int x, int y, int windowWidth, int windowHeight,
+                        int maxWidth, int maxHeight, int ticksPerSecond) throws IllegalArgumentException {
     super();
 
     this.ticksPerSecond = ticksPerSecond;

@@ -9,11 +9,11 @@ import cs5004.animator.model.shapes.ShapeImpl;
 import cs5004.animator.model.shapes.ShapeType;
 import cs5004.animator.model.transformations.TransformationImpl;
 import cs5004.animator.view.AnimationView;
-import cs5004.animator.view.SVGView;
+import cs5004.animator.view.SVGViewImpl;
 
 import static org.junit.Assert.assertEquals;
 
-public class TestSVGView {
+public class TestSVGViewImpl {
 
   @Test
   public void test001() {
@@ -93,7 +93,7 @@ public class TestSVGView {
 
     assertEquals(test, m.toString());
 
-    AnimationView view1 = new SVGView("C:\\Users\\WilliC13\\Documents\\CS Masters\\CS 5004 Object Oriented Design\\Homeworks\\Homework07 GitHub V2\\Animator\\view1.svg", 50);
+    AnimationView view1 = new SVGViewImpl("C:\\Users\\WilliC13\\Documents\\CS Masters\\CS 5004 Object Oriented Design\\Homeworks\\Homework07 GitHub V2\\Animator\\view1.svg", 50);
 
     view1.run(m);
 

@@ -11,14 +11,14 @@ import cs5004.animator.model.shapes.ShapeImpl;
 import cs5004.animator.model.shapes.ShapeType;
 import cs5004.animator.model.transformations.TransformationImpl;
 import cs5004.animator.view.AnimationView;
-import cs5004.animator.view.TextView;
+import cs5004.animator.view.TextViewImpl;
 
 import static org.junit.Assert.assertEquals;
 
 /**
  * This class tests the TextView class.
  */
-public class TestTextView {
+public class TestTextViewImpl {
 
   /**
    * Test creating a TextView with a specified text file to write output to.
@@ -27,7 +27,7 @@ public class TestTextView {
   public void testTextViewFileNameConstructor() {
     String path = Paths.get("").toAbsolutePath().toString() + "\\test_out.txt";
 
-    AnimationView t = new TextView(path);
+    AnimationView t = new TextViewImpl(path);
     AnimationModel m = new AnimationModelImpl(50, 60, 500, 600);
 
     t.run(m);
@@ -90,7 +90,7 @@ public class TestTextView {
     PrintStream originalOut = System.out;
     System.setOut(new PrintStream(outContent));
 
-    AnimationView textView = new TextView();
+    AnimationView textView = new TextViewImpl();
 
     textView.run(m);
 
@@ -151,7 +151,7 @@ public class TestTextView {
    */
   @Test(expected = IllegalArgumentException.class)
   public void testTextViewConstructorNullFileName() {
-    new TextView(null);
+    new TextViewImpl(null);
   }
 
   /**
@@ -159,7 +159,7 @@ public class TestTextView {
    */
   @Test(expected = IllegalArgumentException.class)
   public void testTextViewConstructorNoFileName() {
-    new TextView(".txt");
+    new TextViewImpl(".txt");
   }
 
   /**
@@ -167,7 +167,7 @@ public class TestTextView {
    */
   @Test(expected = IllegalArgumentException.class)
   public void testTextViewConstructorNoFileExtension() {
-    new TextView("textfile");
+    new TextViewImpl("textfile");
   }
 
   /**
@@ -175,7 +175,7 @@ public class TestTextView {
    */
   @Test(expected = IllegalArgumentException.class)
   public void testTextViewWriteNullAnimationModel() {
-    AnimationView textView = new TextView();
+    AnimationView textView = new TextViewImpl();
 
     textView.run(null);
   }
@@ -185,7 +185,7 @@ public class TestTextView {
    */
   @Test(expected = UnsupportedOperationException.class)
   public void testTextDrawNewFrame() {
-    new TextView().drawNewFrame(new ArrayList<>());
+    new TextViewImpl().drawNewFrame(new ArrayList<>());
   }
 
   /**
@@ -193,7 +193,7 @@ public class TestTextView {
    */
   @Test(expected = IllegalStateException.class)
   public void testTextViewGetOutFileNullName() {
-    new TextView().getOutFileContents();
+    new TextViewImpl().getOutFileContents();
   }
 
 }
