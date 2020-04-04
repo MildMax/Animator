@@ -91,6 +91,10 @@ public class SVGViewImpl extends AbstractTextView {
     shapeList.sort(Comparator.comparing(Shape::getLayer));
     for (Shape s : shapeList) {
 
+      if (s.getShapeAtTick(s.getStart()) == null) {
+        continue;
+      }
+
       // Get the initial color values for the shape.
       rInit = s.getShapeAtTick(s.getStart()).getR();
       gInit = s.getShapeAtTick(s.getStart()).getG();
