@@ -30,6 +30,8 @@ public class VisualViewImpl extends JFrame implements AnimationView {
    * @param y takes the y coordinate of the position of the upper left corner of the display.
    * @param windowWidth takes the width of the display.
    * @param windowHeight takes the height of the display.
+   * @param maxWidth takes the maximum window width.
+   * @param maxHeight takes the maximum window height.
    * @param ticksPerSecond takes the ticks per second between frames of the animation
    *                       in milliseconds.
    * @throws IllegalArgumentException if the x or y values indicating the position of the
