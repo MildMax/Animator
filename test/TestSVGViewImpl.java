@@ -1,5 +1,6 @@
 import org.junit.Test;
 
+import java.nio.file.Paths;
 import java.util.List;
 
 import cs5004.animator.model.AnimationModel;
@@ -18,86 +19,65 @@ public class TestSVGViewImpl {
   @Test
   public void test001() {
 
+    // Set outfile path.
+    String path = Paths.get("").toAbsolutePath().toString() + "\\My_view1.svg";
+
+    // Initialize empty model and test.
     AnimationModel m = new AnimationModelImpl(0, 100, 200, 300);
+    AnimationView view1 = new SVGViewImpl(path, 50);
+    view1.run(m);
+    String SVGcontents = "<svg width=\"25\" height=\"25\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\"> \n" +
+            "\n" +
+            "</svg>";
+    assertEquals(SVGcontents, view1.getOutFileContents());
 
-    assertEquals(0, m.getBoundX());
-    assertEquals(100, m.getBoundY());
-    assertEquals(200, m.getWindowWidth());
-    assertEquals(300, m.getWindowHeight());
-    assertEquals(0, m.getTotalTicks());
-
-    String test = "Create window with width 200 and height 300 with top left corner "
-            + "(0,100) and total ticks 0";
-
-    assertEquals(test, m.toString());
-
+    // Add shapes and test.
     m.addShape(new ShapeImpl("rectangle", ShapeType.RECTANGLE, 1));
     m.addShape(new ShapeImpl("ellipse", ShapeType.ELLIPSE, 2));
+    view1.run(m);
+    SVGcontents = "";
+    assertEquals("", view1.getOutFileContents());
 
-    test = "Create window with width 200 and height 300 with top left corner (0,100) and " +
-            "total ticks 0";
-
-    assertEquals(test, m.toString());
-    assertEquals(2, m.getShapes().size());
-    assertEquals("rectangle", m.getShapes().get(0).getName());
-    assertEquals("ellipse", m.getShapes().get(1).getName());
-
+    // Add Transformations and test.
     m.addTransformation("rectangle", new TransformationImpl("rectangle", 10,
             20, 20, 20, 40, 100, 100, 100, 20, 40, 40,
             40, 60, 200, 200, 200));
     m.addTransformation("ellipse", new TransformationImpl("ellipse", 20,
             0, 0, 10, 30, 50, 50, 50, 40, 40, 40,
             40, 60, 150, 150, 150));
-
-    assertEquals(2, m.getTransformations().size());
-    assertEquals(10, m.getTransformations().get(0).getStart());
-    assertEquals(20, m.getTransformations().get(1).getStart());
-    assertEquals(40, m.getTotalTicks());
-
-    List<Shape> sList = m.getShapesAtTick(20);
-
-    assertEquals("rectangle", sList.get(0).getName());
-    assertEquals(40, sList.get(0).getX());
-    assertEquals(40, sList.get(0).getY());
-    assertEquals(40, sList.get(0).getWidth());
-    assertEquals(60, sList.get(0).getHeight());
-    assertEquals(200, sList.get(0).getR());
-    assertEquals(200, sList.get(0).getG());
-    assertEquals(200, sList.get(0).getB());
-
-    assertEquals("ellipse", sList.get(1).getName());
-    assertEquals(0, sList.get(1).getX());
-    assertEquals(0, sList.get(1).getY());
-    assertEquals(10, sList.get(1).getWidth());
-    assertEquals(30, sList.get(1).getHeight());
-    assertEquals(50, sList.get(1).getR());
-    assertEquals(50, sList.get(1).getG());
-    assertEquals(50, sList.get(1).getB());
-
-    test = "Create window with width 200 and height 300 with top left corner (0,100) and total ticks 40\n" +
-            "\n" +
-            "Create rectangle rectangle with center at (20,20) with width 20 and height 40 and color (100,100,100)\n" +
-            "Create ellipse ellipse with center at (0,0) with width 10 and height 30 and color (50,50,50)\n" +
-            "\n" +
-            "rectangle rectangle appears at time t=10 and disappears at time t=20\n" +
-            "ellipse ellipse appears at time t=20 and disappears at time t=40\n" +
-            "\n" +
-            "rectangle moves from (20,20) to (40,40) from time t=10 to time t=20\n" +
-            "rectangle changes width from 20 to 40 from time t=10 to time t=20\n" +
-            "rectangle changes height from 40 to 60 from time t=10 to time t=20\n" +
-            "rectangle changes from color (100,100,100) to color (200,200,200) from time t=10 to time t=20\n" +
-            "ellipse moves from (0,0) to (40,40) from time t=20 to time t=40\n" +
-            "ellipse changes width from 10 to 40 from time t=20 to time t=40\n" +
-            "ellipse changes height from 30 to 60 from time t=20 to time t=40\n" +
-            "ellipse changes from color (50,50,50) to color (150,150,150) from time t=20 to time t=40";
-
-    assertEquals(test, m.toString());
-
-    AnimationView view1 = new SVGViewImpl("C:\\Users\\WilliC13\\Documents\\CS Masters\\CS 5004 Object Oriented Design\\Homeworks\\Homework07 GitHub V2\\Animator\\view1.svg", 50);
-
     view1.run(m);
-
-
+    SVGcontents = "<svg width=\\\"105\\\" height=\\\"125\\\" version=\\\"1.1\\\" xmlns=\\\"http://www.w3.org/2000/svg\\\"> \\n\" +\n" +
+            "            \"\\n\" +\n" +
+            "            \"<rect id=\\\"rectangle\\\" x=\\\"20\\\" y=\\\"20\\\" width=\\\"20\\\" height=\\\"40\\\" fill=\\\"rgb(100,100,100)\\\" fill-opacity=\\\"1.0\\\" visibility=\\\"visible\\\" > \\n\" +\n" +
+            "            \"\\n\" +\n" +
+            "            \"<animate attributeType=\\\"xml\\\" begin=\\\"500ms\\\" dur=\\\"500ms\\\" attributeName=\\\"x\\\" from=\\\"20\\\" to=\\\"40\\\" fill=\\\"freeze\\\" /> \\n\" +\n" +
+            "            \"\\n\" +\n" +
+            "            \"<animate attributeType=\\\"xml\\\" begin=\\\"500ms\\\" dur=\\\"500ms\\\" attributeName=\\\"y\\\" from=\\\"20\\\" to=\\\"40\\\" fill=\\\"freeze\\\" /> \\n\" +\n" +
+            "            \"\\n\" +\n" +
+            "            \"<animate attributeType=\\\"xml\\\" begin=\\\"500ms\\\" dur=\\\"500ms\\\" attributeName=\\\"height\\\" from=\\\"40\\\" to=\\\"60\\\" fill=\\\"freeze\\\" /> \\n\" +\n" +
+            "            \"\\n\" +\n" +
+            "            \"<animate attributeType=\\\"xml\\\" begin=\\\"500ms\\\" dur=\\\"500ms\\\" attributeName=\\\"width\\\" from=\\\"20\\\" to=\\\"40\\\" fill=\\\"freeze\\\" /> \\n\" +\n" +
+            "            \"\\n\" +\n" +
+            "            \"<animate attributeType=\\\"xml\\\" begin=\\\"500ms\\\" dur=\\\"500ms\\\" attributeName=\\\"fill\\\" from=\\\"rgb(100,100,100)\\\" to=\\\"rgb(200,200,200)\\\" fill=\\\"freeze\\\" /> \\n\" +\n" +
+            "            \"\\n\" +\n" +
+            "            \"</rect> \\n\" +\n" +
+            "            \"\\n\" +\n" +
+            "            \"<ellipse id=\\\"ellipse\\\" cx=\\\"0\\\" cy=\\\"0\\\" rx=\\\"5\\\" ry=\\\"15\\\" fill=\\\"rgb(50,50,50)\\\" fill-opacity=\\\"1.0\\\" visibility=\\\"visible\\\" > \\n\" +\n" +
+            "            \"\\n\" +\n" +
+            "            \"<animate attributeType=\\\"xml\\\" begin=\\\"1000ms\\\" dur=\\\"1000ms\\\" attributeName=\\\"cx\\\" from=\\\"0\\\" to=\\\"40\\\" fill=\\\"freeze\\\" /> \\n\" +\n" +
+            "            \"\\n\" +\n" +
+            "            \"<animate attributeType=\\\"xml\\\" begin=\\\"1000ms\\\" dur=\\\"1000ms\\\" attributeName=\\\"cy\\\" from=\\\"0\\\" to=\\\"40\\\" fill=\\\"freeze\\\" /> \\n\" +\n" +
+            "            \"\\n\" +\n" +
+            "            \"<animate attributeType=\\\"xml\\\" begin=\\\"1000ms\\\" dur=\\\"1000ms\\\" attributeName=\\\"ry\\\" from=\\\"15\\\" to=\\\"30\\\" fill=\\\"freeze\\\" /> \\n\" +\n" +
+            "            \"\\n\" +\n" +
+            "            \"<animate attributeType=\\\"xml\\\" begin=\\\"1000ms\\\" dur=\\\"1000ms\\\" attributeName=\\\"rx\\\" from=\\\"5\\\" to=\\\"20\\\" fill=\\\"freeze\\\" /> \\n\" +\n" +
+            "            \"\\n\" +\n" +
+            "            \"<animate attributeType=\\\"xml\\\" begin=\\\"1000ms\\\" dur=\\\"1000ms\\\" attributeName=\\\"fill\\\" from=\\\"rgb(50,50,50)\\\" to=\\\"rgb(150,150,150)\\\" fill=\\\"freeze\\\" /> \\n\" +\n" +
+            "            \"\\n\" +\n" +
+            "            \"</ellipse> \\n\" +\n" +
+            "            \"\\n\" +\n" +
+            "            \"</svg>";
+    assertEquals("", view1.getOutFileContents());
   }
 
 }
