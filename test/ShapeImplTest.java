@@ -16,9 +16,9 @@ import static org.junit.Assert.assertEquals;
 public class ShapeImplTest {
 
   /**
-   * Test constructing a Shape. Test adding Shapes. Test adding Transformations to
-   * the Shape. Test get methods on Shape. Test getShapeAtTick(). Test getTransformationList().
-   * Test getTransformationDescription(). Test toString().
+   * Test constructing a Shape. Test adding Shapes. Test adding Transformations to the Shape. Test
+   * get methods on Shape. Test getShapeAtTick(). Test getTransformationList(). Test
+   * getTransformationDescription(). Test toString().
    */
   @Test
   public void testShapeImplConstructor() {
@@ -54,8 +54,8 @@ public class ShapeImplTest {
     assertEquals(20, s.getEnd());
     assertEquals("Create rectangle rectangle with center at (10,10) "
             + "with width 20 and height 20 and color (100,100,100)\n", s.getCreateStatement());
-    assertEquals("rectangle rectangle appears at time t=10 and disappears" +
-            " at time t=20\n", s.getAppearStatement());
+    assertEquals("rectangle rectangle appears at time t=10 and disappears"
+            + " at time t=20\n", s.getAppearStatement());
 
     s.getShapeAtTick(15);
 
@@ -81,7 +81,7 @@ public class ShapeImplTest {
     assertEquals(10, s.getStart());
     assertEquals(20, s.getEnd());
 
-    s.addTransformation(new TransformationImpl(s.getName(),20, 40, 40, 80, 80,
+    s.addTransformation(new TransformationImpl(s.getName(), 20, 40, 40, 80, 80,
             200, 200, 200, 30, 60, 50, 100, 120, 240, 230, 220));
     s.getShapeAtTick(25);
 
@@ -104,15 +104,15 @@ public class ShapeImplTest {
     assertEquals(30, transformationList.get(1).getEnd());
 
     String test = "rectangle rectangle moves from (10,10) to (40,40) from time t=10 to time t=20\n"
-    + "rectangle changes width from 20 to 80 from time t=10 to time t=20\n"
-    + "rectangle changes height from 20 to 80 from time t=10 to time t=20\n"
-    + "rectangle changes from color (100,100,100) to color (200,200,200) "
-    + "from time t=10 to time t=20\n\n"
-    + "rectangle rectangle moves from (40,40) to (60,50) from time t=20 to time t=30\n"
-    + "rectangle changes width from 80 to 100 from time t=20 to time t=30\n"
-    + "rectangle changes height from 80 to 120 from time t=20 to time t=30\n"
-    + "rectangle changes from color (200,200,200) to color (240,230,220)"
-    + " from time t=20 to time t=30\n\n";
+            + "rectangle changes width from 20 to 80 from time t=10 to time t=20\n"
+            + "rectangle changes height from 20 to 80 from time t=10 to time t=20\n"
+            + "rectangle changes from color (100,100,100) to color (200,200,200) "
+            + "from time t=10 to time t=20\n\n"
+            + "rectangle rectangle moves from (40,40) to (60,50) from time t=20 to time t=30\n"
+            + "rectangle changes width from 80 to 100 from time t=20 to time t=30\n"
+            + "rectangle changes height from 80 to 120 from time t=20 to time t=30\n"
+            + "rectangle changes from color (200,200,200) to color (240,230,220)"
+            + " from time t=20 to time t=30\n\n";
 
     assertEquals(test, s.getTransformationDescription());
   }
@@ -143,8 +143,8 @@ public class ShapeImplTest {
   }
 
   /**
-   * Test adding an existing transformation to the shape when they have the same start time
-   * and different end times.
+   * Test adding an existing transformation to the shape when they have the same start time and
+   * different end times.
    */
   @Test(expected = IllegalArgumentException.class)
   public void testShapeImplAddExistingTransformation() {
@@ -156,8 +156,8 @@ public class ShapeImplTest {
   }
 
   /**
-   * Test adding an existing transformation when they have the same end time but different
-   * start times.
+   * Test adding an existing transformation when they have the same end time but different start
+   * times.
    */
   @Test(expected = IllegalArgumentException.class)
   public void testShapeImplAddExistingTransformation1() {
@@ -197,7 +197,7 @@ public class ShapeImplTest {
    * Test getting shapes at a tick when the shape doesn't appear yet.
    */
   @Test
-  public void  testShapeImplGetShapesAtTickEarly() {
+  public void testShapeImplGetShapesAtTickEarly() {
     Shape s = new ShapeImpl("shape", ShapeType.RECTANGLE, 1);
     s.addTransformation(new TransformationImpl(s.getName(), 10, 10, 10, 15, 15,
             100, 100, 100, 20, 20, 20, 40, 40, 200, 200, 200));

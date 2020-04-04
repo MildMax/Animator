@@ -24,7 +24,7 @@ public class TextViewImpl extends AbstractTextView {
    *                                  does not contain a valid name.
    */
   public TextViewImpl(String fileName) throws IllegalArgumentException {
-    super (fileName);
+    super(fileName);
     if (fileName == null) {
       throw new IllegalArgumentException("String fileName cannot be null");
     }
@@ -55,7 +55,7 @@ public class TextViewImpl extends AbstractTextView {
    */
   @Override
   public void run(AnimationModel m)
-          throws IllegalArgumentException , IllegalStateException{
+          throws IllegalArgumentException , IllegalStateException {
     if (m == null) {
       throw new IllegalArgumentException("AnimationModel cannot be null");
     }

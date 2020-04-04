@@ -27,11 +27,46 @@ public class TransformationImpl implements Transformation {
   private int b1;
   private int b2;
 
+  /**
+   * The TransformationImpl constructor takes a String name associated with the Shape that the
+   * transformation is on, a time that the transformation starts, the x and y coordinates of the
+   * shape at the beginning of the transformation, the width and height values of the shape at the
+   * beginning of the transformation, and the initial RGB color values of the shape at the beginning
+   * of the transformation as well as the time the transformation ends, the x and y coordinates of
+   * the shape at the end of the transformation, the width and height values of the shape at the
+   * end of the transformation, and the RGB color values of the shape at the end of the
+   * transformation.
+   *
+   * @param name takes the name of the Shape the transformation is on.
+   * @param t1 the start time of the transformation.
+   * @param x1 the initial x coordinate of the shape.
+   * @param y1 the initial y coordinate of the shape.
+   * @param w1 the initial width of the shape.
+   * @param h1 the initial height of the shape.
+   * @param r1 the initial red color value of the shape.
+   * @param g1 the initial green color value of the shape.
+   * @param b1 the initial blue color value of the shape.
+   * @param t2 the end time of the transformation.
+   * @param x2 the end x coordinate of the shape.
+   * @param y2 the end y coordinate of the shape.
+   * @param w2 the end width of the shape.
+   * @param h2 the end height of the shape.
+   * @param r2 the end red color value of the shape.
+   * @param g2 the end green color value of the shape.
+   * @param b2 the end blue color value of the shape.
+   * @throws IllegalArgumentException if the start time of transformation is less than 0.
+   *                                  If the end time of the transformation is before the start
+   *                                  time.
+   *                                  If any of the width or height specifiers are less than
+   *                                  or equal to 0.
+   *                                  If the RGB color values are less than 0 or greater than
+   *                                  255.
+   */
   public TransformationImpl(String name, int t1, int x1, int y1, int w1, int h1, int r1, int g1,
                             int b1, int t2, int x2, int y2, int w2, int h2, int r2, int g2,
-                            int b2) {
+                            int b2) throws IllegalArgumentException {
     if (t1 < 0 || t2 < t1) {
-      throw new IllegalArgumentException("invalid start:" + t1 + " and end:" + t2 +" times");
+      throw new IllegalArgumentException("invalid start:" + t1 + " and end:" + t2 + " times");
     }
     else if (w1 <= 0 || h1 <= 0 || w2 <= 0 || h2 <= 0) {
       throw new IllegalArgumentException("invalid width and height parameters");
@@ -232,7 +267,8 @@ public class TransformationImpl implements Transformation {
   }
 
   /**
-   * Returns a String representation of the transformation.
+   * Returns a String representation of the transformation. Lists different types of transformations
+   * (change in dimensions, position) on different lines.
    *
    * @return a String representation of the transformation.
    */

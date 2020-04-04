@@ -316,14 +316,14 @@ public class ShapeImpl implements Shape {
       return "";
     }
     else {
-      return this.type.toString() + " " + this.name + " appears at time t=" + appearTime +
-              " and disappears at time t=" + disappearTime + "\n";
+      return this.type.toString() + " " + this.name + " appears at time t=" + appearTime
+              + " and disappears at time t=" + disappearTime + "\n";
     }
   }
 
   /**
    * Confirm that a set of start and end times are valid and returns true if the timestamps
-   * provided are outside the bounds of the current timestamps
+   * provided are outside the bounds of the current timestamps.
    *
    * @param currStart is the current start time.
    * @param currEnd is the current end time.

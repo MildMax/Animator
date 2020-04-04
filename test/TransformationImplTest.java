@@ -1,5 +1,7 @@
 import org.junit.Test;
+
 import static org.junit.Assert.assertEquals;
+
 import cs5004.animator.model.transformations.Transformation;
 import cs5004.animator.model.transformations.TransformationImpl;
 
@@ -9,8 +11,8 @@ import cs5004.animator.model.transformations.TransformationImpl;
 public class TransformationImplTest {
 
   /**
-   * Test constructing a new transformation as well as get methods on the
-   * transformation ensuring data is set and retrieved properly.
+   * Test constructing a new transformation as well as get methods on the transformation ensuring
+   * data is set and retrieved properly.
    */
   @Test
   public void testTransformationImpl() {
@@ -36,9 +38,10 @@ public class TransformationImplTest {
     assertEquals(20, t.getEnd());
 
     String test = "shape moves from (20,30) to (60,70) from time t=10 to time t=20\n"
-    + "shape changes width from 40 to 80 from time t=10 to time t=20\n"
-    + "shape changes height from 50 to 90 from time t=10 to time t=20\n"
-    + "shape changes from color (100,110,120) to color (200,210,220) from time t=10 to time t=20\n";
+            + "shape changes width from 40 to 80 from time t=10 to time t=20\n"
+            + "shape changes height from 50 to 90 from time t=10 to time t=20\n"
+            + "shape changes from color (100,110,120) to color (200,210,220) "
+            + "from time t=10 to time t=20\n";
 
     assertEquals(test, t.toString());
   }

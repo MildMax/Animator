@@ -11,8 +11,8 @@ import cs5004.animator.model.shapes.ShapeType;
 import cs5004.animator.model.transformations.Transformation;
 
 /**
- * This class holds the functionality necessary to open an SVG file, format a String in the
- * SVG format, write the formatted string to the file, and then close the file. Extends the
+ * This class holds the functionality necessary to open an SVG file, format a String in the SVG
+ * format, write the formatted string to the file, and then close the file. Extends the
  * AbstractTextView class which implements the AnimationView interface.
  */
 public class SVGViewImpl extends AbstractTextView {
@@ -20,27 +20,25 @@ public class SVGViewImpl extends AbstractTextView {
   private int delay;
 
   /**
-   * This constructor takes a String a filename of the
-   * text file that the formatted SVG description will be written to.
+   * This constructor takes a String a filename of the text file that the formatted SVG description
+   * will be written to.
    *
    * @param fileName the name of the text file to be written to.
-   * @param delay represents the delay of each frame of the animation in milliseconds.
-   * @throws IllegalArgumentException if the String filename arguments is null.
-   *                                  If the specified file does not contain .svg file extension.
-   *                                  If the specified file does not have a valid name.
-   *                                  If the specified delay is less than 1.
+   * @param delay    represents the delay of each frame of the animation in milliseconds.
+   * @throws IllegalArgumentException if the String filename arguments is null. If the specified
+   *                                  file does not contain .svg file extension. If the specified
+   *                                  file does not have a valid name. If the specified delay is
+   *                                  less than 1.
    */
   public SVGViewImpl(String fileName, int delay) throws IllegalArgumentException {
     super(fileName);
     if (fileName == null) {
       throw new IllegalArgumentException("String fileName cannot be null");
-    }
-    else if (fileName.length() < 5
+    } else if (fileName.length() < 5
             || fileName.substring(fileName.length() - 4).compareTo(".svg") != 0) {
       throw new IllegalArgumentException("Specified file must have a "
               + "valid name and '.svg' extension");
-    }
-    else if (delay < 1) {
+    } else if (delay < 1) {
       throw new IllegalArgumentException("delay cannot be less than 1");
     }
 
@@ -48,13 +46,13 @@ public class SVGViewImpl extends AbstractTextView {
   }
 
   /**
-   * Writes a description of the animation held in an AnimationModel to the specified file
-   * as a String formatted in SVG.
+   * Writes a description of the animation held in an AnimationModel to the specified file as a
+   * String formatted in SVG.
    *
    * @param m takes an AnimationModel that stores an animation to be written to
    * @throws IllegalArgumentException if the AnimationModel m is null.
-   * @throws IllegalStateException if the specified outfile has not been initialized.
-   *                               If the specified outfile cannot be written to.
+   * @throws IllegalStateException    if the specified outfile has not been initialized. If the
+   *                                  specified outfile cannot be written to.
    */
   @Override
   public void run(AnimationModel m)
@@ -62,7 +60,7 @@ public class SVGViewImpl extends AbstractTextView {
     if (m == null) {
       throw new IllegalArgumentException("AnimationModel m cannot be null");
     }
-    String SVGTyp = "";
+    String svgTyp = "";
     String xTyp = "";
     String yTyp = "";
     String wTyp = "";
@@ -101,7 +99,7 @@ public class SVGViewImpl extends AbstractTextView {
       // Assign the shape type and x/y/w/h attribute types in SVG modifier language.
       // Also Get the initial values for the shape.
       if (s.getType() == ShapeType.CIRCLE) {
-        SVGTyp = "ellipse";
+        svgTyp = "ellipse";
         xTyp = "cx";
         yTyp = "cy";
         wTyp = "rx";
@@ -112,7 +110,7 @@ public class SVGViewImpl extends AbstractTextView {
         hInit = s.getShapeAtTick(s.getStart()).getHeight() / 2;
 
       } else if (s.getType() == ShapeType.ELLIPSE) {
-        SVGTyp = "ellipse";
+        svgTyp = "ellipse";
         xTyp = "cx";
         yTyp = "cy";
         wTyp = "rx";
@@ -123,7 +121,7 @@ public class SVGViewImpl extends AbstractTextView {
         hInit = s.getShapeAtTick(s.getStart()).getHeight() / 2;
 
       } else if (s.getType() == ShapeType.OVAL) {
-        SVGTyp = "ellipse";
+        svgTyp = "ellipse";
         xTyp = "cx";
         yTyp = "cy";
         wTyp = "rx";
@@ -134,62 +132,62 @@ public class SVGViewImpl extends AbstractTextView {
         hInit = s.getShapeAtTick(s.getStart()).getHeight() / 2;
 
       } else if (s.getType() == ShapeType.RECTANGLE) {
-        SVGTyp = "rect";
+        svgTyp = "rect";
         xTyp = "x";
         yTyp = "y";
         wTyp = "width";
         hTyp = "height";
-        xInit = s.getShapeAtTick(s.getStart()).getX(); // Change depending on which (x,y) point the data provides.
-        yInit = s.getShapeAtTick(s.getStart()).getY(); // Change depending on which (x,y) point the data provides.
+        xInit = s.getShapeAtTick(s.getStart()).getX();
+        yInit = s.getShapeAtTick(s.getStart()).getY();
         wInit = s.getShapeAtTick(s.getStart()).getWidth();
         hInit = s.getShapeAtTick(s.getStart()).getHeight();
 
       } else if (s.getType() == ShapeType.SQUARE) {
-        SVGTyp = "rect";
+        svgTyp = "rect";
         xTyp = "x";
         yTyp = "y";
         wTyp = "width";
         hTyp = "height";
-        xInit = s.getShapeAtTick(s.getStart()).getX(); // Change depending on which (x,y) point the data provides.
-        yInit = s.getShapeAtTick(s.getStart()).getY(); // Change depending on which (x,y) point the data provides.
+        xInit = s.getShapeAtTick(s.getStart()).getX();
+        yInit = s.getShapeAtTick(s.getStart()).getY();
         wInit = s.getShapeAtTick(s.getStart()).getWidth();
         hInit = s.getShapeAtTick(s.getStart()).getHeight();
       }
 
       // Assign initial values to shape.
-        b.append("<");
-        b.append(SVGTyp);
-        b.append(" id=\"");
-        b.append(s.getName());
-        b.append("\" ");
-        b.append(xTyp);
-        b.append("=\"");
-        b.append(xInit);
-        b.append("\" ");
-        b.append(yTyp);
-        b.append("=\"");
-        b.append(yInit);
-        b.append("\" ");
-        b.append(wTyp);
-        b.append("=\"");
-        b.append(wInit);
-        b.append("\" ");
-        b.append(hTyp);
-        b.append("=\"");
-        b.append(hInit);
-        b.append("\" fill=\"rgb(");
-        b.append(rInit);
-        b.append(",");
-        b.append(gInit);
-        b.append(",");
-        b.append(bInit);
-        b.append(")\" opacity=\"1.0\" visibility=\"visible\" > \n\n");
+      b.append("<");
+      b.append(svgTyp);
+      b.append(" id=\"");
+      b.append(s.getName());
+      b.append("\" ");
+      b.append(xTyp);
+      b.append("=\"");
+      b.append(xInit);
+      b.append("\" ");
+      b.append(yTyp);
+      b.append("=\"");
+      b.append(yInit);
+      b.append("\" ");
+      b.append(wTyp);
+      b.append("=\"");
+      b.append(wInit);
+      b.append("\" ");
+      b.append(hTyp);
+      b.append("=\"");
+      b.append(hInit);
+      b.append("\" fill=\"rgb(");
+      b.append(rInit);
+      b.append(",");
+      b.append(gInit);
+      b.append(",");
+      b.append(bInit);
+      b.append(")\" fill-opacity=\"1.0\" visibility=\"visible\" > \n\n");
 
       // Loop through all of the transformations on each shape.
       for (Transformation t : s.getTransformationList()) {
 
         // Height and Width depend on shape type. need to divide by 2 for ellipses.
-        if (SVGTyp.equals("ellipse")) {
+        if (svgTyp.equals("ellipse")) {
           h1 = t.getH1() / 2;
           h2 = t.getH2() / 2;
           w1 = t.getW1() / 2;
@@ -285,7 +283,7 @@ public class SVGViewImpl extends AbstractTextView {
         }
       }
       b.append("</");
-      b.append(SVGTyp);
+      b.append(svgTyp);
       b.append("> \n\n");
     }
     b.append("</svg>");

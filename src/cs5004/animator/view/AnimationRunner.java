@@ -19,6 +19,7 @@ public class AnimationRunner implements ActionListener {
   private AnimationModel model;
   private AnimationView view;
   private Timer timer;
+  private int fps = 60;
 
   /**
    * Takes an AnimationModel to pull data from, an AnimationView to display the data
@@ -33,7 +34,7 @@ public class AnimationRunner implements ActionListener {
    *                                  If the delay is less than 1.
    */
   public AnimationRunner(AnimationModel m, AnimationView v, int ticksPerSecond)
-          throws IllegalArgumentException{
+          throws IllegalArgumentException {
     if (m == null || v == null) {
       throw new IllegalArgumentException("Model/View cannot be null");
     }
@@ -41,8 +42,8 @@ public class AnimationRunner implements ActionListener {
       throw new IllegalArgumentException("Delay cannot be less than 1");
     }
 
-    ticksPerFrame = (double)ticksPerSecond / 60.0;
-    int millisecondsPerFrame = (int) Math.round(1000.0 / 60.0);
+    ticksPerFrame = (double)ticksPerSecond / (double)fps;
+    int millisecondsPerFrame = (int) Math.round(1000.0 / (double)fps);
 
     this.model = m;
     this.view = v;

@@ -1,6 +1,8 @@
 package cs5004.animator.view;
 
 import cs5004.animator.model.shapes.Shape;
+import cs5004.animator.model.shapes.ShapeType;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Color;
@@ -45,15 +47,13 @@ public class ShapePanel extends JPanel {
     if (shapeList != null) {
       shapeList.sort(Comparator.comparing(Shape::getLayer));
       for (Shape shape : shapeList) {
-        switch (shape.getType()) {
-          case RECTANGLE:
-            g2d.setColor(new Color(shape.getR(), shape.getG(), shape.getB()));
-            g2d.fillRect(shape.getX(), shape.getY(), shape.getWidth(), shape.getHeight());
-            break;
-          case ELLIPSE:
-            g2d.setColor(new Color(shape.getR(), shape.getG(), shape.getB()));
-            g2d.fillOval(shape.getX(), shape.getY(), shape.getWidth(), shape.getHeight());
-            break;
+        if (shape.getType() == ShapeType.RECTANGLE) {
+          g2d.setColor(new Color(shape.getR(), shape.getG(), shape.getB()));
+          g2d.fillRect(shape.getX(), shape.getY(), shape.getWidth(), shape.getHeight());
+        }
+        else if (shape.getType() == ShapeType.ELLIPSE) {
+          g2d.setColor(new Color(shape.getR(), shape.getG(), shape.getB()));
+          g2d.fillOval(shape.getX(), shape.getY(), shape.getWidth(), shape.getHeight());
         }
       }
     }

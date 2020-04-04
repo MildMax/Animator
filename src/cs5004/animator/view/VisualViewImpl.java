@@ -18,7 +18,6 @@ import cs5004.animator.model.shapes.Shape;
 public class VisualViewImpl extends JFrame implements AnimationView {
 
   private ShapePanel shapePanel;
-  private JScrollPane scrollPane;
   private int ticksPerSecond;
 
   /**
@@ -61,7 +60,8 @@ public class VisualViewImpl extends JFrame implements AnimationView {
     shapePanel = new ShapePanel();
     shapePanel.setPreferredSize(new Dimension(maxWidth, maxHeight));
 
-    scrollPane = new JScrollPane(shapePanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+    JScrollPane scrollPane = new JScrollPane(shapePanel,
+            ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
             ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
     this.add(scrollPane);
