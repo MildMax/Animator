@@ -22,7 +22,7 @@ public interface Shape {
    *                                  If another transformation of the same type already
    *                                  exists in the same time frame.
    */
-  void addTransformation(Transformation t);
+  void addTransformation(Transformation t) throws IllegalArgumentException;
 
   /**
    * Return the name of the shape.

@@ -51,8 +51,8 @@ public class SVGViewImpl extends AbstractTextView {
    *
    * @param m takes an AnimationModel that stores an animation to be written to
    * @throws IllegalArgumentException if the AnimationModel m is null.
-   * @throws IllegalStateException    if the specified outfile has not been initialized. If the
-   *                                  specified outfile cannot be written to.
+   * @throws IllegalStateException    if the specified outfile has not been initialized.
+   *                                  If the specified outfile cannot be written to.
    */
   @Override
   public void run(AnimationModel m)

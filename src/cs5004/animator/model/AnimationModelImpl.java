@@ -41,7 +41,7 @@ public class AnimationModelImpl implements AnimationModel {
    * @throws IllegalArgumentException if the windowHeight or windowWidth is less than or equal to
    *                                  0.
    */
-  public AnimationModelImpl(int x, int y, int w, int h) {
+  public AnimationModelImpl(int x, int y, int w, int h) throws IllegalArgumentException {
     if (w <= 0 || h <= 0) {
       throw new IllegalArgumentException("Height and width values cannot be less than"
               + "or equal to 0.");

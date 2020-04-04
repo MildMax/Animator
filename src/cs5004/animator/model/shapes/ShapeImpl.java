@@ -36,7 +36,7 @@ public class ShapeImpl implements Shape {
    * @throws IllegalArgumentException If the String name is null.
    *                                  If the ShapeType type is null.
    */
-  public ShapeImpl(String name, ShapeType type, int layer) {
+  public ShapeImpl(String name, ShapeType type, int layer) throws IllegalArgumentException {
     if (name == null || type == null) {
       throw new IllegalArgumentException("Name and/or type cannot be null");
     }
@@ -57,7 +57,7 @@ public class ShapeImpl implements Shape {
    *                                  in the same time period.
    */
   @Override
-  public void addTransformation(Transformation t) {
+  public void addTransformation(Transformation t) throws IllegalArgumentException {
     if (t == null) {
       throw new IllegalArgumentException("Transformation cannot be null");
     }
