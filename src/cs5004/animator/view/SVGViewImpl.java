@@ -96,9 +96,9 @@ public class SVGViewImpl extends AbstractTextView {
       }
 
       // Get the initial color values for the shape.
-      rInit = s.getShapeAtTick(s.getStart()).getR();
-      gInit = s.getShapeAtTick(s.getStart()).getG();
-      bInit = s.getShapeAtTick(s.getStart()).getB();
+      rInit = s.getR();
+      gInit = s.getG();
+      bInit = s.getB();
 
       // Assign the shape type and x/y/w/h attribute types in SVG modifier language.
       // Also Get the initial values for the shape.
@@ -108,10 +108,10 @@ public class SVGViewImpl extends AbstractTextView {
         yTyp = "cy";
         wTyp = "rx";
         hTyp = "ry";
-        xInit = s.getShapeAtTick(s.getStart()).getX();
-        yInit = s.getShapeAtTick(s.getStart()).getY();
-        wInit = s.getShapeAtTick(s.getStart()).getWidth() / 2;
-        hInit = s.getShapeAtTick(s.getStart()).getHeight() / 2;
+        xInit = s.getX();
+        yInit = s.getY();
+        wInit = s.getWidth() / 2;
+        hInit = s.getHeight() / 2;
 
       } else if (s.getType() == ShapeType.ELLIPSE) {
         svgTyp = "ellipse";
@@ -119,10 +119,10 @@ public class SVGViewImpl extends AbstractTextView {
         yTyp = "cy";
         wTyp = "rx";
         hTyp = "ry";
-        xInit = s.getShapeAtTick(s.getStart()).getX();
-        yInit = s.getShapeAtTick(s.getStart()).getY();
-        wInit = s.getShapeAtTick(s.getStart()).getWidth() / 2;
-        hInit = s.getShapeAtTick(s.getStart()).getHeight() / 2;
+        xInit = s.getX();
+        yInit = s.getY();
+        wInit = s.getWidth() / 2;
+        hInit = s.getHeight() / 2;
 
       } else if (s.getType() == ShapeType.OVAL) {
         svgTyp = "ellipse";
@@ -130,10 +130,10 @@ public class SVGViewImpl extends AbstractTextView {
         yTyp = "cy";
         wTyp = "rx";
         hTyp = "ry";
-        xInit = s.getShapeAtTick(s.getStart()).getX();
-        yInit = s.getShapeAtTick(s.getStart()).getY();
-        wInit = s.getShapeAtTick(s.getStart()).getWidth() / 2;
-        hInit = s.getShapeAtTick(s.getStart()).getHeight() / 2;
+        xInit = s.getX();
+        yInit = s.getY();
+        wInit = s.getWidth() / 2;
+        hInit = s.getHeight() / 2;
 
       } else if (s.getType() == ShapeType.RECTANGLE) {
         svgTyp = "rect";
@@ -141,10 +141,10 @@ public class SVGViewImpl extends AbstractTextView {
         yTyp = "y";
         wTyp = "width";
         hTyp = "height";
-        xInit = s.getShapeAtTick(s.getStart()).getX();
-        yInit = s.getShapeAtTick(s.getStart()).getY();
-        wInit = s.getShapeAtTick(s.getStart()).getWidth();
-        hInit = s.getShapeAtTick(s.getStart()).getHeight();
+        xInit = s.getX();
+        yInit = s.getY();
+        wInit = s.getWidth();
+        hInit = s.getHeight();
 
       } else if (s.getType() == ShapeType.SQUARE) {
         svgTyp = "rect";
@@ -152,10 +152,10 @@ public class SVGViewImpl extends AbstractTextView {
         yTyp = "y";
         wTyp = "width";
         hTyp = "height";
-        xInit = s.getShapeAtTick(s.getStart()).getX();
-        yInit = s.getShapeAtTick(s.getStart()).getY();
-        wInit = s.getShapeAtTick(s.getStart()).getWidth();
-        hInit = s.getShapeAtTick(s.getStart()).getHeight();
+        xInit = s.getX();
+        yInit = s.getY();
+        wInit = s.getWidth();
+        hInit = s.getHeight();
       }
 
       // Assign initial values to shape.
