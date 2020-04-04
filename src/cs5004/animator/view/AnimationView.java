@@ -51,7 +51,8 @@ public interface AnimationView {
   String getOutFileContents();
 
   /**
-   * Creates an error message on screen corresponding to String parameter Message.
+   * Creates an error message on screen corresponding to String parameter Message. Exits
+   * system with exit status -1.
    *
    * @param message the error message to be printed to the screen.
    */
@@ -60,6 +61,6 @@ public interface AnimationView {
     JDialog dialog = optionPane.createDialog("Easy Animator -- Error");
     dialog.setAlwaysOnTop(true);
     dialog.setVisible(true);
-    System.exit(-2);
+    System.exit(-1);
   }
 }

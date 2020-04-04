@@ -25,7 +25,8 @@ public final class EasyAnimator {
 
   /**
    * Plays the animation according to supplied command line arguments. Displays error messages
-   * to the screen for bad input to command line arguments.
+   * to the screen for bad input to command line arguments. Creates AnimationModel and
+   * AnimationView as specified by command line arguments.
    *
    * @param args command line arguments specifying the type of view, the speed of the animation,
    *             the input file, and the output file.

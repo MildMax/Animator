@@ -243,7 +243,7 @@ Throws an UnspportedOperationException since text views do not draw frames to th
 -----------------------------------------------
 
 --TextViewImpl class--
-The TextViewImpl class writes a textual description of the animation to either a specified output .txt file or to System.out. Has two constructors since a fileName does not need to be supplied to create a TextView.
+The TextViewImpl class writes a textual description of the animation to either a specified output .txt file or to System.out. Has two constructors since a fileName does not need to be supplied to create a TextView. Extends the AbstractTextView class.
 
 --TextViewImpl single argument constructor--
 The TextViewImpl constructor that takes a single argument takes a String indicating the name of a file that the text output will be written to. If the fileName is null, throws IllegalARgumentException since the file must exist in this instance. If the filename does not end with ".txt", throws IllegalArugmentException since the class must write to a text file if it writes to a file. If the filename is less than 5 characters, including the ".txt", then it does not contain a valid filename, and throws IllegalArgumentException. Passes fileName to the super constructor.
@@ -252,7 +252,18 @@ The TextViewImpl constructor that takes a single argument takes a String indicat
 The TextViewImpl constructor that takes no arugments passes a null fileName value to the super constructor. This will be used to indicate that the textual view should write its output to System.out, the default output for textual views. 
 
 --run() method--
-Takes an AnimationModel object that holds the data representing the animation. Calls openView() and closeView() internally to guaruntee that the file is opened and closed each time the run() operation is called. If the output of for the text view is an instance of FileWriter, casts 'out' up to a FileWriter object and writes the textual representation of the animation to the file. Otherwise, appends the textual representation of the animation to System.out. Throws IllegalArgumentException if the AnimationModel is null. Throws IllegalStateException if the FileWriter object of System.Out cannot be written to.
+Takes an AnimationModel object that holds the data representing the animation. Calls openView() and closeView() internally to guaruntee that the file is opened and closed each time the run() operation is called. If the output of for the text view is an instance of FileWriter, casts 'out' up to a FileWriter object and writes the textual representation of the animation to the file. Otherwise, appends the textual representation of the animation to System.out. Throws IllegalArgumentException if the AnimationModel is null. Throws IllegalStateException if the FileWriter object of System.Out cannot be written to or if the specified file cannot be written to.
+
+-----------------------------------------------
+
+--SVGViewImpl class--
+The SVGViewImpl class writes a text description of an animation to an SVG file formatted in as XML. The created file can be played in an internet browser or opened as a text file. Has methods responsible for opening the SVG file, closing the SVG file, and running the animation, which requires writing a String formatted in XML to the SVG file. Extends the AbstractTextView class.
+
+--Constructor--
+The SVGViewImpl constructor takes a String representing a path and file name of the SVG file that the XML format will be written to and an int delay that represents the delay in milliseconds between each tick in the transformation. Throws an IllegalArgumentException if the fileName String is null. Also throws an IllegalArgumentException if the specified file doesn't end with the '.svg' extension or if the name of the file is less than 5 characters, including the '.svg' extension (must have a valid filename). Throws IllegalArgumentException if the specified delay is less than 1.
+
+--run() method--
+Takes an AnimationModel m that holds data that represents an animation over a specified number of ticks. Formats the list of Shapes in the AnimationModel in XML and then formats the list of instructions on each of the Shapes in the AnimationModel in XML and then writes the final formatted string to the SVG file. Calls openView() before writing to the file and closeView() after the file has been written to to guaruntee that the SVG file is properly opened and closed each time run() is called. Throws IllegalArgumentException if AnimationModel parameter is null. Throws IllegalStateException if the SVG file cannot be written to.
 
 -----------------------------------------------
 

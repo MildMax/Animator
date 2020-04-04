@@ -14,7 +14,7 @@ import cs5004.animator.model.AnimationModel;
  */
 public class AnimationRunner implements ActionListener {
 
-  private double ticksPerFrame = 0;
+  private double ticksPerFrame;
   private int frames = 0;
   private AnimationModel model;
   private AnimationView view;

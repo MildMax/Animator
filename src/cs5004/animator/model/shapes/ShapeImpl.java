@@ -7,8 +7,8 @@ import java.util.List;
 import cs5004.animator.model.transformations.Transformation;
 
 /**
- * Create a class called AbstractShape that is a generic shape. Contains methods
- * that apply to all shapes. This class implements the Shape interface.
+ * Create a class ShapeImpl that specifies a shape type and holds values common to all
+ * simple shapes. This class implements the Shape interface.
  */
 public class ShapeImpl implements Shape {
   private  String name;

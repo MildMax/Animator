@@ -297,7 +297,7 @@ public class AnimationModelImpl implements AnimationModel {
    */
   public static final class Builder implements AnimationBuilder<AnimationModel> {
     private AnimationModel m;
-    int layer = 0;
+    private int layer = 0;
 
     /**
      * Returns the instance of AnimationModel in in this builder. Throws IllegalArgumentException

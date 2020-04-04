@@ -4,6 +4,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
+import cs5004.animator.EasyAnimator;
 import cs5004.animator.model.AnimationModel;
 import cs5004.animator.model.AnimationModelImpl;
 import cs5004.animator.model.shapes.Shape;
@@ -202,6 +203,11 @@ public class AnimationModelImplTest {
             200, 200, 200));
     assertEquals(20, m.getTotalTicks());
     m.getShapesAtTick(21);
+  }
+
+  @Test
+  public void generic() {
+    EasyAnimator.main(new String[]{"start", "end"});
   }
 
 }

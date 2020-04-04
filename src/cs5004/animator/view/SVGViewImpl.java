@@ -83,9 +83,9 @@ public class SVGViewImpl extends AbstractTextView {
 
     // Create the background window.
     b.append("<svg width=\"");
-    b.append(m.getWindowWidth());
+    b.append(m.getAnimationWidth());
     b.append("\" height=\"");
-    b.append(m.getWindowHeight());
+    b.append(m.getAnimationHeight());
     b.append("\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\"> \n\n");
 
     // Loop through all of the shapes in the model.

@@ -19,11 +19,27 @@ public class VisualViewImplTest {
   }
 
   /**
+   * Test passing negative width to the VisualView.
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void testAnimationViewImplZeroWidth() {
+    new VisualViewImpl(0, 0, 0, 100, 500, 600, 50);
+  }
+
+  /**
    * Test passing negative height to the VisualView.
    */
   @Test(expected = IllegalArgumentException.class)
   public void testAnimationViewImplNegativeHeight() {
     new VisualViewImpl(0, 0, 100, -1, 500, 600, 50);
+  }
+
+  /**
+   * Test passing negative height to the VisualView.
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void testAnimationViewImplZeroHeight() {
+    new VisualViewImpl(0, 0, 100, 0, 500, 600, 50);
   }
 
   /**
@@ -51,11 +67,27 @@ public class VisualViewImplTest {
   }
 
   /**
+   * Test passing a negative max width to the VisualView.
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void testAnimationViewZeroMaxWidth() {
+    new VisualViewImpl(0, 0, 100, 100, 0, 600, 50);
+  }
+
+  /**
    * Test passing a negative max height to the VisualView.
    */
   @Test(expected = IllegalArgumentException.class)
   public void testAnimationViewNegativeMaxHeight() {
     new VisualViewImpl(0, 0, 100, 100, 500, -1, 50);
+  }
+
+  /**
+   * Test passing a negative max height to the VisualView.
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void testAnimationViewZeroMaxHeight() {
+    new VisualViewImpl(0, 0, 100, 100, 500, 0, 50);
   }
 
   /**

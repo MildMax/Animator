@@ -1,9 +1,7 @@
 package cs5004.animator.view;
 
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
 
 import cs5004.animator.model.AnimationModel;
 
@@ -17,7 +15,8 @@ public class TextViewImpl extends AbstractTextView {
 
   /**
    * This constructor takes a String containing the filename of the text file that
-   * the description of the animation will be written to.
+   * the description of the animation will be written to. Filename must end in .'txt' and
+   * contain valid characters.
    *
    * @param fileName the name of the text file to be written to.
    * @throws IllegalArgumentException if the String fileName arguments is null.

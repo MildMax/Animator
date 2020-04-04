@@ -40,7 +40,8 @@ public class VisualViewImpl extends JFrame implements AnimationView {
    *                                  If the specified ticks per second is less than 1.
    */
   public VisualViewImpl(int x, int y, int windowWidth, int windowHeight,
-                        int maxWidth, int maxHeight, int ticksPerSecond) throws IllegalArgumentException {
+                        int maxWidth, int maxHeight, int ticksPerSecond)
+          throws IllegalArgumentException {
     super();
 
     this.ticksPerSecond = ticksPerSecond;
@@ -80,6 +81,15 @@ public class VisualViewImpl extends JFrame implements AnimationView {
   }
 
   /**
+   * Closes the window on screen.
+   */
+  @Override
+  public void closeView() {
+    this.setVisible(false);
+    this.dispose();
+  }
+
+  /**
    * Draws a frame on the window according to the list of shapes provided to parameter shapeList.
    * Throws IllegalArgumentException if the list of shapes is null.
    *
@@ -100,26 +110,6 @@ public class VisualViewImpl extends JFrame implements AnimationView {
   }
 
   /**
-   * Throws UnsupportedOperationException since visual view does not write any data to a file.
-   *
-   * @return always throws exception.
-   * @throws UnsupportedOperationException since visual views do not write any data to a file.
-   */
-  @Override
-  public String getOutFileContents() throws UnsupportedOperationException {
-    throw new UnsupportedOperationException("VisualView does not support getting file contents");
-  }
-
-  /**
-   * Closes the window on screen.
-   */
-  @Override
-  public void closeView() {
-    this.setVisible(false);
-    this.dispose();
-  }
-
-  /**
    * Runs the visual animation in a window displayed on screen.
    *
    * @param m takes an AnimationModel that stores an animation to be written to
@@ -131,5 +121,16 @@ public class VisualViewImpl extends JFrame implements AnimationView {
       throw new IllegalArgumentException("Animation Model cannot be null.");
     }
     new AnimationRunner(m, this, this.ticksPerSecond).runAnim();
+  }
+
+  /**
+   * Throws UnsupportedOperationException since visual view does not write any data to a file.
+   *
+   * @return always throws exception.
+   * @throws UnsupportedOperationException since visual views do not write any data to a file.
+   */
+  @Override
+  public String getOutFileContents() throws UnsupportedOperationException {
+    throw new UnsupportedOperationException("VisualView does not support getting file contents");
   }
 }
