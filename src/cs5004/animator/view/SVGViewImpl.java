@@ -185,7 +185,13 @@ public class SVGViewImpl extends AbstractTextView {
       b.append(gInit);
       b.append(",");
       b.append(bInit);
-      b.append(")\" fill-opacity=\"1.0\" visibility=\"visible\" > \n\n");
+      b.append(")\" fill-opacity=\"0.0\" visibility=\"visible\" > \n\n");
+
+      // For each shape, set its appear time.
+      b.append("<animate attributeType=\"xml\" begin=\"");
+      b.append(s.getStart() * delay);
+      b.append("ms\" dur=\"1ms\" attributeName=\"fill-opacity\" ");
+      b.append("from=\"0.0\" to=\"1.0\" fill=\"freeze\" />\n\n");
 
       // Loop through all of the transformations on each shape.
       for (Transformation t : s.getTransformationList()) {
