@@ -1,6 +1,8 @@
 package cs5004.animator.view;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.*;
@@ -8,7 +10,7 @@ import javax.swing.*;
 import cs5004.animator.model.AnimationModel;
 import cs5004.animator.model.shapes.Shape;
 
-public class IVisualViewImpl extends JFrame implements AnimationView {
+public class IVisualViewImpl extends JFrame implements AnimationView, ActionListener {
 
   private ShapePanel shapePanel;
   private JButton startButton;
@@ -20,13 +22,14 @@ public class IVisualViewImpl extends JFrame implements AnimationView {
   private JButton speedSet;
   private int ticksPerSecond;
 
+  private AnimationRunner runner;
+
   private int buttonWidth = 100;
   private int buttonHeight = 25;
 
   public IVisualViewImpl(int x, int y, int windowWidth, int windowHeight,
                         int maxWidth, int maxHeight, int ticksPerSecond)
           throws IllegalArgumentException {
-    super();
 
     this.ticksPerSecond = ticksPerSecond;
 
@@ -70,26 +73,34 @@ public class IVisualViewImpl extends JFrame implements AnimationView {
 
     top.add(scrollPane);
 
-    int bHeight = y + windowHeight;
-
-    startButton = new JButton("start");
+    startButton = new JButton("Start");
     startButton.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
+    startButton.addActionListener(this);
+    startButton.setActionCommand("start");
     bottom.add(startButton);
 
-    pauseButton = new JButton("pause");
+    pauseButton = new JButton("Pause");
     pauseButton.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
+    pauseButton.addActionListener(this);
+    pauseButton.setActionCommand("pause");
     bottom.add(pauseButton);
 
-    resumeButton = new JButton("resume");
+    resumeButton = new JButton("Resume");
     resumeButton.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
+    resumeButton.addActionListener(this);
+    resumeButton.setActionCommand("resume");
     bottom.add(resumeButton);
 
-    restartButton = new JButton("restart");
+    restartButton = new JButton("Restart");
     restartButton.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
+    restartButton.addActionListener(this);
+    restartButton.setActionCommand("restart");
     bottom.add(restartButton);
 
     loopButton = new JToggleButton("Loop");
     loopButton.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
+    loopButton.addActionListener(this);
+    loopButton.setActionCommand("loop");
     bottom.add(loopButton);
 
     JLabel speedLabel = new JLabel("Speed:");
@@ -97,9 +108,12 @@ public class IVisualViewImpl extends JFrame implements AnimationView {
     speedIn.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
     speedSet = new JButton("Enter");
     speedSet.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
+    speedSet.addActionListener(this);
+    speedSet.setActionCommand("speed");
     bottom.add(speedLabel);
     bottom.add(speedIn);
     bottom.add(speedSet);
+
 
 
     //this.setPreferredSize(new Dimension(windowWidth,
@@ -158,7 +172,8 @@ public class IVisualViewImpl extends JFrame implements AnimationView {
     if (m == null) {
       throw new IllegalArgumentException("Animation Model cannot be null.");
     }
-    new AnimationRunner(m, this, this.ticksPerSecond).runAnim();
+    runner = new AnimationRunner(m, this, this.ticksPerSecond);
+    runner.runAnim();
   }
 
   /**
@@ -170,5 +185,37 @@ public class IVisualViewImpl extends JFrame implements AnimationView {
   @Override
   public String getOutFileContents() throws UnsupportedOperationException {
     throw new UnsupportedOperationException("VisualView does not support getting file contents");
+  }
+
+  @Override
+  public void actionPerformed(ActionEvent e) {
+    switch (e.getActionCommand()) {
+      case "start":
+      case "resume":
+        runner.startAnim();
+        break;
+      case "pause":
+        runner.pauseAnim();
+        break;
+      case "restart":
+        runner.restartAnim();
+        break;
+      case "loop":
+        runner.toggleLoop();
+        break;
+      case "speed":
+        String text = speedIn.getText();
+        int newSpeed;
+        try {
+          newSpeed = Integer.parseInt(text);
+          if (newSpeed > 0) {
+            runner.setTicksPerSeconds(newSpeed);
+          }
+        } catch (NumberFormatException err) {
+
+        }
+        speedIn.setText("");
+        break;
+    }
   }
 }

@@ -20,6 +20,7 @@ public class AnimationRunner implements ActionListener {
   private AnimationView view;
   private Timer timer;
   private int fps = 60;
+  private boolean isLooping = false;
 
   /**
    * Takes an AnimationModel to pull data from, an AnimationView to display the data
@@ -55,7 +56,32 @@ public class AnimationRunner implements ActionListener {
    */
   public void runAnim() {
     view.openView();
+    //timer.start();
+  }
+
+  public void startAnim() {
     timer.start();
+  }
+
+  public void pauseAnim() {
+    if (timer.isRunning()) {
+      timer.stop();
+    }
+  }
+
+  public void restartAnim() {
+    this.frames = 0;
+    if (!timer.isRunning()) {
+      timer.start();
+    }
+  }
+
+  public void toggleLoop() {
+    isLooping = !isLooping;
+  }
+
+  public void setTicksPerSeconds(int ticksPerSecond) {
+    ticksPerFrame = (double)ticksPerSecond / (double)fps;
   }
 
   /**
@@ -67,8 +93,13 @@ public class AnimationRunner implements ActionListener {
   public void actionPerformed(ActionEvent e) {
     ++frames;
     if ((this.frames * this.ticksPerFrame) > this.model.getTotalTicks()) {
-      timer.stop();
-      //view.closeView();
+      this.view.drawNewFrame(this.model.getShapesAtTick(model.getTotalTicks()));
+      if (isLooping) {
+        frames = 0;
+      }
+      else {
+        timer.stop();
+      }
       return;
     }
     this.view.drawNewFrame(this.model.getShapesAtTick((double)this.frames * this.ticksPerFrame));
