@@ -74,7 +74,7 @@ public final class EasyAnimator {
           if (viewType.toLowerCase().compareTo("svg") != 0
                   && viewType.toLowerCase().compareTo("text") != 0
               && viewType.toLowerCase().compareTo("visual") != 0
-              && viewType.toLowerCase().compareTo("ivisual") != 0) {
+              && viewType.toLowerCase().compareTo("playback") != 0) {
             AnimationView.displayErrorMessage("Invalid view type " + viewType);
           }
         } else {
@@ -96,7 +96,7 @@ public final class EasyAnimator {
               m.getWindowWidth(), m.getWindowHeight(),
               m.getAnimationWidth(), m.getAnimationHeight(), this.ticksPerSecond);
     }
-    else if (viewType.compareTo("ivisual") == 0) {
+    else if (viewType.compareTo("playback") == 0) {
       view = new IVisualViewImpl(m.getBoundX(), m.getBoundY(),
               m.getWindowWidth(), m.getWindowHeight(),
               m.getAnimationWidth(), m.getAnimationHeight(), this.ticksPerSecond);
