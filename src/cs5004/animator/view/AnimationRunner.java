@@ -68,7 +68,7 @@ public class AnimationRunner implements ActionListener {
     ++frames;
     if ((this.frames * this.ticksPerFrame) > this.model.getTotalTicks()) {
       timer.stop();
-      view.closeView();
+      //view.closeView();
       return;
     }
     this.view.drawNewFrame(this.model.getShapesAtTick((double)this.frames * this.ticksPerFrame));

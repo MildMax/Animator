@@ -8,6 +8,7 @@ import cs5004.animator.model.AnimationModel;
 import cs5004.animator.model.AnimationModelImpl;
 import cs5004.animator.util.AnimationReader;
 import cs5004.animator.view.AnimationView;
+import cs5004.animator.view.IVisualViewImpl;
 import cs5004.animator.view.SVGViewImpl;
 import cs5004.animator.view.TextViewImpl;
 import cs5004.animator.view.VisualViewImpl;
@@ -72,7 +73,8 @@ public final class EasyAnimator {
           viewType = args[i + 1];
           if (viewType.toLowerCase().compareTo("svg") != 0
                   && viewType.toLowerCase().compareTo("text") != 0
-              && viewType.toLowerCase().compareTo("visual") != 0) {
+              && viewType.toLowerCase().compareTo("visual") != 0
+              && viewType.toLowerCase().compareTo("ivisual") != 0) {
             AnimationView.displayErrorMessage("Invalid view type " + viewType);
           }
         } else {
@@ -91,6 +93,11 @@ public final class EasyAnimator {
     AnimationView view = null;
     if (viewType.compareTo("visual") == 0) {
       view = new VisualViewImpl(m.getBoundX(), m.getBoundY(),
+              m.getWindowWidth(), m.getWindowHeight(),
+              m.getAnimationWidth(), m.getAnimationHeight(), this.ticksPerSecond);
+    }
+    else if (viewType.compareTo("ivisual") == 0) {
+      view = new IVisualViewImpl(m.getBoundX(), m.getBoundY(),
               m.getWindowWidth(), m.getWindowHeight(),
               m.getAnimationWidth(), m.getAnimationHeight(), this.ticksPerSecond);
     }
