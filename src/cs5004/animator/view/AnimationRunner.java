@@ -72,7 +72,5 @@ public class AnimationRunner implements ActionListener {
       return;
     }
     this.view.drawNewFrame(this.model.getShapesAtTick((double)this.frames * this.ticksPerFrame));
-
-
   }
 }

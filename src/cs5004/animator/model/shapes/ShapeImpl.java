@@ -206,9 +206,9 @@ public class ShapeImpl implements Shape {
   }
 
   /**
-   * Changes the internal values of the shape according to its list of
-   * transformations at a given tick indicating the frame of the
-   * animation and returns itself. Returns null if the shape doesn't appear
+   * Creates a new shape object of the same type as the current shape with values modified
+   * according to a list of transformations at a given tick indicating the frame of the
+   * animation and returns the new Shape. Returns null if the shape doesn't appear
    * or doesn't have any transformations yet.
    *
    * @param tick the frame of the animation.
@@ -241,20 +241,33 @@ public class ShapeImpl implements Shape {
       diff = (tick - (double)t.getStart()) / ((double)t.getEnd() - (double)t.getStart());
     }
 
-    //calculate pos
-    this.x = t.getX1() + (int)(diff * (t.getX2() - t.getX1()));
-    this.y = t.getY1() + (int)(diff * (t.getY2() - t.getY1()));
+    int newX = t.getX1() + (int)(diff * (t.getX2() - t.getX1()));
+    int newY = t.getY1() + (int)(diff * (t.getY2() - t.getY1()));
 
-    //calculate dims
-    this.width = t.getW1() + (int)(diff * (t.getW2() - t.getW1()));
-    this.height = t.getH1() + (int)(diff * (t.getH2() - t.getH1()));
+    int newWidth = t.getW1() + (int)(diff * (t.getW2() - t.getW1()));
+    int newHeight = t.getH1() + (int)(diff * (t.getH2() - t.getH1()));
 
-    //calculate color
-    this.r = t.getR1() + (int)(diff * (t.getR2() - t.getR1()));
-    this.g = t.getG1() + (int)(diff * (t.getG2() - t.getG1()));
-    this.b = t.getB1() + (int)(diff * (t.getB2() - t.getB1()));
+    int newR = t.getR1() + (int)(diff * (t.getR2() - t.getR1()));
+    int newG = t.getG1() + (int)(diff * (t.getG2() - t.getG1()));
+    int newB = t.getB1() + (int)(diff * (t.getB2() - t.getB1()));
 
-    return this;
+    ShapeImpl s =  new ShapeImpl(this.name, this.type, this.layer);
+    s.x = newX;
+    s.y = newY;
+
+    s.width = newWidth;
+    s.height = newHeight;
+
+    s.r = newR;
+    s.g = newG;
+    s.b = newB;
+
+    s.appearTime = this.appearTime;
+    s.disappearTime = this.disappearTime;
+
+    s.transformationList = this.getTransformationList();
+
+    return s;
   }
 
   /**

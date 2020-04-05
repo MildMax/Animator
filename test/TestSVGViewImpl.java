@@ -1,20 +1,14 @@
 import org.junit.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 
 import cs5004.animator.model.AnimationModel;
 import cs5004.animator.model.AnimationModelImpl;
-import cs5004.animator.model.shapes.Shape;
 import cs5004.animator.model.shapes.ShapeImpl;
 import cs5004.animator.model.shapes.ShapeType;
 import cs5004.animator.model.transformations.TransformationImpl;
 import cs5004.animator.view.AnimationView;
 import cs5004.animator.view.SVGViewImpl;
-import cs5004.animator.view.TextViewImpl;
 
 import static org.junit.Assert.assertEquals;
 
@@ -36,21 +30,21 @@ public class TestSVGViewImpl {
     AnimationModel m = new AnimationModelImpl(0, 100, 200, 300);
     AnimationView view1 = new SVGViewImpl(path, 50);
     view1.run(m);
-    String SVGcontents = "<svg width=\"25\" height=\"25\" version=\"1.1\" xmlns" +
-            "=\"http://www.w3.org/2000/svg\"> \n" +
-            "\n" +
-            "</svg>";
-    assertEquals(SVGcontents, view1.getOutFileContents());
+    String scgContents = "<svg width=\"25\" height=\"25\" version=\"1.1\" xmlns"
+            + "=\"http://www.w3.org/2000/svg\"> \n"
+            + "\n"
+            + "</svg>";
+    assertEquals(scgContents, view1.getOutFileContents());
 
     // Add shapes and test.
     m.addShape(new ShapeImpl("rectangle", ShapeType.RECTANGLE, 1));
     m.addShape(new ShapeImpl("ellipse", ShapeType.ELLIPSE, 2));
     view1.run(m);
-    SVGcontents = "<svg width=\"25\" height=\"25\" version=\"1.1\" xmlns=\"http://www.w" +
+    scgContents = "<svg width=\"25\" height=\"25\" version=\"1.1\" xmlns=\"http://www.w" +
             "3.org/2000/svg\"> \n" +
             "\n" +
             "</svg>";
-    assertEquals(SVGcontents, view1.getOutFileContents());
+    assertEquals(scgContents, view1.getOutFileContents());
 
     // Add Transformations and test.
     m.addTransformation("rectangle", new TransformationImpl("rectangle", 10,
@@ -60,7 +54,7 @@ public class TestSVGViewImpl {
             0, 0, 10, 30, 50, 50, 50, 40, 40, 40,
             40, 60, 150, 150, 150));
     view1.run(m);
-    SVGcontents = "<svg width=\"105\" height=\"125\" version=\"1.1\" xmlns=\"http://ww"
+    scgContents = "<svg width=\"105\" height=\"125\" version=\"1.1\" xmlns=\"http://ww"
             + "w.w3.org/2000/svg\"> \n"
             + "\n"
             + "<rect id=\"rectangle\" x=\"20\" y=\"20\" width=\"20\" height=\"40\" fi"

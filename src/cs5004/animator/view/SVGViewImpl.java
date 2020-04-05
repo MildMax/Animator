@@ -89,8 +89,9 @@ public class SVGViewImpl extends AbstractTextView {
     // Loop through all of the shapes in the model.
     List<Shape> shapeList = m.getShapes();
     shapeList.sort(Comparator.comparing(Shape::getLayer));
-    for (Shape s : shapeList) {
+    for (Shape copyS : shapeList) {
 
+      Shape s = copyS.getShapeAtTick(copyS.getStart());
       if (s.getShapeAtTick(s.getStart()) == null) {
         continue;
       }
