@@ -16,7 +16,7 @@ import cs5004.animator.util.AnimationBuilder;
 
 /**
  * The AnimationModelImpl class holds a series of Shapes and their transformations. Supports adding
- * and removing shapes and transformations. Allows for speed of the animation to be set manually.
+ * shapes and transformations. Allows for speed of the animation to be set manually.
  * Allows for the background color to be set manually. Implements the AnimationModel interface.
  */
 public class AnimationModelImpl implements AnimationModel {
