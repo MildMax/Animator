@@ -1,6 +1,8 @@
 package cs5004.animator.view;
 
 import java.awt.Dimension;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -122,7 +124,9 @@ public class VisualViewImpl extends JFrame implements AnimationView {
     if (m == null) {
       throw new IllegalArgumentException("Animation Model cannot be null.");
     }
-    new AnimationRunner(m, this, this.ticksPerSecond).runAnim();
+    AnimationRunner runner = new AnimationRunnerImpl(m, this, this.ticksPerSecond);
+    runner.openWindow();
+    runner.startAnim();
   }
 
   /**
@@ -134,5 +138,25 @@ public class VisualViewImpl extends JFrame implements AnimationView {
   @Override
   public String getOutFileContents() throws UnsupportedOperationException {
     throw new UnsupportedOperationException("VisualView does not support getting file contents");
+  }
+
+  @Override
+  public AnimationRunnerImpl getRunner() {
+    throw new UnsupportedOperationException("Visual view does not support getting runner");
+  }
+
+  @Override
+  public void setSpeed() {
+    throw new UnsupportedOperationException("Visual view does not allow for setting speed");
+  }
+
+  @Override
+  public void setCommandListener(ActionListener e) {
+    throw new UnsupportedOperationException("Visual view does not require command listener");
+  }
+
+  @Override
+  public void setMouseListener(MouseListener listener) {
+    throw new UnsupportedOperationException("Visual vies does not require mouse listener");
   }
 }

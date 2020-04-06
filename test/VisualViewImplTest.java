@@ -1,7 +1,7 @@
 import org.junit.Test;
 
 import cs5004.animator.model.AnimationModelImpl;
-import cs5004.animator.view.AnimationRunner;
+import cs5004.animator.view.AnimationRunnerImpl;
 import cs5004.animator.view.ShapePanel;
 import cs5004.animator.view.VisualViewImpl;
 
@@ -111,7 +111,7 @@ public class VisualViewImplTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void testAnimationRunnerNullView() {
-    new AnimationRunner(new AnimationModelImpl(0, 0, 100, 100), null, 20);
+    new AnimationRunnerImpl(new AnimationModelImpl(0, 0, 100, 100), null, 20);
   }
 
   /**
@@ -119,7 +119,7 @@ public class VisualViewImplTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void testAnimationRunnerNullModel() {
-    new AnimationRunner(null, new VisualViewImpl(0,0,100,100, 200, 200, 20), 20);
+    new AnimationRunnerImpl(null, new VisualViewImpl(0,0,100,100, 200, 200, 20), 20);
   }
 
   /**
@@ -127,7 +127,7 @@ public class VisualViewImplTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void testAnimationRunnerZeroTicksPerSecond() {
-    new AnimationRunner(new AnimationModelImpl(0, 0, 100, 100),
+    new AnimationRunnerImpl(new AnimationModelImpl(0, 0, 100, 100),
             new VisualViewImpl(0,0,100,100, 200, 200, 20), 0);
   }
 

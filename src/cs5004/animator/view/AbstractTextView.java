@@ -1,5 +1,7 @@
 package cs5004.animator.view;
 
+import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -103,5 +105,25 @@ public abstract class AbstractTextView implements AnimationView {
   @Override
   public void drawNewFrame(List<Shape> shapeList) throws UnsupportedOperationException {
     throw new UnsupportedOperationException("Text-based outputs do not support drawing frames");
+  }
+
+  @Override
+  public AnimationRunnerImpl getRunner() {
+    throw new UnsupportedOperationException("Text views do not support getting runner");
+  }
+
+  @Override
+  public void setSpeed() {
+    throw new UnsupportedOperationException("Text views do not allow for setting speed");
+  }
+
+  @Override
+  public void setCommandListener(ActionListener e) {
+    throw new UnsupportedOperationException("Text views do not require command listener");
+  }
+
+  @Override
+  public void setMouseListener(MouseListener listener) {
+    throw new UnsupportedOperationException("Text views do not require mouse listener");
   }
 }

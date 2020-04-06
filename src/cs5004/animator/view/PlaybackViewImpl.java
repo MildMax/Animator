@@ -2,10 +2,6 @@ package cs5004.animator.view;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
 
@@ -190,21 +186,30 @@ public class PlaybackViewImpl extends JFrame implements AnimationView {
     if (m == null) {
       throw new IllegalArgumentException("Animation Model cannot be null.");
     }
-    runner = new AnimationRunner(m, this, this.ticksPerSecond);
-    runner.runAnim();
+    runner = new AnimationRunnerImpl(m, this, this.ticksPerSecond);
+    runner.openWindow();
   }
 
+  /**
+   *
+   * @return
+   */
+  @Override
   public AnimationRunner getRunner() {
     return this.runner;
   }
 
-  public void setText() {
+  /**
+   *
+   */
+  @Override
+  public void setSpeed() {
     String text = speedIn.getText();
     int newSpeed;
     try {
       newSpeed = Integer.parseInt(text);
       if (newSpeed > 0) {
-        runner.setTicksPerSeconds(newSpeed);
+        runner.setTicksPerSecond(newSpeed);
       }
     } catch (NumberFormatException err) {
 
@@ -212,6 +217,11 @@ public class PlaybackViewImpl extends JFrame implements AnimationView {
     speedIn.setText("");
   }
 
+  /**
+   *
+   * @param e an ActionListener that handles executing methods for a the view
+   */
+  @Override
   public void setCommandListener(ActionListener e) {
     startButton.addActionListener(e);
     pauseButton.addActionListener(e);
@@ -221,6 +231,11 @@ public class PlaybackViewImpl extends JFrame implements AnimationView {
     speedSet.addActionListener(e);
   }
 
+  /**
+   *
+   * @param listener the listener to be attached to the object in the view.
+   */
+  @Override
   public void setMouseListener(MouseListener listener) {
     shapePanel.addMouseListener(listener);
   }

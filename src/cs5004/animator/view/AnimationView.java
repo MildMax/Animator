@@ -1,9 +1,10 @@
 package cs5004.animator.view;
 
+import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-import javax.swing.JDialog;
+import javax.swing.*;
 
 import cs5004.animator.model.AnimationModel;
 import cs5004.animator.model.shapes.Shape;
@@ -40,6 +41,33 @@ public interface AnimationView {
    * @throws IllegalArgumentException if the list of shapes is null.
    */
   void drawNewFrame(List<Shape> shapeList) throws IllegalArgumentException;
+
+  /**
+   * Get the AnimationRunner from the view.
+   *
+   * @return the AnimationRunner from the view.
+   */
+  AnimationRunner getRunner();
+
+  /**
+   * Sets the speed of the animation.
+   */
+  void setSpeed();
+
+  /**
+   * Sets the command listener for interactive aspects of the view.
+   *
+   * @param e an ActionListener that handles executing methods for a the view
+   *          based on user interaction.
+   */
+  void setCommandListener(ActionListener e);
+
+  /**
+   * Takes a MouseListener object and assigns it to a component in the view.
+   *
+   * @param listener the listener to be attached to the object in the view.
+   */
+  void setMouseListener(MouseListener listener);
 
   /**
    * Returns a String with the contents written to the specified out file
