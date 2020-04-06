@@ -78,6 +78,9 @@ public class AnimationRunner implements ActionListener {
 
   public void toggleLoop() {
     isLooping = !isLooping;
+    if (!timer.isRunning() && isLooping) {
+      timer.start();
+    }
   }
 
   public void setTicksPerSeconds(int ticksPerSecond) {
