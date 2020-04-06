@@ -70,10 +70,8 @@ public class AnimationRunner implements ActionListener {
   }
 
   public void restartAnim() {
-    this.frames = 0;
-    if (!timer.isRunning()) {
-      timer.start();
-    }
+    this.frames = 1;
+    this.view.drawNewFrame(this.model.getShapesAtTick(1));
   }
 
   public void toggleLoop() {
@@ -84,8 +82,9 @@ public class AnimationRunner implements ActionListener {
   }
 
   public void setTicksPerSeconds(int ticksPerSecond) {
-    frames = (int)((frames * ticksPerFrame) / ((double)ticksPerSecond / (double)fps));
-    ticksPerFrame = (double)ticksPerSecond / (double)fps;
+    double newTPF = (double)ticksPerSecond / (double)fps;
+    frames = (int)((frames * ticksPerFrame) / newTPF);
+    ticksPerFrame = newTPF;
   }
 
   /**
