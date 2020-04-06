@@ -18,10 +18,13 @@ public class AnimationControllerImpl implements ActionListener {
   }
 
   public void go() {
+    v.run(m);
+
     if (v instanceof PlaybackViewImpl) {
       ((PlaybackViewImpl) v).setCommandListener(this);
+      ((PlaybackViewImpl) v)
+              .setMouseListener(new TogglePlayMouseListener(((PlaybackViewImpl) v).getRunner()));
     }
-    v.run(m);
   }
 
   @Override

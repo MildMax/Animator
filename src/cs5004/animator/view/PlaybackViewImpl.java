@@ -2,6 +2,11 @@ package cs5004.animator.view;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
 
 import javax.swing.*;
@@ -214,6 +219,10 @@ public class PlaybackViewImpl extends JFrame implements AnimationView {
     restartButton.addActionListener(e);
     loopBox.addActionListener(e);
     speedSet.addActionListener(e);
+  }
+
+  public void setMouseListener(MouseListener listener) {
+    shapePanel.addMouseListener(listener);
   }
 
   /**

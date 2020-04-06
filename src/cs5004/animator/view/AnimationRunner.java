@@ -82,6 +82,14 @@ public class AnimationRunner implements ActionListener {
     }
   }
 
+  public void togglePlay() {
+    if (timer.isRunning()) {
+      timer.stop();
+    } else {
+      timer.start();
+    }
+  }
+
   public void setTicksPerSeconds(int ticksPerSecond) {
     double newTPF = (double)ticksPerSecond / (double)fps;
     frames = (int)((frames * ticksPerFrame) / newTPF);
