@@ -21,7 +21,7 @@ public class PlaybackViewImpl extends JFrame implements AnimationView {
   private JButton pauseButton;
   private JButton resumeButton;
   private JButton restartButton;
-  private JToggleButton loopButton;
+  private JCheckBox loopBox;
   private JLabel speedLabel;
   private JTextField speedIn;
   private JButton speedSet;
@@ -56,11 +56,12 @@ public class PlaybackViewImpl extends JFrame implements AnimationView {
     top = new JPanel();
     //top.setBounds(0, 0, windowWidth, windowHeight);
     top.setPreferredSize(new Dimension(windowWidth, windowHeight));
+    //top.setSize(new Dimension(windowWidth, windowHeight));
     bottom = new JPanel();
     bottom.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
     //bottom.setBounds(0, 0, buttonWidth, buttonHeight);
-    bottom.setLayout(new BoxLayout(bottom, BoxLayout.X_AXIS));
-    //bottom.setLayout(new GridLayout());
+    //bottom.setLayout(new BoxLayout(bottom, BoxLayout.X_AXIS));
+    bottom.setLayout(new GridBagLayout());
 
     splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
     splitPane.setDividerLocation(windowHeight);
@@ -82,41 +83,47 @@ public class PlaybackViewImpl extends JFrame implements AnimationView {
     top.add(scrollPane);
 
     startButton = new JButton("Start");
-    startButton.setPreferredSize(buttonDims);
+    //startButton.setPreferredSize(buttonDims);
+    startButton.setMinimumSize(buttonDims);
     //startButton.addActionListener(this);
     startButton.setActionCommand("start");
-    startButton.setPreferredSize(buttonDims);
     bottom.add(startButton);
 
     pauseButton = new JButton("Pause");
-    pauseButton.setPreferredSize(buttonDims);
+    //pauseButton.setPreferredSize(buttonDims);
+    pauseButton.setMinimumSize(buttonDims);
     //pauseButton.addActionListener(this);
     pauseButton.setActionCommand("pause");
     bottom.add(pauseButton);
 
     resumeButton = new JButton("Resume");
-    resumeButton.setPreferredSize(buttonDims);
+    //resumeButton.setPreferredSize(buttonDims);
+    resumeButton.setMinimumSize(buttonDims);
     //resumeButton.addActionListener(this);
     resumeButton.setActionCommand("resume");
     bottom.add(resumeButton);
 
     restartButton = new JButton("Restart");
-    restartButton.setPreferredSize(buttonDims);
+    //restartButton.setPreferredSize(buttonDims);
+    restartButton.setMinimumSize(buttonDims);
     //restartButton.addActionListener(this);
     restartButton.setActionCommand("restart");
     bottom.add(restartButton);
 
-    loopButton = new JToggleButton("Loop");
-    loopButton.setPreferredSize(buttonDims);
-    //loopButton.addActionListener(this);
-    loopButton.setActionCommand("loop");
-    bottom.add(loopButton);
+    JLabel loopLabel = new JLabel("Loop:", SwingConstants.RIGHT);
+    bottom.add(loopLabel);
+    loopBox = new JCheckBox();
+    loopBox.setActionCommand("loop");
+    bottom.add(loopBox);
 
     speedLabel = new JLabel("Speed:", SwingConstants.RIGHT);
     speedIn = new JTextField();
-    speedIn.setPreferredSize(buttonDims);
+    //speedIn.setPreferredSize(buttonDims);
+    speedIn.setMinimumSize(buttonDims);
+    //speedIn.setMaximumSize(buttonDims);
     speedSet = new JButton("Enter");
-    speedSet.setPreferredSize(buttonDims);
+    //speedSet.setPreferredSize(buttonDims);
+    speedSet.setMinimumSize(buttonDims);
     //speedSet.addActionListener(this);
     speedSet.setActionCommand("speed");
     bottom.add(speedLabel);
@@ -205,7 +212,7 @@ public class PlaybackViewImpl extends JFrame implements AnimationView {
     pauseButton.addActionListener(e);
     resumeButton.addActionListener(e);
     restartButton.addActionListener(e);
-    loopButton.addActionListener(e);
+    loopBox.addActionListener(e);
     speedSet.addActionListener(e);
   }
 
@@ -223,9 +230,11 @@ public class PlaybackViewImpl extends JFrame implements AnimationView {
   @Override
   public void validate() {
     super.validate();
-    shapePanel.setSize(new Dimension(splitPane.getWidth(), splitPane.getHeight() - buttonHeight));
+    int w = splitPane.getWidth();
+    int h = splitPane.getHeight() - buttonHeight;
+    shapePanel.setSize(new Dimension(w, h));
     //scrollPane.setSize(new Dimension(splitPane.getWidth(), splitPane.getHeight() - buttonHeight));
-    scrollPane.setBounds(0, 0, splitPane.getWidth(), splitPane.getHeight() - buttonHeight);
+    scrollPane.setBounds(0, 0, w, h);
     //splitPane.setDividerLocation(splitPane.getHeight() - buttonHeight);
     //speedLabel.setSize(buttonDims);
     //bottom.setSize(400, 25);

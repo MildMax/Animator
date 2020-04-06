@@ -76,7 +76,8 @@ public class AnimationRunner implements ActionListener {
 
   public void toggleLoop() {
     isLooping = !isLooping;
-    if (!timer.isRunning() && isLooping) {
+    if (!timer.isRunning() && isLooping &&
+            this.frames * this.ticksPerFrame > this.model.getTotalTicks()) {
       timer.start();
     }
   }
