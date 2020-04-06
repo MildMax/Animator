@@ -30,9 +30,6 @@ public class IVisualViewImpl extends JFrame implements AnimationView, ActionList
   public IVisualViewImpl(int x, int y, int windowWidth, int windowHeight,
                         int maxWidth, int maxHeight, int ticksPerSecond)
           throws IllegalArgumentException {
-
-    this.ticksPerSecond = ticksPerSecond;
-
     if (windowWidth <= 0 || windowHeight <= 0) {
       throw new IllegalArgumentException("Width and height must be greater"
               + "than 0");
@@ -44,6 +41,8 @@ public class IVisualViewImpl extends JFrame implements AnimationView, ActionList
     } else if (ticksPerSecond < 1) {
       throw new IllegalArgumentException("Delay cannot be less than 1");
     }
+
+    this.ticksPerSecond = ticksPerSecond;
 
     JSplitPane splitPane = new JSplitPane();
 
@@ -70,7 +69,6 @@ public class IVisualViewImpl extends JFrame implements AnimationView, ActionList
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
             ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
     scrollPane.setPreferredSize(new Dimension(windowWidth, windowHeight));
-
     top.add(scrollPane);
 
     startButton = new JButton("Start");
@@ -114,10 +112,6 @@ public class IVisualViewImpl extends JFrame implements AnimationView, ActionList
     bottom.add(speedIn);
     bottom.add(speedSet);
 
-
-
-    //this.setPreferredSize(new Dimension(windowWidth,
-    //        windowHeight + buttonHeight + 200));
     this.setBounds(x, y, windowWidth, windowHeight + buttonHeight);
     this.setTitle("Easy Animator");
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

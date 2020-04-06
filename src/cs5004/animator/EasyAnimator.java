@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+import cs5004.animator.controller.AnimationControllerImpl;
 import cs5004.animator.model.AnimationModel;
 import cs5004.animator.model.AnimationModelImpl;
 import cs5004.animator.util.AnimationReader;
@@ -42,8 +43,8 @@ public final class EasyAnimator {
     //set up the view
     AnimationView view = e.initializeView(model);
 
-    //populate display/view
-    view.run(model);
+    AnimationControllerImpl controller = new AnimationControllerImpl(model, view);
+    controller.go();
   }
 
   private void parseArgs(String[] args) {

@@ -81,6 +81,7 @@ public class AnimationRunner implements ActionListener {
   }
 
   public void setTicksPerSeconds(int ticksPerSecond) {
+    frames = (int)((frames * ticksPerFrame) / ((double)ticksPerSecond / (double)fps));
     ticksPerFrame = (double)ticksPerSecond / (double)fps;
   }
 
