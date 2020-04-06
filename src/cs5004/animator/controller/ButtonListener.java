@@ -16,23 +16,22 @@ public class ButtonListener implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    PlaybackViewImpl p = (PlaybackViewImpl) v;
     switch (e.getActionCommand()) {
       case "start":
       case "resume":
-        p.getRunner().startAnim();
+        v.getRunner().startAnim();
         break;
       case "pause":
-        p.getRunner().pauseAnim();
+        v.getRunner().pauseAnim();
         break;
       case "restart":
-        p.getRunner().restartAnim();
+        v.getRunner().restartAnim();
         break;
       case "loop":
-        p.getRunner().toggleLoop();
+        v.getRunner().toggleLoop();
         break;
       case "speed":
-        p.setSpeed();
+        v.setSpeed();
         break;
     }
   }

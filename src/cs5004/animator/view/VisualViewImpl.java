@@ -17,10 +17,7 @@ import cs5004.animator.model.shapes.Shape;
  * as supplied by the AnimationModelImpl. Extends the JFrame class
  * and implements the AnimationView interface.
  */
-public class VisualViewImpl extends JFrame implements AnimationView {
-
-  private ShapePanel shapePanel;
-  private int ticksPerSecond;
+public class VisualViewImpl extends AbstractVisualView {
 
   /**
    * The AnimationViewImpl constructor takes x and y values specifying the
@@ -45,24 +42,7 @@ public class VisualViewImpl extends JFrame implements AnimationView {
   public VisualViewImpl(int x, int y, int windowWidth, int windowHeight,
                         int maxWidth, int maxHeight, int ticksPerSecond)
           throws IllegalArgumentException {
-    super();
-
-    this.ticksPerSecond = ticksPerSecond;
-
-    if (windowWidth <= 0 || windowHeight <= 0) {
-      throw new IllegalArgumentException("Width and height must be greater"
-              + "than 0");
-    } else if (maxWidth <= 0 || maxHeight <= 0) {
-      throw new IllegalArgumentException("Max window width and height must be greater"
-              + "than 0");
-    } else if (x < 0 || y < 0) {
-      throw new IllegalArgumentException("x and y positions cannot be negative");
-    } else if (ticksPerSecond < 1) {
-      throw new IllegalArgumentException("Delay cannot be less than 1");
-    }
-
-    shapePanel = new ShapePanel();
-    shapePanel.setPreferredSize(new Dimension(maxWidth, maxHeight));
+    super(x, y, windowWidth, windowHeight, maxWidth, maxHeight, ticksPerSecond);
 
     JScrollPane scrollPane = new JScrollPane(shapePanel,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -77,43 +57,6 @@ public class VisualViewImpl extends JFrame implements AnimationView {
   }
 
   /**
-   * Displays the window on screen.
-   */
-  @Override
-  public void openView() {
-    this.setVisible(true);
-  }
-
-  /**
-   * Closes the window on screen.
-   */
-  @Override
-  public void closeView() {
-    this.setVisible(false);
-    this.dispose();
-  }
-
-  /**
-   * Draws a frame on the window according to the list of shapes provided to parameter shapeList.
-   * Throws IllegalArgumentException if the list of shapes is null.
-   *
-   * @param shapeList takes a list of shapes to be drawn.
-   * @throws IllegalArgumentException if the list of shapes is null.
-   */
-  @Override
-  public void drawNewFrame(List<Shape> shapeList) throws IllegalArgumentException {
-    if (shapeList == null) {
-      throw new IllegalArgumentException("shapeList cannot be null");
-    }
-
-    //add new rects and ellipses in here
-    shapePanel.addFrame(shapeList);
-
-    this.repaint();
-    this.revalidate();
-  }
-
-  /**
    * Runs the visual animation in a window displayed on screen.
    *
    * @param m takes an AnimationModel that stores an animation to be written to
@@ -121,11 +64,7 @@ public class VisualViewImpl extends JFrame implements AnimationView {
    */
   @Override
   public void run(AnimationModel m) throws IllegalArgumentException {
-    if (m == null) {
-      throw new IllegalArgumentException("Animation Model cannot be null.");
-    }
-    AnimationRunner runner = new AnimationRunnerImpl(m, this, this.ticksPerSecond);
-    runner.openWindow();
+    super.run(m);
     runner.startAnim();
   }
 

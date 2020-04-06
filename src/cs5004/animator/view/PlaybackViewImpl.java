@@ -10,14 +10,13 @@ import javax.swing.*;
 import cs5004.animator.model.AnimationModel;
 import cs5004.animator.model.shapes.Shape;
 
-public class PlaybackViewImpl extends JFrame implements AnimationView {
+public class PlaybackViewImpl extends AbstractVisualView {
 
   private JSplitPane splitPane;
   private JScrollPane scrollPane;
   private JPanel top;
   private JPanel bottom;
 
-  private ShapePanel shapePanel;
   private JButton startButton;
   private JButton pauseButton;
   private JButton resumeButton;
@@ -26,9 +25,6 @@ public class PlaybackViewImpl extends JFrame implements AnimationView {
   private JLabel speedLabel;
   private JTextField speedIn;
   private JButton speedSet;
-  private int ticksPerSecond;
-
-  private AnimationRunner runner;
 
   private final Dimension buttonDims = new Dimension(75, 15);
 
@@ -38,19 +34,7 @@ public class PlaybackViewImpl extends JFrame implements AnimationView {
   public PlaybackViewImpl(int x, int y, int windowWidth, int windowHeight,
                           int maxWidth, int maxHeight, int ticksPerSecond)
           throws IllegalArgumentException {
-    if (windowWidth <= 0 || windowHeight <= 0) {
-      throw new IllegalArgumentException("Width and height must be greater"
-              + "than 0");
-    } else if (maxWidth <= 0 || maxHeight <= 0) {
-      throw new IllegalArgumentException("Max window width and height must be greater"
-              + "than 0");
-    } else if (x < 0 || y < 0) {
-      throw new IllegalArgumentException("x and y positions cannot be negative");
-    } else if (ticksPerSecond < 1) {
-      throw new IllegalArgumentException("Delay cannot be less than 1");
-    }
-
-    this.ticksPerSecond = ticksPerSecond;
+    super(x, y, windowWidth, windowHeight, maxWidth, maxHeight, ticksPerSecond);
 
     splitPane = new JSplitPane();
 
@@ -73,9 +57,6 @@ public class PlaybackViewImpl extends JFrame implements AnimationView {
 
     getContentPane().setLayout(new GridLayout());
     getContentPane().add(splitPane);
-
-    shapePanel = new ShapePanel();
-    shapePanel.setPreferredSize(new Dimension(maxWidth, maxHeight));
 
     scrollPane = new JScrollPane(shapePanel,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -136,43 +117,6 @@ public class PlaybackViewImpl extends JFrame implements AnimationView {
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     //this.setResizable(false);
     this.pack();
-  }
-
-  /**
-   * Displays the window on screen.
-   */
-  @Override
-  public void openView() {
-    this.setVisible(true);
-  }
-
-  /**
-   * Closes the window on screen.
-   */
-  @Override
-  public void closeView() {
-    this.setVisible(false);
-    this.dispose();
-  }
-
-  /**
-   * Draws a frame on the window according to the list of shapes provided to parameter shapeList.
-   * Throws IllegalArgumentException if the list of shapes is null.
-   *
-   * @param shapeList takes a list of shapes to be drawn.
-   * @throws IllegalArgumentException if the list of shapes is null.
-   */
-  @Override
-  public void drawNewFrame(List<Shape> shapeList) throws IllegalArgumentException {
-    if (shapeList == null) {
-      throw new IllegalArgumentException("shapeList cannot be null");
-    }
-
-    //add new rects and ellipses in here
-    shapePanel.addFrame(shapeList);
-
-    this.repaint();
-    this.revalidate();
   }
 
   /**
@@ -257,8 +201,10 @@ public class PlaybackViewImpl extends JFrame implements AnimationView {
     int w = splitPane.getWidth();
     int h = splitPane.getHeight() - buttonHeight;
     shapePanel.setSize(new Dimension(w, h));
-    //scrollPane.setSize(new Dimension(splitPane.getWidth(), splitPane.getHeight() - buttonHeight));
     scrollPane.setBounds(0, 0, w, h);
+
+    //scrollPane.setSize(new Dimension(splitPane.getWidth(), splitPane.getHeight() - buttonHeight));
+
     //splitPane.setDividerLocation(splitPane.getHeight() - buttonHeight);
     //speedLabel.setSize(buttonDims);
     //bottom.setSize(400, 25);
