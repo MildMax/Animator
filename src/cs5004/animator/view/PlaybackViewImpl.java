@@ -65,14 +65,12 @@ public class PlaybackViewImpl extends AbstractVisualView {
     playButton = new JButton("Play");
     //startButton.setPreferredSize(buttonDims);
     playButton.setMinimumSize(buttonDims);
-    //startButton.addActionListener(this);
     playButton.setActionCommand("play");
     bottom.add(playButton);
 
     restartButton = new JButton("Restart");
     //restartButton.setPreferredSize(buttonDims);
     restartButton.setMinimumSize(buttonDims);
-    //restartButton.addActionListener(this);
     restartButton.setActionCommand("restart");
     bottom.add(restartButton);
 
@@ -90,7 +88,6 @@ public class PlaybackViewImpl extends AbstractVisualView {
     speedSet = new JButton("Enter");
     //speedSet.setPreferredSize(buttonDims);
     speedSet.setMinimumSize(buttonDims);
-    //speedSet.addActionListener(this);
     speedSet.setActionCommand("speed");
     bottom.add(speedLabel);
     bottom.add(speedIn);
@@ -99,7 +96,6 @@ public class PlaybackViewImpl extends AbstractVisualView {
     this.setBounds(x, y, windowWidth, windowHeight + buttonHeight);
     this.setTitle("Easy Animator");
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    //this.setResizable(false);
     this.pack();
   }
 
@@ -188,19 +184,12 @@ public class PlaybackViewImpl extends AbstractVisualView {
 
   @Override
   public void validate() {
-    super.validate();
     int w = splitPane.getWidth();
     int h = splitPane.getHeight() - buttonHeight;
     shapePanel.setSize(new Dimension(w, h));
     scrollPane.setBounds(0, 0, w, h);
+    super.validate();
 
-    //scrollPane.setSize(new Dimension(splitPane.getWidth(), splitPane.getHeight() - buttonHeight));
 
-    //splitPane.setDividerLocation(splitPane.getHeight() - buttonHeight);
-    //speedLabel.setSize(buttonDims);
-    //bottom.setSize(400, 25);
-    //shapePanel.setSize(new Dimension(splitPane.getWidth(), splitPane.getHeight() - buttonHeight));
-    //scrollPane.setSize(new Dimension(splitPane.getWidth(), splitPane.getHeight() - buttonHeight));
-    //top.setSize(new Dimension(splitPane.getWidth(), splitPane.getHeight() - buttonHeight));
   }
 }
