@@ -17,9 +17,7 @@ public class PlaybackViewImpl extends AbstractVisualView {
   private JPanel top;
   private JPanel bottom;
 
-  private JButton startButton;
-  private JButton pauseButton;
-  private JButton resumeButton;
+  private JButton playButton;
   private JButton restartButton;
   private JCheckBox loopBox;
   private JLabel speedLabel;
@@ -64,26 +62,12 @@ public class PlaybackViewImpl extends AbstractVisualView {
     scrollPane.setPreferredSize(new Dimension(windowWidth, windowHeight));
     top.add(scrollPane);
 
-    startButton = new JButton("Start");
+    playButton = new JButton("Play");
     //startButton.setPreferredSize(buttonDims);
-    startButton.setMinimumSize(buttonDims);
+    playButton.setMinimumSize(buttonDims);
     //startButton.addActionListener(this);
-    startButton.setActionCommand("start");
-    bottom.add(startButton);
-
-    pauseButton = new JButton("Pause");
-    //pauseButton.setPreferredSize(buttonDims);
-    pauseButton.setMinimumSize(buttonDims);
-    //pauseButton.addActionListener(this);
-    pauseButton.setActionCommand("pause");
-    bottom.add(pauseButton);
-
-    resumeButton = new JButton("Resume");
-    //resumeButton.setPreferredSize(buttonDims);
-    resumeButton.setMinimumSize(buttonDims);
-    //resumeButton.addActionListener(this);
-    resumeButton.setActionCommand("resume");
-    bottom.add(resumeButton);
+    playButton.setActionCommand("play");
+    bottom.add(playButton);
 
     restartButton = new JButton("Restart");
     //restartButton.setPreferredSize(buttonDims);
@@ -161,15 +145,22 @@ public class PlaybackViewImpl extends AbstractVisualView {
     speedIn.setText("");
   }
 
+  public void togglePlayText() {
+    if (runner.isRunning()) {
+      playButton.setText("Pause");
+    }
+    else {
+      playButton.setText("Play");
+    }
+  }
+
   /**
    *
    * @param e an ActionListener that handles executing methods for a the view
    */
   @Override
   public void setCommandListener(ActionListener e) {
-    startButton.addActionListener(e);
-    pauseButton.addActionListener(e);
-    resumeButton.addActionListener(e);
+    playButton.addActionListener(e);
     restartButton.addActionListener(e);
     loopBox.addActionListener(e);
     speedSet.addActionListener(e);

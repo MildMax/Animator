@@ -17,12 +17,8 @@ public class ButtonListener implements ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
     switch (e.getActionCommand()) {
-      case "start":
-      case "resume":
-        v.getRunner().startAnim();
-        break;
-      case "pause":
-        v.getRunner().pauseAnim();
+      case "play":
+        v.getRunner().togglePlay();
         break;
       case "restart":
         v.getRunner().restartAnim();

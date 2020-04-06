@@ -6,13 +6,13 @@ public interface AnimationRunner {
 
   void startAnim();
 
-  void pauseAnim();
-
   void restartAnim();
 
   void toggleLoop();
 
   void togglePlay();
+
+  boolean isRunning();
 
   void setTicksPerSecond(int ticksPerSecond);
 

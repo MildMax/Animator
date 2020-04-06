@@ -62,19 +62,14 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
   @Override
   public void startAnim() {
     timer.start();
-  }
-
-  @Override
-  public void pauseAnim() {
-    if (timer.isRunning()) {
-      timer.stop();
-    }
+    togglePlayText();
   }
 
   @Override
   public void restartAnim() {
     this.frames = 1;
     this.view.drawNewFrame(this.model.getShapesAtTick(1));
+    togglePlayText();
   }
 
   @Override
@@ -84,6 +79,7 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
             this.frames * this.ticksPerFrame > this.model.getTotalTicks()) {
       timer.start();
     }
+    togglePlayText();
   }
 
   @Override
@@ -93,6 +89,7 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
     } else {
       timer.start();
     }
+    togglePlayText();
   }
 
   @Override
@@ -100,6 +97,11 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
     double newTPF = (double)ticksPerSecond / (double)fps;
     frames = (int)((frames * ticksPerFrame) / newTPF);
     ticksPerFrame = newTPF;
+  }
+
+  @Override
+  public boolean isRunning() {
+    return timer.isRunning();
   }
 
   /**
@@ -121,5 +123,11 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
       return;
     }
     this.view.drawNewFrame(this.model.getShapesAtTick((double)this.frames * this.ticksPerFrame));
+  }
+
+  private void togglePlayText() {
+    if (view instanceof PlaybackViewImpl) {
+      ((PlaybackViewImpl) view).togglePlayText();
+    }
   }
 }
