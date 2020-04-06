@@ -11,12 +11,18 @@ import cs5004.animator.model.shapes.Shape;
 
 public class PlaybackViewImpl extends JFrame implements AnimationView {
 
+  private JSplitPane splitPane;
+  private JScrollPane scrollPane;
+  private JPanel top;
+  private JPanel bottom;
+
   private ShapePanel shapePanel;
   private JButton startButton;
   private JButton pauseButton;
   private JButton resumeButton;
   private JButton restartButton;
   private JToggleButton loopButton;
+  private JLabel speedLabel;
   private JTextField speedIn;
   private JButton speedSet;
   private int ticksPerSecond;
@@ -45,20 +51,21 @@ public class PlaybackViewImpl extends JFrame implements AnimationView {
 
     this.ticksPerSecond = ticksPerSecond;
 
-    JSplitPane splitPane = new JSplitPane();
+    splitPane = new JSplitPane();
 
-    JPanel top = new JPanel();
-    top.setBounds(0, 0, windowWidth, windowHeight);
-    //top.setPreferredSize(new Dimension(windowWidth, windowHeight));
-    JPanel bottom = new JPanel();
-    //bottom.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
-    bottom.setBounds(0, 0, buttonWidth, buttonHeight);
-    //bottom.setLayout(new BoxLayout(bottom, BoxLayout.X_AXIS));
-    bottom.setLayout(new GridLayout());
+    top = new JPanel();
+    //top.setBounds(0, 0, windowWidth, windowHeight);
+    top.setPreferredSize(new Dimension(windowWidth, windowHeight));
+    bottom = new JPanel();
+    bottom.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
+    //bottom.setBounds(0, 0, buttonWidth, buttonHeight);
+    bottom.setLayout(new BoxLayout(bottom, BoxLayout.X_AXIS));
+    //bottom.setLayout(new GridLayout());
 
     splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
     splitPane.setDividerLocation(windowHeight);
-    splitPane.setDividerSize(5);
+    splitPane.setDividerSize(0);
+    splitPane.setResizeWeight(1);
     splitPane.setBottomComponent(bottom);
     splitPane.setTopComponent(top);
 
@@ -68,7 +75,7 @@ public class PlaybackViewImpl extends JFrame implements AnimationView {
     shapePanel = new ShapePanel();
     shapePanel.setPreferredSize(new Dimension(maxWidth, maxHeight));
 
-    JScrollPane scrollPane = new JScrollPane(shapePanel,
+    scrollPane = new JScrollPane(shapePanel,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
             ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
     scrollPane.setPreferredSize(new Dimension(windowWidth, windowHeight));
@@ -78,7 +85,7 @@ public class PlaybackViewImpl extends JFrame implements AnimationView {
     startButton.setPreferredSize(buttonDims);
     //startButton.addActionListener(this);
     startButton.setActionCommand("start");
-    startButton.setMaximumSize(buttonDims);
+    startButton.setPreferredSize(buttonDims);
     bottom.add(startButton);
 
     pauseButton = new JButton("Pause");
@@ -105,7 +112,7 @@ public class PlaybackViewImpl extends JFrame implements AnimationView {
     loopButton.setActionCommand("loop");
     bottom.add(loopButton);
 
-    JLabel speedLabel = new JLabel("Speed:", SwingConstants.RIGHT);
+    speedLabel = new JLabel("Speed:", SwingConstants.RIGHT);
     speedIn = new JTextField();
     speedIn.setPreferredSize(buttonDims);
     speedSet = new JButton("Enter");
@@ -213,4 +220,17 @@ public class PlaybackViewImpl extends JFrame implements AnimationView {
     throw new UnsupportedOperationException("VisualView does not support getting file contents");
   }
 
+  @Override
+  public void validate() {
+    super.validate();
+    shapePanel.setSize(new Dimension(splitPane.getWidth(), splitPane.getHeight() - buttonHeight));
+    //scrollPane.setSize(new Dimension(splitPane.getWidth(), splitPane.getHeight() - buttonHeight));
+    scrollPane.setBounds(0, 0, splitPane.getWidth(), splitPane.getHeight() - buttonHeight);
+    //splitPane.setDividerLocation(splitPane.getHeight() - buttonHeight);
+    //speedLabel.setSize(buttonDims);
+    //bottom.setSize(400, 25);
+    //shapePanel.setSize(new Dimension(splitPane.getWidth(), splitPane.getHeight() - buttonHeight));
+    //scrollPane.setSize(new Dimension(splitPane.getWidth(), splitPane.getHeight() - buttonHeight));
+    //top.setSize(new Dimension(splitPane.getWidth(), splitPane.getHeight() - buttonHeight));
+  }
 }
