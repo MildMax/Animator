@@ -89,7 +89,7 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
     } else {
       timer.start();
     }
-    togglePlayText();
+    //togglePlayText();
   }
 
   @Override

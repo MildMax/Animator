@@ -148,6 +148,7 @@ public class PlaybackViewImpl extends AbstractVisualView {
     else {
       playButton.setText("Play");
     }
+
   }
 
   /**
@@ -184,12 +185,10 @@ public class PlaybackViewImpl extends AbstractVisualView {
 
   @Override
   public void validate() {
+    super.validate();
     int w = splitPane.getWidth();
     int h = splitPane.getHeight() - buttonHeight;
     shapePanel.setSize(new Dimension(w, h));
     scrollPane.setBounds(0, 0, w, h);
-    super.validate();
-
-
   }
 }
