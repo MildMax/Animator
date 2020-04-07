@@ -3,12 +3,10 @@ package cs5004.animator.view;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
-import java.util.List;
 
 import javax.swing.*;
 
 import cs5004.animator.model.AnimationModel;
-import cs5004.animator.model.shapes.Shape;
 
 public class PlaybackViewImpl extends AbstractVisualView {
 
@@ -25,6 +23,8 @@ public class PlaybackViewImpl extends AbstractVisualView {
   private JButton speedSet;
 
   private final Dimension buttonDims = new Dimension(75, 15);
+  private int oldWidth;
+  private int oldHeight;
 
   private int buttonWidth = 75;
   private int buttonHeight = 25;
@@ -59,7 +59,6 @@ public class PlaybackViewImpl extends AbstractVisualView {
     scrollPane = new JScrollPane(shapePanel,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
             ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-    scrollPane.setPreferredSize(new Dimension(windowWidth, windowHeight));
     top.add(scrollPane);
 
     playButton = new JButton("Play");
