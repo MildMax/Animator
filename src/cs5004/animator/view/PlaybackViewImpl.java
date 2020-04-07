@@ -3,7 +3,6 @@ package cs5004.animator.view;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
-import java.util.Dictionary;
 import java.util.Hashtable;
 
 import javax.swing.*;
@@ -15,7 +14,6 @@ public class PlaybackViewImpl extends AbstractVisualView {
 
   private JSplitPane splitPane;
   private JScrollPane scrollPane;
-  private JPanel top;
   private JPanel bottom;
 
   private JButton playButton;
@@ -35,10 +33,6 @@ public class PlaybackViewImpl extends AbstractVisualView {
 
     splitPane = new JSplitPane();
 
-    top = new JPanel();
-    //top.setBounds(0, 0, windowWidth, windowHeight);
-    top.setPreferredSize(new Dimension(windowWidth, windowHeight));
-    //top.setSize(new Dimension(windowWidth, windowHeight));
     bottom = new JPanel();
     bottom.setPreferredSize(new Dimension(buttonWidth, bottomHeight));
     //bottom.setBounds(0, 0, buttonWidth, buttonHeight);
@@ -50,7 +44,6 @@ public class PlaybackViewImpl extends AbstractVisualView {
     splitPane.setDividerSize(0);
     splitPane.setResizeWeight(1);
     splitPane.setBottomComponent(bottom);
-    splitPane.setTopComponent(top);
 
     getContentPane().setLayout(new GridLayout());
     getContentPane().add(splitPane);
@@ -58,7 +51,7 @@ public class PlaybackViewImpl extends AbstractVisualView {
     scrollPane = new JScrollPane(shapePanel,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
             ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-    top.add(scrollPane);
+    splitPane.setTopComponent(scrollPane);
 
     playButton = new JButton("Play");
     //startButton.setPreferredSize(buttonDims);
@@ -176,14 +169,5 @@ public class PlaybackViewImpl extends AbstractVisualView {
   @Override
   public String getOutFileContents() throws UnsupportedOperationException {
     throw new UnsupportedOperationException("VisualView does not support getting file contents");
-  }
-
-  @Override
-  public void validate() {
-    super.validate();
-    int w = splitPane.getWidth();
-    int h = splitPane.getHeight() - bottomHeight;
-    shapePanel.setSize(new Dimension(w, h));
-    scrollPane.setBounds(0, 0, w, h);
   }
 }
