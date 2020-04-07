@@ -24,54 +24,56 @@ public class PlaybackViewImpl extends AbstractVisualView {
   private int buttonWidth = 75;
   private int bottomHeight = 75;
 
-  private final Dimension buttonDims = new Dimension(buttonWidth, 15);
+  private final Dimension buttonDims = new Dimension(buttonWidth, 25);
 
   public PlaybackViewImpl(int x, int y, int windowWidth, int windowHeight,
                           int maxWidth, int maxHeight, int ticksPerSecond)
           throws IllegalArgumentException {
     super(x, y, windowWidth, windowHeight, maxWidth, maxHeight, ticksPerSecond);
 
+    //make splitpane
     splitPane = new JSplitPane();
 
-    bottom = new JPanel();
-    bottom.setPreferredSize(new Dimension(buttonWidth, bottomHeight));
-    //bottom.setBounds(0, 0, buttonWidth, buttonHeight);
-    //bottom.setLayout(new BoxLayout(bottom, BoxLayout.X_AXIS));
-    bottom.setLayout(new GridBagLayout());
-
-    splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
-    splitPane.setDividerLocation(windowHeight);
-    splitPane.setDividerSize(0);
-    splitPane.setResizeWeight(1);
-    splitPane.setBottomComponent(bottom);
-
-    getContentPane().setLayout(new GridLayout());
-    getContentPane().add(splitPane);
-
+    //set up top component
+    //shapePanel set in super constructor
     scrollPane = new JScrollPane(shapePanel,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
             ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
     splitPane.setTopComponent(scrollPane);
 
+    //set up bottom component
+    bottom = new JPanel();
+    //bottom.setLayout(new BoxLayout(bottom, BoxLayout.X_AXIS));
+    GridBagLayout layout = new GridBagLayout();
+    bottom.setLayout(layout);
+    GridBagConstraints c = new GridBagConstraints();
+    c.insets = new Insets(0, 5, 0, 5);
+
+    //pause/playbutton setup
     playButton = new JButton("Play");
-    //startButton.setPreferredSize(buttonDims);
-    playButton.setMinimumSize(buttonDims);
+    playButton.setPreferredSize(buttonDims);
     playButton.setActionCommand("play");
     bottom.add(playButton);
+    layout.setConstraints(playButton, c);
 
+    //restart button setup
     restartButton = new JButton("Restart");
-    //restartButton.setPreferredSize(buttonDims);
-    restartButton.setMinimumSize(buttonDims);
+    restartButton.setPreferredSize(buttonDims);
     restartButton.setActionCommand("restart");
     bottom.add(restartButton);
+    layout.setConstraints(restartButton, c);
 
+    //loop button setup
+    JPanel loopPanel = new JPanel();
     JLabel loopLabel = new JLabel("Loop:", SwingConstants.RIGHT);
     bottom.add(loopLabel);
     loopBox = new JCheckBox();
     loopBox.setActionCommand("loop");
-    bottom.add(loopBox);
+    loopPanel.add(loopLabel);
+    loopPanel.add(loopBox);
+    bottom.add(loopPanel);
 
-
+    //slider component setup
     slider = new JSlider(JSlider.HORIZONTAL, 10, 200, 50);
     slider.setMajorTickSpacing(10);
     slider.setPaintTicks(true);
@@ -91,6 +93,15 @@ public class PlaybackViewImpl extends AbstractVisualView {
     sliderPanel.add(slider);
     bottom.add(sliderPanel);
 
+    //finish setting up splitpane
+    splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
+    splitPane.setDividerLocation(windowHeight);
+    splitPane.setDividerSize(0);
+    splitPane.setResizeWeight(1);
+    splitPane.setBottomComponent(bottom);
+
+    //set up JFrame
+    this.getContentPane().add(splitPane);
     this.setBounds(x, y, windowWidth, windowHeight + bottomHeight);
     this.setTitle("Easy Animator");
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
