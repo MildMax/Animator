@@ -21,9 +21,6 @@ public class PlaybackViewImpl extends AbstractVisualView {
   private JButton playButton;
   private JButton restartButton;
   private JCheckBox loopBox;
-  private JLabel speedLabel;
-  private JTextField speedIn;
-  private JButton speedSet;
   private JSlider slider;
 
   private int buttonWidth = 75;
@@ -81,19 +78,6 @@ public class PlaybackViewImpl extends AbstractVisualView {
     loopBox.setActionCommand("loop");
     bottom.add(loopBox);
 
-    speedLabel = new JLabel("Speed:", SwingConstants.RIGHT);
-    speedIn = new JTextField();
-    //speedIn.setPreferredSize(buttonDims);
-    speedIn.setMinimumSize(buttonDims);
-    //speedIn.setMaximumSize(buttonDims);
-    speedSet = new JButton("Enter");
-    //speedSet.setPreferredSize(buttonDims);
-    speedSet.setMinimumSize(buttonDims);
-    speedSet.setActionCommand("speed");
-    bottom.add(speedLabel);
-    bottom.add(speedIn);
-    bottom.add(speedSet);
-
 
     slider = new JSlider(JSlider.HORIZONTAL, 10, 200, 50);
     slider.setMajorTickSpacing(10);
@@ -144,24 +128,6 @@ public class PlaybackViewImpl extends AbstractVisualView {
     return this.runner;
   }
 
-  /**
-   *
-   */
-  @Override
-  public void setSpeed() {
-    String text = speedIn.getText();
-    int newSpeed;
-    try {
-      newSpeed = Integer.parseInt(text);
-      if (newSpeed > 0) {
-        runner.setTicksPerSecond(newSpeed);
-      }
-    } catch (NumberFormatException err) {
-
-    }
-    speedIn.setText("");
-  }
-
   public void togglePlayText() {
     if (runner.isRunning()) {
       playButton.setText("Pause");
@@ -169,7 +135,7 @@ public class PlaybackViewImpl extends AbstractVisualView {
     else {
       playButton.setText("Play");
     }
-
+    validate();
   }
 
   public void setAnimSpeed() {
@@ -186,7 +152,6 @@ public class PlaybackViewImpl extends AbstractVisualView {
     playButton.addActionListener(e);
     restartButton.addActionListener(e);
     loopBox.addActionListener(e);
-    speedSet.addActionListener(e);
   }
 
   public void setChangeListener(ChangeListener e) {

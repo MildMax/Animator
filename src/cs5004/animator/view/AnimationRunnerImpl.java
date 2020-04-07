@@ -89,14 +89,14 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
     } else {
       timer.start();
     }
-    //togglePlayText();
+    togglePlayText();
   }
 
   @Override
   public void setTicksPerSecond(int ticksPerSecond) {
     ticksPerSecond = (int)Math.round((double)ticksPerSecond / 10) * 10;
     double newTPF = (double)ticksPerSecond / (double)fps;
-    frames = (int)((frames * ticksPerFrame) / newTPF);
+    frames = (int)Math.round((frames * ticksPerFrame) / newTPF);
     ticksPerFrame = newTPF;
   }
 

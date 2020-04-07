@@ -26,9 +26,6 @@ public class ButtonListener implements ActionListener {
       case "loop":
         v.getRunner().toggleLoop();
         break;
-      case "speed":
-        v.setSpeed();
-        break;
     }
   }
 }

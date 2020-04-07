@@ -113,11 +113,6 @@ public abstract class AbstractTextView implements AnimationView {
   }
 
   @Override
-  public void setSpeed() {
-    throw new UnsupportedOperationException("Text views do not allow for setting speed");
-  }
-
-  @Override
   public void setCommandListener(ActionListener e) {
     throw new UnsupportedOperationException("Text views do not require command listener");
   }

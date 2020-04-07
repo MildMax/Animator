@@ -85,11 +85,6 @@ public class VisualViewImpl extends AbstractVisualView {
   }
 
   @Override
-  public void setSpeed() {
-    throw new UnsupportedOperationException("Visual view does not allow for setting speed");
-  }
-
-  @Override
   public void setCommandListener(ActionListener e) {
     throw new UnsupportedOperationException("Visual view does not require command listener");
   }

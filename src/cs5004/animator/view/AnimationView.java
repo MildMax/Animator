@@ -50,11 +50,6 @@ public interface AnimationView {
   AnimationRunner getRunner();
 
   /**
-   * Sets the speed of the animation.
-   */
-  void setSpeed();
-
-  /**
    * Sets the command listener for interactive aspects of the view.
    *
    * @param e an ActionListener that handles executing methods for a the view
