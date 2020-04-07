@@ -43,25 +43,33 @@ public class PlaybackViewImpl extends AbstractVisualView {
 
     //set up bottom component
     bottom = new JPanel();
-    //bottom.setLayout(new BoxLayout(bottom, BoxLayout.X_AXIS));
-    GridBagLayout layout = new GridBagLayout();
-    bottom.setLayout(layout);
+    GridBagLayout bottomLayout = new GridBagLayout();
+    bottom.setLayout(bottomLayout);
+
+    JPanel leftPanel = new JPanel();
+    GridBagLayout leftLayout = new GridBagLayout();
+    leftPanel.setLayout(leftLayout);
+
+    JPanel buttonPanel = new JPanel();
+    GridBagLayout buttonLayout = new GridBagLayout();
+    buttonPanel.setLayout(buttonLayout);
+
     GridBagConstraints c = new GridBagConstraints();
-    c.insets = new Insets(0, 5, 0, 5);
+    c.insets = new Insets(5, 5, 5, 5);
 
     //pause/playbutton setup
     playButton = new JButton("Play");
     playButton.setPreferredSize(buttonDims);
     playButton.setActionCommand("play");
-    bottom.add(playButton);
-    layout.setConstraints(playButton, c);
+    buttonPanel.add(playButton);
+    buttonLayout.setConstraints(playButton, c);
 
     //restart button setup
     restartButton = new JButton("Restart");
     restartButton.setPreferredSize(buttonDims);
     restartButton.setActionCommand("restart");
-    bottom.add(restartButton);
-    layout.setConstraints(restartButton, c);
+    buttonPanel.add(restartButton);
+    buttonLayout.setConstraints(restartButton, c);
 
     //loop button setup
     JPanel loopPanel = new JPanel();
@@ -71,7 +79,17 @@ public class PlaybackViewImpl extends AbstractVisualView {
     loopBox.setActionCommand("loop");
     loopPanel.add(loopLabel);
     loopPanel.add(loopBox);
-    bottom.add(loopPanel);
+    buttonPanel.add(loopPanel);
+
+    JTextArea clickText = new JTextArea();
+    clickText.setText("Click the screen to pause/play animation!");
+
+    c.gridy = 1;
+
+    leftPanel.add(buttonPanel);
+    leftPanel.add(clickText);
+    leftLayout.setConstraints(clickText, c);
+    bottom.add(leftPanel);
 
     //slider component setup
     slider = new JSlider(JSlider.HORIZONTAL, 10, 200, 50);
