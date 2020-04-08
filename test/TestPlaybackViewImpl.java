@@ -1,19 +1,13 @@
 import org.junit.Test;
-
-import java.nio.file.Paths;
+import static org.junit.Assert.assertEquals;
 
 import cs5004.animator.model.AnimationModel;
 import cs5004.animator.model.AnimationModelImpl;
 import cs5004.animator.model.shapes.ShapeImpl;
 import cs5004.animator.model.shapes.ShapeType;
 import cs5004.animator.model.transformations.TransformationImpl;
-import cs5004.animator.view.AnimationRunner;
-import cs5004.animator.view.AnimationRunnerImpl;
 import cs5004.animator.view.AnimationView;
 import cs5004.animator.view.PlaybackViewImpl;
-import cs5004.animator.view.SVGViewImpl;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * This class tests the class PlaybackViewImpl.
@@ -148,6 +142,16 @@ public class TestPlaybackViewImpl {
   public void test0013() {
     PlaybackViewImpl view1 = new PlaybackViewImpl(10,10, 100,
             100, 100, 100, 100);
+
+    AnimationModel m = new AnimationModelImpl(0, 0, 100, 100);
+    m.addShape(new ShapeImpl("rect", ShapeType.RECTANGLE, 1));
+    m.addTransformation("rect", new TransformationImpl("rect",
+            0, 10, 10, 10, 10, 255, 255, 255, 50,
+            20, 20, 40, 40, 120, 120, 120));
+    view1.run(m);
+    view1.getRunner().startAnim();
+
+    assertEquals(true, view1.getRunner().isRunning());
   }
 
   /**
