@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.swing.event.ChangeListener;
+
 import cs5004.animator.model.shapes.Shape;
 
 /**
@@ -120,6 +122,7 @@ public abstract class AbstractTextView implements AnimationView {
   /**
    * Is overridden and nullified -- textual views do not utilize CommandListeners.
    *
+   * @param e takes an ActionListener to be assigned to buttons in a view.
    * @throws UnsupportedOperationException text view does not utilize CommandListeners.
    */
   @Override
@@ -128,8 +131,20 @@ public abstract class AbstractTextView implements AnimationView {
   }
 
   /**
+   * Is overridden and nullified -- textual views do not utilize ChangeListeners.
+   *
+   * @param e the ChangeListener to be set to the TicksPerSecondSlider in the Playback view.
+   * @throws UnsupportedOperationException
+   */
+  @Override
+  public void setChangeListener(ChangeListener e) throws UnsupportedOperationException {
+    throw new UnsupportedOperationException("Text views do not utilize ChangeListeners");
+  }
+
+  /**
    * Is overridden and nullified -- textual views do not utilize MouseListeners.
    *
+   * @param listener takes a MouseListener to be assigned to the AnimationView window
    * @throws UnsupportedOperationException text view does not utilize MouseListeners.
    */
   @Override

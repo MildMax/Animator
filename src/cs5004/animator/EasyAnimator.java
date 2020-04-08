@@ -15,7 +15,8 @@ import cs5004.animator.view.TextViewImpl;
 import cs5004.animator.view.VisualViewImpl;
 
 /**
- * Plays the animation and manages interaction between the view and the model.
+ * Initializes the Model, View and Controller for the animation. Contains static main method
+ * for running the program.
  */
 public final class EasyAnimator {
 
@@ -27,8 +28,8 @@ public final class EasyAnimator {
 
   /**
    * Plays the animation according to supplied command line arguments. Displays error messages
-   * to the screen for bad input to command line arguments. Creates AnimationModel and
-   * AnimationView as specified by command line arguments.
+   * to the screen for bad input to command line arguments. Creates AnimationModel,
+   * AnimationView and AnimationController as specified by command line arguments.
    *
    * @param args command line arguments specifying the type of view, the speed of the animation,
    *             the input file, and the output file.

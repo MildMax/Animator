@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 import javax.swing.JDialog;
+import javax.swing.event.ChangeListener;
 
 import cs5004.animator.model.AnimationModel;
 import cs5004.animator.model.shapes.Shape;
@@ -55,15 +56,27 @@ public interface AnimationView {
    *
    * @param e an ActionListener that handles executing methods for a the view
    *          based on user interaction.
+   * @throws IllegalArgumentException if ActionListener e is null.
    */
-  void setCommandListener(ActionListener e);
+  void setCommandListener(ActionListener e) throws IllegalArgumentException;
 
   /**
-   * Takes a MouseListener object and assigns it to a component in the view.
+   * Sets the ChangeListener to components in the view that respond to a measurable
+   * change in state.
    *
-   * @param listener the listener to be attached to the object in the view.
+   * @param e the ChangeListener to be set to an object in the view.
+   * @throws IllegalArgumentException if the ChangeListener is null.
    */
-  void setMouseListener(MouseListener listener);
+  void setChangeListener(ChangeListener e) throws IllegalArgumentException;
+
+
+    /**
+     * Takes a MouseListener object and assigns it to a component in the view.
+     *
+     * @param listener the listener to be attached to an object in the view.
+     * @throws IllegalArgumentException if the MouseListener is null.
+     */
+  void setMouseListener(MouseListener listener) throws IllegalArgumentException;
 
   /**
    * Returns a String with the contents written to the specified out file

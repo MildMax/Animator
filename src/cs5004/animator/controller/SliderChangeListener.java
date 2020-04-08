@@ -12,7 +12,7 @@ import cs5004.animator.view.PlaybackViewImpl;
  */
 public class SliderChangeListener implements ChangeListener {
 
-  AnimationView view;
+  private AnimationView view;
 
   /**
    * Takes an AnimationView object that contains the slider that the current class is

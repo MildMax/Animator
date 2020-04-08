@@ -42,10 +42,11 @@ public class PlaybackViewImpl extends AbstractVisualView {
   private JCheckBox loopBox;
   private JSlider slider;
 
-  private int buttonWidth = 75;
-  private int bottomHeight = 75;
+  private final int buttonWidth = 75;
+  private final int buttonHeight = 25;
+  private final int bottomHeight = 75;
 
-  private final Dimension buttonDims = new Dimension(buttonWidth, 25);
+  private final Dimension buttonDims = new Dimension(buttonWidth, buttonHeight);
 
   /**
    * Formats the window the animation will be played in. Takes two ints indicating the x and y
@@ -136,6 +137,15 @@ public class PlaybackViewImpl extends AbstractVisualView {
 
     //slider component setup
     slider = new JSlider(JSlider.HORIZONTAL, 10, 200, 50);
+    if (this.ticksPerSecond < 10) {
+      slider.setValue(10);
+    }
+    else if (this.ticksPerSecond > 200) {
+      slider.setValue(200);
+    }
+    else {
+      slider.setValue(this.ticksPerSecond);
+    }
     slider.setMajorTickSpacing(10);
     slider.setPaintTicks(true);
     Hashtable<Integer, JLabel> labelTable = new Hashtable();
@@ -176,21 +186,6 @@ public class PlaybackViewImpl extends AbstractVisualView {
   }
 
   /**
-   * Runs the visual animation in a window displayed on screen.
-   *
-   * @param m takes an AnimationModel that stores an animation to be written to
-   * @throws IllegalArgumentException if AnimationModel m is null.
-   */
-  @Override
-  public void run(AnimationModel m) throws IllegalArgumentException {
-    if (m == null) {
-      throw new IllegalArgumentException("Animation Model cannot be null.");
-    }
-    runner = new AnimationRunnerImpl(m, this, this.ticksPerSecond);
-    runner.openWindow();
-  }
-
-  /**
    * Returns the AnimationRunner running the current animation.
    *
    * @return the AnimationRunner running the current animation.
@@ -224,7 +219,7 @@ public class PlaybackViewImpl extends AbstractVisualView {
   }
 
   /**
-   * Sets the command listener to be attached to the play/pause button, the restart button, and
+   * Sets an ActionListener e to be attached to the play/pause button, the restart button, and
    * the loop checkbox.
    *
    * @param e an ActionListener that handles executing methods for a the view
@@ -246,6 +241,7 @@ public class PlaybackViewImpl extends AbstractVisualView {
    * @param e the ChangeListener to be set to the TicksPerSecondSlider in the Playback view.
    * @throws IllegalArgumentException if the ChangeListener is null.
    */
+  @Override
   public void setChangeListener(ChangeListener e) throws IllegalArgumentException {
     if (e == null) {
       throw new IllegalArgumentException("ChangeListener cannot be null");
@@ -269,17 +265,6 @@ public class PlaybackViewImpl extends AbstractVisualView {
   }
 
   /**
-   * Throws UnsupportedOperationException since visual view does not write any data to a file.
-   *
-   * @return always throws exception.
-   * @throws UnsupportedOperationException since visual views do not write any data to a file.
-   */
-  @Override
-  public String getOutFileContents() throws UnsupportedOperationException {
-    throw new UnsupportedOperationException("VisualView does not support getting file contents");
-  }
-
-  /**
    * Get the playButton.
    *
    * @return playButton.
@@ -289,9 +274,9 @@ public class PlaybackViewImpl extends AbstractVisualView {
   }
 
   /**
-   * Get the playButton.
+   * Get the restartButton.
    *
-   * @return playButton.
+   * @return restartButton.
    */
   public JButton getRestartButton() {
     return this.restartButton;

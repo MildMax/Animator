@@ -10,8 +10,8 @@ import cs5004.animator.view.PlaybackViewImpl;
  */
 public class AnimationControllerImpl implements AnimationController {
 
-  AnimationModel m;
-  AnimationView v;
+  private AnimationModel m;
+  private AnimationView v;
 
   /**
    * The AnimationControllerImpl takes a model that holds data for the animation and a view

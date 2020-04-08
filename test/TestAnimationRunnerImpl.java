@@ -83,7 +83,7 @@ public class TestAnimationRunnerImpl {
     PlaybackViewImpl view1 = new PlaybackViewImpl(10,10, 100,
             100, 100, 100, 100);
     AnimationRunner ar1 = new AnimationRunnerImpl(model1, view1, 10);
-    ar1.openWindow();
+    view1.openView();
   }
 
   /**
@@ -125,7 +125,7 @@ public class TestAnimationRunnerImpl {
             0, 0, 10, 30, 50, 50, 50, 40, 40, 40,
             40, 60, 150, 150, 150));
     AnimationRunnerImpl ar1 = new AnimationRunnerImpl(model1, view1, 10);
-    ar1.openWindow();
+    view1.openView();
     view1.run(model1);
     ar1.startAnim();
   }
@@ -148,7 +148,7 @@ public class TestAnimationRunnerImpl {
             0, 0, 10, 30, 50, 50, 50, 40, 40, 40,
             40, 60, 150, 150, 150));
     AnimationRunnerImpl ar1 = new AnimationRunnerImpl(model1, view1, 10);
-    ar1.openWindow();
+    view1.openView();
     view1.run(model1);
     ar1.startAnim();
     assertEquals(true, ar1.getTimer().isRunning());
@@ -173,7 +173,7 @@ public class TestAnimationRunnerImpl {
             0, 0, 10, 30, 50, 50, 50, 40, 40, 40,
             40, 60, 150, 150, 150));
     AnimationRunnerImpl ar1 = new AnimationRunnerImpl(model1, view1, 10);
-    ar1.openWindow();
+    view1.openView();
     view1.run(model1);
     ar1.startAnim();
     assertEquals(false, ar1.getIsLooping());
@@ -205,7 +205,7 @@ public class TestAnimationRunnerImpl {
             0, 0, 10, 30, 50, 50, 50, 40, 40, 40,
             40, 60, 150, 150, 150));
     AnimationRunnerImpl ar1 = new AnimationRunnerImpl(model1, view1, 10);
-    ar1.openWindow();
+    view1.openView();
     view1.run(model1);
     ar1.startAnim();
     assertEquals(true, ar1.getTimer().isRunning());
@@ -256,7 +256,7 @@ public class TestAnimationRunnerImpl {
             0, 0, 10, 30, 50, 50, 50, 40, 40, 40,
             40, 60, 150, 150, 150));
     AnimationRunnerImpl ar1 = new AnimationRunnerImpl(model1, view1, 10);
-    ar1.openWindow();
+    view1.openView();
     view1.run(model1);
     ar1.startAnim();
     assertEquals(0, ar1.getFrames());
@@ -282,7 +282,7 @@ public class TestAnimationRunnerImpl {
             0, 0, 10, 30, 50, 50, 50, 40, 40, 40,
             40, 60, 150, 150, 150));
     AnimationRunnerImpl ar1 = new AnimationRunnerImpl(model1, view1, 10);
-    ar1.openWindow();
+    view1.openView();
     view1.run(model1);
     assertEquals(60, ar1.getFPS());
   }

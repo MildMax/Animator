@@ -52,13 +52,8 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
   }
 
   /**
-   * Runs the timer in the Listener.
+   * Starts the animation. Toggles play text upon starting.
    */
-  @Override
-  public void openWindow() {
-    view.openView();
-  }
-
   @Override
   public void startAnim() {
     timer.start();

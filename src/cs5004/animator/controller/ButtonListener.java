@@ -11,7 +11,7 @@ import cs5004.animator.view.AnimationView;
  */
 public class ButtonListener implements ActionListener {
 
-  AnimationView v;
+  private AnimationView v;
 
   /**
    * Constructor takes an AnimationView that the ButtonListener listens to and modifies based on

@@ -6,7 +6,6 @@ import cs5004.animator.model.AnimationModelImpl;
 import cs5004.animator.model.shapes.ShapeImpl;
 import cs5004.animator.model.shapes.ShapeType;
 import cs5004.animator.model.transformations.TransformationImpl;
-import cs5004.animator.view.AnimationView;
 import cs5004.animator.view.PlaybackViewImpl;
 
 /**

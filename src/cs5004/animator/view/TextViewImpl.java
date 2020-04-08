@@ -50,7 +50,7 @@ public class TextViewImpl extends AbstractTextView {
    *
    * @param m takes an AnimationModel that stores an animation.
    * @throws IllegalArgumentException if the AnimationModel is null.
-   * @throws IllegalStateException if the FileWriter cannot be written to.
+   * @throws IllegalStateException if the out file cannot be written to.
    *                               If System.out cannot be written to.
    */
   @Override

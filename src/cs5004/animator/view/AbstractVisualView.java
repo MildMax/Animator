@@ -1,9 +1,8 @@
 package cs5004.animator.view;
 
-import java.awt.*;
+import java.awt.Dimension;
 import java.util.List;
 
-import javax.swing.JPanel;
 import javax.swing.JFrame;
 
 import cs5004.animator.model.AnimationModel;
@@ -112,7 +111,7 @@ public abstract class AbstractVisualView extends JFrame implements AnimationView
       throw new IllegalArgumentException("Animation Model cannot be null.");
     }
     runner = new AnimationRunnerImpl(m, this, this.ticksPerSecond);
-    runner.openWindow();
+    openView();
   }
 
   /**

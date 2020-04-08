@@ -7,11 +7,6 @@ package cs5004.animator.view;
 public interface AnimationRunner {
 
   /**
-   * Opens the window the animation will be displayed on.
-   */
-  void openWindow();
-
-  /**
    * Starts the animation.
    */
   void startAnim();

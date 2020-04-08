@@ -7,6 +7,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.event.ChangeListener;
 
 import cs5004.animator.model.AnimationModel;
 
@@ -67,39 +68,43 @@ public class VisualViewImpl extends AbstractVisualView {
   }
 
   /**
-   * Throws UnsupportedOperationException since visual view does not write any data to a file.
+   * Is overridden and nullified -- VisualView not require getting the AnimationRunnerImpl.
    *
-   * @return always throws exception.
-   * @throws UnsupportedOperationException since visual views do not write any data to a file.
-   */
-  @Override
-  public String getOutFileContents() throws UnsupportedOperationException {
-    throw new UnsupportedOperationException("VisualView does not support getting file contents");
-  }
-
-  /**
-   * Is overridden and nullified -- VisualView not utilize an AnimationRunner.
-   *
-   * @throws UnsupportedOperationException Visual View does not utilize an AnimationRunner.
+   * @throws UnsupportedOperationException Visual View does not require getting the
+   *                                       AnimationRunnerImpl.
    */
   @Override
   public AnimationRunnerImpl getRunner() throws UnsupportedOperationException {
-    throw new UnsupportedOperationException("Text views do not support getting runner");
+    throw new UnsupportedOperationException("VisualViewImpl does not require getting the" +
+            "AnimationRunnerImpl");
   }
 
   /**
-   * Is overridden and nullified -- VisualView does not utilize CommandListeners.
+   * Is overridden and nullified -- VisualViewImpl does not utilize CommandListeners.
    *
-   * @throws UnsupportedOperationException text view does not utilize CommandListeners.
+   * @param e takes an ActionListener to be assigned to buttons in a view.
+   * @throws UnsupportedOperationException VisualViewImpl does not utilize CommandListeners.
    */
   @Override
   public void setCommandListener(ActionListener e) {
-    throw new UnsupportedOperationException("Text views do not require command listener");
+    throw new UnsupportedOperationException("VisualViewImpl does not require command listener");
+  }
+
+  /**
+   * Is overridden and nullified -- VisualViewImpl does not utilize ChangeListers.
+   *
+   * @param e the ChangeListener to be set to an object in the view.
+   * @throws UnsupportedOperationException VisualViewImpl does not utilize ChangeListeners.
+   */
+  @Override
+  public void setChangeListener(ChangeListener e) throws UnsupportedOperationException {
+    throw new UnsupportedOperationException("VisualViewImpl does not require change listener");
   }
 
   /**
    * Is overridden and nullified -- VisualView does not utilize MouseListeners.
    *
+   * @param listener takes a MouseListener to be assigned to an object in the view.
    * @throws UnsupportedOperationException text view does not utilize MouseListeners.
    */
   @Override

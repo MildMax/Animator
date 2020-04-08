@@ -11,7 +11,7 @@ import cs5004.animator.view.AnimationRunner;
  */
 public class TogglePlayMouseListener extends MouseAdapter {
 
-  AnimationRunner runner;
+  private AnimationRunner runner;
 
   /**
    * Takes an AnimationRunner that is running the current animation and stores it in the
