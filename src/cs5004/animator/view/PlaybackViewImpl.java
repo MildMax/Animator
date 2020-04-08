@@ -207,4 +207,31 @@ public class PlaybackViewImpl extends AbstractVisualView {
   public String getOutFileContents() throws UnsupportedOperationException {
     throw new UnsupportedOperationException("VisualView does not support getting file contents");
   }
+
+  /**
+   * Get the playButton.
+   *
+   * @return playButton.
+   */
+  public JButton getPlayButton() {
+    return this.playButton;
+  }
+
+  /**
+   * Get the playButton.
+   *
+   * @return playButton.
+   */
+  public JButton getRestartButton() {
+    return this.restartButton;
+  }
+
+  /**
+   * Get loopBox.
+   *
+   * @return loopBox.
+   */
+  public JCheckBox getLoopBox() {
+    return this.loopBox;
+  }
 }

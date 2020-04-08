@@ -12,7 +12,6 @@ import cs5004.animator.view.PlaybackViewImpl;
 /**
  * This class tests the class PlaybackViewImpl.
  */
-
 public class TestPlaybackViewImpl {
 
   /**
