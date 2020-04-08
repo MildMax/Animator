@@ -160,6 +160,7 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
 
   /**
    * Get ticksPerFrame.
+   * Method only exists for testing purposes.
    *
    * @return ticksPerFrame.
    */
@@ -169,6 +170,7 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
 
   /**
    * Get the timer.
+   * Method only exists for testing purposes.
    *
    * @return timer.
    */
@@ -178,6 +180,7 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
 
   /**
    * Get the looping status.
+   * Method only exists for testing purposes.
    *
    * @return the looping status.
    */
@@ -186,7 +189,8 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
   }
 
   /**
-   *  Get frames.
+   * Get frames.
+   * Method only exists for testing purposes.
    *
    * @return frames.
    */
@@ -196,6 +200,7 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
 
   /**
    * Get fps.
+   * Method only exists for testing purposes.
    *
    * @return fps.
    */
@@ -205,6 +210,7 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
 
   /**
    * Get the view.
+   * Method only exists for testing purposes.
    *
    * @return the view.
    */
@@ -214,6 +220,7 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
 
   /**
    * Get the model.
+   * Method only exists for testing purposes.
    *
    * @return the model.
    */

@@ -266,6 +266,7 @@ public class PlaybackViewImpl extends AbstractVisualView {
 
   /**
    * Get the playButton.
+   * Method only exists for testing purposes.
    *
    * @return playButton.
    */
@@ -284,6 +285,7 @@ public class PlaybackViewImpl extends AbstractVisualView {
 
   /**
    * Get loopBox.
+   * Method only exists for testing purposes.
    *
    * @return loopBox.
    */

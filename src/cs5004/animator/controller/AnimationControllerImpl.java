@@ -45,4 +45,21 @@ public class AnimationControllerImpl implements AnimationController {
     }
   }
 
+  /**
+   * Get the model. This class only exists for testing purposes.
+   *
+   * @return the model.
+   */
+  public AnimationModel getAnimationModel() {
+    return this.m;
+  }
+
+  /**
+   * Get the view. This class only exists for testing purposes.
+   *
+   * @return the view.
+   */
+  public AnimationView getAnimationView() {
+    return this.v;
+  }
 }
