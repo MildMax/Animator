@@ -161,4 +161,67 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
       ((PlaybackViewImpl) view).togglePlayText();
     }
   }
+
+  /**
+   * Get ticksPerFrame.
+   *
+   * @return ticksPerFrame.
+   */
+  public double getTicksPerFrame() {
+    return this.ticksPerFrame;
+  }
+
+  /**
+   * Get the timer.
+   *
+   * @return timer.
+   */
+  public Timer getTimer() {
+    return this.timer;
+  }
+
+  /**
+   * Get the looping status.
+   *
+   * @return the looping status.
+   */
+  public boolean getIsLooping() {
+    return this.isLooping;
+  }
+
+  /**
+   *  Get frames.
+   *
+   * @return frames.
+   */
+  public int getFrames() {
+    return this.frames;
+  }
+
+  /**
+   * Get fps.
+   *
+   * @return fps.
+   */
+  public int getFPS() {
+    return this.fps;
+  }
+
+  /**
+   * Get the view.
+   *
+   * @return the view.
+   */
+  public PlaybackViewImpl getView() {
+    return (PlaybackViewImpl) this.view;
+  }
+
+  /**
+   * Get the model.
+   *
+   * @return the model.
+   */
+  public AnimationModel getModel() {
+    return this.model;
+  }
 }
