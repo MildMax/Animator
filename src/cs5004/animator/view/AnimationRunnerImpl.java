@@ -145,6 +145,7 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
       }
       else {
         timer.stop();
+        togglePlayText();
       }
       return;
     }
