@@ -60,6 +60,7 @@ public class PlaybackViewImpl extends AbstractVisualView {
     //pause/playbutton setup
     playButton = new JButton("Play");
     playButton.setPreferredSize(buttonDims);
+    playButton.setMinimumSize(buttonDims);
     playButton.setActionCommand("play");
     buttonPanel.add(playButton);
     buttonLayout.setConstraints(playButton, c);
@@ -67,6 +68,7 @@ public class PlaybackViewImpl extends AbstractVisualView {
     //restart button setup
     restartButton = new JButton("Restart");
     restartButton.setPreferredSize(buttonDims);
+    restartButton.setMinimumSize(buttonDims);
     restartButton.setActionCommand("restart");
     buttonPanel.add(restartButton);
     buttonLayout.setConstraints(restartButton, c);
@@ -118,9 +120,15 @@ public class PlaybackViewImpl extends AbstractVisualView {
     splitPane.setResizeWeight(1);
     splitPane.setBottomComponent(bottom);
 
+    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    if (screenSize.height < (windowHeight + bottomHeight)) {
+      int buffer = 50;
+      splitPane.setDividerLocation(screenSize.height - (buffer * 2) - bottomHeight);
+      this.setPreferredSize(new Dimension(windowWidth, screenSize.height - buffer));
+    }
+
     //set up JFrame
-    this.getContentPane().add(splitPane);
-    this.setBounds(x, y, windowWidth, windowHeight + bottomHeight);
+    this.add(splitPane);
     this.setTitle("Easy Animator");
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.pack();

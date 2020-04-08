@@ -7,7 +7,7 @@ package cs5004.animator.controller;
 public interface AnimationController {
 
   /**
-   * Runs the animation.
+   * Runs the animation by providing information from the model to the view.
    */
   void go();
 }

@@ -4,8 +4,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import cs5004.animator.view.AnimationRunner;
-import cs5004.animator.view.AnimationView;
-import cs5004.animator.view.PlaybackViewImpl;
 
 public class TogglePlayMouseListener extends MouseAdapter {
 
