@@ -3,14 +3,12 @@ package cs5004.animator.view;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
-import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
 import cs5004.animator.model.AnimationModel;
-import cs5004.animator.model.shapes.Shape;
 
 /**
  * This class displays a window with an animation of simple shapes
@@ -79,18 +77,34 @@ public class VisualViewImpl extends AbstractVisualView {
     throw new UnsupportedOperationException("VisualView does not support getting file contents");
   }
 
+  /**
+   * Is overridden and nullified -- VisualView not utilize an AnimationRunner.
+   *
+   * @throws UnsupportedOperationException Visual View does not utilize an AnimationRunner.
+   */
   @Override
-  public AnimationRunnerImpl getRunner() {
-    throw new UnsupportedOperationException("Visual view does not support getting runner");
+  public AnimationRunnerImpl getRunner() throws UnsupportedOperationException {
+    throw new UnsupportedOperationException("Text views do not support getting runner");
   }
 
+  /**
+   * Is overridden and nullified -- VisualView does not utilize CommandListeners.
+   *
+   * @throws UnsupportedOperationException text view does not utilize CommandListeners.
+   */
   @Override
   public void setCommandListener(ActionListener e) {
-    throw new UnsupportedOperationException("Visual view does not require command listener");
+    throw new UnsupportedOperationException("Text views do not require command listener");
   }
 
+  /**
+   * Is overridden and nullified -- VisualView does not utilize MouseListeners.
+   *
+   * @throws UnsupportedOperationException text view does not utilize MouseListeners.
+   */
   @Override
   public void setMouseListener(MouseListener listener) {
-    throw new UnsupportedOperationException("Visual vies does not require mouse listener");
+    throw new UnsupportedOperationException("Text views do not require mouse listener");
   }
+
 }

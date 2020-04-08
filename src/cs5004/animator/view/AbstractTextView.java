@@ -107,16 +107,31 @@ public abstract class AbstractTextView implements AnimationView {
     throw new UnsupportedOperationException("Text-based outputs do not support drawing frames");
   }
 
+  /**
+   * Is overridden and nullified -- textual views do not utilize an AnimationRunner.
+   *
+   * @throws UnsupportedOperationException text view does not utilize an AnimationRunner.
+   */
   @Override
-  public AnimationRunnerImpl getRunner() {
+  public AnimationRunnerImpl getRunner() throws UnsupportedOperationException {
     throw new UnsupportedOperationException("Text views do not support getting runner");
   }
 
+  /**
+   * Is overridden and nullified -- textual views do not utilize CommandListeners.
+   *
+   * @throws UnsupportedOperationException text view does not utilize CommandListeners.
+   */
   @Override
   public void setCommandListener(ActionListener e) {
     throw new UnsupportedOperationException("Text views do not require command listener");
   }
 
+  /**
+   * Is overridden and nullified -- textual views do not utilize MouseListeners.
+   *
+   * @throws UnsupportedOperationException text view does not utilize MouseListeners.
+   */
   @Override
   public void setMouseListener(MouseListener listener) {
     throw new UnsupportedOperationException("Text views do not require mouse listener");

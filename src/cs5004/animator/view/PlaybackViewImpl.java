@@ -1,15 +1,36 @@
 package cs5004.animator.view;
 
-import java.awt.*;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Dimension;
+import java.awt.Insets;
+import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.util.Hashtable;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
+import javax.swing.JScrollPane;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JSlider;
+import javax.swing.JLabel;
+import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
+import javax.swing.JFrame;
+import javax.swing.BorderFactory;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.event.ChangeListener;
 
 import cs5004.animator.model.AnimationModel;
 
+/**
+ * The PlaybackViewImpl class plays an animation in an interactive window that allows for playing,
+ * pausing, looping and changing speed of the animation. Extends the AbstractVisualView class
+ * which implements the AnimationView interface.
+ */
 public class PlaybackViewImpl extends AbstractVisualView {
 
   private JSplitPane splitPane;
@@ -26,6 +47,26 @@ public class PlaybackViewImpl extends AbstractVisualView {
 
   private final Dimension buttonDims = new Dimension(buttonWidth, 25);
 
+  /**
+   * Formats the window the animation will be played in. Takes two ints indicating the x and y
+   * position of the window, two ints indicating the width and height of the window, two ints
+   * indicating the overall width and height of the animation, and an int indicating the ticks
+   * per second of the animation. If the size of the window specified is larger than the screen,
+   * reformats the window to fit within the current screen.
+   *
+   * @param x the x position of the window on the screen.
+   * @param y the y position of the window on the screen.
+   * @param windowWidth the width of the window.
+   * @param windowHeight the height of the window.
+   * @param maxWidth the width of the animation.
+   * @param maxHeight the height of the animation.
+   * @param ticksPerSecond the ticks per second of the animation.
+   * @throws IllegalArgumentException if the x or y values indicating the position of the
+   *                                  upper left corner of the display are less than 0.
+   *                                  If the width or height values of the display window are less
+   *                                  than or equal to 0.
+   *                                  If the specified ticks per second is less than 1.
+   */
   public PlaybackViewImpl(int x, int y, int windowWidth, int windowHeight,
                           int maxWidth, int maxHeight, int ticksPerSecond)
           throws IllegalArgumentException {
@@ -150,14 +191,19 @@ public class PlaybackViewImpl extends AbstractVisualView {
   }
 
   /**
+   * Returns the AnimationRunner running the current animation.
    *
-   * @return
+   * @return the AnimationRunner running the current animation.
    */
   @Override
   public AnimationRunner getRunner() {
     return this.runner;
   }
 
+  /**
+   * Toggles the text on the Play/Pause button. If the animation is playing, displays "Pause", if
+   * the animation is not playing, displays "Play".
+   */
   public void togglePlayText() {
     if (runner.isRunning()) {
       playButton.setText("Pause");
@@ -168,32 +214,57 @@ public class PlaybackViewImpl extends AbstractVisualView {
     validate();
   }
 
+  /**
+   * Sets the speed of the animation according to the value specified by the Ticks Per Second
+   * slider on the display.
+   */
   public void setAnimSpeed() {
     int val = slider.getValue();
     runner.setTicksPerSecond(val);
   }
 
   /**
+   * Sets the command listener to be attached to the play/pause button, the restart button, and
+   * the loop checkbox.
    *
    * @param e an ActionListener that handles executing methods for a the view
+   * @throws IllegalArgumentException if the ActionListener e is null.
    */
   @Override
-  public void setCommandListener(ActionListener e) {
+  public void setCommandListener(ActionListener e) throws IllegalArgumentException {
+    if (e == null) {
+      throw new IllegalArgumentException("ActionListener is null");
+    }
     playButton.addActionListener(e);
     restartButton.addActionListener(e);
     loopBox.addActionListener(e);
   }
 
-  public void setChangeListener(ChangeListener e) {
+  /**
+   * Sets the ChangeListener to the Ticks Per Second slider in the PlaybackView.
+   *
+   * @param e the ChangeListener to be set to the TicksPerSecondSlider in the Playback view.
+   * @throws IllegalArgumentException if the ChangeListener is null.
+   */
+  public void setChangeListener(ChangeListener e) throws IllegalArgumentException {
+    if (e == null) {
+      throw new IllegalArgumentException("ChangeListener cannot be null");
+    }
     slider.addChangeListener(e);
   }
 
   /**
+   * Sets a MouseListener object that listens to the clicks on the AnimationView
+   * animation window.
    *
-   * @param listener the listener to be attached to the object in the view.
+   * @param listener the listener to be attached to the animation window.
+   * @throws IllegalArgumentException if the MouseListener is null.
    */
   @Override
-  public void setMouseListener(MouseListener listener) {
+  public void setMouseListener(MouseListener listener) throws IllegalArgumentException {
+    if (listener == null) {
+      throw new IllegalArgumentException("MouseListener cannot be null");
+    }
     shapePanel.addMouseListener(listener);
   }
 

@@ -3,19 +3,47 @@ package cs5004.animator.view;
 import java.awt.*;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JFrame;
 
 import cs5004.animator.model.AnimationModel;
 import cs5004.animator.model.shapes.Shape;
 
+/**
+ * The AbstractVisualView class contains methods relevant to AnimationViews
+ * that display the animation on screen in a visual format. Extends the JFrame
+ * class and implements the AnimationView interface.
+ */
 public abstract class AbstractVisualView extends JFrame implements AnimationView {
 
   protected ShapePanel shapePanel;
   protected AnimationRunner runner;
   protected int ticksPerSecond;
 
+  /**
+   * The AbstractVisualView constructor takes two ints x and y indicating the position
+   * of the window, two ints windowWidth and windowHeight indicating the width and
+   * height of the window displaying the animation, two ints maxWidth and maxHeight
+   * indicating the total size of the animation and an int indicating the ticks per second
+   * of the animation. Checks for invalid parameter arguments. Initializes
+   * JPanel shapes are drawn to.
+   *
+   * @param x the left x coordinate of the window.
+   * @param y the upper y coordinate of the window
+   * @param windowWidth the width of the window displaying the animation.
+   * @param windowHeight the height of the window displaying the animation.
+   * @param maxWidth the overall width of the animation.
+   * @param maxHeight the overall height of the animation.
+   * @param ticksPerSecond the ticks per second the animation will be played at.
+   * @throws IllegalArgumentException if the x or y values indicating the position of the
+   *                                  upper left corner of the display are less than 0.
+   *                                  If the width or height values of the display window are less
+   *                                  than or equal to 0.
+   *                                  If the specified ticks per second is less than 1.
+   */
   public AbstractVisualView(int x, int y, int windowWidth, int windowHeight,
-                            int maxWidth, int maxHeight, int ticksPerSecond) {
+                            int maxWidth, int maxHeight, int ticksPerSecond)
+          throws IllegalArgumentException {
     if (windowWidth <= 0 || windowHeight <= 0) {
       throw new IllegalArgumentException("Width and height must be greater"
               + "than 0");

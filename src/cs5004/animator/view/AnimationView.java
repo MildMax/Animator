@@ -4,7 +4,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
+import javax.swing.JDialog;
 
 import cs5004.animator.model.AnimationModel;
 import cs5004.animator.model.shapes.Shape;

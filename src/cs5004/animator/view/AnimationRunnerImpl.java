@@ -65,6 +65,10 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
     togglePlayText();
   }
 
+  /**
+   * Sets the state of the animation to the first specified tick. Does not play the animation.
+   * Toggles the text on the Play/Pause button.
+   */
   @Override
   public void restartAnim() {
     this.frames = 1;
@@ -72,6 +76,11 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
     togglePlayText();
   }
 
+  /**
+   * Toggles the loop setting on the Animation. If the animation is not set to loop, sets the
+   * animation to loop. If the animation is set to loop, sets the animation to not loop.
+   * Toggles the text on the Play/Pause button.
+   */
   @Override
   public void toggleLoop() {
     isLooping = !isLooping;
@@ -82,6 +91,10 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
     togglePlayText();
   }
 
+  /**
+   * Toggles the state of the timer. If the timer is not running, starts the timer. If the
+   * timer is running, stops the timer. Toggles the text on the Play/Pause button.
+   */
   @Override
   public void togglePlay() {
     if (timer.isRunning()) {
@@ -92,14 +105,31 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
     togglePlayText();
   }
 
+  /**
+   * Sets the ticks per second the animation plays at. Throws IllegalArgumentException
+   * if the new ticksPerSecond specified is less than or equal to zero.
+   *
+   * @param ticksPerSecond takes the ticks per second the animation will be playe dat.
+   * @throws IllegalArgumentException if ticksPerSecond is less than or equal to 0.
+   */
   @Override
-  public void setTicksPerSecond(int ticksPerSecond) {
+  public void setTicksPerSecond(int ticksPerSecond) throws IllegalArgumentException {
+    if (ticksPerSecond <= 0) {
+      throw new IllegalArgumentException("ticksPerSecond cannot be less than or equal"
+              + "to zero");
+    }
     ticksPerSecond = (int)Math.round((double)ticksPerSecond / 10) * 10;
     double newTPF = (double)ticksPerSecond / (double)fps;
     frames = (int)Math.round((frames * ticksPerFrame) / newTPF);
     ticksPerFrame = newTPF;
   }
 
+  /**
+   * Returns whether or not the timer in the AnimationRunner is running. Returns true if animation
+   * is running, false if not.
+   *
+   * @return a boolean value indicating whether or not the timer in the AnimationRunner is running.
+   */
   @Override
   public boolean isRunning() {
     return timer.isRunning();
@@ -116,7 +146,7 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
     if ((this.frames * this.ticksPerFrame) > this.model.getTotalTicks()) {
       this.view.drawNewFrame(this.model.getShapesAtTick(model.getTotalTicks()));
       if (isLooping) {
-        frames = 0;
+        frames = 1;
       }
       else {
         timer.stop();
