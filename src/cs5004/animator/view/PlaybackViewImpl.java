@@ -36,7 +36,7 @@ public class PlaybackViewImpl extends AbstractVisualView {
   private JCheckBox loopBox;
   private JSlider slider;
 
-  private final int buttonWidth = 75;
+  private final int buttonWidth = 85;
   private final int buttonHeight = 25;
   private final int bottomHeight = 75;
 
@@ -185,16 +185,18 @@ public class PlaybackViewImpl extends AbstractVisualView {
   }
 
   /**
-   * Toggles the text on the Play/Pause button. If the animation is playing, displays "Pause", if
-   * the animation is not playing, displays "Play".
+   * Sets the text on the Play/Pause button. If the animation is playing, displays "Pause", if
+   * the animation is not playing and is at the beginning or end of the animation, displays "Play",
+   * otherwise displays "Resume".
+   *
+   * @param text the text to be displayed on the start/pause/play button.
+   * @throws IllegalArgumentException if the String text is null.
    */
-  public void togglePlayText() {
-    if (runner.isRunning()) {
-      playButton.setText("Pause");
+  public void setPlayText(String text) throws IllegalArgumentException {
+    if (text == null) {
+      throw new IllegalArgumentException("Text cannot be null");
     }
-    else {
-      playButton.setText("Play");
-    }
+    playButton.setText(text);
   }
 
   /**

@@ -232,7 +232,18 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
   //designed for TESTING PURPOSES ONLY.
   private void togglePlayText() {
     if (view instanceof PlaybackViewImpl) {
-      ((PlaybackViewImpl) view).togglePlayText();
+      if (timer.isRunning()) {
+        ((PlaybackViewImpl) view).setPlayText("Pause");
+      }
+      else {
+        System.out.println("Frames: " + this.frames + " -- calculated val: " + this.model.getTotalTicks() / ticksPerFrame);
+        if (frames <= 1 || frames >= this.model.getTotalTicks() / ticksPerFrame) {
+          ((PlaybackViewImpl) view).setPlayText("Play");
+        }
+        else {
+          ((PlaybackViewImpl) view).setPlayText("Resume");
+        }
+      }
     }
   }
 }
