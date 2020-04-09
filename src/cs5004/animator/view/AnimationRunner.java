@@ -26,7 +26,7 @@ public interface AnimationRunner {
   /**
    * Toggles whether or not the animator is playing the animation. If the animation
    * is playing, stops the animation. If the animation is stopped, plays the
-   * animation.
+   * animation. If the animation is over, restarts the animation from the beginning.
    */
   void togglePlay();
 

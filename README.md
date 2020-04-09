@@ -415,7 +415,7 @@ Sets the state of the animation to the first tick in the animation. Does not cha
 Toggles whether or not the animation is set to loop. If the animation is set to loop, will set animation to not loop. If the animation is not set to loop, will set animation to loop.
 
 --togglePlay() method--
-Toggles whether or not the animation is playing. If the animation is playing, pauses the animation. If the animation is paused, plays the animation.
+Toggles whether or not the animation is playing. If the animation is playing, pauses the animation. If the animation is paused, plays the animation. If the animation is over, resets the animation to the beginning and plays from the start.
 
 --setTicksPerSecond() method--
 The setTicksPerSecond() method takes an integer ticksPerSecond and calculates the number of ticks per frame the animation should run at, since the animation always runs at approx 60fps. Recalculates current frame based on ticks per second to ensure animation is not reset to earlier or later frame. Throws IllegalArgumentException if ticksPerSecond argument is less than or equal to 0.

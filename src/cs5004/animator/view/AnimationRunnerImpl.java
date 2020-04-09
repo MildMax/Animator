@@ -88,13 +88,17 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
 
   /**
    * Toggles the state of the timer. If the timer is not running, starts the timer. If the
-   * timer is running, stops the timer. Toggles the text on the Play/Pause button.
+   * timer is running, stops the timer. If the animation is over, resets the animation to the
+   * beginning and plays. Toggles the text on the Play/Pause button.
    */
   @Override
   public void togglePlay() {
     if (timer.isRunning()) {
       timer.stop();
     } else {
+      if (frames >= this.model.getTotalTicks() / ticksPerFrame) {
+        frames = 1;
+      }
       timer.start();
     }
     togglePlayText();
