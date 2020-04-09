@@ -6,7 +6,8 @@ import cs5004.animator.view.PlaybackViewImpl;
 
 /**
  * The AnimationControllerImpl class defines the methods needed to control the flow
- * of information between the AnimationView and the AnimationController.
+ * of information between the AnimationView and the AnimationController. Implements
+ * the AnimationController interface.
  */
 public class AnimationControllerImpl implements AnimationController {
 
@@ -14,8 +15,9 @@ public class AnimationControllerImpl implements AnimationController {
   private AnimationView v;
 
   /**
-   * The AnimationControllerImpl takes a model that holds data for the animation and a view
-   * that displays the information.
+   * The AnimationControllerImpl constructor takes a model that holds data for the animation
+   * and a view that displays the information. Throws IllegalArgumentException if the AnimationModel
+   * or the AnimationView are null.
    *
    * @param m takes a model that stores data for the animation.
    * @param v takes a view that displays the animation.

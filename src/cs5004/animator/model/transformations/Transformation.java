@@ -2,15 +2,8 @@ package cs5004.animator.model.transformations;
 
 /**
  * The Transformation interface declares methods that must be implemented by every
- * transformation for each animation. Contains the following features:
- *
- * <p>- getShapeName() method</p>
- *
- * <p>- getStart() method</p>
- *
- * <p>- getType() method</p>
- *
- * <p>- getDescription() method</p>
+ * transformation for each animation. Consists of only getMethods such that the internal
+ * properties of the Transformation cannot be changed.
  */
 
 public interface Transformation {
@@ -39,28 +32,28 @@ public interface Transformation {
   /**
    * Return the starting x value of the shape during the transformation.
    *
-   * @return the starting x value of the transformation.
+   * @return the starting x value of the shape during transformation.
    */
   int getX1();
 
   /**
    * Return the ending x value of the shape during the transformation.
    *
-   * @return the ending x value of the transformation.
+   * @return the ending x value of the shape during transformation.
    */
   int getX2();
 
   /**
    * Return the starting y value of the shape during the transformation.
    *
-   * @return the starting y value of the transformation.
+   * @return the starting y value of the shape during transformation.
    */
   int getY1();
 
   /**
    * Return the ending y value of the shape during the transformation.
    *
-   * @return the ending y value of the transformation.
+   * @return the ending y value of the shape during transformation.
    */
   int getY2();
 

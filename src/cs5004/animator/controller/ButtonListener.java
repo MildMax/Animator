@@ -4,11 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import cs5004.animator.view.AnimationRunner;
-import cs5004.animator.view.AnimationView;
 
 /**
  * The ButtonListener class responds to input from buttons in the AnimationView and performs
- * the corresponding action. Implements the ActionListener interface.
+ * the corresponding action in the view's AnimationRunner. Implements the ActionListener interface.
  */
 public class ButtonListener implements ActionListener {
 
@@ -23,7 +22,7 @@ public class ButtonListener implements ActionListener {
    */
   public ButtonListener(AnimationRunner runner) throws IllegalArgumentException {
     if (runner == null) {
-      throw new IllegalArgumentException("View cannot be null");
+      throw new IllegalArgumentException("AnimationRunner cannot be null");
     }
     this.runner = runner;
   }

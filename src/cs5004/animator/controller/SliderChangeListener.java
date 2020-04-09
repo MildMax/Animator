@@ -8,7 +8,8 @@ import cs5004.animator.view.PlaybackViewImpl;
 
 /**
  * The SliderChangeListener listens for changes in the state of a slider specifying ticks per
- * second in an animation and reflects those changes in a specified AnimationView.
+ * second in an animation and reflects those changes in a specified AnimationView. Implements
+ * the ChangeListener interface.
  */
 public class SliderChangeListener implements ChangeListener {
 
@@ -16,7 +17,7 @@ public class SliderChangeListener implements ChangeListener {
 
   /**
    * Takes an AnimationView object that contains the slider that the current class is
-   * listening to.
+   * listening to. Throws an IllegalArgumentException if the AnimationView is null.
    *
    * @param v takes an AnimationView with a slider component.
    * @throws IllegalArgumentException if the AnimationView v is null.

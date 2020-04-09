@@ -13,7 +13,7 @@ import cs5004.animator.model.shapes.Shape;
 
 /**
  * This Interface represents the methods that are to be implemented in all classes
- * that have a view.
+ * that display an animation, either textually or visually.
  */
 public interface AnimationView {
 

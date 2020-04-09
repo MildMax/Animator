@@ -4,17 +4,15 @@ import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.event.ChangeListener;
 
 import cs5004.animator.model.AnimationModel;
 
 /**
  * This class displays a window with an animation of simple shapes
- * as supplied by the AnimationModelImpl. Extends the JFrame class
- * and implements the AnimationView interface.
+ * as supplied by the AnimationModelImpl. Extends the AbstractVisualView
+ * class which extends the JFrame class and implements the AniamtionView
+ * interface.
  */
 public class VisualViewImpl extends AbstractVisualView {
 
@@ -23,6 +21,10 @@ public class VisualViewImpl extends AbstractVisualView {
    * coordinates of the upper left corner of the display and a width and height
    * specifying the width and height of the screen and a int ticksPerSecond
    * that specifies the ticks of the animation played over the course of one second.
+   * Throws IllegalArgumentException if the x or y values indicating the upper left
+   * corner of the display are less than 0, if any width or height values are
+   * less than or equal to zero, or if the specified ticks per second are less than
+   * or equal to 0.
    *
    * @param x takes the x coordinate of the position of the upper left corner of the display.
    * @param y takes the y coordinate of the position of the upper left corner of the display.
@@ -36,6 +38,8 @@ public class VisualViewImpl extends AbstractVisualView {
    *                                  upper left corner of the display are less than 0.
    *                                  If the width or height values of the display window are less
    *                                  than or equal to 0.
+   *                                  If the maxWidth or maxHeight values of the display window
+   *                                  are less than or equal to 0.
    *                                  If the specified ticks per second is less than 1.
    */
   public VisualViewImpl(int x, int y, int windowWidth, int windowHeight,
@@ -43,20 +47,14 @@ public class VisualViewImpl extends AbstractVisualView {
           throws IllegalArgumentException {
     super(x, y, windowWidth, windowHeight, maxWidth, maxHeight, ticksPerSecond);
 
-    JScrollPane scrollPane = new JScrollPane(shapePanel,
-            ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-
     this.add(scrollPane);
-    this.setTitle("Easy Animator");
     this.setPreferredSize(new Dimension(windowWidth, windowHeight));
-    this.setLocation(x, y);
-    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.pack();
   }
 
   /**
-   * Runs the visual animation in a window displayed on screen.
+   * Runs the visual animation in a window displayed on screen in its entirety
+   * and then closes the window and exits the program upon completion.
    *
    * @param m takes an AnimationModel that stores an animation to be written to
    * @throws IllegalArgumentException if AnimationModel m is null.

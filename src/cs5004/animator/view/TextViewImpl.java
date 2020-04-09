@@ -19,7 +19,7 @@ public class TextViewImpl extends AbstractTextView {
    * contain valid characters.
    *
    * @param fileName the name of the text file to be written to.
-   * @throws IllegalArgumentException if the String fileName arguments is null.
+   * @throws IllegalArgumentException if the String fileName argument is null.
    *                                  If the specified fileName does not end with '.txt' or
    *                                  does not contain a valid name.
    */

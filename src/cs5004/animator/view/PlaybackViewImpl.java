@@ -12,19 +12,14 @@ import java.util.Hashtable;
 
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
-import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JSlider;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
-import javax.swing.JFrame;
 import javax.swing.BorderFactory;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.event.ChangeListener;
-
-import cs5004.animator.model.AnimationModel;
 
 /**
  * The PlaybackViewImpl class plays an animation in an interactive window that allows for playing,
@@ -34,7 +29,6 @@ import cs5004.animator.model.AnimationModel;
 public class PlaybackViewImpl extends AbstractVisualView {
 
   private JSplitPane splitPane;
-  private JScrollPane scrollPane;
   private JPanel bottom;
 
   private JButton playButton;
@@ -78,9 +72,6 @@ public class PlaybackViewImpl extends AbstractVisualView {
 
     //set up top component
     //shapePanel set in super constructor
-    scrollPane = new JScrollPane(shapePanel,
-            ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
     splitPane.setTopComponent(scrollPane);
 
     //set up bottom component
@@ -180,8 +171,6 @@ public class PlaybackViewImpl extends AbstractVisualView {
 
     //set up JFrame
     this.add(splitPane);
-    this.setTitle("Easy Animator");
-    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.pack();
   }
 
@@ -206,7 +195,6 @@ public class PlaybackViewImpl extends AbstractVisualView {
     else {
       playButton.setText("Play");
     }
-    validate();
   }
 
   /**
@@ -220,7 +208,7 @@ public class PlaybackViewImpl extends AbstractVisualView {
 
   /**
    * Sets an ActionListener e to be attached to the play/pause button, the restart button, and
-   * the loop checkbox.
+   * the loop checkbox. Throws IllegalArgumentException if the ActionListener is null.
    *
    * @param e an ActionListener that handles executing methods for a the view
    * @throws IllegalArgumentException if the ActionListener e is null.
@@ -236,7 +224,8 @@ public class PlaybackViewImpl extends AbstractVisualView {
   }
 
   /**
-   * Sets the ChangeListener to the Ticks Per Second slider in the PlaybackView.
+   * Sets the ChangeListener to the Ticks Per Second slider in the PlaybackView. Throws
+   * IllegalArgumentException if the ChangeListener is null.
    *
    * @param e the ChangeListener to be set to the TicksPerSecondSlider in the Playback view.
    * @throws IllegalArgumentException if the ChangeListener is null.
@@ -251,7 +240,7 @@ public class PlaybackViewImpl extends AbstractVisualView {
 
   /**
    * Sets a MouseListener object that listens to the clicks on the AnimationView
-   * animation window.
+   * animation window. Throws IllegalArgumentException if the ChangeListener is null.
    *
    * @param listener the listener to be attached to the animation window.
    * @throws IllegalArgumentException if the MouseListener is null.

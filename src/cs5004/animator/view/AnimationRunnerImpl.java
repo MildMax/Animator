@@ -8,9 +8,9 @@ import javax.swing.Timer;
 import cs5004.animator.model.AnimationModel;
 
 /**
- * This class keeps track of the ticks in the animation, and holds methods
+ * The AnimationRunnerImpl class keeps track of the ticks in the animation, and holds methods
  * that start the animation, check if the animation is running, adds frames to
- * the animation, and exits the animation. Implements the ActionListener interface.
+ * the animation, and exit the animation. Implements the ActionListener interface.
  */
 public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
 
@@ -52,7 +52,7 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
   }
 
   /**
-   * Starts the animation. Toggles play text upon starting.
+   * Starts the animation. Toggles text on the Play/Pause button upon starting.
    */
   @Override
   public void startAnim() {
@@ -104,7 +104,7 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
    * Sets the ticks per second the animation plays at. Throws IllegalArgumentException
    * if the new ticksPerSecond specified is less than or equal to zero.
    *
-   * @param ticksPerSecond takes the ticks per second the animation will be playe dat.
+   * @param ticksPerSecond takes the ticks per second the animation will be played at.
    * @throws IllegalArgumentException if ticksPerSecond is less than or equal to 0.
    */
   @Override
@@ -140,7 +140,10 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
     ++frames;
     if ((this.frames * this.ticksPerFrame) > this.model.getTotalTicks()) {
       this.view.drawNewFrame(this.model.getShapesAtTick(model.getTotalTicks()));
-      if (isLooping) {
+      if (view instanceof VisualViewImpl) {
+        view.closeView();
+      }
+      else if (isLooping) {
         frames = 1;
       }
       else {
@@ -150,12 +153,6 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
       return;
     }
     this.view.drawNewFrame(this.model.getShapesAtTick((double)this.frames * this.ticksPerFrame));
-  }
-
-  private void togglePlayText() {
-    if (view instanceof PlaybackViewImpl) {
-      ((PlaybackViewImpl) view).togglePlayText();
-    }
   }
 
   /**
@@ -219,5 +216,16 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
    */
   public AnimationModel getModel() {
     return this.model;
+  }
+
+  //calls the togglePlayText method in the PlaybackViewImpl class
+  //don't want the buttons exposed, so this method calls an identical method
+  //such that the buttons inside the view are not accessible outside of
+  //the view. Any other public methods that make the buttons relevant are
+  //designed for TESTING PURPOSES ONLY.
+  private void togglePlayText() {
+    if (view instanceof PlaybackViewImpl) {
+      ((PlaybackViewImpl) view).togglePlayText();
+    }
   }
 }

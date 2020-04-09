@@ -49,7 +49,9 @@ public class ShapeImpl implements Shape {
   /**
    * Add a transformation to the shape's transformation list. If the transformation
    * starts before the appear time of the Shape or after the disappear time of the Shape,
-   * resets the appear or disappear time of the shape respectively.
+   * resets the appear or disappear time of the shape respectively. Throws an
+   * IllegalArgumentException if the transformation is null or if another transformation
+   * already exists within the specified time period.
    *
    * @param t is the transformation to be added.
    * @throws IllegalArgumentException if transformation is null.

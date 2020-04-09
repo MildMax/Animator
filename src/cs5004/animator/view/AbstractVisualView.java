@@ -3,6 +3,8 @@ package cs5004.animator.view;
 import java.awt.Dimension;
 import java.util.List;
 
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.JFrame;
 
 import cs5004.animator.model.AnimationModel;
@@ -16,6 +18,7 @@ import cs5004.animator.model.shapes.Shape;
 public abstract class AbstractVisualView extends JFrame implements AnimationView {
 
   protected ShapePanel shapePanel;
+  protected JScrollPane scrollPane;
   protected AnimationRunner runner;
   protected int ticksPerSecond;
 
@@ -52,13 +55,21 @@ public abstract class AbstractVisualView extends JFrame implements AnimationView
     } else if (x < 0 || y < 0) {
       throw new IllegalArgumentException("x and y positions cannot be negative");
     } else if (ticksPerSecond < 1) {
-      throw new IllegalArgumentException("Delay cannot be less than 1");
+      throw new IllegalArgumentException("Ticks per second cannot be less than 1");
     }
 
     this.ticksPerSecond = ticksPerSecond;
 
     shapePanel = new ShapePanel();
     shapePanel.setPreferredSize(new Dimension(maxWidth, maxHeight));
+
+    scrollPane = new JScrollPane(shapePanel,
+            ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+    this.setTitle("Easy Animator");
+    this.setLocation(x, y);
+    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
   }
 
@@ -71,12 +82,13 @@ public abstract class AbstractVisualView extends JFrame implements AnimationView
   }
 
   /**
-   * Closes the window on screen.
+   * Closes the window on screen and exits the program.
    */
   @Override
   public void closeView() {
     this.setVisible(false);
     this.dispose();
+    System.exit(0);
   }
 
   /**

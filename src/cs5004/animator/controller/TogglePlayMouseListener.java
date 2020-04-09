@@ -7,7 +7,7 @@ import cs5004.animator.view.AnimationRunner;
 
 /**
  * The TogglePlayMouseListener listens for clicks on the AnimationView window and changes the
- * state of the Animation. Extends the MouseAdapter class.
+ * state of the Animation in the AnimationRunner in the view. Extends the MouseAdapter class.
  */
 public class TogglePlayMouseListener extends MouseAdapter {
 

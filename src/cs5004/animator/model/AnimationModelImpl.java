@@ -15,9 +15,11 @@ import cs5004.animator.model.transformations.TransformationImpl;
 import cs5004.animator.util.AnimationBuilder;
 
 /**
- * The AnimationModelImpl class holds a series of Shapes and their transformations. Supports adding
- * shapes and transformations. Allows for speed of the animation to be set manually.
- * Allows for the background color to be set manually. Implements the AnimationModel interface.
+ * The AnimationModelImpl class holds a series of Shapes and their Transformations. Supports adding
+ * shapes and transformations. Provides methods for getting information about the animation
+ * such as the height of the window, the position of the window, the Shapes stored in the model
+ * and the Transformations on those Shapes. Provides methods of creating a String representation
+ * of the animation. Implements the AnimationModel interface.
  */
 public class AnimationModelImpl implements AnimationModel {
   private final int boundX;
@@ -60,8 +62,8 @@ public class AnimationModelImpl implements AnimationModel {
    * if the shape with the same name already exists.
    *
    * @param shape takes the shape to be added.
-   * @throws IllegalArgumentException if the shape object is null. If the shape with the same name
-   *                                  already exists.
+   * @throws IllegalArgumentException if the shape object is null.
+   *                                  If the shape with the same name already exists.
    */
   @Override
   public void addShape(Shape shape) throws IllegalArgumentException {
@@ -69,13 +71,12 @@ public class AnimationModelImpl implements AnimationModel {
       throw new IllegalArgumentException("Shape cannot be null");
     } else if (shapeMap.containsKey(shape.getName())) {
       throw new IllegalArgumentException("That shape already exists");
-    } else {
-      shapeMap.put(shape.getName(), shape);
     }
+    shapeMap.put(shape.getName(), shape);
   }
 
   /**
-   * Adds a transformation to a shape in the AnimationModelImpl. Throws IllegalArgumentException if
+   * Adds a Transformation to a Shape in the AnimationModelImpl. Throws IllegalArgumentException if
    * the String shapeName is null, if the Transformation t is null, if there is no shape associated
    * with shapeName or if there is already a transformation of the same type at the same time of the
    * Transformation t.
@@ -150,7 +151,7 @@ public class AnimationModelImpl implements AnimationModel {
   /**
    * Returns a list of shapes with values corresponding to each shapes transformations at the frame
    * in the animation specified by parameter tick. Throws IllegalArgumentException if the specified
-   * tick is less than 0.
+   * tick is less than 0 or greater than the total ticks in the animation.
    *
    * @param tick takes a double indicating the current frame of the animation.
    * @return a list of shapes with values corresponding to its transformations at the frame in the

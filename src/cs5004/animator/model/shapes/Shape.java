@@ -95,12 +95,12 @@ public interface Shape {
   int getEnd();
 
   /**
-   * Changes the internal values of the shape according to its list of
+   * Calculates the values of the shape according to its list of
    * transformations at a given tick indicating the frame of the
-   * animation and returns itself.
+   * animation and returns a new version of itself with modified values.
    *
    * @param tick the frame of the animation.
-   * @return itself with modified values.
+   * @return a deep copy of itself with modified values.
    */
   Shape getShapeAtTick(double tick);
 

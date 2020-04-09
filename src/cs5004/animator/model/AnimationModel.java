@@ -7,29 +7,35 @@ import cs5004.animator.model.transformations.Transformation;
 
 /**
  * The AnimationModel interface declares methods that must be implemented to add shapes,
- * transformations to shapes and set information regarding the speed of the animation
- * and the color of the background.
+ * transformations to shapes and set information regarding the speed of the animation.
+ * Also provides methods to get information regarding the window that the animation
+ * will be displayed in.
  */
 public interface AnimationModel {
 
   /**
-   * Adds a shape to the Animation Model.
+   * Adds a shape to the Animation Model. Throws an IllegalArgumentException if the shape
+   * already exists or if the shape is null.
    *
    * @param shape takes the shape to be added.
-   * @throws IllegalArgumentException if the shape already exists.
+   * @throws IllegalArgumentException if the Shape already exists.
+   *                                  If the Shape is null.
    */
   void addShape(Shape shape) throws IllegalArgumentException;
 
   /**
    * Adds a Transformation to a Shape. Throws IllegalArgumentException if a transformation of the
    * same type exists with a time frame that overlaps with the time frame of Transformation t or
-   * if the Shape does not exist.
+   * if the Shape does not exist. Throws IllegalArgumentException if a transformation on the
+   * specified shape already exists in the same timeframe or if a shape with the associated
+   * shapeName does not exist or if the shapeName String or the Transformation are null.
    *
    * @param shapeName the name of the Shape.
    * @param t The transformation to be added.
    * @throws IllegalArgumentException if the same transformation already exists in the same time
    *                                  frame on a single Shape.
    *                                  If the shape does not exist.
+   *                                  If the shapeName or the Transformation is null.
    */
   void addTransformation(String shapeName, Transformation t) throws IllegalArgumentException;
 
@@ -99,14 +105,14 @@ public interface AnimationModel {
   int getBoundY();
 
   /**
-   * Return the maximum width of the window that displays the animation.
+   * Return the maximum width of the window needed to display the entire animation.
    *
    * @return the maximum width of the window that displays the animation.
    */
   int getAnimationWidth();
 
   /**
-   * Return the maximum height of the window that displays the animation.
+   * Return the maximum height of the window needed to display the entire animation.
    *
    * @return the maximum height of the window that displays the animation.
    */
