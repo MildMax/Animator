@@ -251,6 +251,6 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
   }
 
   private boolean isAnimationOver() {
-    return frames >= this.model.getTotalTicks() / ticksPerFrame;
+    return ticksPerFrame * frames >= this.model.getTotalTicks();
   }
 }
