@@ -331,8 +331,8 @@ The AbstractVisualView constructor takes an int x and y values inicating the top
 --getRunner() method--
 Retrieves the AnimationRunnerImpl from the current class.
 
---togglePlayText() method--
-Changes the text on the Play/Pause button. If the animation is playing, sets text to be "Pause". If the animation is not playing, sets text to be "Play". Only exists in the current class as no other views require stopping or starting of animation.
+--setPlayText() method--
+Changes the text on the Play/Pause button to a parameter String text. If the animation is playing, sets text to be "Pause". If the animation is not playing, sets text to be "Play" if the animation is at the beginning or end; otherwise sets text to be "pause". Only exists in the current class as no other views require stopping or starting of animation.
 
 --setAnimSpeed() method--
 Sets the speed in ticks per second of the animation to what is displayed on the Slider component in the view. Only exists in current class as no other views utilize a slider.
