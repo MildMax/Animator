@@ -80,7 +80,7 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
   public void toggleLoop() {
     isLooping = !isLooping;
     if (!timer.isRunning() && isLooping &&
-            this.frames * this.ticksPerFrame > this.model.getTotalTicks()) {
+            isAnimationOver()) {
       timer.start();
     }
     togglePlayText();
@@ -96,7 +96,7 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
     if (timer.isRunning()) {
       timer.stop();
     } else {
-      if (frames >= this.model.getTotalTicks() / ticksPerFrame) {
+      if (isAnimationOver()) {
         frames = 1;
       }
       timer.start();
@@ -142,7 +142,7 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
   @Override
   public void actionPerformed(ActionEvent e) {
     ++frames;
-    if ((this.frames * this.ticksPerFrame) > this.model.getTotalTicks()) {
+    if (isAnimationOver()) {
       this.view.drawNewFrame(this.model.getShapesAtTick(model.getTotalTicks()));
       if (view instanceof VisualViewImpl) {
         view.closeView();
@@ -240,8 +240,7 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
         ((PlaybackViewImpl) view).setPlayText("Pause");
       }
       else {
-        System.out.println("Frames: " + this.frames + " -- calculated val: " + this.model.getTotalTicks() / ticksPerFrame);
-        if (frames <= 1 || frames >= this.model.getTotalTicks() / ticksPerFrame) {
+        if (frames <= 1 || isAnimationOver()) {
           ((PlaybackViewImpl) view).setPlayText("Play");
         }
         else {
@@ -249,5 +248,9 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
         }
       }
     }
+  }
+
+  private boolean isAnimationOver() {
+    return frames >= this.model.getTotalTicks() / ticksPerFrame;
   }
 }
