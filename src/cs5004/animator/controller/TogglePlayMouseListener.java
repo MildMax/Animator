@@ -3,6 +3,8 @@ package cs5004.animator.controller;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.*;
+
 import cs5004.animator.view.AnimationRunner;
 
 /**
@@ -28,16 +30,20 @@ public class TogglePlayMouseListener extends MouseAdapter {
   }
 
   /**
-   * When the mouse is clicked, changes the play state of the animation in the AnimationRunner.
-   * If the animation is playing, pauses the animation. If the animation is paused, plays the
-   * animation.
+   * When the left mouse button is clicked, changes the play state of the animation in the
+   * AnimationRunner. If the animation is playing, pauses the animation. If the animation is paused,
+   * plays the animation. When the right mouse button is clicked, restarts the animation.
    *
    * @param e takes a MouseEvent tied to the window that displays the animation.
    */
   @Override
   public void mouseClicked(MouseEvent e) {
     super.mouseClicked(e);
-    runner.togglePlay();
+    if (SwingUtilities.isLeftMouseButton(e)) {
+      runner.togglePlay();
+    } else if (SwingUtilities.isRightMouseButton(e)) {
+      runner.restartAnim();
+    }
   }
 
 }

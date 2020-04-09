@@ -504,7 +504,7 @@ The TogglePlayMouseListener class holds an AnimationRunner that pauses/starts th
 The TogglePlayMouseListener constructor takes an AnimationRunner that starts/pauses the animation. Throws an IllegalArgumentException if the AnimationRunner is null.
 
 --mouseClicked() method--
-Takes a MouseEvent and toggles the current state of the animation when the screen holding the animation is clicked by the mouse. If the animation is playing, sets the animation to a paused state. If the animation is paused, sets the animation to a playing state. If the animation has ended and looping is not set, cannot be used to restart the animation. 
+Takes a MouseEvent and toggles the current state of the animation when the screen holding the animation is right clicked by the mouse. If the animation is playing, sets the animation to a paused state. If the animation is paused, sets the animation to a playing state. If the animation has ended and looping is not set, cannot be used to restart the animation. If the left mouse button is clicked on the screen, restarts the animation.
 
 ------------------------------------------------
 

@@ -117,7 +117,8 @@ public class PlaybackViewImpl extends AbstractVisualView {
     buttonPanel.add(loopPanel);
 
     JTextArea clickText = new JTextArea();
-    clickText.setText("Click the screen to pause/play animation!");
+    clickText.setText("Left-click the screen to pause/play animation!\n"
+    + "Right-click the screen to restart the animation!");
 
     c.gridy = 1;
 
