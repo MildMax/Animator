@@ -3,7 +3,7 @@ package cs5004.animator.controller;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.*;
+import javax.swing.SwingUtilities;
 
 import cs5004.animator.view.AnimationRunner;
 
@@ -20,7 +20,7 @@ public class TogglePlayMouseListener extends MouseAdapter {
    * current object.
    *
    * @param runner takes an AnimationRunner displaying the current animation.
-   * @throws IllegalArgumentException
+   * @throws IllegalArgumentException if the animation runner is null.
    */
   public TogglePlayMouseListener(AnimationRunner runner) throws IllegalArgumentException {
     if (runner == null) {

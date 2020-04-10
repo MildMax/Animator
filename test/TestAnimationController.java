@@ -57,6 +57,11 @@ public class TestAnimationController {
             .getRunner().isRunning());
     AnimationRunner r = ((AnimationControllerImpl) c).getAnimationView().getRunner();
     assertEquals(1, ((AnimationRunnerImpl) r).getFrames());
+    assertEquals(2, ((AnimationControllerImpl) c).getAnimationModel().getShapes().size());
+    assertEquals("rectangle", ((AnimationControllerImpl) c).getAnimationModel()
+            .getShapes().get(0).getName());
+    assertEquals("ellipse", ((AnimationControllerImpl) c).getAnimationModel()
+            .getShapes().get(1).getName());
 
   }
 
@@ -98,26 +103,6 @@ public class TestAnimationController {
             40, 60, 150, 150, 150));
 
     AnimationControllerImpl c = new AnimationControllerImpl(m, null);
-  }
-
-  /**
-   * Test the creation of an object of the AnimationControllerImpl class.
-   */
-  @Test
-  public void test004() {
-    AnimationModel m = new AnimationModelImpl(0, 100, 200, 300);
-    PlaybackViewImpl v = new PlaybackViewImpl(1000,1000, 1000,
-            1000, 1000, 1000, 100);
-    m.addShape(new ShapeImpl("rectangle", ShapeType.RECTANGLE, 1));
-    m.addShape(new ShapeImpl("ellipse", ShapeType.ELLIPSE, 2));
-    m.addTransformation("rectangle", new TransformationImpl("rectangle",
-            10, 20, 20, 20, 40, 100, 100, 100, 20, 40,
-            40, 40, 60, 200, 200, 200));
-    m.addTransformation("ellipse", new TransformationImpl("ellipse", 20,
-            0, 0, 10, 30, 50, 50, 50, 40, 40, 40,
-            40, 60, 150, 150, 150));
-
-    AnimationControllerImpl c = new AnimationControllerImpl(m, v);
   }
 
   /**
