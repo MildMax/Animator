@@ -70,12 +70,12 @@ public interface AnimationView {
   void setChangeListener(ChangeListener e) throws IllegalArgumentException;
 
 
-    /**
-     * Takes a MouseListener object and assigns it to a component in the view.
-     *
-     * @param listener the listener to be attached to an object in the view.
-     * @throws IllegalArgumentException if the MouseListener is null.
-     */
+  /**
+   * Takes a MouseListener object and assigns it to a component in the view.
+   *
+   * @param listener the listener to be attached to an object in the view.
+   * @throws IllegalArgumentException if the MouseListener is null.
+   */
   void setMouseListener(MouseListener listener) throws IllegalArgumentException;
 
   /**

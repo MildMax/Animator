@@ -35,7 +35,7 @@ public interface AnimationRunner {
    * if running, false if stopped.
    *
    * @return a boolean value indicating whether or not the animation
-   * is running.
+   *         is running.
    */
   boolean isRunning();
 

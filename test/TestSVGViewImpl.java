@@ -40,10 +40,10 @@ public class TestSVGViewImpl {
     m.addShape(new ShapeImpl("rectangle", ShapeType.RECTANGLE, 1));
     m.addShape(new ShapeImpl("ellipse", ShapeType.ELLIPSE, 2));
     view1.run(m);
-    scgContents = "<svg width=\"25\" height=\"25\" version=\"1.1\" xmlns=\"http://www.w" +
-            "3.org/2000/svg\"> \n" +
-            "\n" +
-            "</svg>";
+    scgContents = "<svg width=\"25\" height=\"25\" version=\"1.1\" xmlns=\"http://www.w"
+            + "3.org/2000/svg\"> \n"
+            + "\n"
+            + "</svg>";
     assertEquals(scgContents, view1.getOutFileContents());
 
     // Add Transformations and test.

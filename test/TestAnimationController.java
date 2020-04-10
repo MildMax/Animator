@@ -1,6 +1,5 @@
 import org.junit.Test;
 
-import java.awt.*;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -8,8 +7,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.nio.file.Paths;
 import java.util.List;
-
-import javax.swing.*;
 
 import cs5004.animator.controller.AnimationController;
 import cs5004.animator.controller.AnimationControllerImpl;
@@ -51,7 +48,16 @@ public class TestAnimationController {
             0, 0, 10, 30, 50, 50, 50, 40, 40, 40,
             40, 60, 150, 150, 150));
 
-    AnimationControllerImpl c = new AnimationControllerImpl(m, v);
+    AnimationController c = new AnimationControllerImpl(m, v);
+
+    c.doAnimation();
+    ((AnimationControllerImpl) c).getAnimationView().getRunner().startAnim();
+
+    assertEquals(true, ((AnimationControllerImpl) c).getAnimationView()
+            .getRunner().isRunning());
+    AnimationRunner r = ((AnimationControllerImpl) c).getAnimationView().getRunner();
+    assertEquals(1, ((AnimationRunnerImpl) r).getFrames());
+
   }
 
   /**
@@ -113,6 +119,7 @@ public class TestAnimationController {
 
     AnimationControllerImpl c = new AnimationControllerImpl(m, v);
   }
+
   /**
    * Test creating an empty AnimationModel. Test adding shapes to the animation model. Test adding
    * transformations to the shapes in the animation model. Test getting the shapes in the animation
@@ -192,10 +199,10 @@ public class TestAnimationController {
     test =  "Create window with width 200 and height 300 with top "
             + "left corner (0,100) and total ticks 40\n"
             + "\n"
-            + "Create rectangle rectangle with center at (0,0) with"
-            + " width 0 and height 0 and color (0,0,0)\n"
+            + "Create rectangle rectangle with center at (20,-20) with"
+            + " width 20 and height 40 and color (100,100,100)\n"
             + "Create ellipse ellipse with center at (0,0) with "
-            + "width 0 and height 0 and color (0,0,0)\n"
+            + "width 10 and height 30 and color (50,50,50)\n"
             + "\n"
             + "rectangle rectangle appears at time t=10 and disappears at time t=20\n"
             + "ellipse ellipse appears at time t=20 and disappears at time t=40\n"
@@ -278,10 +285,10 @@ public class TestAnimationController {
     test =  "Create window with width 500 and height 600 with top "
             + "left corner (50,60) and total ticks 40\n"
             + "\n"
-            + "Create rectangle rectangle with center at (0,0) with"
-            + " width 0 and height 0 and color (0,0,0)\n"
+            + "Create rectangle rectangle with center at (20,-20) with"
+            + " width 20 and height 40 and color (100,100,100)\n"
             + "Create ellipse ellipse with center at (0,0) with "
-            + "width 0 and height 0 and color (0,0,0)\n"
+            + "width 10 and height 30 and color (50,50,50)\n"
             + "\n"
             + "rectangle rectangle appears at time t=10 and disappears at time t=20\n"
             + "ellipse ellipse appears at time t=20 and disappears at time t=40\n"
@@ -350,17 +357,17 @@ public class TestAnimationController {
     AnimationControllerImpl c3 = new AnimationControllerImpl(m, t);
     c3.getAnimationView().run(m);
 
-    test = "Create window with width 500 and height 600 with top left "
-            + "corner (50,60) and total ticks 40\n\n"
-
-            + "Create rectangle rectangle with center at (0,0) with width 0 "
-            + "and height 0 and color (0,0,0)\n"
-
-            + "Create ellipse ellipse with center at (0,0) with width 0 and height "
-            + "0 and color (0,0,0)\n\n"
-
+    test =  "Create window with width 500 and height 600 with top "
+            + "left corner (50,60) and total ticks 40\n"
+            + "\n"
+            + "Create rectangle rectangle with center at (20,-20) with"
+            + " width 20 and height 40 and color (100,100,100)\n"
+            + "Create ellipse ellipse with center at (0,0) with "
+            + "width 10 and height 30 and color (50,50,50)\n"
+            + "\n"
             + "rectangle rectangle appears at time t=10 and disappears at time t=20\n"
-            + "ellipse ellipse appears at time t=20 and disappears at time t=40\n\n"
+            + "ellipse ellipse appears at time t=20 and disappears at time t=40\n"
+            + "\n"
             + "rectangle moves from (20,-20) to (40,-40) from time t=10 to time t=20\n"
             + "rectangle changes width from 20 to 40 from time t=10 to time t=20\n"
             + "rectangle changes height from 40 to 60 from time t=10 to time t=20\n"
@@ -478,7 +485,7 @@ public class TestAnimationController {
             20, 20, 20));
     AnimationView v = new PlaybackViewImpl(0, 0, 500, 500, 500, 500, 20);
     AnimationController c = new AnimationControllerImpl(m, v);
-    c.go();
+    c.doAnimation();
     assertEquals(false, v.getRunner().isRunning());
 
     ((PlaybackViewImpl) v).getPlayButton().doClick();
@@ -502,7 +509,7 @@ public class TestAnimationController {
             20, 20, 20));
     AnimationView v = new PlaybackViewImpl(0, 0, 500, 500, 500, 500, 20);
     AnimationController c = new AnimationControllerImpl(m, v);
-    c.go();
+    c.doAnimation();
 
     assertEquals(false, ((PlaybackViewImpl) v).getLoopBox().isSelected());
 
@@ -527,7 +534,7 @@ public class TestAnimationController {
             20, 20, 20));
     AnimationView v = new PlaybackViewImpl(0, 0, 500, 500, 500, 500, 20);
     AnimationController c = new AnimationControllerImpl(m, v);
-    c.go();
+    c.doAnimation();
 
     ((PlaybackViewImpl) v).getPlayButton().doClick();
 
@@ -557,7 +564,7 @@ public class TestAnimationController {
             20, 20, 20));
     AnimationView v = new PlaybackViewImpl(0, 0, 500, 500, 500, 500, 20);
     AnimationController c = new AnimationControllerImpl(m, v);
-    c.go();
+    c.doAnimation();
 
     assertEquals(0.33, ((AnimationRunnerImpl) v.getRunner()).getTicksPerFrame(), 0.01);
 
@@ -579,13 +586,13 @@ public class TestAnimationController {
             20, 20, 20));
     AnimationView v = new PlaybackViewImpl(0, 0, 500, 500, 500, 500, 20);
     AnimationController c = new AnimationControllerImpl(m, v);
-    c.go();
+    c.doAnimation();
 
     assertEquals(false, v.getRunner().isRunning());
 
     ShapePanel p = ((PlaybackViewImpl) v).getShapePanel();
-    MouseListener mouseListeners[] = p.getMouseListeners();
-    MouseEvent me = new MouseEvent(p, 0, 0, InputEvent.BUTTON1_DOWN_MASK, 100, 100, 1, false);;
+    MouseListener[] mouseListeners = p.getMouseListeners();
+    MouseEvent me = new MouseEvent(p, 0, 0, InputEvent.BUTTON1_DOWN_MASK, 100, 100, 1, false);
     mouseListeners[0].mouseClicked(me);
 
     assertEquals(true, v.getRunner().isRunning());
@@ -609,7 +616,7 @@ public class TestAnimationController {
             20, 20, 20));
     AnimationView v = new PlaybackViewImpl(0, 0, 500, 500, 500, 500, 20);
     AnimationController c = new AnimationControllerImpl(m, v);
-    c.go();
+    c.doAnimation();
 
     ((PlaybackViewImpl) v).getPlayButton().doClick();
 
@@ -624,8 +631,8 @@ public class TestAnimationController {
     ((PlaybackViewImpl) v).getPlayButton().doClick();
 
     ShapePanel p = ((PlaybackViewImpl) v).getShapePanel();
-    MouseListener mouseListeners[] = p.getMouseListeners();
-    MouseEvent me = new MouseEvent(p, 0, 0, InputEvent.BUTTON3_DOWN_MASK, 100, 100, 1, false);;
+    MouseListener[] mouseListeners = p.getMouseListeners();
+    MouseEvent me = new MouseEvent(p, 0, 0, InputEvent.BUTTON3_DOWN_MASK, 100, 100, 1, false);
     mouseListeners[0].mouseClicked(me);
 
     assertEquals(1, ((AnimationRunnerImpl)v.getRunner()).getFrames());

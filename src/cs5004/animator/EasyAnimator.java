@@ -45,7 +45,7 @@ public final class EasyAnimator {
     AnimationView view = e.initializeView(model);
 
     AnimationControllerImpl controller = new AnimationControllerImpl(model, view);
-    controller.go();
+    controller.doAnimation();
   }
 
   private void parseArgs(String[] args) {

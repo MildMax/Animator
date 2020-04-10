@@ -312,10 +312,10 @@ public class ShapeImpl implements Shape {
     if (transformationList.size() == 0) {
       return "";
     }
-    getShapeAtTick(getStart());
-    return "Create " + this.type.toString() + " " + this.name + " with center at ("
-            + this.x + "," + this.y + ") with width " + this.width + " and height "
-            + this.height + " and color (" + this.r + "," + this.g + "," + this.b + ")\n";
+    ShapeImpl s = (ShapeImpl) getShapeAtTick(getStart());
+    return "Create " + s.type.toString() + " " + s.name + " with center at ("
+            + s.x + "," + s.y + ") with width " + s.width + " and height "
+            + s.height + " and color (" + s.r + "," + s.g + "," + s.b + ")\n";
   }
 
   /**

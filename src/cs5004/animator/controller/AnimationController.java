@@ -9,5 +9,5 @@ public interface AnimationController {
   /**
    * Runs the animation by providing information from the model to the view.
    */
-  void go();
+  void doAnimation();
 }

@@ -15,7 +15,7 @@ import cs5004.animator.model.AnimationModel;
 public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
 
   private double ticksPerFrame;
-  private int frames = 0;
+  private int frames = 1;
   private AnimationModel model;
   private AnimationView view;
   private Timer timer;
@@ -79,8 +79,8 @@ public class AnimationRunnerImpl implements ActionListener, AnimationRunner {
   @Override
   public void toggleLoop() {
     isLooping = !isLooping;
-    if (!timer.isRunning() && isLooping &&
-            isAnimationOver()) {
+    if (!timer.isRunning() && isLooping
+            && isAnimationOver()) {
       timer.start();
     }
     togglePlayText();

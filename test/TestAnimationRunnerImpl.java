@@ -71,6 +71,11 @@ public class TestAnimationRunnerImpl {
     PlaybackViewImpl view1 = new PlaybackViewImpl(10,10, 100,
             100, 100, 100, 100);
     AnimationRunner ar1 = new AnimationRunnerImpl(model1, view1, 10);
+    assertEquals(false, ar1.isRunning());
+    ar1.startAnim();
+    assertEquals(true, ar1.isRunning());
+    ar1.togglePlay();
+    assertEquals(false, ar1.isRunning());
   }
 
   /**
@@ -84,6 +89,7 @@ public class TestAnimationRunnerImpl {
             100, 100, 100, 100);
     AnimationRunner ar1 = new AnimationRunnerImpl(model1, view1, 10);
     view1.openView();
+    assertEquals(true, view1.getShapePanel().isVisible());
   }
 
   /**
@@ -127,7 +133,9 @@ public class TestAnimationRunnerImpl {
     AnimationRunnerImpl ar1 = new AnimationRunnerImpl(model1, view1, 10);
     view1.openView();
     view1.run(model1);
+    assertEquals(false, ar1.isRunning());
     ar1.startAnim();
+    assertEquals(true, ar1.isRunning());
   }
 
   /**
@@ -239,7 +247,7 @@ public class TestAnimationRunnerImpl {
   }
 
   /**
-   * Test that restartAnim() works
+   * Test that restartAnim() works.
    *
    */
   @Test
@@ -259,7 +267,7 @@ public class TestAnimationRunnerImpl {
     view1.openView();
     view1.run(model1);
     ar1.startAnim();
-    assertEquals(0, ar1.getFrames());
+    assertEquals(1, ar1.getFrames());
     ar1.restartAnim();
     assertEquals(1, ar1.getFrames());
   }

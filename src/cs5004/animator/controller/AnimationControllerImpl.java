@@ -37,7 +37,7 @@ public class AnimationControllerImpl implements AnimationController {
    * listeners if the view requires listeners.
    */
   @Override
-  public void go() {
+  public void doAnimation() {
     v.run(m);
 
     if (v instanceof PlaybackViewImpl) {

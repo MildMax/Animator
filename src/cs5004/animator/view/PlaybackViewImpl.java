@@ -21,17 +21,12 @@ import javax.swing.SwingConstants;
 import javax.swing.BorderFactory;
 import javax.swing.event.ChangeListener;
 
-import cs5004.animator.model.shapes.Shape;
-
 /**
  * The PlaybackViewImpl class plays an animation in an interactive window that allows for playing,
  * pausing, looping and changing speed of the animation. Extends the AbstractVisualView class
  * which implements the AnimationView interface.
  */
 public class PlaybackViewImpl extends AbstractVisualView {
-
-  private JSplitPane splitPane;
-  private JPanel bottom;
 
   private JButton playButton;
   private JButton restartButton;
@@ -70,14 +65,14 @@ public class PlaybackViewImpl extends AbstractVisualView {
     super(x, y, windowWidth, windowHeight, maxWidth, maxHeight, ticksPerSecond);
 
     //make splitpane
-    splitPane = new JSplitPane();
+    JSplitPane splitPane = new JSplitPane();
 
     //set up top component
     //shapePanel set in super constructor
     splitPane.setTopComponent(scrollPane);
 
     //set up bottom component
-    bottom = new JPanel();
+    JPanel bottom = new JPanel();
     GridBagLayout bottomLayout = new GridBagLayout();
     bottom.setLayout(bottomLayout);
 

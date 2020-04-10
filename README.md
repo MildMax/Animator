@@ -450,9 +450,9 @@ The actionPerformed() method keeps track of the number of frames that have passe
 ------------------------------------------------
 
 --AnimationController interface--
-The AnimationController interface describes the method needed to run the the animation from the controller. Contains go() method.
+The AnimationController interface describes the method needed to run the the animation from the controller. Contains doAnimation() method.
 
---go() method--
+--doAnimation() method--
 Sets up the view and the model to run the animation and then runs the animation.
 
 ------------------------------------------------
@@ -463,8 +463,8 @@ The AnimationControllerImpl class defines the methods needed to control the flow
 --Constructor--
 The AnimationController constructor takes an AnimationModel and an AnimationView and stores them in the class to be used to run the animation. Throws an IllegalArgumentException if the AnimationModel or the AnimationView is null.
 
---go() method--
-The go() method is responsible for setting up the view to display the animation correctly. Runs the animation by passing the AnimationModel to the run() method in the view. If the view is an instance of PlaybackViewImpl, sets the ButtonListener, SliderChange Listener, and MouseListener values in the view.
+--doAnimation() method--
+The doAnimation() method is responsible for setting up the view to display the animation correctly. Runs the animation by passing the AnimationModel to the run() method in the view. If the view is an instance of PlaybackViewImpl, sets the ButtonListener, SliderChange Listener, and MouseListener values in the view.
 
 --getAnimationModel() method--
 Gets the model from the controller. EXISTS ONLY FOR TESTING PURPOSES.

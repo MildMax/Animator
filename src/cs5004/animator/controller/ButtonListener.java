@@ -29,12 +29,14 @@ public class ButtonListener implements ActionListener {
 
   /**
    * Takes an ActionEvent as input from a button in the AnimationView and executes
-   * the corresponding actions in the AnimationRunner.
+   * the corresponding actions in the AnimationRunner. If no action corresponds to the command,
+   * throws IllegalArgumentException.
    *
    * @param e takes an ActionEvent tied to a button in the AnimationView.
+   * @throws IllegalArgumentException if there is no string associated with the ActionCommand.
    */
   @Override
-  public void actionPerformed(ActionEvent e) {
+  public void actionPerformed(ActionEvent e) throws IllegalArgumentException {
     switch (e.getActionCommand()) {
       case "play":
         runner.togglePlay();
@@ -45,6 +47,8 @@ public class ButtonListener implements ActionListener {
       case "loop":
         runner.toggleLoop();
         break;
+      default:
+        throw new IllegalArgumentException("No command corresponding to event");
     }
   }
 }

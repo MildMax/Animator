@@ -134,7 +134,7 @@ public abstract class AbstractTextView implements AnimationView {
    * Is overridden and nullified -- textual views do not utilize ChangeListeners.
    *
    * @param e the ChangeListener to be set to the TicksPerSecondSlider in the Playback view.
-   * @throws UnsupportedOperationException
+   * @throws UnsupportedOperationException text views do not utilize ChangeListeners.
    */
   @Override
   public void setChangeListener(ChangeListener e) throws UnsupportedOperationException {

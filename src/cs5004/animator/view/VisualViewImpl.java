@@ -73,8 +73,8 @@ public class VisualViewImpl extends AbstractVisualView {
    */
   @Override
   public AnimationRunnerImpl getRunner() throws UnsupportedOperationException {
-    throw new UnsupportedOperationException("VisualViewImpl does not require getting the" +
-            "AnimationRunnerImpl");
+    throw new UnsupportedOperationException("VisualViewImpl does not require getting the"
+            + "AnimationRunnerImpl");
   }
 
   /**

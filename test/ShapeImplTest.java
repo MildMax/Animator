@@ -41,7 +41,7 @@ public class ShapeImplTest {
 
     s.addTransformation(new TransformationImpl(s.getName(), 10, 10, 10, 20, 20,
             100, 100, 100, 20, 40, 40, 80, 80, 200, 200, 200));
-    s.getShapeAtTick(10);
+    s = s.getShapeAtTick(10);
 
     assertEquals(20, s.getWidth());
     assertEquals(20, s.getHeight());
@@ -57,7 +57,7 @@ public class ShapeImplTest {
     assertEquals("rectangle rectangle appears at time t=10 and disappears"
             + " at time t=20\n", s.getAppearStatement());
 
-    s.getShapeAtTick(15);
+    s = s.getShapeAtTick(15);
 
     assertEquals(50, s.getWidth());
     assertEquals(50, s.getHeight());
@@ -69,7 +69,7 @@ public class ShapeImplTest {
     assertEquals(10, s.getStart());
     assertEquals(20, s.getEnd());
 
-    s.getShapeAtTick(20);
+    s = s.getShapeAtTick(20);
 
     assertEquals(80, s.getWidth());
     assertEquals(80, s.getHeight());
@@ -83,7 +83,7 @@ public class ShapeImplTest {
 
     s.addTransformation(new TransformationImpl(s.getName(), 20, 40, 40, 80, 80,
             200, 200, 200, 30, 60, 50, 100, 120, 240, 230, 220));
-    s.getShapeAtTick(25);
+    s = s.getShapeAtTick(25);
 
     assertEquals(90, s.getWidth());
     assertEquals(100, s.getHeight());
