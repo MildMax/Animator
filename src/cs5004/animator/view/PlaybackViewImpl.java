@@ -21,6 +21,8 @@ import javax.swing.SwingConstants;
 import javax.swing.BorderFactory;
 import javax.swing.event.ChangeListener;
 
+import cs5004.animator.model.shapes.Shape;
+
 /**
  * The PlaybackViewImpl class plays an animation in an interactive window that allows for playing,
  * pausing, looping and changing speed of the animation. Extends the AbstractVisualView class
@@ -118,7 +120,7 @@ public class PlaybackViewImpl extends AbstractVisualView {
 
     JTextArea clickText = new JTextArea();
     clickText.setText("Left-click the screen to pause/play animation!\n"
-    + "Right-click the screen to restart the animation!");
+        + "Right-click the screen to restart the animation!");
 
     c.gridy = 1;
 
@@ -268,11 +270,22 @@ public class PlaybackViewImpl extends AbstractVisualView {
 
   /**
    * Get the restartButton.
+   * Method only exists for testing purposes.
    *
    * @return restartButton.
    */
   public JButton getRestartButton() {
     return this.restartButton;
+  }
+
+  /**
+   * Get the slider that handles ticks per frame.
+   * Method exists only for testing purposes.
+   *
+   * @return slider that handles ticks per frame.
+   */
+  public JSlider getSpeedSlider() {
+    return this.slider;
   }
 
   /**
@@ -283,5 +296,15 @@ public class PlaybackViewImpl extends AbstractVisualView {
    */
   public JCheckBox getLoopBox() {
     return this.loopBox;
+  }
+
+  /**
+   * Gets the shape panel that the animation is displayed on.
+   * Method only exists for testing purposes.
+   *
+   * @return the shapePanel that the animation is displayed on.
+   */
+  public ShapePanel getShapePanel() {
+    return this.shapePanel;
   }
 }

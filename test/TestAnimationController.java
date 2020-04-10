@@ -1,10 +1,17 @@
 import org.junit.Test;
 
+import java.awt.*;
+import java.awt.event.InputEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.nio.file.Paths;
 import java.util.List;
 
+import javax.swing.*;
+
+import cs5004.animator.controller.AnimationController;
 import cs5004.animator.controller.AnimationControllerImpl;
 import cs5004.animator.model.AnimationModel;
 import cs5004.animator.model.AnimationModelImpl;
@@ -12,9 +19,12 @@ import cs5004.animator.model.shapes.Shape;
 import cs5004.animator.model.shapes.ShapeImpl;
 import cs5004.animator.model.shapes.ShapeType;
 import cs5004.animator.model.transformations.TransformationImpl;
+import cs5004.animator.view.AnimationRunner;
+import cs5004.animator.view.AnimationRunnerImpl;
 import cs5004.animator.view.AnimationView;
 import cs5004.animator.view.PlaybackViewImpl;
 import cs5004.animator.view.SVGViewImpl;
+import cs5004.animator.view.ShapePanel;
 import cs5004.animator.view.TextViewImpl;
 
 import static org.junit.Assert.assertEquals;
@@ -454,5 +464,170 @@ public class TestAnimationController {
             + "\n"
             + "</svg>";
     //assertEquals(SVGcontents, view1.getOutFileContents());
+  }
+
+  /**
+   * Tests simulating a click on the play button. Triggers ButtonListener.
+   */
+  @Test
+  public void testPlayButtonListener() {
+    AnimationModel m = new AnimationModelImpl(0, 0, 100, 100);
+    m.addShape(new ShapeImpl("name", ShapeType.RECTANGLE, 1));
+    m.addTransformation("name", new TransformationImpl("name", 0, 0, 0,
+            10, 10, 10, 10, 10, 50, 20, 20, 20, 20,
+            20, 20, 20));
+    AnimationView v = new PlaybackViewImpl(0, 0, 500, 500, 500, 500, 20);
+    AnimationController c = new AnimationControllerImpl(m, v);
+    c.go();
+    assertEquals(false, v.getRunner().isRunning());
+
+    ((PlaybackViewImpl) v).getPlayButton().doClick();
+
+    assertEquals(true, v.getRunner().isRunning());
+
+    ((PlaybackViewImpl) v).getPlayButton().doClick();
+
+    assertEquals(false, v.getRunner().isRunning());
+  }
+
+  /**
+   * Test simulating a click on the loop check box. Triggers ButtonListener.
+   */
+  @Test
+  public void testLoopButtonListener() {
+    AnimationModel m = new AnimationModelImpl(0, 0, 100, 100);
+    m.addShape(new ShapeImpl("name", ShapeType.RECTANGLE, 1));
+    m.addTransformation("name", new TransformationImpl("name", 0, 0, 0,
+            10, 10, 10, 10, 10, 50, 20, 20, 20, 20,
+            20, 20, 20));
+    AnimationView v = new PlaybackViewImpl(0, 0, 500, 500, 500, 500, 20);
+    AnimationController c = new AnimationControllerImpl(m, v);
+    c.go();
+
+    assertEquals(false, ((PlaybackViewImpl) v).getLoopBox().isSelected());
+
+    ((PlaybackViewImpl) v).getLoopBox().doClick();
+
+    assertEquals(true, ((PlaybackViewImpl) v).getLoopBox().isSelected());
+
+    ((PlaybackViewImpl) v).getLoopBox().doClick();
+
+    assertEquals(false, ((PlaybackViewImpl) v).getLoopBox().isSelected());
+  }
+
+  /**
+   * Test simulating a click on the restart button. Triggers ButtonListener.
+   */
+  @Test
+  public void testRestartButtonListener() {
+    AnimationModel m = new AnimationModelImpl(0, 0, 100, 100);
+    m.addShape(new ShapeImpl("name", ShapeType.RECTANGLE, 1));
+    m.addTransformation("name", new TransformationImpl("name", 0, 0, 0,
+            10, 10, 10, 10, 10, 50, 20, 20, 20, 20,
+            20, 20, 20));
+    AnimationView v = new PlaybackViewImpl(0, 0, 500, 500, 500, 500, 20);
+    AnimationController c = new AnimationControllerImpl(m, v);
+    c.go();
+
+    ((PlaybackViewImpl) v).getPlayButton().doClick();
+
+    try {
+      Thread.sleep(1000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+
+    assertEquals(true, ((AnimationRunnerImpl)v.getRunner()).getFrames() > 1);
+
+    ((PlaybackViewImpl) v).getPlayButton().doClick();
+    ((PlaybackViewImpl) v).getRestartButton().doClick();
+
+    assertEquals(1, ((AnimationRunnerImpl)v.getRunner()).getFrames());
+  }
+
+  /**
+   * Test simulating a change on the ticks per second slider. Triggers SliderChangeListener.
+   */
+  @Test
+  public void testSpeedSlider() {
+    AnimationModel m = new AnimationModelImpl(0, 0, 100, 100);
+    m.addShape(new ShapeImpl("name", ShapeType.RECTANGLE, 1));
+    m.addTransformation("name", new TransformationImpl("name", 0, 0, 0,
+            10, 10, 10, 10, 10, 50, 20, 20, 20, 20,
+            20, 20, 20));
+    AnimationView v = new PlaybackViewImpl(0, 0, 500, 500, 500, 500, 20);
+    AnimationController c = new AnimationControllerImpl(m, v);
+    c.go();
+
+    assertEquals(0.33, ((AnimationRunnerImpl) v.getRunner()).getTicksPerFrame(), 0.01);
+
+    ((PlaybackViewImpl) v).getSpeedSlider().setValue(50);
+
+    assertEquals(0.833, ((AnimationRunnerImpl) v.getRunner()).getTicksPerFrame(), 0.01);
+  }
+
+  /**
+   * Test simulating a left mouse click on the shapePanel, playing/pausing the animation. Triggers
+   * the TogglePlayMouseListener.
+   */
+  @Test
+  public void testMouseListenerLeftClick() {
+    AnimationModel m = new AnimationModelImpl(0, 0, 100, 100);
+    m.addShape(new ShapeImpl("name", ShapeType.RECTANGLE, 1));
+    m.addTransformation("name", new TransformationImpl("name", 0, 0, 0,
+            10, 10, 10, 10, 10, 50, 20, 20, 20, 20,
+            20, 20, 20));
+    AnimationView v = new PlaybackViewImpl(0, 0, 500, 500, 500, 500, 20);
+    AnimationController c = new AnimationControllerImpl(m, v);
+    c.go();
+
+    assertEquals(false, v.getRunner().isRunning());
+
+    ShapePanel p = ((PlaybackViewImpl) v).getShapePanel();
+    MouseListener mouseListeners[] = p.getMouseListeners();
+    MouseEvent me = new MouseEvent(p, 0, 0, InputEvent.BUTTON1_DOWN_MASK, 100, 100, 1, false);;
+    mouseListeners[0].mouseClicked(me);
+
+    assertEquals(true, v.getRunner().isRunning());
+
+    mouseListeners[0].mouseClicked(me);
+
+    assertEquals(false, v.getRunner().isRunning());
+
+  }
+
+  /**
+   * Tests simulating a right mouse click on shape panel, restarting the animation. Triggers
+   * the TogglePlayMouseListener.
+   */
+  @Test
+  public void testMouseListenerRightClick() {
+    AnimationModel m = new AnimationModelImpl(0, 0, 100, 100);
+    m.addShape(new ShapeImpl("name", ShapeType.RECTANGLE, 1));
+    m.addTransformation("name", new TransformationImpl("name", 0, 0, 0,
+            10, 10, 10, 10, 10, 50, 20, 20, 20, 20,
+            20, 20, 20));
+    AnimationView v = new PlaybackViewImpl(0, 0, 500, 500, 500, 500, 20);
+    AnimationController c = new AnimationControllerImpl(m, v);
+    c.go();
+
+    ((PlaybackViewImpl) v).getPlayButton().doClick();
+
+    try {
+      Thread.sleep(1000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+
+    assertEquals(true, ((AnimationRunnerImpl)v.getRunner()).getFrames() > 1);
+
+    ((PlaybackViewImpl) v).getPlayButton().doClick();
+
+    ShapePanel p = ((PlaybackViewImpl) v).getShapePanel();
+    MouseListener mouseListeners[] = p.getMouseListeners();
+    MouseEvent me = new MouseEvent(p, 0, 0, InputEvent.BUTTON3_DOWN_MASK, 100, 100, 1, false);;
+    mouseListeners[0].mouseClicked(me);
+
+    assertEquals(1, ((AnimationRunnerImpl)v.getRunner()).getFrames());
   }
 }

@@ -42,7 +42,7 @@ public class AnimationControllerImpl implements AnimationController {
 
     if (v instanceof PlaybackViewImpl) {
       v.setCommandListener(new ButtonListener(this.v.getRunner()));
-      v.setMouseListener(new TogglePlayMouseListener(v.getRunner()));
+      v.setMouseListener(new TogglePlayMouseListener(this.v.getRunner()));
       v.setChangeListener(new SliderChangeListener(this.v));
     }
   }
