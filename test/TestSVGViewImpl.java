@@ -58,8 +58,11 @@ public class TestSVGViewImpl {
             + "w.w3.org/2000/svg\"> \n"
             + "\n"
             + "<rect id=\"rectangle\" x=\"20\" y=\"20\" width=\"20\" height=\"40\" fi"
-            + "ll=\"rgb(100,100,100)\" fill-opacity=\"1.0\" visibility=\"visible\" > \n"
+            + "ll=\"rgb(100,100,100)\" fill-opacity=\"0.0\" visibility=\"visible\" > \n"
             + "\n"
+            + "<animate attributeType=\"xml\" begin=\"500ms\" dur=\"1ms\" attributeName=\""
+            + "fill-opacity\" from=\"0.0\" to=\"1.0\" fill=\"freeze\" />"
+            + "\n\n"
             + "<animate attributeType=\"xml\" begin=\"500ms\" dur=\"500ms\" attribu"
             + "teName=\"x\" from=\"20\" to=\"40\" fill=\"freeze\" /> \n"
             + "\n"
@@ -79,8 +82,11 @@ public class TestSVGViewImpl {
             + "</rect> \n"
             + "\n"
             + "<ellipse id=\"ellipse\" cx=\"0\" cy=\"0\" rx=\"5\" ry=\"15\" fill=\"rgb(50"
-            + ",50,50)\" fill-opacity=\"1.0\" visibility=\"visible\" > \n"
+            + ",50,50)\" fill-opacity=\"0.0\" visibility=\"visible\" > \n"
             + "\n"
+            + "<animate attributeType=\"xml\" begin=\"1000ms\" dur=\"1ms\" attributeName=\""
+            + "fill-opacity\" from=\"0.0\" to=\"1.0\" fill=\"freeze\" />"
+            + "\n\n"
             + "<animate attributeType=\"xml\" begin=\"1000ms\" dur=\"1000ms\" attribu"
             + "teName=\"cx\" from=\"0\" to=\"40\" fill=\"freeze\" /> \n"
             + "\n"
@@ -100,7 +106,7 @@ public class TestSVGViewImpl {
             + "</ellipse> \n"
             + "\n"
             + "</svg>";
-    //assertEquals(SVGcontents, view1.getOutFileContents());
+    assertEquals(scgContents, view1.getOutFileContents());
   }
 
   /**

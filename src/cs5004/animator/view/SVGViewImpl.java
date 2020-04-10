@@ -92,7 +92,7 @@ public class SVGViewImpl extends AbstractTextView {
     for (Shape copyS : shapeList) {
 
       Shape s = copyS.getShapeAtTick(copyS.getStart());
-      if (s.getShapeAtTick(s.getStart()) == null) {
+      if (s == null) {
         continue;
       }
 
