@@ -185,12 +185,13 @@ public class PlaybackViewImpl extends AbstractVisualView {
   /**
    * Sets the text on the Play/Pause button. If the animation is playing, displays "Pause", if
    * the animation is not playing and is at the beginning or end of the animation, displays "Play",
-   * otherwise displays "Resume".
+   * otherwise displays "Resume". Is package protected since it should not be modified
+   * outside of the view.
    *
    * @param text the text to be displayed on the start/pause/play button.
    * @throws IllegalArgumentException if the String text is null.
    */
-  public void setPlayText(String text) throws IllegalArgumentException {
+  void setPlayText(String text) throws IllegalArgumentException {
     if (text == null) {
       throw new IllegalArgumentException("Text cannot be null");
     }
