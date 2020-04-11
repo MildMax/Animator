@@ -48,7 +48,7 @@ public class AnimationControllerImpl implements AnimationController {
   }
 
   /**
-   * Get the model. This class only exists for testing purposes.
+   * Get the model. This method only exists for testing purposes.
    *
    * @return the model.
    */
@@ -57,7 +57,7 @@ public class AnimationControllerImpl implements AnimationController {
   }
 
   /**
-   * Get the view. This class only exists for testing purposes.
+   * Get the view. This method only exists for testing purposes.
    *
    * @return the view.
    */
