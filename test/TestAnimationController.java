@@ -221,7 +221,7 @@ public class TestAnimationController {
             0, 10, 10, 10, 10, 255, 255, 255, 50,
             20, 20, 40, 40, 120, 120, 120));
     AnimationControllerImpl c = new AnimationControllerImpl(m, v);
-    c.getAnimationView().run(m);
+    c.doAnimation();
     c.getAnimationView().getRunner().startAnim();
     assertEquals(true, c.getAnimationView().getRunner().isRunning());
   }
@@ -239,7 +239,7 @@ public class TestAnimationController {
     AnimationView t = new TextViewImpl(path);
     AnimationModel m = new AnimationModelImpl(50, 60, 500, 600);
     AnimationControllerImpl c = new AnimationControllerImpl(m, t);
-    c.getAnimationView().run(m);
+    c.doAnimation();
 
     String test = "Create window with width 500 and height 600 with top left "
             + "corner (50,60) and total ticks 0";
@@ -249,7 +249,7 @@ public class TestAnimationController {
     m.addShape(new ShapeImpl("rectangle", ShapeType.RECTANGLE, 1));
     m.addShape(new ShapeImpl("ellipse", ShapeType.ELLIPSE, 2));
     AnimationControllerImpl c2 = new AnimationControllerImpl(m, t);
-    c2.getAnimationView().run(m);
+    c2.doAnimation();
 
 
     test = "Create window with width 500 and height 600 with top left "
@@ -265,7 +265,7 @@ public class TestAnimationController {
             0, 0, 10, 30, 50, 50, 50, 40, 40, -40,
             40, 60, 150, 150, 150));
     AnimationControllerImpl c3 = new AnimationControllerImpl(m, t);
-    c3.getAnimationView().run(m);
+    c3.doAnimation();
 
     test =  "Create window with width 500 and height 600 with top "
             + "left corner (50,60) and total ticks 40\n"
@@ -310,7 +310,7 @@ public class TestAnimationController {
     AnimationView t = new TextViewImpl();
 
     AnimationControllerImpl c = new AnimationControllerImpl(m, t);
-    c.getAnimationView().run(m);
+    c.doAnimation();
 
     String test = "Create window with width 500 and height 600 with top left "
             + "corner (50,60) and total ticks 0";
@@ -323,7 +323,7 @@ public class TestAnimationController {
     m.addShape(new ShapeImpl("ellipse", ShapeType.ELLIPSE, 2));
 
     AnimationControllerImpl c2 = new AnimationControllerImpl(m, t);
-    c2.getAnimationView().run(m);
+    c2.doAnimation();
 
     test = "Create window with width 500 and height 600 with top left "
             + "corner (50,60) and total ticks 0";
@@ -340,7 +340,7 @@ public class TestAnimationController {
             40, 60, 150, 150, 150));
 
     AnimationControllerImpl c3 = new AnimationControllerImpl(m, t);
-    c3.getAnimationView().run(m);
+    c3.doAnimation();
 
     test =  "Create window with width 500 and height 600 with top "
             + "left corner (50,60) and total ticks 40\n"
@@ -386,7 +386,7 @@ public class TestAnimationController {
     AnimationView v = new SVGViewImpl(path, 50);
 
     AnimationControllerImpl c = new AnimationControllerImpl(m, v);
-    c.getAnimationView().run(m);
+    c.doAnimation();
 
     String scgContents = "<svg width=\"25\" height=\"25\" version=\"1.1\" xmlns"
             + "=\"http://www.w3.org/2000/svg\"> \n"
@@ -407,7 +407,7 @@ public class TestAnimationController {
             40, 60, 150, 150, 150));
 
     AnimationControllerImpl c3 = new AnimationControllerImpl(m, v);
-    c3.getAnimationView().run(m);
+    c3.doAnimation();
 
     scgContents = "<svg width=\"105\" height=\"125\" version=\"1.1\" xmlns=\"http://ww"
             + "w.w3.org/2000/svg\"> \n"
