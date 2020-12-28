@@ -10,9 +10,13 @@ Installation:
 
 Arguments are as follows:
 -in <file> -> input file. These are given in the same directory as the jar file (buildings.txt, big-bang-big-crunch.txt, hanoi.txt, toh-3.txt, toh-5.txt toh-8.txt, toh-12.txt)
+  
 -out <file> -> If 'svg' or 'text' views are chosen, specifies name of file where the animation will be written
+  
 -view <view> -> 'playback' gives video player with controls on screen, 'visual' plays animation in window without playback controls, 'svg' creates svg file to be viewed in browser, 'text' creates .txt file with textual representation of animation
+  
 -speed <speed> -> the speed at which the animation will be played, only relevant to 'svg' and 'visual' views, must be non-negative, do not recommend playing in excess of 200 fps
+  
   
 Enjoy the show :)
 
