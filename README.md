@@ -2,6 +2,12 @@
 Repository for animator project for 5004
 README
 
+Installation:
+1) Clone the repo/download the zip file
+2) 
+
+Final Report:
+
 Animator Assignment 7+8+10 – Joseph Burns, Chris Williams
 
 This README describes the classes, interfaces and enums used in our Animation Model as well as verbose descriptions of why we made the decisions to design our classes in such a way.
